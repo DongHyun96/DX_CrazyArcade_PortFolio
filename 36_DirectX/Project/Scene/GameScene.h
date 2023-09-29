@@ -13,14 +13,9 @@ public:
 private:
 
 	Object* mainUI{};
-
-	Object* tileExample{};
-
-	Object* tileExamples[13][15];
-
-	Transform* tileParentExample{};
-
 	Collider* mapBoundary{};
+
+	TileManager* tileManager{};
 
 	Knight* knight{};
 

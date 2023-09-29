@@ -60,6 +60,8 @@ using namespace DirectX;
 #define MAP_ROW			13
 #define MAP_COL			15
 
+#define GM				GameManager::GetInst()
+
 typedef XMFLOAT3 Vector3;
 typedef XMFLOAT4 Vector4;
 typedef XMMATRIX Matrix;
@@ -69,6 +71,8 @@ typedef XMMATRIX Matrix;
 #include "Utility/Keyboard.h"
 #include "Utility/Time.h"
 #include "Utility/Vector2.h"
+
+#include "Manager/GameManager.h"
 
 #include "Object/Transform.h"
 

@@ -17,8 +17,8 @@ namespace Util
 	{
 		return Vector2
 		(
-			WIN_WIDTH / 30.f + x * (WIN_WIDTH / 15.f) - WIN_CENTER.x,
-			WIN_HEIGHT / 26.f + y * (WIN_HEIGHT / 13.f) - WIN_CENTER.y
+			WIN_WIDTH / (MAP_COL * 2.f)  + x * (WIN_WIDTH / MAP_COL)  - WIN_CENTER.x,
+			WIN_HEIGHT / (MAP_ROW * 2.f) + y * (WIN_HEIGHT / MAP_ROW) - WIN_CENTER.y
 		);
 	}
 }
