@@ -42,6 +42,7 @@ VertexShader::~VertexShader()
     blob->Release(); // 단순히 shader 정보를 불러와서 vertexShader를 만드는 데 필요함
     vertexShader->Release();
     inputLayout->Release();
+    reflection->Release();
 }
 
 void VertexShader::SetShader()

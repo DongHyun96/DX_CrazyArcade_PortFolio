@@ -12,7 +12,7 @@ Camera::Camera()
 Camera::~Camera()
 {
 	delete viewBuffer;
-
+	delete transform;
 }
 
 void Camera::Update()

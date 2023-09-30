@@ -23,8 +23,9 @@ Environment::~Environment()
 {
 	delete projectionBuffer;
 
-	//alphaBlend->Release();
 	samplerState->Release();
+	alphaBlend->Release();
+	rasterizerState->Release();
 }
 
 void Environment::Set()
