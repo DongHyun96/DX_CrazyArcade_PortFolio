@@ -22,10 +22,11 @@ public:
 public:
 
 	Transform* GetGameFieldTransform() const { return gameFieldTransform; }
-
+	bool IsEditMode() const { return editMode; }
 
 private:
 
 	Transform* gameFieldTransform{};
-
+	
+	bool editMode = true;
 };
