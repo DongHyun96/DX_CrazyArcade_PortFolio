@@ -11,6 +11,7 @@ Texture::Texture(ID3D11ShaderResourceView* srv, ScratchImage& image)
 Texture::~Texture()
 {
 	srv->Release();
+
 }
 
 void Texture::SetPS(UINT slot)

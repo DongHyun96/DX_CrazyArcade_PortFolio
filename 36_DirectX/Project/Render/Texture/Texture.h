@@ -20,7 +20,7 @@ private:
 	
 	ScratchImage image;				// 온전한 이미지 정보를 여기로 불러옴
 
-	ID3D11ShaderResourceView* srv;	// srv를 통해 이미지 정보를 가공하여 gpu에 넘김
+	ID3D11ShaderResourceView* srv{};	// srv를 통해 이미지 정보를 가공하여 gpu에 넘김
 
 	static map<wstring, Texture*> textures;
 

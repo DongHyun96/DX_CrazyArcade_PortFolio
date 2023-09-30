@@ -17,8 +17,6 @@ private:
 
 	TileManager* tileManager{};
 
-	Knight* knight{};
-
-
+	Block* block{};
 };
 

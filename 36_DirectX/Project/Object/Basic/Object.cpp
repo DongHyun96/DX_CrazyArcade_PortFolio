@@ -171,6 +171,7 @@ Object::~Object()
     delete pixelShader;
     delete indexBuffer;
     delete worldBuffer;
+
 }
 
 void Object::Render() // 모든 data 세팅은 "draw call전에 해야함
