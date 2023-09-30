@@ -60,6 +60,8 @@ using namespace DirectX;
 #define MAP_ROW			13
 #define MAP_COL			15
 
+#define TEX_WORLD_SIZE	Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW)
+
 #define GM				GameManager::GetInst()
 
 typedef XMFLOAT3 Vector3;
@@ -111,7 +113,13 @@ typedef XMMATRIX Matrix;
 #include "Object/Collision/ColliderRect.h"
 #include "Object/Collision/ColliderCircle.h"
 
-#include "Object/Tile/TileManager.h"
+#include "GameMap/TileManager.h"
+#include "GameMap/Block.h"
+#include "GameMap/BlockManager.h"
+
+#include "GameMap/MapEditor.h"
+
+
 
 #include "Object/Game/Character.h"
 #include "Object/Game/Knight.h"

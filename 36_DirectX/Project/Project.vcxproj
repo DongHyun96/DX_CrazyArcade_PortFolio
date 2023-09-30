@@ -155,10 +155,13 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="GameMap\BlockManager.h" />
+    <ClInclude Include="GameMap\Block.h" />
     <ClInclude Include="Manager\GameManager.h" />
+    <ClInclude Include="GameMap\MapEditor.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Object\Tile\TileManager.h" />
+    <ClInclude Include="GameMap\TileManager.h" />
     <ClInclude Include="Utility\Util.h" />
     <ClInclude Include="Utility\BinaryReader.h" />
     <ClInclude Include="Utility\BinaryWriter.h" />
@@ -209,9 +212,12 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="GameMap\BlockManager.cpp" />
+    <ClCompile Include="GameMap\Block.cpp" />
     <ClCompile Include="Manager\GameManager.cpp" />
+    <ClCompile Include="GameMap\MapEditor.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
-    <ClCompile Include="Object\Tile\TileManager.cpp" />
+    <ClCompile Include="GameMap\TileManager.cpp" />
     <ClCompile Include="Utility\BinaryReader.cpp" />
     <ClCompile Include="Utility\BinaryWriter.cpp" />
     <ClCompile Include="System\Camera.cpp" />
