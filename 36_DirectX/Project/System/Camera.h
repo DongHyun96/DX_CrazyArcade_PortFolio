@@ -1,9 +1,12 @@
 #pragma once
 class Camera : public Singleton<Camera>
 {
-public:
+	friend class Singleton<Camera>;
+private:
 	Camera();
 	~Camera();
+
+public:
 
 	void Update();
 	void Set();

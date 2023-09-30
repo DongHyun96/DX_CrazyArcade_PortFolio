@@ -2,9 +2,13 @@
 // Scene과 무관하게 세팅하는 환경값
 class Environment : public Singleton<Environment>
 {
-public:
+	friend class Singleton<Environment>;
+private:
+
 	Environment();
 	~Environment();
+
+public:
 
 	void Set();
 
