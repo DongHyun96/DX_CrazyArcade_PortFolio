@@ -9,7 +9,7 @@ Environment::Environment()
 	(
 		0.f, WIN_WIDTH,
 		0.f, WIN_HEIGHT,
-		0.f, 1.f
+		NEAR_Z, FAR_Z
 	);
 
 	projectionBuffer = new MatrixBuffer();
@@ -54,8 +54,8 @@ void Environment::CreateSamplerState()
 void Environment::CreateBlendState()
 {
 	D3D11_BLEND_DESC desc = {};
-	desc.AlphaToCoverageEnable  = false;
-	desc.IndependentBlendEnable = false;
+	desc.AlphaToCoverageEnable	= true;
+	desc.IndependentBlendEnable	= false;
 	desc.RenderTarget[0].BlendEnable           = true;
 	desc.RenderTarget[0].SrcBlend              = D3D11_BLEND_SRC_ALPHA;
 	desc.RenderTarget[0].DestBlend             = D3D11_BLEND_INV_SRC_ALPHA;

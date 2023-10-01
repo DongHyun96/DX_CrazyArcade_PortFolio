@@ -27,8 +27,8 @@ void Transform::UpdateWorld()
 
 	S = XMMatrixScaling(scale.x, scale.y, 1.f);
 	R = XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z);
-	//T = XMMatrixTranslation(translation.x, translation.y, zDepth);
-	T = XMMatrixTranslation(translation.x, translation.y, 0.f);
+	T = XMMatrixTranslation(translation.x, translation.y, zDepth);
+	//T = XMMatrixTranslation(translation.x, translation.y, 0.f);
 
 
 	world = IP * S * R * T * P;

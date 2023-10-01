@@ -14,11 +14,9 @@ Device::~Device()
            swapChain->Release();
     renderTargetView->Release();
 
-    if (g_pDepthStencil)
-        g_pDepthStencil->Release();
+    g_pDepthStencil->Release();
 
-    if (stencilView)
-        stencilView->Release();
+    stencilView->Release();
 }
 
 void Device::Initialize()
@@ -72,10 +70,10 @@ void Device::Initialize()
     // backBuffer는 renderTargetView를 만들면 끝남
     backBuffer->Release();
 
-    //CreateDepthStencil();
+    CreateDepthStencil();
 
-    deviceContext->OMSetRenderTargets(1, &renderTargetView, nullptr);
-    //deviceContext->OMSetRenderTargets(1, &renderTargetView, stencilView);
+    //deviceContext->OMSetRenderTargets(1, &renderTargetView, nullptr);
+    deviceContext->OMSetRenderTargets(1, &renderTargetView, stencilView);
 
 
     /*  ViewPort */
@@ -96,7 +94,7 @@ void Device::ClearRTV()
     float clearColor[4] = { 0.33f, 0.33f, 0.33f, 1.0f };
     deviceContext->ClearRenderTargetView(renderTargetView, clearColor); // 화면을 백지로 초기화하는 것 (PltBlt과 같은 과정)
 
-    //deviceContext->ClearDepthStencilView(stencilView, D3D11_CLEAR_DEPTH, 1.f, 0);
+    deviceContext->ClearDepthStencilView(stencilView, D3D11_CLEAR_DEPTH, 1.f, 0);
 }
 
 void Device::Present()

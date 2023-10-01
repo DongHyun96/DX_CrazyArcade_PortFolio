@@ -9,7 +9,6 @@ TileManager::TileManager()
 			CreateTile(x, y, L"InGame/Village/GroundTiles/Tile.png", 7, 1, 4, 1);
 	}
 
-
 }
 
 TileManager::~TileManager()
@@ -56,5 +55,5 @@ void TileManager::CreateTile(UINT boardX, UINT boardY, wstring file, UINT frameX
 	tiles[boardY][boardX] = new Object(size, file, frameX, frameY, targetX, targetY);
 
 	Util::SetTransformToGameBoard(tiles[boardY][boardX], boardX, boardY);
-	tiles[boardY][boardX]->zDepth = 5000.f;
+	tiles[boardY][boardX]->zDepth = FAR_Z - 1.f;
 }
