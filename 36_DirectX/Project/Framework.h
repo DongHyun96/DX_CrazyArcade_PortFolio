@@ -60,9 +60,12 @@ using namespace DirectX;
 #define MAP_ROW			13
 #define MAP_COL			15
 
-#define TEX_WORLD_SIZE	Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW)
+#define CELL_WORLD_SIZE	Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW)
 
 #define GM				GameManager::GetInst()
+
+#define NEAR_Z			-1.f
+#define FAR_Z			1500.f
 
 typedef XMFLOAT3 Vector3;
 typedef XMFLOAT4 Vector4;
@@ -77,8 +80,6 @@ typedef XMMATRIX Matrix;
 #include "Manager/GameManager.h"
 
 #include "Object/Transform.h"
-
-#include "Renderer.h"
 
 #include "Utility/Util.h"
 
@@ -117,7 +118,9 @@ typedef XMMATRIX Matrix;
 #include "GameMap/Block.h"
 #include "GameMap/BlockManager.h"
 
-#include "GameMap/MapEditor.h"
+#include "GameMap/Editor/TileEditor.h"
+#include "GameMap/Editor/BlockEditor.h"
+#include "GameMap/Editor/MapEditor.h"
 
 
 

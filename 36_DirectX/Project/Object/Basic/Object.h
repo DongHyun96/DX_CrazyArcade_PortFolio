@@ -1,5 +1,5 @@
 #pragma once
-class Object : public Transform, public Renderer
+class Object : public Transform
 {
 public:
 	Object(Vector2 size);

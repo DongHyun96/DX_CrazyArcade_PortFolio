@@ -13,6 +13,4 @@ private:
 	Knight* knight{};
 
 	Object* background{};
-
-	vector<Renderer*> renderers{};
 };

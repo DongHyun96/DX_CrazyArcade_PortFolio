@@ -16,9 +16,6 @@ TextureScene::TextureScene()
 	knight->zDepth = -5.f;
 
 	background->SetLabel("BackGround");
-
-	renderers.push_back((Renderer*)knight);
-	renderers.push_back((Renderer*)background);
 }
 
 TextureScene::~TextureScene()
@@ -35,15 +32,8 @@ void TextureScene::Update()
 
 void TextureScene::Render()
 {
-	//sort(renderers.begin(), renderers.end(), [](Renderer* a, Renderer* b) {return dynamic_cast<Transform*>(a)->zDepth > dynamic_cast<Transform*>(b)->zDepth; });
-
-	sort(renderers.begin(), renderers.end(), Util::CompareRendererZorder);
-
-	for (Renderer* r : renderers)
-		r->Render();
-
-	//knight->Render();
-	//background->Render();
+	knight->Render();
+	background->Render();
 
 	background->Debug();
 }

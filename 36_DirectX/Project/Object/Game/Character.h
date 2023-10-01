@@ -1,6 +1,6 @@
 #pragma once
 
-class Character : public Transform, public Renderer
+class Character : public Transform
 {
 public:
 	Character();

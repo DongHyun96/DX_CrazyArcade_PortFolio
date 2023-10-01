@@ -156,9 +156,6 @@
     <ClInclude Include="Utility\BinaryReader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Utility\Util.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -171,13 +168,19 @@
     <ClInclude Include="Manager\GameManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameMap\MapEditor.h">
+    <ClInclude Include="GameMap\Editor\MapEditor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameMap\Block.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameMap\BlockManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap\Editor\TileEditor.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap\Editor\BlockEditor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -290,13 +293,19 @@
     <ClCompile Include="Manager\GameManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="GameMap\MapEditor.cpp">
+    <ClCompile Include="GameMap\Editor\MapEditor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameMap\Block.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameMap\BlockManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap\Editor\TileEditor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap\Editor\BlockEditor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
