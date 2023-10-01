@@ -16,7 +16,6 @@ private:
 	Collider* mapBoundary{};
 
 	TileManager* tileManager{};
-
-	Block* block{};
+	BlockManager* blockManager{};
 };
 
