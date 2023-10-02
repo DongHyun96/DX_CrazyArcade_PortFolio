@@ -9,9 +9,59 @@ struct BlockProperty
 	bool hidable{};
 };
 
+struct BlockInfo
+{
+	BlockInfo() {}
+
+	BlockInfo(wstring file, Util::Coord boardXY, Util::Coord frameXY, Util::Coord targetXY, BlockProperty bProp, Vector2 texWorldSize = CELL_WORLD_SIZE)
+		:file(file), boardXY(boardXY), frameXY(frameXY), targetXY(targetXY), bProp(bProp), texWorldSize(texWorldSize)
+	{
+		initialized = true;
+	}
+
+	void SaveData(BinaryWriter& binWriter)
+	{
+		binWriter.WriteData(initialized);
+		binWriter.WriteData(file);
+		binWriter.WriteData(boardXY);
+		binWriter.WriteData(frameXY);
+		binWriter.WriteData(targetXY);
+		binWriter.WriteData(bProp.breakable);
+		binWriter.WriteData(bProp.movable);
+		binWriter.WriteData(bProp.hidable);
+		binWriter.WriteData(texWorldSize);
+	}
+
+	void ReadAndCopy(BinaryReader& binReader)
+	{
+		initialized			= binReader.ReadInt();
+		file				= binReader.ReadWString();
+		boardXY				= binReader.ReadCoord();
+		frameXY				= binReader.ReadCoord();
+		targetXY			= binReader.ReadCoord();
+		bProp.breakable		= binReader.ReadInt();
+		bProp.movable		= binReader.ReadInt();
+		bProp.hidable		= binReader.ReadInt();
+		texWorldSize		= binReader.ReadVector2();
+	}
+
+	bool initialized{};
+
+	wstring			file{};
+	Util::Coord		boardXY{};
+	Util::Coord		frameXY{};
+	Util::Coord		targetXY{};
+	BlockProperty	bProp{};
+	Vector2			texWorldSize{ CELL_WORLD_SIZE };
+};
+
 class Block
 {
 public:
+
+	Block(const BlockInfo& info);
+
+
 	// texWorldSize에 디폴트로 y offset을 조금 두어 머리부분이 뒤로 조금 넘어가게끔 미세하게 조정할 것임
 	Block
 	(
@@ -29,8 +79,8 @@ public:
 
 	void PlayBushInteraction();
 
-	void Move(const UINT& destBoardCoordX, const UINT& destBoardCoordY);
-	void Move(const Util::Coord& destCoord);
+	bool Move(const UINT& destBoardCoordX, const UINT& destBoardCoordY);
+	bool Move(const Util::Coord& destCoord);
 
 	void ApplyDamage();
 
@@ -41,7 +91,7 @@ public:
 
 	Collider* GetBody() { return rectBody; }
 	Vector2 GetTranslation() const { return rectBody->translation; }
-	Util::Coord GetBoardPos() const { return boardPos; }
+
 	bool& IsActive() { return isActive; }
 
 private:
@@ -51,14 +101,9 @@ private:
 
 	void HandleBushInteract();
 
-
-private:
-
 private:
 	
 	string label{};
-
-	Util::Coord	boardPos{};
 
 	Collider*	rectBody{};
 	Object*		texObj{};

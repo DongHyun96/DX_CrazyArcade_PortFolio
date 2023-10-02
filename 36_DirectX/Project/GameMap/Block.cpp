@@ -1,11 +1,14 @@
 #include "Framework.h"
 #include "Block.h"
 
+Block::Block(const BlockInfo& info)
+	:Block(info.boardXY, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp)
+{
+}
+
 Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Coord targetXY, Vector2 texWorldSize, BlockProperty bProp)
 	:breakable(bProp.breakable), movable(bProp.movable), hidable(bProp.hidable)
 {
-	boardPos = { boardXY.x, boardXY.y };
-	
 	texWorldSize.y += Y_OFFSET; // offset Á¶Á¤
 
 	rectBody	= new ColliderRect(CELL_WORLD_SIZE);
@@ -17,7 +20,7 @@ Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Co
 
 	Util::SetTransformToGameBoard(rectBody, boardXY);
 
-	rectBody->zDepth = rectBody->GlobalPosition().y;
+	label = to_string(boardXY.x) + to_string(boardXY.y);
 }
 
 Block::~Block()
@@ -30,6 +33,8 @@ void Block::Update()
 {
 	if (!isActive)
 		return;
+
+	rectBody->UpdateZDepthToY();
 
 	Move();
 	HandleBushInteract();
@@ -44,7 +49,7 @@ void Block::Render()
 	if (!isActive)
 		return;
 
-	rectBody->Render();
+	//rectBody->Render();
 	texObj->Render();
 
 	//Debug();
@@ -58,16 +63,14 @@ void Block::PlayBushInteraction()
 	currentlyBushing = true;
 }
 
-void Block::Move(const UINT& destBoardCoordX, const UINT& destBoardCoordY)
+bool Block::Move(const UINT& destBoardCoordX, const UINT& destBoardCoordY)
 {
-	if (Move(Util::ConvertBoardIdxToWorldPos({ destBoardCoordX, destBoardCoordY })))
-		boardPos = { destBoardCoordX, destBoardCoordY };
+	return Move(Util::ConvertBoardIdxToWorldPos({ destBoardCoordX, destBoardCoordY }));
 }
 
-void Block::Move(const Util::Coord& destCoord)
+bool Block::Move(const Util::Coord& destCoord)
 {
-	if (Move(Util::ConvertBoardIdxToWorldPos({ destCoord.x, destCoord.y })))
-		boardPos = destCoord;
+	return Move(Util::ConvertBoardIdxToWorldPos({ destCoord.x, destCoord.y }));
 }
 
 bool Block::Move(Vector2 destination)
@@ -143,8 +146,6 @@ void Block::Debug()
 
 	if (ImGui::BeginMenu(label.c_str()))
 	{
-		ImGui::InputInt2("BoardPos", (int*)&boardPos);
-
 		ImGui::InputFloat2("Translation", (float*)&rectBody->translation);
 
 		Vector2 gp = rectBody->GlobalPosition();
@@ -152,6 +153,7 @@ void Block::Debug()
 
 		ImGui::InputFloat2("Destination", (float*)&destination);
 
+		ImGui::DragFloat("zDepth", &(rectBody->zDepth));
 		
 
 		ImGui::EndMenu();
