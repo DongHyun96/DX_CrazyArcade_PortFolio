@@ -36,10 +36,13 @@ void MapEditor::Update()
 
 void MapEditor::Render()
 {
-	for (UINT i = 0; i < MAP_ROW; i++)
+	if (renderColliderFlag)
 	{
-		for (UINT j = 0; j < MAP_COL; j++)
-			cells[i][j]->Render();
+		for (UINT i = 0; i < MAP_ROW; i++)
+		{
+			for (UINT j = 0; j < MAP_COL; j++)
+				cells[i][j]->Render();
+		}
 	}
 
 	tileEditor->Render();
@@ -80,6 +83,10 @@ void MapEditor::Debug()
 		mode = static_cast<EditMode>(selectedItem);
 	}
 
+	ImGui::End();
+
+	ImGui::Begin("RenderCollider");
+	ImGui::Checkbox("RenderCollider", &renderColliderFlag);
 	ImGui::End();
 
 

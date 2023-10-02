@@ -30,6 +30,7 @@ public:
 
 public:
 	EditMode GetMode() const { return mode; }
+	bool GetRenderColliderFlag() const { return renderColliderFlag; }
 
 	//Collider* (*GetCells())[MAP_COL] { return cells; }
 
@@ -51,6 +52,8 @@ private:
 private: // ImGui를 통한 기능들
 	
 	const string label{"MapEditor"};
-	EditMode mode = TILE_MODE;
+	EditMode mode = BLOCK_MODE;
+	
+	bool renderColliderFlag = true;
 
 };
