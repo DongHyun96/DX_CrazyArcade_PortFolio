@@ -53,6 +53,11 @@ void Transform::UpdateWorld()
 
 }
 
+void Transform::UpdateZDepthToY()
+{
+	zDepth = globalPosition.y;
+}
+
 void Transform::Debug()
 {
 	assert(label != "");

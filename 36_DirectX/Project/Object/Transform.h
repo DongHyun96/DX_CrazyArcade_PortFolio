@@ -11,8 +11,9 @@ public:
 	void Debug();
 
 	virtual void Update();
-
 	void UpdateWorld();
+
+	void UpdateZDepthToY();
 
 	void SetParent(Transform* parent) { this->parent = parent; }
 
