@@ -83,6 +83,12 @@ void BinaryWriter::WriteData(Transform data)
 	WriteData(data.translation);
 }
 
+void BinaryWriter::WriteData(Util::Coord data)
+{
+	WriteData(data.x);
+	WriteData(data.y);
+}
+
 
 void BinaryWriter::WriteData(void* data, UINT dataSize)
 {

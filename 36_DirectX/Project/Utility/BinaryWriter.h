@@ -14,6 +14,8 @@ public:
 	void WriteData(Vector3	 data);
 	void WriteData(Vector4	 data);
 	void WriteData(Transform data);
+	
+	void WriteData(Util::Coord data);
 
 	void WriteData(void* data, UINT dataSize);
 

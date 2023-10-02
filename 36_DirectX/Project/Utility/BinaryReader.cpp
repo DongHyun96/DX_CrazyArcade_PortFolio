@@ -111,6 +111,16 @@ Vector4 BinaryReader::ReadVector4()
 	return data;
 }
 
+Util::Coord BinaryReader::ReadCoord()
+{
+	Util::Coord coord{};
+
+	coord.x = ReadUINT();
+	coord.y = ReadUINT();
+
+	return coord;
+}
+
 void BinaryReader::ReadData(OUT void** data, UINT dataSize)
 {
 	assert(ReadFile(file, *data, dataSize, &size, nullptr));
