@@ -34,6 +34,14 @@ namespace Util
 		SetTransformToGameBoard(target, boardXY.x, boardXY.y);
 	}
 
+	template<typename T>
+	static void Swap(T* t1, T* t2)
+	{
+		T* temp = t1;
+		t1 = t2;
+		t2 = temp;
+	}
+
 	template <typename T>
 	static T GetRandom(const T& start, const T& end)
 	{

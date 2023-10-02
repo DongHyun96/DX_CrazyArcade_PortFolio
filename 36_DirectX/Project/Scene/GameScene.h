@@ -17,5 +17,8 @@ private:
 
 	TileManager* tileManager{};
 	BlockManager* blockManager{};
+
+	Block* block{};
+	Util::Coord curBlockPos{};
 };
 

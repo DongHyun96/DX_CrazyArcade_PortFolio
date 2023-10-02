@@ -33,9 +33,6 @@
     <ClInclude Include="Scene\Scene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\TutorialScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="System\Device.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -75,12 +72,6 @@
     <ClInclude Include="Utility\Time.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\SRTScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene\SolarScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="_Include\imconfig.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -117,9 +108,6 @@
     <ClInclude Include="Object\SolarSystem\Planet.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\TextureScene.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Render\Texture\Texture.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -127,12 +115,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Render\Texture\Animation.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Game\Character.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Object\Game\Knight.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Object\Collision\Collider.h">
@@ -183,6 +165,9 @@
     <ClInclude Include="GameMap\Editor\BlockEditor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Character\Character.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -192,9 +177,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="MainGame.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\TutorialScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="System\Device.cpp">
@@ -227,12 +209,6 @@
     <ClCompile Include="Utility\Time.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\SRTScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene\SolarScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Utility\Vector2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -245,9 +221,6 @@
     <ClCompile Include="Object\SolarSystem\Planet.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\TextureScene.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Render\Texture\Texture.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -255,12 +228,6 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Render\Texture\Animation.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Game\Character.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Object\Game\Knight.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Object\Collision\Collider.cpp">
@@ -306,6 +273,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameMap\Editor\BlockEditor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Character\Character.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

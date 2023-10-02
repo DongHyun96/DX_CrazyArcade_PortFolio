@@ -28,5 +28,5 @@ private:
 
 	Transform* gameFieldTransform{};
 	
-	bool editMode = true;
+	bool editMode = false;
 };

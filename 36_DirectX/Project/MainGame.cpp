@@ -6,11 +6,6 @@ MainGame::MainGame()
 {
 	SetUpImGui();
 
-	//scene = new TutorialScene;
-	//scene = new SRTScene;
-	//scene = new SolarScene;
-
-	//scene = new TextureScene;
 	//scene = new CollisionScene;
 	scene = new GameScene;
 

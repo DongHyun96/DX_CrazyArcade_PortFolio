@@ -114,6 +114,8 @@ typedef XMMATRIX Matrix;
 #include "Object/Collision/ColliderRect.h"
 #include "Object/Collision/ColliderCircle.h"
 
+// 실제 게임 관련
+
 #include "GameMap/TileManager.h"
 #include "GameMap/Block.h"
 #include "GameMap/BlockManager.h"
@@ -122,16 +124,9 @@ typedef XMMATRIX Matrix;
 #include "GameMap/Editor/BlockEditor.h"
 #include "GameMap/Editor/MapEditor.h"
 
-
-
-#include "Object/Game/Character.h"
-#include "Object/Game/Knight.h"
+#include "Character/Character.h"
 
 #include "Scene/Scene.h"
-#include "Scene/TutorialScene.h"
-#include "Scene/SRTScene.h"
-#include "Scene/SolarScene.h"
-#include "Scene/TextureScene.h"
 #include "Scene/CollisionScene.h"
 
 #include "Scene/GameScene.h"

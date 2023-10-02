@@ -155,6 +155,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Character\Character.h" />
     <ClInclude Include="GameMap\Editor\BlockEditor.h" />
     <ClInclude Include="GameMap\BlockManager.h" />
     <ClInclude Include="GameMap\Block.h" />
@@ -171,14 +172,10 @@
     <ClInclude Include="Object\Collision\ColliderCircle.h" />
     <ClInclude Include="Object\Collision\ColliderRect.h" />
     <ClInclude Include="Object\Collision\Collider.h" />
-    <ClInclude Include="Object\Game\Knight.h" />
-    <ClInclude Include="Object\Game\Character.h" />
     <ClInclude Include="Render\Texture\Animation.h" />
     <ClInclude Include="Render\Texture\Frame.h" />
     <ClInclude Include="Object\Basic\Polygons.h" />
     <ClInclude Include="Object\SolarSystem\Planet.h" />
-    <ClInclude Include="Scene\SRTScene.h" />
-    <ClInclude Include="Scene\SolarScene.h" />
     <ClInclude Include="System\Environment.h" />
     <ClInclude Include="Render\Buffer\GlobalBuffer.h" />
     <ClInclude Include="Render\Buffer\ConstantBuffer.h" />
@@ -190,9 +187,7 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="Scene\Scene.h" />
-    <ClInclude Include="Scene\TutorialScene.h" />
     <ClInclude Include="Object\Transform.h" />
-    <ClInclude Include="Scene\TextureScene.h" />
     <ClInclude Include="Render\Texture\Texture.h" />
     <ClInclude Include="Utility\Keyboard.h" />
     <ClInclude Include="Utility\Singleton.h" />
@@ -213,6 +208,7 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Character\Character.cpp" />
     <ClCompile Include="GameMap\Editor\BlockEditor.cpp" />
     <ClCompile Include="GameMap\BlockManager.cpp" />
     <ClCompile Include="GameMap\Block.cpp" />
@@ -228,14 +224,10 @@
     <ClCompile Include="Object\Collision\ColliderCircle.cpp" />
     <ClCompile Include="Object\Collision\ColliderRect.cpp" />
     <ClCompile Include="Object\Collision\Collider.cpp" />
-    <ClCompile Include="Object\Game\Knight.cpp" />
-    <ClCompile Include="Object\Game\Character.cpp" />
     <ClCompile Include="Render\Texture\Animation.cpp" />
     <ClCompile Include="Render\Texture\Frame.cpp" />
     <ClCompile Include="Object\Basic\Polygons.cpp" />
     <ClCompile Include="Object\SolarSystem\Planet.cpp" />
-    <ClCompile Include="Scene\SRTScene.cpp" />
-    <ClCompile Include="Scene\SolarScene.cpp" />
     <ClCompile Include="System\Environment.cpp" />
     <ClCompile Include="Render\Buffer\ConstantBuffer.cpp" />
     <ClCompile Include="Object\Basic\Object.cpp" />
@@ -250,11 +242,9 @@
     </ClCompile>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainGame.cpp" />
-    <ClCompile Include="Scene\TutorialScene.cpp" />
     <ClCompile Include="Render\Buffer\VertexBuffer.cpp" />
     <ClCompile Include="Render\Shader\VertexShader.cpp" />
     <ClCompile Include="Object\Transform.cpp" />
-    <ClCompile Include="Scene\TextureScene.cpp" />
     <ClCompile Include="Render\Texture\Texture.cpp" />
     <ClCompile Include="Utility\Keyboard.cpp" />
     <ClCompile Include="Utility\Time.cpp" />
