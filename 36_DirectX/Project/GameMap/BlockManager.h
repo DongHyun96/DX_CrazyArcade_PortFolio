@@ -9,6 +9,7 @@ public:
 	void Update();
 	void Render();
 
+private:
 	void CreateBlock(Util::Coord coord, wstring file,
 					 Util::Coord frameXY = { 1, 1 },
 					 Util::Coord targetXY = {1, 1},
@@ -16,8 +17,8 @@ public:
 					 BlockProperty bProp = {});
 
 private:
-	//vector<Block*> blocks{};
-	vector<Block*> blocks{};
-
+	
+	Block* blocks[MAP_ROW][MAP_COL]{};
+	
 	Animation* destroyedAnim{};
 };

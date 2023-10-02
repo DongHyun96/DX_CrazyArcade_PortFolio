@@ -9,10 +9,10 @@ BlockManager::BlockManager()
 
 	//block = new Block({ 6, 6 }, L"InGame/Village/Objects/box.png", { 3, 1 }, { 3, 1 }, CELL_WORLD_SIZE, { true, true, false });
 
-	for (UINT i = 3; i < MAP_ROW; i++)
+	for (UINT y = 3; y < MAP_ROW; y++)
 	{
-		for (UINT j = 3; j < MAP_COL; j++)
-			CreateBlock({ j, i }, L"InGame/Village/Objects/box.png", { 3, 1 }, { 2, 1}, CELL_WORLD_SIZE, {true, false, false});
+		for (UINT x = 3; x < MAP_COL; x++)
+			CreateBlock({ x, y }, L"InGame/Village/Objects/box.png", { 3, 1 }, {2, 1}, CELL_WORLD_SIZE, {true, false, false});
 	}
 }
 
@@ -20,66 +20,36 @@ BlockManager::~BlockManager()
 {
 	delete destroyedAnim;
 
-	for (Block* b : blocks)
-		delete b;
+	for (UINT y = 0; y < MAP_ROW; y++)
+	{
+		for (UINT x = 0; x < MAP_COL; x++)
+			if (blocks[y][x]) delete blocks[y][x];
+	}
 }
 
 void BlockManager::Update()
 {
-	for (Block* block : blocks)
-		block->Update();
+	for (UINT y = 0; y < MAP_ROW; y++)
+	{
+		for (UINT x = 0; x < MAP_COL; x++)
+			if (blocks[y][x]) blocks[y][x]->Update();
+	}
 }
+
 
 void BlockManager::Render()
 {
-	for (Block* block : blocks)
-		block->Render();
+	for (UINT y = 0; y < MAP_ROW; y++)
+	{
+		for (UINT x = 0; x < MAP_COL; x++)
+			if (blocks[y][x]) blocks[y][x]->Render();
+	}
 }
 
 void BlockManager::CreateBlock(Util::Coord coord, wstring file, Util::Coord frameXY, Util::Coord targetXY, Vector2 texWorldSize, BlockProperty bProp)
 {
-	blocks.push_back(new Block(coord, file, frameXY, targetXY, texWorldSize, bProp));
+	assert(!blocks[coord.y][coord.x]);
+
+	blocks[coord.y][coord.x] = new Block(coord, file, frameXY, targetXY, texWorldSize, bProp);
 }
 
-
-
-//if (KEY_DOWN(VK_LEFT))
-	//{
-	//	Util::Coord c = block->GetBoardPos();
-
-	//	c.x--;
-
-	//	block->Move(c);
-	//	
-	//}
-	//else if (KEY_DOWN(VK_RIGHT))
-	//{
-	//	Util::Coord c = block->GetBoardPos();
-
-	//	c.x++;
-
-	//	block->Move(c);
-
-	//}
-	//else if (KEY_DOWN(VK_UP))
-	//{
-	//	Util::Coord c = block->GetBoardPos();
-
-	//	c.y++;
-
-	//	block->Move(c);
-
-	//}
-	//else if (KEY_DOWN(VK_DOWN))
-	//{
-	//	Util::Coord c = block->GetBoardPos();
-
-	//	c.y--;
-
-	//	block->Move(c);
-	//}
-
-	////if (KEY_DOWN(VK_DOWN))
-	////{
-	////	block->PlayBushInteraction();
-	////}
