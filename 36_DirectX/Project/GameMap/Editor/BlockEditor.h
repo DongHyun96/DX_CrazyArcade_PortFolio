@@ -1,20 +1,6 @@
 #pragma once
 
-struct BlockInfo
-{
-	BlockInfo() {}
 
-	BlockInfo(wstring file, Util::Coord boardXY, Util::Coord frameXY, Util::Coord targetXY, BlockProperty bProp, Vector2 texWorldSize = CELL_WORLD_SIZE)
-		:file(file), boardXY(boardXY), frameXY(frameXY), targetXY(targetXY), bProp(bProp), texWorldSize(texWorldSize)
-	{}
-
-	wstring			file{};
-	Util::Coord		boardXY{};
-	Util::Coord		frameXY{};
-	Util::Coord		targetXY{};
-	BlockProperty	bProp{};
-	Vector2			texWorldSize{ CELL_WORLD_SIZE };
-};
 
 class BlockEditor
 {
@@ -34,9 +20,10 @@ private:
 	void SelectBlockMap();
 	void SetBlockToWorld();
 
-	void CreateBlock(Util::Coord boardXY);
-	void CreateBlock(const BlockInfo& info, Util::Coord boardXY);
-
+	void CreateBlock(Util::Coord boardXY);						  // editor에서 edit할 떄의 용도
+	void CreateBlock(const BlockInfo& info, Util::Coord boardXY); // 시작 시 Load할 때 create하는 용도
+	void EraseBlock(const Util::Coord& boardXY);
+																  
 private:
 
 	void Save();
@@ -45,12 +32,15 @@ private:
 private:
 
 	// 월드에 배치된 블록들 관련
-	vector<Block*>		cellBlocks{};
-	vector<BlockInfo>	infos{};
+	Block*		cellBlocks[MAP_ROW][MAP_COL]{};
+	BlockInfo	infos[MAP_ROW][MAP_COL]{};
+
 
 	// 블록맵 메뉴 관련
 	vector<pair<Block*, BlockInfo>> blockMaps{};
 	vector<Collider*>				blockMapColliders{};
 	UINT							selectedIdx{};
+
+
 };
 
