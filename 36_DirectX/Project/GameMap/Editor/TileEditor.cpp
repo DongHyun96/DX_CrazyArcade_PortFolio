@@ -51,8 +51,10 @@ void TileEditor::Render()
 	if (MapEditor::GetInst()->GetMode() != MapEditor::TILE_MODE)
 		return;
 
-	for (auto& tile : tileMaps)		 tile.first->Render();
-	for (auto& c : tileMapColliders) c->Render();
+	for (auto& tile : tileMaps) tile.first->Render();
+
+	if (MapEditor::GetInst()->GetRenderColliderFlag())
+		for (auto& c : tileMapColliders) c->Render();
 }
 
 void TileEditor::UpdateObjects()

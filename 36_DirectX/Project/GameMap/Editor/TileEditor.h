@@ -20,9 +20,9 @@ struct TileInfo
 
 	void ReadAndCopy(BinaryReader& binReader)
 	{
-		file = binReader.ReadWString();
-		frameX = binReader.ReadUINT();
-		frameY = binReader.ReadUINT();
+		file	= binReader.ReadWString();
+		frameX	= binReader.ReadUINT();
+		frameY	= binReader.ReadUINT();
 		targetX = binReader.ReadUINT();
 		targetY = binReader.ReadUINT();
 	}
@@ -53,8 +53,8 @@ private:
 	void SelectTileMap();
 	void SetTileToWorld();
 
-	void CreateTile(UINT boardX, UINT boardY);
-	void CreateTile(const TileInfo& info, UINT boardX, UINT boardY);
+	void CreateTile(UINT boardX, UINT boardY);						 // editor에서 edit할 떄의 용도
+	void CreateTile(const TileInfo& info, UINT boardX, UINT boardY); // 시작 시 Load할 때 create하는 용도
 
 private:
 
