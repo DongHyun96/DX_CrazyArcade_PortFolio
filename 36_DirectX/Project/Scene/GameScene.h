@@ -20,5 +20,7 @@ private:
 
 	Block* block{};
 	Util::Coord curBlockPos{};
+
+	Character* player{};
 };
 

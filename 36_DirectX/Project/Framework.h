@@ -124,7 +124,21 @@ typedef XMMATRIX Matrix;
 #include "GameMap/Editor/BlockEditor.h"
 #include "GameMap/Editor/MapEditor.h"
 
+
 #include "Character/Character.h"
+#include "Character/Player.h"
+
+#include "Character/CharacterAnims/CharacterAnimFactory.h"
+#include "Character/CharacterAnims/CharacterAnimState.h"
+
+#include "Character/CharacterAnims/CharacterAnim.h"
+#include "Character/CharacterAnims/BazziAnim.h"
+#include "Character/CharacterAnims/DaoAnim.h"
+#include "Character/CharacterAnims/CappiAnim.h"
+#include "Character/CharacterAnims/MaridAnim.h"
+
+
+
 
 #include "Scene/Scene.h"
 #include "Scene/CollisionScene.h"

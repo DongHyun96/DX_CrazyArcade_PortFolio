@@ -11,12 +11,12 @@ Vector2::Vector2(float x, float y)
 {
 }
 
-float Vector2::Length()
+float Vector2::Length() const
 {
 	return sqrtf(powf(x, 2) + powf(y, 2));
 }
 
-Vector2 Vector2::GetNormal()
+Vector2 Vector2::GetNormal() const
 {
 	if (Length() == 0)
 		return *this;
@@ -59,6 +59,11 @@ Vector2 Vector2::operator*(const float& value) const
 Vector2 Vector2::operator/(const float& value) const
 {
 	return Vector2(this->x / value, this->y / value);
+}
+
+bool Vector2::operator==(const Vector2& other) const
+{
+	return this->x == other.x && this->y == other.y;
 }
 
 void Vector2::operator+=(const Vector2& other)

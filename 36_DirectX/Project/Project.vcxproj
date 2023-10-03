@@ -155,12 +155,20 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Character\CharacterAnims\CappiAnim.h" />
+    <ClInclude Include="Character\CharacterAnims\BazziAnim.h" />
+    <ClInclude Include="Character\CharacterAnims\CharacterAnim.h" />
+    <ClInclude Include="Character\CharacterAnims\CharacterAnimFactory.h" />
+    <ClInclude Include="Character\CharacterAnims\CharacterAnimState.h" />
     <ClInclude Include="Character\Character.h" />
+    <ClInclude Include="Character\CharacterAnims\DaoAnim.h" />
     <ClInclude Include="GameMap\Editor\BlockEditor.h" />
     <ClInclude Include="GameMap\BlockManager.h" />
     <ClInclude Include="GameMap\Block.h" />
     <ClInclude Include="Manager\GameManager.h" />
     <ClInclude Include="GameMap\Editor\MapEditor.h" />
+    <ClInclude Include="Character\CharacterAnims\MaridAnim.h" />
+    <ClInclude Include="Character\Player.h" />
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="GameMap\TileManager.h" />
     <ClInclude Include="GameMap\Editor\TileEditor.h" />
@@ -208,12 +216,19 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Character\CharacterAnims\CappiAnim.cpp" />
+    <ClCompile Include="Character\CharacterAnims\BazziAnim.cpp" />
+    <ClCompile Include="Character\CharacterAnims\CharacterAnim.cpp" />
+    <ClCompile Include="Character\CharacterAnims\CharacterAnimFactory.cpp" />
     <ClCompile Include="Character\Character.cpp" />
+    <ClCompile Include="Character\CharacterAnims\DaoAnim.cpp" />
     <ClCompile Include="GameMap\Editor\BlockEditor.cpp" />
     <ClCompile Include="GameMap\BlockManager.cpp" />
     <ClCompile Include="GameMap\Block.cpp" />
     <ClCompile Include="Manager\GameManager.cpp" />
     <ClCompile Include="GameMap\Editor\MapEditor.cpp" />
+    <ClCompile Include="Character\CharacterAnims\MaridAnim.cpp" />
+    <ClCompile Include="Character\Player.cpp" />
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="GameMap\TileManager.cpp" />
     <ClCompile Include="GameMap\Editor\TileEditor.cpp" />

@@ -28,6 +28,8 @@ GameScene::GameScene()
 	//block = new Block({ 5, 6 }, L"InGame/Village/Objects/tree.png", {1, 1}, {1, 1}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f));
 	//block = new Block({ 5, 7 }, L"InGame/Village/Objects/house.png", { 3, 1 }, { 2, 1 }, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f));
 	block = new Block({ 5, 6 }, L"InGame/Village/Objects/Hide.png", {2, 1}, {1, 1}, Vector2(WIN_WIDTH / MAP_COL * 1.15f, WIN_HEIGHT / MAP_ROW), {true, false, true});
+
+	player = new Player(BAZZI);
 }
 
 GameScene::~GameScene()
@@ -38,6 +40,8 @@ GameScene::~GameScene()
 	delete blockManager;
 
 	delete block;
+
+	delete player;
 }
 
 void GameScene::Update()
@@ -61,6 +65,8 @@ void GameScene::Update()
 	{
 		block->PlayBushInteraction();
 	}
+
+	player->Update();
 	
 }
 
@@ -79,6 +85,8 @@ void GameScene::Render()
 	//blockManager->Render();
 
 	block->Render();
+
+	player->Render();
 }
 
 //if (KEY_DOWN(VK_LEFT))

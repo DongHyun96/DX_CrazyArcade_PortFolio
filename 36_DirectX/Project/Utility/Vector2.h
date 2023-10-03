@@ -5,9 +5,9 @@ struct Vector2 : public XMFLOAT2
 	Vector2();
 	Vector2(float x, float y);
 
-	float Length();
+	float Length() const;
 
-	Vector2 GetNormal();
+	Vector2 GetNormal() const;
 
 	void Normalize(); // 원본 자체를 정규화
 
@@ -22,6 +22,8 @@ struct Vector2 : public XMFLOAT2
 	Vector2 operator*(const float& value) const;
 	Vector2 operator/(const float& value) const;
 	
+	bool operator==(const Vector2& other) const;
+
 	void operator+=(const Vector2& other);
 	void operator-=(const Vector2& other);
 
@@ -30,6 +32,7 @@ struct Vector2 : public XMFLOAT2
 
 	Vector2 operator* (const Matrix& value) const;
 	void	operator*=(const Matrix& value);
+	
 
 
 

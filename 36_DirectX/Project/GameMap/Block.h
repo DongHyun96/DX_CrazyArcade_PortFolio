@@ -68,7 +68,7 @@ public:
 		Util::Coord boardXY, wstring texFile, 
 		Util::Coord frameXY  = {1, 1},
 		Util::Coord targetXY = {1, 1},
-		Vector2 texWorldSize = Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW),
+		Vector2 texWorldSize = CELL_WORLD_SIZE,
 		BlockProperty bProp = {}
 	);
 
