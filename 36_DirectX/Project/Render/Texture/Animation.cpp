@@ -2,6 +2,26 @@
 #include "Animation.h"
 
 
+Animation::Animation(Vector2 texWorldSize, wstring file, UINT frameX, UINT frameY, UINT nFrames, float updateTime)
+	:updateTime(updateTime)
+{
+	if (nFrames == 0)
+		nFrames = frameX * frameY;
+
+	for (UINT i = 0; i < nFrames; i++)
+	{
+		UINT x = i % frameX; // 0, 1, 2, 3
+		UINT y = i / frameX; // 0, 0, 0, 0, 1, 1, 1, 1
+
+		Vector2 uvStart = { x / (float)frameX, y / (float)frameY };
+		Vector2 uvEnd = { (x + 1) / (float)frameX, (y + 1) / (float)frameY };
+
+		frames.push_back(new Frame(texWorldSize, file, uvStart, uvEnd));
+	}
+
+	SetAll();
+}
+
 Animation::Animation(wstring file, UINT frameX, UINT frameY, UINT nFrames, float updateTime)
 	:updateTime(updateTime)
 {
@@ -77,6 +97,8 @@ void Animation::Render()
 
 void Animation::Play()
 {
+	if (isPlay) return;
+
 	isPlay = true;
 
 	frameTime = 0.f;
@@ -94,6 +116,12 @@ void Animation::Stop()
 
 	if (EndEvent)
 		EndEvent();
+}
+
+void Animation::Stop(UINT rewindIdx)
+{
+	Stop();
+	curPlayIndex = rewindIdx;
 }
 
 void Animation::SetAll(bool isLoop)
