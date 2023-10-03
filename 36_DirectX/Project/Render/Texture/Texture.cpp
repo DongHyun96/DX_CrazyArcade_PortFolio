@@ -34,6 +34,8 @@ Texture* Texture::GetTexture(wstring file)
 
 	CreateShaderResourceView(DEVICE, image.GetImages(), image.GetImageCount(), image.GetMetadata(), &srv);
 
+	assert(srv);
+
 	textures.emplace(file, new Texture(srv, image));
 
 	return textures[file];
