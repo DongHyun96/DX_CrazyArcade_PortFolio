@@ -1,18 +1,39 @@
 #pragma once
 
-enum CharacterState
+class CharacterAnim;
+
+#define SPEED_BASE 50.f
+
+enum CharacterType
 {
-	SPAWN,
-	IDLE,
-	RIDING,
-	CAPTURED,
-	DEAD
+	BAZZI,
+	DAO,
+	CAPPI,
+	MARID
 };
 
-class Character : public Transform
+enum CharacterState
+{
+	C_SPAWN,
+
+	C_IDLE,
+
+	C_SPACECRAFT,
+	C_OWL,
+	C_TURTLE,
+
+	C_CAPTURED,
+
+	C_RETURN_IDLE,
+
+	C_DEAD
+};
+
+class Character : public Transform // Character Transform 그 잡체가 Animation 프레임의 위치정보가 됨
 {
 public:
-	Character();
+	Character(const CharacterType& cType);
+
 	virtual ~Character();
 
 	virtual void Update();
@@ -20,25 +41,38 @@ public:
 
 	void SetAction(int state);
 
-	virtual void AddAction() = 0;
+	virtual void Move() = 0;
+
+	void SetCharacterState(const CharacterState& state) { this->mainState = state; }
 
 protected:
 
-	VertexShader*			vertexShader{};
-	PixelShader*			pixelShader{};
+	VertexShader*						vertexShader{};
+	PixelShader*						pixelShader{};
 
-	MatrixBuffer*			worldBuffer{};
-
-	Vector2					velocity{};
-
-	CharacterState			mainState{IDLE};
-
-	ColliderRect*			body{};
+	MatrixBuffer*						worldBuffer{};
 
 
-	//map<int, Animation*>	actions{};
+	Collider*							body{};
+	Vector2								velocity{};
 
-	//Animation*			curAction{};
+	CharacterState						mainState{C_IDLE};
+	
 
-	//int					state{};
+	CharacterAnim*						actionHandler;
+	
+	/*
+	속도 / 물풍선 / 물줄기
+	*/
+	UINT speedLvMin{};
+	UINT speedLvMax{};
+	UINT balloonCntMin{};
+	UINT balloonCntMax{};
+	UINT streamLvMin{};
+	UINT streamLvMax{};
+
+	UINT speedLv{ 1 };
+	UINT balloonCnt{ 1 };
+	UINT streamLv{ 1 };
+
 };
