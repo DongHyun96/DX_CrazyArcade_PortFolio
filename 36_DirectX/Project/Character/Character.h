@@ -29,7 +29,7 @@ enum CharacterState
 	C_DEAD
 };
 
-class Character : public Transform // Character Transform 그 잡체가 Animation 프레임의 위치정보가 됨
+class Character : public Transform
 {
 public:
 	Character(const CharacterType& cType);
@@ -39,28 +39,36 @@ public:
 	virtual void Update();
 	virtual void Render();
 
-	void SetAction(int state);
-
 	virtual void Move() = 0;
 
 	void SetCharacterState(const CharacterState& state) { this->mainState = state; }
 
+	void SetVisible(const bool& visible) { this->visible = visible; }
+
+	ColliderRect* GetBody() { return body; }
+
+	void Debug();
+
+	void SetLabel(const string& label) { this->label = label; }
+
 protected:
 
-	VertexShader*						vertexShader{};
-	PixelShader*						pixelShader{};
+	ColorBuffer* colorBuffer{};
+	bool visible{ true };
 
-	MatrixBuffer*						worldBuffer{};
+protected:
 
+	ColliderRect*	body{};
+	Vector2			velocity{};
 
-	Collider*							body{};
-	Vector2								velocity{};
+	CharacterState	mainState{C_IDLE};
 
-	CharacterState						mainState{C_IDLE};
+	CharacterAnim*	actionHandler;
+
+	string			label{};
 	
+protected:
 
-	CharacterAnim*						actionHandler;
-	
 	/*
 	속도 / 물풍선 / 물줄기
 	*/

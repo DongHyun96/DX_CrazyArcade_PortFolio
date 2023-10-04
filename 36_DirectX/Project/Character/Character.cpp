@@ -4,59 +4,55 @@
 
 Character::Character(const CharacterType& cType)
 {
-	actionHandler = CharacterAnimFactory::CreateCharacterAnim(cType);
-
-	vertexShader = new VertexShader(L"VertexTexture");
-	pixelShader = new PixelShader(L"PixelTexture");
-
-	worldBuffer = new MatrixBuffer();
+	Vector2 characterBodySize = { CELL_WORLD_SIZE.x - 10.f, CELL_WORLD_SIZE.y - 10.f };
 
 	body = new ColliderRect(CELL_WORLD_SIZE);
-	Util::SetTransformToGameBoard(body, { 6, 7 });
-	
-	// Character 자기자신의 Transform은 곧 Animation의 transform -> Animation transform의 부모를 bodyCollider로 둠
-	this->SetParent(body);
+
+	Util::SetTransformToGameBoard(body, { 3, 4 });
+
+	actionHandler = CharacterAnimFactory::CreateCharacterAnim(cType, body);
+
+	colorBuffer = new ColorBuffer();
 }
 
 Character::~Character()
 {
-	delete worldBuffer;
-	delete vertexShader;
-	delete pixelShader;
-
 	delete actionHandler;
 
 	delete body;
+
+	delete colorBuffer;
 }
 
 void Character::Update()
 {
-	Transform::Update();
 	body->Update();
 	
 	body->UpdateZDepthToY();
 
-	actionHandler->Update();
+	Move();
 
+	actionHandler->Update();
 	actionHandler->UpdateAction(mainState, velocity);
 
-	Move();
 }
 
 void Character::Render()
 {
-	worldBuffer->SetData(world);
-	worldBuffer->VSSetBuffer(0);
+	//colorBuffer->SetData(Vector4(1, 0, 1, 1.f));
+	if (!visible)
+		return;
 
-	vertexShader->SetShader();
-	pixelShader->SetShader();
+	colorBuffer->PSSetBuffer(0);
 
 	actionHandler->Render();
 
 	body->Render();
 }
 
-void Character::SetAction(int state)
+void Character::Debug()
 {
+	assert(label != "");
 
+	body->Debug(label);
 }
