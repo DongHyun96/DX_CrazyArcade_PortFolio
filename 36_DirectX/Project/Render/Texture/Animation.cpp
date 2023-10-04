@@ -92,6 +92,8 @@ void Animation::Update()
 
 void Animation::Render()
 {
+
+
 	actions[curPlayIndex]->Render();
 }
 
@@ -171,3 +173,4 @@ void Animation::SetIndex(vector<UINT> indices, bool isLoop)
 		actions.push_back(frames[indices[i]]);
 	}
 }
+

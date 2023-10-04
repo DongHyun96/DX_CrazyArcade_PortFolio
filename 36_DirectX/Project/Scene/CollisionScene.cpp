@@ -38,7 +38,7 @@ void CollisionScene::Update()
 	for (Collider* collider : colliders)
 		collider->Update();
 
-	if (colliders[0]->Collision(colliders[3]))
+	if (colliders[2]->Collision(colliders[3]))
 		colliders[2]->SetColor(1, 0, 0);
 	else
 		colliders[2]->SetColor(0, 1, 0);

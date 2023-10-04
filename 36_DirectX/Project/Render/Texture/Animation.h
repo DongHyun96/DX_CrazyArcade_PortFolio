@@ -40,4 +40,5 @@ private:
 	UINT curPlayIndex{};
 
 	function<void()> EndEvent = nullptr;
+
 };

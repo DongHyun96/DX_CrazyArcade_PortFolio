@@ -9,6 +9,7 @@ public:
 	virtual ~Transform();
 	
 	void Debug();
+	void Debug(const string& label);
 
 	virtual void Update();
 	void UpdateWorld();
@@ -32,10 +33,13 @@ public:
 
 public:
 
+	// Locals
 	Vector2 scale		= { 1.f, 1.f };
 	Vector3 rotation	= { 0.f, 0.f, 0.f };
 	Vector2 translation	= { 0.f, 0.f };
 	float zDepth{};
+
+
 
 protected:
 
@@ -46,7 +50,7 @@ protected:
 	Transform*	parent{};
 
 	Vector2		pivot{};
-
+	
 	string label{};
 
 	Vector2 globalScale{};

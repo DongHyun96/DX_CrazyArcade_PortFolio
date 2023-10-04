@@ -36,6 +36,8 @@ void Transform::UpdateWorld()
 	if (parent)
 		this->world *= parent->world;
 
+	// Globals
+
 	XMVECTOR outS, outR, outT;
 
 	XMMatrixDecompose(&outS, &outR, &outT, world); // Decompose S, R, T로 분해해주는 함수
@@ -71,6 +73,23 @@ void Transform::Debug()
 
 		ImGui::InputFloat2	("GlobalScale", (float*)&globalScale);
 		ImGui::InputFloat2  ("GlobalPos", (float*)&globalPosition);
+
+		ImGui::EndMenu();
+
+	}
+}
+
+void Transform::Debug(const string& label)
+{
+	if (ImGui::BeginMenu(label.c_str()))
+	{
+		ImGui::DragFloat2("Scale", (float*)&scale, 0.1f, 0.1f, 50.f);
+		ImGui::SliderAngle("Rotation", &rotation.z);
+		ImGui::DragFloat2("Translation", (float*)&translation, 1.f, -WIN_WIDTH, WIN_WIDTH);
+		ImGui::DragFloat("ZDepth", &zDepth);
+
+		ImGui::InputFloat2("GlobalScale", (float*)&globalScale);
+		ImGui::InputFloat2("GlobalPos", (float*)&globalPosition);
 
 		ImGui::EndMenu();
 
