@@ -50,6 +50,7 @@ Object::Object(Vector2 size)
     pixelShader = new PixelShader(L"PixelTexture");
 
     worldBuffer = new MatrixBuffer();
+    colorBuffer = new ColorBuffer();
 }
 
 Object::Object(wstring file, Vector2 uvStart, Vector2 uvEnd)
@@ -86,6 +87,7 @@ Object::Object(wstring file, Vector2 uvStart, Vector2 uvEnd)
     pixelShader     = new PixelShader(L"PixelTexture");
 
     worldBuffer     = new MatrixBuffer();
+    colorBuffer     = new ColorBuffer();
 }
 
 Object::Object(Vector2 size, wstring file, Vector2 uvStart, Vector2 uvEnd)
@@ -121,6 +123,8 @@ Object::Object(Vector2 size, wstring file, Vector2 uvStart, Vector2 uvEnd)
     pixelShader = new PixelShader(L"PixelTexture");
 
     worldBuffer = new MatrixBuffer();
+
+    colorBuffer = new ColorBuffer();
 }
 
 Object::Object(Vector2 size, wstring file, UINT frameX, UINT frameY, UINT targetX, UINT targetY)
@@ -162,6 +166,9 @@ Object::Object(Vector2 size, wstring file, UINT frameX, UINT frameY, UINT target
     pixelShader = new PixelShader(L"PixelTexture");
 
     worldBuffer = new MatrixBuffer();
+
+    colorBuffer = new ColorBuffer();
+
 }
 
 Object::~Object()
@@ -171,6 +178,7 @@ Object::~Object()
     delete pixelShader;
     delete indexBuffer;
     delete worldBuffer;
+    delete colorBuffer;
 
 }
 
@@ -184,6 +192,8 @@ void Object::Render() // 모든 data 세팅은 "draw call전에 해야함
 
     worldBuffer->SetData(world);
     worldBuffer->VSSetBuffer(0);
+
+    colorBuffer->PSSetBuffer(0);
 
     if (texture)
         texture->SetPS();

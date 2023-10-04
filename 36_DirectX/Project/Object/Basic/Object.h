@@ -18,6 +18,8 @@ public:
 
 	void Render();
 
+	void SetColor(const float& r, const float& g, const float& b, const float& a) { colorBuffer->SetData(Vector4(r, g, b, a)); }
+
 
 private:
 	vector<VertexTexture>	vertices{};
@@ -31,6 +33,7 @@ private:
 	PixelShader*			pixelShader;
 
 	MatrixBuffer*			worldBuffer;
+	ColorBuffer*			colorBuffer;
 
 	Texture*				texture;
 };

@@ -39,7 +39,7 @@ public:
 private:
 	struct Data
 	{
-		Vector4 color;
+		Vector4 color = { 1,1,1,1 };
 	};
 
 	Data data;

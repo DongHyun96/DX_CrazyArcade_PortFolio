@@ -34,6 +34,7 @@ private:
 	//Depth Stencil ฐüทร
 	ID3D11Texture2D*		g_pDepthStencil{};
 	ID3D11DepthStencilView* stencilView{};
+	ID3D11DepthStencilState* depthStencilState{};
 
 
 };

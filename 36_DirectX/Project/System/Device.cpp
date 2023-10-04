@@ -15,8 +15,8 @@ Device::~Device()
     renderTargetView->Release();
 
     g_pDepthStencil->Release();
-
     stencilView->Release();
+    depthStencilState->Release();
 }
 
 void Device::Initialize()
@@ -120,6 +120,18 @@ void Device::CreateDepthStencil()
     descDepth.MiscFlags             = 0;
 
     device->CreateTexture2D(&descDepth, nullptr, &g_pDepthStencil);
+
+    D3D11_DEPTH_STENCIL_DESC depthStencilStateDesc;
+    ZeroMemory(&depthStencilStateDesc, sizeof(D3D11_DEPTH_STENCIL_DESC));
+
+
+    depthStencilStateDesc.DepthEnable       = TRUE;
+    depthStencilStateDesc.DepthWriteMask    = D3D11_DEPTH_WRITE_MASK_ALL;
+    depthStencilStateDesc.DepthFunc         = D3D11_COMPARISON_LESS;
+    depthStencilStateDesc.StencilEnable     = FALSE;
+
+    device->CreateDepthStencilState(&depthStencilStateDesc, &depthStencilState);
+    deviceContext->OMSetDepthStencilState(depthStencilState, 1);
 
     D3D11_DEPTH_STENCIL_VIEW_DESC descDSV;
 
