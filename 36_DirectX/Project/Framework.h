@@ -14,7 +14,7 @@
 #include <map>
 #include <functional>
 #include <algorithm>
-
+#include <set>
 using namespace std;
 
 
@@ -64,8 +64,8 @@ using namespace DirectX;
 
 #define GM				GameManager::GetInst()
 
-#define NEAR_Z			-1.f
-#define FAR_Z			1500.f
+#define NEAR_Z			-10.f
+#define FAR_Z			1090.f
 
 typedef XMFLOAT3 Vector3;
 typedef XMFLOAT4 Vector4;

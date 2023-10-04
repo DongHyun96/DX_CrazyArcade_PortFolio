@@ -7,6 +7,8 @@ Camera::Camera()
 	viewBuffer = new MatrixBuffer();
 
 	transform = new Transform();
+	
+	transform->zDepth = 0.f;
 }
 
 Camera::~Camera()

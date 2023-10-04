@@ -155,7 +155,7 @@ void TileEditor::CreateTile(UINT boardX, UINT boardY)
 
 	Util::SetTransformToGameBoard(cellTiles[boardY][boardX], boardX, boardY);
 
-	cellTiles[boardY][boardX]->zDepth = FAR_Z - 1.f;
+	cellTiles[boardY][boardX]->zDepth = FAR_Z - 10.f;
 
 	infos[boardY][boardX] = tileMaps[selectedTIdx].second;
 
@@ -174,7 +174,7 @@ void TileEditor::CreateTile(const TileInfo& info, UINT boardX, UINT boardY)
 
 	Util::SetTransformToGameBoard(cellTiles[boardY][boardX], boardX, boardY);
 
-	cellTiles[boardY][boardX]->zDepth = FAR_Z - 1.f;
+	cellTiles[boardY][boardX]->zDepth = FAR_Z - 10.f;
 
 }
 
