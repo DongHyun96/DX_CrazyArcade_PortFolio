@@ -2,8 +2,15 @@
 #include "CharacterAnim.h"
 
 
-CharacterAnim::CharacterAnim()
+CharacterAnim::CharacterAnim(ColliderRect* parent)
+	:parent(parent)
 {
+	vertexShader = new VertexShader(L"VertexTexture");
+	pixelShader = new PixelShader(L"PixelTexture");
+
+	worldBuffer = new MatrixBuffer();
+
+	this->SetParent(parent);
 }
 
 CharacterAnim::~CharacterAnim()
@@ -33,6 +40,10 @@ CharacterAnim::~CharacterAnim()
 	owlActions.clear();
 	turtleActions.clear();
 	bubbleActions.clear();
+
+	delete worldBuffer;
+	delete vertexShader;
+	delete pixelShader;
 }
 
 void CharacterAnim::Update()
@@ -40,13 +51,22 @@ void CharacterAnim::Update()
 	if (!curAction)
 		return;
 
+	Transform::Update();
 	curAction->Update();
+	
+	translation.y = (curAction->Size().y - parent->LocalSize().y) / 2;
 }
 
 void CharacterAnim::Render()
 {
 	if (!curAction)
 		return;
+
+	worldBuffer->SetData(world);
+	worldBuffer->VSSetBuffer(0);
+
+	vertexShader->SetShader();
+	pixelShader->SetShader();
 
 	curAction->Render();
 }
@@ -157,13 +177,3 @@ int CharacterAnim::GetDirRelativeFrameIdx(const Vector2& velocity)
 	else                            return 3;
 }
 
-//void Character::SetAction(int state)
-//{
-//	if (this->state == state)
-//		return;
-//
-//	this->state = state;
-//
-//	curAction = actions[state];
-//	curAction->Play();
-//}

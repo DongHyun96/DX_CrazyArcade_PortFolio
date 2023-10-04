@@ -2,7 +2,8 @@
 #include "CappiAnim.h"
 
 
-CappiAnim::CappiAnim()
+CappiAnim::CappiAnim(ColliderRect* parent)
+	:CharacterAnim(parent)
 {
 }
 

@@ -2,7 +2,8 @@
 #include "MaridAnim.h"
 
 
-MaridAnim::MaridAnim()
+MaridAnim::MaridAnim(ColliderRect* parent)
+	:CharacterAnim(parent)
 {
 }
 

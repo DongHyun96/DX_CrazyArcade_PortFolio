@@ -6,7 +6,7 @@ public:
 	CharacterAnimFactory();
 	~CharacterAnimFactory();
 	
-	static CharacterAnim* CreateCharacterAnim(const CharacterType& cType);
+	static CharacterAnim* CreateCharacterAnim(const CharacterType& cType, ColliderRect* parent);
 
 private:
 

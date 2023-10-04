@@ -2,7 +2,7 @@
 class DaoAnim : public CharacterAnim
 {
 public:
-	DaoAnim();
+	DaoAnim(ColliderRect* parent);
 	~DaoAnim();
 
 private:

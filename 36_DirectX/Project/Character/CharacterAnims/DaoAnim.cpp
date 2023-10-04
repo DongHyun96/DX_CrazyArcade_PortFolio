@@ -2,7 +2,8 @@
 #include "DaoAnim.h"
 
 
-DaoAnim::DaoAnim()
+DaoAnim::DaoAnim(ColliderRect* parent)
+	:CharacterAnim(parent)
 {
 }
 

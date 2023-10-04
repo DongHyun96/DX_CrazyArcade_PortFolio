@@ -2,10 +2,10 @@
 
 // TODO - 각자 SpawnAction 스프라이트를 만들어줘야 함
 
-class CharacterAnim
+class CharacterAnim : public Transform
 {
 protected:
-	CharacterAnim();
+	CharacterAnim(ColliderRect* parent);
 
 public:
 	virtual ~CharacterAnim();
@@ -33,5 +33,12 @@ protected:
 
 	CharacterState						ownerPrevState{};
 	Vector2								ownerPrevVelocity{};
+
+	ColliderRect*						parent{};
+
+	VertexShader*						vertexShader{};
+	PixelShader*						pixelShader{};
+
+	MatrixBuffer*						worldBuffer{};
 
 };

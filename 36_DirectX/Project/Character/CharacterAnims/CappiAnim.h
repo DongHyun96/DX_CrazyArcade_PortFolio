@@ -2,7 +2,7 @@
 class CappiAnim : public CharacterAnim
 {
 public:
-	CappiAnim();
+	CappiAnim(ColliderRect* parent);
 	~CappiAnim();
 
 private:

@@ -2,7 +2,7 @@
 class MaridAnim : public CharacterAnim
 {
 public:
-	MaridAnim();
+	MaridAnim(ColliderRect* parent);
 	~MaridAnim();
 
 private:
