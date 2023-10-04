@@ -1,5 +1,8 @@
 #pragma once
 
+/// <summary>
+/// 점 개념으로도 사용
+/// </summary>
 struct Vector2 : public XMFLOAT2
 {
 	Vector2();
@@ -15,6 +18,8 @@ struct Vector2 : public XMFLOAT2
 
 	// 외적의 반환은 Vector but 2차원에서 쓰기 때문에 z값의 부호만 의미 있기 때문에 그냥 float 으로 return
 	static float Cross(const Vector2& v1, const Vector2& v2);
+
+	static float Distance(const Vector2& p1, const Vector2& p2);
 
 	Vector2 operator+(const Vector2& other) const;
 	Vector2 operator-(const Vector2& other) const;
@@ -34,9 +39,7 @@ struct Vector2 : public XMFLOAT2
 	void	operator*=(const Matrix& value);
 	
 
-
-
 	/// <summary> factor가 v1과 v2 사이에 있나 </summary>
-	static bool IsBetween(const Vector2& factor, const Vector2& v1, const Vector2 v2);
+	static bool IsBetween(const Vector2& factor, const Vector2& v1, const Vector2& v2);
 
 };

@@ -41,6 +41,16 @@ float Vector2::Cross(const Vector2& v1, const Vector2& v2)
 	return v1.x * v2.y - v1.y * v2.x;
 }
 
+float Vector2::Distance(const Vector2& p1, const Vector2& p2)
+{
+	float x = p1.x - p2.x;
+	float y = p1.y - p2.y;
+
+	float distance = sqrtf(x * x + y * y);
+
+	return distance;
+}
+
 Vector2 Vector2::operator+(const Vector2& other) const
 {
 	return Vector2(this->x + other.x, this->y + other.y);
@@ -118,7 +128,7 @@ void Vector2::operator*=(const Matrix& value)
 	*this = position;
 }
 
-bool Vector2::IsBetween(const Vector2& factor, const Vector2& v1, const Vector2 v2)
+bool Vector2::IsBetween(const Vector2& factor, const Vector2& v1, const Vector2& v2)
 {
 	// Factor가 들어가는 순서도 일정해야 함
 	return Cross(factor, v1) * Cross(factor, v2) < 0;
