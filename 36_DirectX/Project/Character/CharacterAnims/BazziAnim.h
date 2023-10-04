@@ -2,7 +2,7 @@
 class BazziAnim : public CharacterAnim
 {
 public:
-	BazziAnim();
+	BazziAnim(ColliderRect* parent);
 	~BazziAnim();
 
 private:
