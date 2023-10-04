@@ -34,16 +34,41 @@ void ColliderRect::SetVertex()
     vertexBuffer = new VertexBuffer(vertices);
 }
 
-bool ColliderRect::Collision(Vector2 point)
+bool ColliderRect::Collision(Vector2 point, Transform* owner)
 {
     Matrix invWorld = XMMatrixInverse(nullptr, this->world);
 
     Vector2 invPoint = point * invWorld;
 
-    return (abs(invPoint.x) <= this->size.x * 0.5f && abs(invPoint.y) <= this->size.y * 0.5f);
+    if (abs(invPoint.x) < this->size.x * 0.5f && abs(invPoint.y) < this->size.y * 0.5f)
+    {
+        if (owner)
+        {
+            if (enteredPointOwners.find(owner) == enteredPointOwners.end()) // new Point owner entered
+            {
+                enteredPointOwners.insert(owner);
+                if (PointEnterEvent) PointEnterEvent(owner);
+            }
+        }
+        return true;
+    }
+    else
+    {
+        if (owner)
+        {
+            auto targetIt = enteredPointOwners.find(owner);
+
+            if (targetIt != enteredPointOwners.end())
+            {
+                enteredPointOwners.erase(targetIt);
+                if (PointExitEvent) PointExitEvent(owner);
+            }
+        }
+        return false;
+    }
 }
 
-bool ColliderRect::Collision(ColliderRect* rect)
+bool ColliderRect::Collision(ColliderRect* rect, Transform* owner)
 {
     Vector2 distance = this->globalPosition - rect->globalPosition;
 
@@ -57,10 +82,10 @@ bool ColliderRect::Collision(ColliderRect* rect)
 
     Vector2 vectors[4] =
     {
-        axes[0] * (this->Size().x * 0.5f),
-        axes[1] * (this->Size().y * 0.5f),
-        axes[2] * (rect->Size().x * 0.5f),
-        axes[3] * (rect->Size().y * 0.5f)
+        axes[0] * (this->GlobalSize().x * 0.5f),
+        axes[1] * (this->GlobalSize().y * 0.5f),
+        axes[2] * (rect->GlobalSize().x * 0.5f),
+        axes[3] * (rect->GlobalSize().y * 0.5f)
     };
 
     for (UINT i = 0; i < 4; i++)
@@ -70,8 +95,27 @@ bool ColliderRect::Collision(ColliderRect* rect)
         for (UINT j = 0; j < 4; j++)
             sum += abs(Vector2::Dot(axes[i], vectors[j]));
 
-        if (sum < abs(Vector2::Dot(axes[i], distance)))
+        if (sum <= abs(Vector2::Dot(axes[i], distance)))
+        {
+            auto targetIt = enteredRectOwners.find(owner);
+
+            if (targetIt != enteredRectOwners.end())
+            {
+                enteredRectOwners.erase(targetIt);
+                if(RectExitEvent) RectExitEvent(owner);
+            }
             return false;
+        }
+    }
+
+    if (owner)
+    {
+        if (enteredRectOwners.find(owner) == enteredRectOwners.end()) // new rect owner entered
+        {
+            enteredRectOwners.insert(owner);
+
+            if (RectEnterEvent) RectEnterEvent(owner);
+        }
     }
 
     return true;
@@ -92,16 +136,16 @@ bool ColliderRect::Collision(ColliderCircle* other)
 
     float radius = other->Radius();
 
-    if (lengthX > this->Size().x * 0.5f + radius) return false;
-    if (lengthY > this->Size().y * 0.5f + radius) return false;
+    if (lengthX >= this->GlobalSize().x * 0.5f + radius) return false;
+    if (lengthY >= this->GlobalSize().y * 0.5f + radius) return false;
 
-    if (lengthX <= this->Size().x * 0.5f) return true;
-    if (lengthY <= this->Size().y * 0.5f) return true;
+    if (lengthX < this->GlobalSize().x * 0.5f) return true;
+    if (lengthY < this->GlobalSize().y * 0.5f) return true;
 
-    float x = lengthX - this->Size().x * 0.5f;
-    float y = lengthY - this->Size().y * 0.5f;
+    float x = lengthX - this->GlobalSize().x * 0.5f;
+    float y = lengthY - this->GlobalSize().y * 0.5f;
 
     float edgeToCircle = sqrt(pow(x, 2) + pow(y, 2));
 
-    return edgeToCircle <= radius;
+    return edgeToCircle < radius;
 }

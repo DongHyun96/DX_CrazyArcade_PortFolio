@@ -33,14 +33,14 @@ void ColliderCircle::SetVertex()
     vertexBuffer = new VertexBuffer(vertices);
 }
 
-bool ColliderCircle::Collision(Vector2 point)
+bool ColliderCircle::Collision(Vector2 point, Transform* owner)
 {
     float distance = (point - globalPosition).Length();
 
     return distance <= Radius();
 }
 
-bool ColliderCircle::Collision(ColliderRect* other)
+bool ColliderCircle::Collision(ColliderRect* other, Transform* owner)
 {
     return other->Collision(this);
 }

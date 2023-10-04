@@ -7,8 +7,8 @@ public:
 
 	virtual void SetVertex() override;
 
-	virtual bool Collision(Vector2 point) override;
-	virtual bool Collision(ColliderRect* other) override;
+	virtual bool Collision(Vector2 point, Transform* owner = nullptr) override;
+	virtual bool Collision(ColliderRect* other, Transform* owner = nullptr) override;
 	virtual bool Collision(ColliderCircle* other) override;
 
 	float Radius() const { return radius * max(globalScale.x, globalScale.y); }

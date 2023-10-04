@@ -20,7 +20,23 @@ Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Co
 
 	Util::SetTransformToGameBoard(rectBody, boardXY);
 
+	//Util::SetTransformToGameBoard(body, { 3, 4 });
+	
 	label = to_string(boardXY.x) + to_string(boardXY.y);
+
+	// Setting Collider call back functions
+	// 물줄기 위치 파악 -> 해당 위치에 있는 블록을 제거
+	// player 움직임은 명확하게 떨어지지 않음(좌표가 딱딱 떨어지는 것이 아님) -> player movement 충돌은 실제 충돌처리로 처리
+	if (hidable)
+	{
+		rectBody->SetPointEnterEvent(bind(&Block::OnColliderPointEnter, this, placeholders::_1));
+		rectBody->SetPointExitEvent(bind(&Block::OnColliderPointExit, this, placeholders::_1));
+	}
+	else
+	{
+		rectBody->SetRectEnterEvent(bind(&Block::OnColliderRectEnter, this, placeholders::_1));
+		rectBody->SetRectExitEvent(bind(&Block::OnColliderRectExit, this, placeholders::_1));
+	}
 }
 
 Block::~Block()
@@ -49,7 +65,7 @@ void Block::Render()
 	if (!isActive)
 		return;
 
-	//rectBody->Render();
+	rectBody->Render();
 	texObj->Render();
 
 	//Debug();
@@ -140,6 +156,87 @@ void Block::HandleBushInteract()
 
 }
 
+void Block::OnColliderPointEnter(Transform* owner)
+{
+	if (hidable)
+	{
+		PlayBushInteraction();
+
+		Character* c = dynamic_cast<Character*>(owner);
+		
+		if (c) c->SetVisible(false);
+
+	}
+	
+}
+
+void Block::OnColliderPointExit(Transform* owner)
+{
+	if (hidable)
+	{
+		PlayBushInteraction();
+
+		Character* c = dynamic_cast<Character*>(owner);
+
+		if (c) c->SetVisible(true);
+	}
+}
+
+void Block::OnColliderRectEnter(Transform* owner)
+{
+	// Hidable 배제 (등록도 하지 않는다)
+	if (movable)
+	{
+		// 얘 처리도 모호함.. --> 아예 클래스를 하나 파서 충돌체를 겉에 하나 더 주는 식으로 해서 처리하는 편도 나쁘지는 않을 듯함
+	}
+	else
+	{
+		Character* c = dynamic_cast<Character*>(owner);
+
+		if (c) HandleCharacterCollision(c);
+	}
+}
+
+void Block::OnColliderRectExit(Transform* owner)
+{
+	// Hidable 배제 (등록도 하지 않는다)
+
+}
+
+void Block::HandleCharacterCollision(Character* character)
+{
+	Vector2 dir = character->GetBody()->GlobalPosition() - this->GetBody()->GlobalPosition();
+
+	Vector2 size = this->GetBody()->GlobalSize();
+
+	Vector2 LU = Vector2(-size.x, +size.y);
+	Vector2 RU = Vector2(+size.x, +size.y);
+	Vector2 LD = Vector2(-size.x, -size.y);
+	Vector2 RD = Vector2(+size.x, -size.y);
+
+	// LEFT
+	if (Vector2::IsBetween(dir, LU, LD) && character->GetBody()->GlobalPosition().x < this->GetBody()->GlobalPosition().x)
+	{
+		character->GetBody()->translation.x = this->GetBody()->Left() - character->GetBody()->LocalSize().x * 0.51f;
+	}
+	// RIGHT
+	else if (Vector2::IsBetween(dir, RU, RD) && character->GetBody()->GlobalPosition().x > this->GetBody()->GlobalPosition().x)
+	{
+		character->GetBody()->translation.x = this->GetBody()->Right() + character->GetBody()->LocalSize().x * 0.51f;
+	}
+	// UP
+	else if (Vector2::IsBetween(dir, LU, RU) && character->GetBody()->GlobalPosition().y > this->GetBody()->GlobalPosition().y)
+	{
+		character->GetBody()->translation.y = this->GetBody()->Top() + character->GetBody()->LocalSize().y * 0.51f;
+	}
+	// DOWN
+	else if (Vector2::IsBetween(dir, LD, RD) && character->GetBody()->GlobalPosition().y < this->GetBody()->GlobalPosition().y)
+	{
+		character->GetBody()->translation.y = this->GetBody()->Bottom() - character->GetBody()->LocalSize().y * 0.51f;
+	}
+
+}
+
 void Block::Debug()
 {
 	assert(label != "");
@@ -160,4 +257,9 @@ void Block::Debug()
 	}
 
 
+}
+
+void Block::Debug(const string& label)
+{
+	rectBody->Debug(label);
 }

@@ -11,9 +11,11 @@ public:
 
 	bool Collision(Collider* other);
 
-	virtual bool Collision(		 Vector2			point) = 0;
-	virtual bool Collision(class ColliderRect*		other) = 0;
-	virtual bool Collision(class ColliderCircle*	other) = 0;
+	virtual bool Collision(Vector2 point, Transform* owner = nullptr) = 0;
+
+	virtual bool Collision(class ColliderRect* other, Transform* owner = nullptr) = 0;
+
+	virtual bool Collision(class ColliderCircle* other) = 0;
 
 	void SetColor(float r, float g, float b) { colorBuffer->SetData(Vector4(r, g, b, 1.f)); }
 
@@ -32,5 +34,6 @@ protected:
 
 	MatrixBuffer*	worldBuffer;
 	ColorBuffer*	colorBuffer;
+		
 
 };

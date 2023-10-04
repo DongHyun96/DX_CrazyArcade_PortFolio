@@ -2,6 +2,9 @@
 
 #define Y_OFFSET 20.f
 
+class Character;
+class Player;
+
 struct BlockProperty
 {
 	bool breakable{};
@@ -85,11 +88,12 @@ public:
 	void ApplyDamage();
 
 	void Debug();
+	void Debug(const string& label);
 	void SetLabel(const string& label) { this->label = label; }
 
 public:
 
-	Collider* GetBody() { return rectBody; }
+	ColliderRect* GetBody() { return rectBody; }
 	Vector2 GetTranslation() const { return rectBody->translation; }
 
 	bool& IsActive() { return isActive; }
@@ -100,13 +104,22 @@ private:
 	void Move();
 
 	void HandleBushInteract();
+	
+private:
+
+	void OnColliderPointEnter(Transform* owner);
+	void OnColliderPointExit(Transform* owner);
+	void OnColliderRectEnter(Transform* owner);
+	void OnColliderRectExit(Transform* owner);
+
+	void HandleCharacterCollision(Character* character);
 
 private:
 	
 	string label{};
 
-	Collider*	rectBody{};
-	Object*		texObj{};
+	ColliderRect*	rectBody{};
+	Object*			texObj{};
 
 	bool isActive = true;
 
