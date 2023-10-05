@@ -1,5 +1,11 @@
 #pragma once
 
+enum ColliderTag
+{
+	DEFAULT,
+	CHARACTER,
+	CHARACTER_PUSH
+};
 
 class ColliderRect : public Collider // 해당 주체
 {
@@ -23,24 +29,35 @@ public:
 	float	Bottom()	const { return translation.y - size.y * 0.5f; }
 	Vector2 LocalSize() const { return size; }
 
+	void SetColliderTag(const ColliderTag& tag) { this->tag = tag; }
+	ColliderTag GetColliderTag() const { return tag; }
+
 public:
 
 	void SetPointEnterEvent(function<void(Transform*)> E) { this->PointEnterEvent = E; }
+	void SetPointStayEvent(function<void(Transform*)> E) { this->PointStayEvent = E; }
 	void SetPointExitEvent(function<void(Transform*)> E) { this->PointExitEvent = E; }
-	void SetRectEnterEvent(function<void(Transform*)> E) { this->RectEnterEvent = E; }
-	void SetRectExitEvent(function<void(Transform*)> E) { this->RectExitEvent = E; }
+
+	void SetRectEnterEvent(function<void(ColliderRect*, Transform*)> E) { this->RectEnterEvent = E; }
+	void SetRectStayEvent(function<void(ColliderRect*, Transform*)> E) { this->RectStayEvent = E; }
+	void SetRectExitEvent(function<void(ColliderRect*, Transform*)> E) { this->RectExitEvent = E; }
 
 private:
 
 	Vector2 size; // Local size
 
 	set<Transform*> enteredPointOwners{};
-	set<Transform*> enteredRectOwners{};
+
+	set<ColliderRect*> enteredBodies{};
 	
 	function<void(Transform*)> PointEnterEvent{};
+	function<void(Transform*)> PointStayEvent{};
 	function<void(Transform*)> PointExitEvent{};
 
-	function<void(Transform*)> RectEnterEvent{};
-	function<void(Transform*)> RectExitEvent{};
+	function<void(ColliderRect*, Transform*)> RectEnterEvent{};
+	function<void(ColliderRect*, Transform*)> RectStayEvent{};
+	function<void(ColliderRect*, Transform*)> RectExitEvent{};
+
+	ColliderTag tag{DEFAULT};
 
 };

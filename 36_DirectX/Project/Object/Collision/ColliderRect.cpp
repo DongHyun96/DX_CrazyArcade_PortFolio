@@ -40,7 +40,7 @@ bool ColliderRect::Collision(Vector2 point, Transform* owner)
 
     Vector2 invPoint = point * invWorld;
 
-    if (abs(invPoint.x) < this->size.x * 0.5f && abs(invPoint.y) < this->size.y * 0.5f)
+    if (abs(invPoint.x) < this->size.x * 0.5f && abs(invPoint.y) < this->size.y * 0.5f) // Collided
     {
         if (owner)
         {
@@ -49,10 +49,14 @@ bool ColliderRect::Collision(Vector2 point, Transform* owner)
                 enteredPointOwners.insert(owner);
                 if (PointEnterEvent) PointEnterEvent(owner);
             }
+            else // existing Point owner entered
+            {
+                if (PointStayEvent) PointStayEvent(owner);
+            }
         }
         return true;
     }
-    else
+    else // Not Collided
     {
         if (owner)
         {
@@ -97,12 +101,12 @@ bool ColliderRect::Collision(ColliderRect* rect, Transform* owner)
 
         if (sum <= abs(Vector2::Dot(axes[i], distance)))
         {
-            auto targetIt = enteredRectOwners.find(owner);
+            auto targetIt = enteredBodies.find(rect);
 
-            if (targetIt != enteredRectOwners.end())
+            if (targetIt != enteredBodies.end())
             {
-                enteredRectOwners.erase(targetIt);
-                if(RectExitEvent) RectExitEvent(owner);
+                enteredBodies.erase(targetIt);
+                if(RectExitEvent) RectExitEvent(rect, owner);
             }
             return false;
         }
@@ -110,11 +114,15 @@ bool ColliderRect::Collision(ColliderRect* rect, Transform* owner)
 
     if (owner)
     {
-        if (enteredRectOwners.find(owner) == enteredRectOwners.end()) // new rect owner entered
+        if (enteredBodies.find(rect) == enteredBodies.end()) // new rect owner entered
         {
-            enteredRectOwners.insert(owner);
+            enteredBodies.insert(rect);
 
-            if (RectEnterEvent) RectEnterEvent(owner);
+            if (RectEnterEvent) RectEnterEvent(rect, owner);
+        }
+        else // Existing rect owner collided
+        {
+            if (RectStayEvent) RectStayEvent(rect, owner);
         }
     }
 
