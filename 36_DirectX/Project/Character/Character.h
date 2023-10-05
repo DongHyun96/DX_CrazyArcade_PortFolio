@@ -41,15 +41,24 @@ public:
 
 	virtual void Move() = 0;
 
-	void SetCharacterState(const CharacterState& state) { this->mainState = state; }
-
-	void SetVisible(const bool& visible) { this->visible = visible; }
-
-	ColliderRect* GetBody() { return body; }
-
+public:
 	void Debug();
 
 	void SetLabel(const string& label) { this->label = label; }
+
+public:
+
+	void SetCharacterState(const CharacterState& state) { this->mainState = state; }
+	void SetVisible(const bool& visible) { this->visible = visible; }
+
+	ColliderRect* GetBody() const { return body; }
+
+	ColliderRect* GetPushCollider() const { return pushCollider; }
+
+	Vector2 GetVelocity() const { return velocity; }
+
+private:
+	void HandleBoundary();
 
 protected:
 
@@ -67,6 +76,10 @@ protected:
 
 	string			label{};
 	
+protected:
+
+	ColliderRect* pushCollider{}; // 밀어낼 수 있는 블록용도로 쓸 것임
+
 protected:
 
 	/*
