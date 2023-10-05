@@ -6,6 +6,8 @@
 // 전역 변수:
 
 Vector2 mousePos; // API에서 DX 좌표계로 바꾼 mousePos 좌표
+bool hiddenInGame{};
+void ToggleHideUI() { hiddenInGame = !hiddenInGame; }
 
 HWND hWnd;
 HINSTANCE hInst;                                // 현재 인스턴스입니다.

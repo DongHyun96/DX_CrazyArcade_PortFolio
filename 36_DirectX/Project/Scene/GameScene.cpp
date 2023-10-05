@@ -26,13 +26,15 @@ GameScene::GameScene()
 	//block = new Block({ 5, 6 }, L"InGame/Village/Objects/Stone.png", {15, 1}, { 4, 1 }, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 2.f));
 	//block = new Block({ 5, 6 }, L"InGame/Village/Objects/tree.png", {1, 1}, {1, 1}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f));
 	//block = new Block({ 5, 7 }, L"InGame/Village/Objects/house.png", { 3, 1 }, { 2, 1 }, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f));
-	block = new Block({ 5, 6 }, L"InGame/Village/Objects/Hide.png", {2, 1}, {1, 1}, Vector2(WIN_WIDTH / MAP_COL * 1.15f, WIN_HEIGHT / MAP_ROW), {true, false, true});
+	/*block = new Block({ 5, 6 }, L"InGame/Village/Objects/Hide.png", {2, 1}, {1, 1}, Vector2(WIN_WIDTH / MAP_COL * 1.15f, WIN_HEIGHT / MAP_ROW), {true, false, true});
 	block2 = new Block({ 5, 2 }, L"InGame/Village/Objects/box.png", { 3, 1 }, { 2, 1 }, CELL_WORLD_SIZE, { true, false, false });
-	curBlockPos = { 7, 6 };
+	curBlockPos = { 7, 6 };*/
 
 
 	player = new Player(BAZZI);
 	player->SetLabel("Player");
+
+	GM->SetPlayer(player);
 }
 
 GameScene::~GameScene()
@@ -42,8 +44,8 @@ GameScene::~GameScene()
 	delete tileManager;
 	delete blockManager;
 
-	delete block;
-	delete block2;
+	/*delete block;
+	delete block2;*/
 
 	delete player;
 }
@@ -61,23 +63,24 @@ void GameScene::Update()
 	}
 
 		
-	tileManager->Update();
-	//blockManager->Update();
-
-	block->Update();
-	block2->Update();
-
 	player->Update();
+
+	tileManager->Update();
+	blockManager->Update();
+
+	//block->Update();
+	//block2->Update();
+
 
 	//if (KEY_DOWN(VK_DOWN))
 	//{
 	//	block->PlayBushInteraction();
 	//}
 
-	block->GetBody()->Collision(player->GetBody()->GlobalPosition(), (Transform*)player);
-	block2->GetBody()->Collision(player->GetBody(), (Transform*)player);
+	/*block->GetBody()->Collision(player->GetBody()->GlobalPosition(), (Transform*)player);
+	block2->GetBody()->Collision(player->GetBody(), (Transform*)player);*/
 
-	if (KEY_DOWN(VK_LEFT))
+	/*if (KEY_DOWN(VK_LEFT))
 	{
 		Util::Coord c = curBlockPos;
 
@@ -115,7 +118,7 @@ void GameScene::Update()
 
 		if (block2->Move(c))
 			curBlockPos = c;
-	}
+	}*/
 }
 
 void GameScene::Render()
@@ -130,14 +133,14 @@ void GameScene::Render()
 	}
 
 	tileManager->Render();
-	//blockManager->Render();
+	blockManager->Render();
 
-	block->Render();
-	block2->Render();
+	/*block->Render();
+	block2->Render();*/
 	player->Render();
 
 	player->Debug();
-	block2->Debug("Block2");
+	//block2->Debug("Block2");
 }
 
 

@@ -43,6 +43,12 @@ using namespace DirectX;
 
 #pragma comment(lib, "shlwapi.lib")
 
+#include <d2d1_2.h>
+#include <dwrite.h>
+
+#pragma comment(lib, "d2d1.lib")
+#pragma comment(lib, "dwrite.lib")
+
 #define	WIN_WIDTH		1920.f
 #define	WIN_HEIGHT		1080.f
 
@@ -52,6 +58,7 @@ using namespace DirectX;
 #define DEVICE			Device::GetInstance()->GetDevice()
 #define DC				Device::GetInstance()->GetDC()
 #define CAMERA			Camera::GetInstance()
+#define FONT			Font::GetInstance()
 
 #define KEY_UP(p)		Keyboard::GetInstance()->Up(p)
 #define KEY_DOWN(p)		Keyboard::GetInstance()->Down(p)
@@ -87,6 +94,8 @@ typedef XMMATRIX Matrix;
 #include "Utility/BinaryReader.h"
 
 #include "System/Device.h"
+
+#include "Utility/Font.h"
 
 #include "Render/Buffer/VertexLayout.h"
 #include "Render/Buffer/VertexBuffer.h"
@@ -150,3 +159,5 @@ typedef XMMATRIX Matrix;
 
 extern HWND hWnd;
 extern Vector2 mousePos;
+extern bool hiddenInGame;
+extern void ToggleHideUI();

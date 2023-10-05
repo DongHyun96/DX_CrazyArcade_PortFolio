@@ -230,6 +230,7 @@ void BlockEditor::CreateBlock(Util::Coord boardXY)
 	info.boardXY = boardXY;
 
 	cellBlocks[boardXY.y][boardXY.x] = new Block(info);
+	cellBlocks[boardXY.y][boardXY.x]->SetBoardPos(boardXY);
 
 	infos[boardXY.y][boardXY.x] = info;
 }
@@ -243,6 +244,8 @@ void BlockEditor::CreateBlock(const BlockInfo& info, Util::Coord boardXY)
 	}
 
 	cellBlocks[boardXY.y][boardXY.x] = new Block(info);
+	cellBlocks[boardXY.y][boardXY.x]->SetBoardPos(boardXY);
+
 }
 
 void BlockEditor::EraseBlock(const Util::Coord& boardXY)
@@ -258,7 +261,7 @@ void BlockEditor::EraseBlock(const Util::Coord& boardXY)
 
 void BlockEditor::Save()
 {
-	BinaryWriter binWriter(L"VillageBlockData");
+	BinaryWriter binWriter(L"VillageBlockSampleData");
 
 	for (UINT i = 0; i < MAP_ROW; i++)
 	{
@@ -269,7 +272,7 @@ void BlockEditor::Save()
 
 void BlockEditor::Load()
 {
-	BinaryReader reader(L"VillageBlockData");
+	BinaryReader reader(L"VillageBlockSampleData");
 
 	if (!reader.Succeeded())
 		return;

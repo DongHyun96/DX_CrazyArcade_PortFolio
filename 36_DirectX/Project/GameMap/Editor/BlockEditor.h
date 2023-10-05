@@ -11,6 +11,9 @@ public:
 	void Update();
 	void Render();
 
+public:
+	
+
 private:
 
 	void InitBlockMaps();

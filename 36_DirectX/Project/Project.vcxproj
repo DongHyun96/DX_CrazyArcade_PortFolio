@@ -172,6 +172,7 @@
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="GameMap\TileManager.h" />
     <ClInclude Include="GameMap\Editor\TileEditor.h" />
+    <ClInclude Include="Utility\Font.h" />
     <ClInclude Include="Utility\Util.h" />
     <ClInclude Include="Utility\BinaryReader.h" />
     <ClInclude Include="Utility\BinaryWriter.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="Render\Shader\VertexShader.cpp" />
     <ClCompile Include="Object\Transform.cpp" />
     <ClCompile Include="Render\Texture\Texture.cpp" />
+    <ClCompile Include="Utility\Font.cpp" />
     <ClCompile Include="Utility\Keyboard.cpp" />
     <ClCompile Include="Utility\Time.cpp" />
     <ClCompile Include="Utility\Vector2.cpp" />
