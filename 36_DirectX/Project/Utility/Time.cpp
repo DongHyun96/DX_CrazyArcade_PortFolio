@@ -51,4 +51,7 @@ void Time::Update()
 
 void Time::Render()
 {
+	wstring str = L"FPS : " + to_wstring(frameRate);
+
+	FONT->RenderText(str, "D2Coding", Vector2(0, 20));
 }

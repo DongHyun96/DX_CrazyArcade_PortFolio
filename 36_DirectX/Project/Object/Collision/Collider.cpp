@@ -27,6 +27,9 @@ Collider::~Collider()
 
 void Collider::Render()
 {
+	if (hiddenInGame)
+		return;
+
 	if (!isActive)
 		return;
 

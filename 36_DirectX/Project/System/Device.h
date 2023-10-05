@@ -18,6 +18,8 @@ public:
 	ID3D11Device*			GetDevice() { return device; }
 	ID3D11DeviceContext*	GetDC()		{ return deviceContext; }
 
+	IDXGISwapChain* GetSwapChain() const { return swapChain; }
+
 private:
 	void CreateDepthStencil();
 

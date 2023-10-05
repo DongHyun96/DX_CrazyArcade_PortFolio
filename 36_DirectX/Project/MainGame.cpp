@@ -8,7 +8,9 @@ MainGame::MainGame()
 
 	//scene = new CollisionScene;
 	scene = new GameScene;
-
+	//rgb(4, 54, 74)
+	//rgb(216, 0, 50)
+	FONT->Add("D2Coding", L"D2Coding", {1.f, 1.f, 1.f}, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_TRAILING, DWRITE_FONT_WEIGHT_BOLD);
 }
 
 MainGame::~MainGame()
@@ -22,6 +24,7 @@ MainGame::~MainGame()
 	Keyboard::Delete();
 	Texture::Delete();
 	Camera::Delete();
+	Font::Delete();
 
 	// Cleanup
 	ImGui_ImplDX11_Shutdown();
@@ -36,19 +39,31 @@ void MainGame::Update()
 	Camera::GetInstance()->Update();
 
 	scene->Update();
+
+	if (KEY_DOWN(VK_TAB))
+		ToggleHideUI();
 }
 
 void MainGame::Render()
 {
 	ImGuiNewFrame();
 
+	FONT->GetDC()->BeginDraw(); // Begin End 사이에서 render해야함
+
 	Environment::GetInstance()->Set();
 	Camera::GetInstance()->Set();
 
 	scene->Render();
 
-	ImGui::Render();
-	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	if (!hiddenInGame)
+	{
+		Time::GetInstance()->Render();
+		ImGui::Render();
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	}
+
+	FONT->GetDC()->EndDraw();
+	ImGui::EndFrame();
 }
 
 void MainGame::SetUpImGui()
