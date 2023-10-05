@@ -5,6 +5,16 @@
 class Character;
 class Player;
 
+enum Direction
+{
+	DIR_UP,
+	DIR_DOWN,
+	DIR_LEFT,
+	DIR_RIGHT,
+	DIR_NONE
+};
+
+
 struct BlockProperty
 {
 	bool breakable{};
@@ -58,7 +68,7 @@ struct BlockInfo
 	Vector2			texWorldSize{ CELL_WORLD_SIZE };
 };
 
-class Block
+class Block : public Transform
 {
 public:
 
@@ -95,24 +105,42 @@ public:
 
 	ColliderRect* GetBody() { return rectBody; }
 	Vector2 GetTranslation() const { return rectBody->translation; }
+	
+	void SetBoardPos(const Util::Coord& coord) { this->boardPos = coord; }
+	Util::Coord GetBoardPos() const { return boardPos; }
 
 	bool& IsActive() { return isActive; }
+	bool IsMovable() const { return movable; }
+	bool IsBreakable() const { return breakable; }
+	bool IsHidable() const { return hidable; }
+
+	void SetVisible(const bool& visible) { this->visible = visible; }
 
 private:
+	
+	// Move TODO : 보드판 딱판 옮기기
 
 	bool Move(Vector2 destination);
-	void Move();
+
+	void Move(); // Use UpdateTime
 
 	void HandleBushInteract();
 	
 private:
 
 	void OnColliderPointEnter(Transform* owner);
+	void OnColliderPointStay(Transform* owner);
 	void OnColliderPointExit(Transform* owner);
-	void OnColliderRectEnter(Transform* owner);
-	void OnColliderRectExit(Transform* owner);
 
-	void HandleCharacterCollision(Character* character);
+	void OnColliderRectEnter(ColliderRect* targetCollider, Transform* owner);
+	void OnColliderRectStay(ColliderRect* targetCollider, Transform* owner);
+	void OnColliderRectExit(ColliderRect* targetCollider, Transform* owner);
+
+	Direction GetCollidedDirection(ColliderRect* collider);
+
+	void HandleCommonCollision(ColliderRect* targetBody);
+
+	bool IsPushing(const Direction& cDirection, const Direction& collidedFace);
 
 private:
 	
@@ -127,15 +155,20 @@ private:
 	bool movable{};
 	bool hidable{};
 
+	bool visible{ true };
+
 	UINT hp{};
 	Animation* destroyedAnim{}; // BlockManager에서 받아옴
 
 	// Movable 관련
-	Vector2 destination{};
-	bool currentlyMoving{};
+	Util::Coord boardPos{};
+	Vector2		destination{};
+	bool		currentlyMoving{};
+	float		appliedTime{};
+	const float appliedTimeLimit{ 0.2f };
 
 	// Bush Interaction 관련
-	bool currentlyBushing{};
-	float interactTime{};
+	bool	currentlyBushing{};
+	float	interactTime{};
 
 };

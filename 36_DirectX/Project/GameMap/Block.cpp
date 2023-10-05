@@ -30,12 +30,14 @@ Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Co
 	if (hidable)
 	{
 		rectBody->SetPointEnterEvent(bind(&Block::OnColliderPointEnter, this, placeholders::_1));
+		rectBody->SetPointStayEvent(bind(&Block::OnColliderPointStay, this, placeholders::_1));
 		rectBody->SetPointExitEvent(bind(&Block::OnColliderPointExit, this, placeholders::_1));
 	}
 	else
 	{
-		rectBody->SetRectEnterEvent(bind(&Block::OnColliderRectEnter, this, placeholders::_1));
-		rectBody->SetRectExitEvent(bind(&Block::OnColliderRectExit, this, placeholders::_1));
+		rectBody->SetRectEnterEvent(bind(&Block::OnColliderRectEnter, this, placeholders::_1, placeholders::_2));
+		rectBody->SetRectStayEvent(bind(&Block::OnColliderRectStay, this, placeholders::_1, placeholders::_2));
+		rectBody->SetRectExitEvent(bind(&Block::OnColliderRectExit, this, placeholders::_1, placeholders::_2));
 	}
 }
 
@@ -65,6 +67,9 @@ void Block::Render()
 	if (!isActive)
 		return;
 
+	if (!visible)
+		return;
+
 	rectBody->Render();
 	texObj->Render();
 
@@ -81,23 +86,36 @@ void Block::PlayBushInteraction()
 
 bool Block::Move(const UINT& destBoardCoordX, const UINT& destBoardCoordY)
 {
-	return Move(Util::ConvertBoardIdxToWorldPos({ destBoardCoordX, destBoardCoordY }));
+	if (!Move(Util::ConvertBoardIdxToWorldPos({ destBoardCoordX, destBoardCoordY })))
+		return false;
+
+	BlockManager::SwapBlocks(boardPos, { destBoardCoordX, destBoardCoordY });
+
+	boardPos = { destBoardCoordX, destBoardCoordY };
+
+
+	return true;
 }
 
 bool Block::Move(const Util::Coord& destCoord)
 {
-	return Move(Util::ConvertBoardIdxToWorldPos({ destCoord.x, destCoord.y }));
+	if (!Move(Util::ConvertBoardIdxToWorldPos({ destCoord.x, destCoord.y })))
+		return false;
+
+	BlockManager::SwapBlocks(boardPos, destCoord);
+
+	boardPos = destCoord;
+
+	return true;
 }
 
 bool Block::Move(Vector2 destination)
 {
-	if (!movable)
-		return false;
-
 	if (currentlyMoving)
 		return false;
 
 	currentlyMoving = true;
+
 	this->destination = destination;
 
 	return true;
@@ -143,14 +161,15 @@ void Block::HandleBushInteract()
 	interactTime += Time::Delta();
 
 	// 1초를 0.25로 쪼개어 interaction을 줄 예정, texObj만 local translation x값을 조정하여 양옆으로 왔다갔다만 할 예정
-	if		(interactTime < 0.15f) texObj->translation.x = -10.f;
-	else if (interactTime < 0.3f)	texObj->translation.x = 10.f;
-	else if (interactTime < 0.45f) texObj->translation.x = -10.f;
-	else if (interactTime < 0.6f)	texObj->translation.x = 10.f;
+	if		(interactTime < 0.1f)	texObj->translation.x =  5.f;
+	else if (interactTime < 0.2f)	texObj->translation.x = -5.f;
+	else if (interactTime < 0.3f)	texObj->translation.x =  5.f;
+	else if (interactTime < 0.4f)	texObj->translation.x = -5.f;
 	else
 	{
-		interactTime -= 0.6f;
+		interactTime = 0.f;
 		texObj->translation.x = 0.f;
+
 		currentlyBushing = false;
 	}
 
@@ -159,15 +178,25 @@ void Block::HandleBushInteract()
 void Block::OnColliderPointEnter(Transform* owner)
 {
 	if (hidable)
-	{
 		PlayBushInteraction();
+}
 
+void Block::OnColliderPointStay(Transform* owner)
+{
+	if (hidable)
+	{
 		Character* c = dynamic_cast<Character*>(owner);
-		
-		if (c) c->SetVisible(false);
 
+		if (c)
+		{
+			c->SetVisible(false);
+			return;
+		}
+
+		Block* b = dynamic_cast<Block*>(owner);
+		
+		if (b) b->SetVisible(false);
 	}
-	
 }
 
 void Block::OnColliderPointExit(Transform* owner)
@@ -178,34 +207,105 @@ void Block::OnColliderPointExit(Transform* owner)
 
 		Character* c = dynamic_cast<Character*>(owner);
 
-		if (c) c->SetVisible(true);
+		if (c)
+		{
+			c->SetVisible(true);
+			return;
+		}
+
+		Block* b = dynamic_cast<Block*>(owner);
+
+		if (b) b->SetVisible(true);
 	}
 }
 
-void Block::OnColliderRectEnter(Transform* owner)
+void Block::OnColliderRectEnter(ColliderRect* targetCollider, Transform* owner)
 {
 	// Hidable 배제 (등록도 하지 않는다)
-	if (movable)
-	{
-		// 얘 처리도 모호함.. --> 아예 클래스를 하나 파서 충돌체를 겉에 하나 더 주는 식으로 해서 처리하는 편도 나쁘지는 않을 듯함
-	}
-	else
+	if (targetCollider->GetColliderTag() != CHARACTER_PUSH)
 	{
 		Character* c = dynamic_cast<Character*>(owner);
 
-		if (c) HandleCharacterCollision(c);
+		if (c) HandleCommonCollision(targetCollider);
+
+	}
+	else
+	{
+
 	}
 }
 
-void Block::OnColliderRectExit(Transform* owner)
+void Block::OnColliderRectStay(ColliderRect* targetCollider, Transform* owner)
+{
+	if (movable && targetCollider->GetColliderTag() == CHARACTER_PUSH)
+	{
+		if (currentlyMoving)
+		{
+			appliedTime = 0.f;
+			return;
+		}
+
+		Character* character = dynamic_cast<Character*>(owner);
+
+		if (!character)
+			return;
+
+		Direction collidedFace = GetCollidedDirection(targetCollider);
+
+		Vector2 cVelocity = character->GetVelocity();
+		Direction cDir = (cVelocity.x > 0) ? DIR_RIGHT	:
+						 (cVelocity.x < 0) ? DIR_LEFT	:
+						 (cVelocity.y > 0) ? DIR_UP		:
+						 (cVelocity.y < 0) ? DIR_DOWN	: DIR_NONE;
+
+		Util::Coord destCoord = boardPos;
+		
+		switch (cDir)
+		{
+		case DIR_UP:	destCoord.y += 1; break;
+		case DIR_DOWN:	destCoord.y -= 1; break;
+		case DIR_LEFT:	destCoord.x -= 1; break;
+		case DIR_RIGHT: destCoord.x += 1; break;
+		default: break;
+		}
+
+		
+		// 충돌하고 있는 면의 방향과 캐릭터의 현 velocity가 맞물려야 시간을 더함
+		// TODO : 플레이어도 destination에 없어야 함
+		// + 움직이고자 하는 방면에 물체가 없어야 함 + 맵 범위 판정
+
+		if (!IsPushing(cDir, collidedFace))
+		{
+			appliedTime = 0.f;
+			return;
+		}
+
+		if (!BlockManager::IsValidDestCoord(destCoord))
+		{
+			appliedTime = 0.f;
+			return;
+		}
+
+		appliedTime += Time::Delta();
+		
+		// 밀기 만족
+		if (appliedTime >= appliedTimeLimit)
+		{
+			Move(destCoord);
+			appliedTime = 0.f;
+		}
+	}
+}
+
+void Block::OnColliderRectExit(ColliderRect* targetCollider, Transform* owner)
 {
 	// Hidable 배제 (등록도 하지 않는다)
 
 }
 
-void Block::HandleCharacterCollision(Character* character)
+Direction Block::GetCollidedDirection(ColliderRect* collider)
 {
-	Vector2 dir = character->GetBody()->GlobalPosition() - this->GetBody()->GlobalPosition();
+	Vector2 dir = collider->GlobalPosition() - this->GetBody()->GlobalPosition();
 
 	Vector2 size = this->GetBody()->GlobalSize();
 
@@ -214,25 +314,46 @@ void Block::HandleCharacterCollision(Character* character)
 	Vector2 LD = Vector2(-size.x, -size.y);
 	Vector2 RD = Vector2(+size.x, -size.y);
 
-	// LEFT
-	if (Vector2::IsBetween(dir, LU, LD) && character->GetBody()->GlobalPosition().x < this->GetBody()->GlobalPosition().x)
+	if (Vector2::IsBetween(dir, LU, LD) && collider->GlobalPosition().x < this->GetBody()->GlobalPosition().x)
+		return DIR_LEFT;
+	else if (Vector2::IsBetween(dir, RU, RD) && collider->GlobalPosition().x > this->GetBody()->GlobalPosition().x)
+		return DIR_RIGHT;
+	else if (Vector2::IsBetween(dir, LU, RU) && collider->GlobalPosition().y > this->GetBody()->GlobalPosition().y)
+		return DIR_UP;
+	else if (Vector2::IsBetween(dir, LD, RD) && collider->GlobalPosition().y < this->GetBody()->GlobalPosition().y)
+		return DIR_DOWN;
+
+	return DIR_NONE;
+}
+
+void Block::HandleCommonCollision(ColliderRect* targetBody)
+{
+	Direction collidedFace = GetCollidedDirection(targetBody);
+	
+	if (collidedFace == DIR_LEFT)
+		targetBody->translation.x = this->GetBody()->Left() - targetBody->LocalSize().x * 0.51f;
+
+	else if (collidedFace == DIR_RIGHT)
+		targetBody->translation.x = this->GetBody()->Right() + targetBody->LocalSize().x * 0.51f;
+
+	else if (collidedFace == DIR_UP)
+		targetBody->translation.y = this->GetBody()->Top() + targetBody->LocalSize().y * 0.51f;
+
+	else if (collidedFace == DIR_DOWN)
+		targetBody->translation.y = this->GetBody()->Bottom() - targetBody->LocalSize().y * 0.51f;
+}
+
+bool Block::IsPushing(const Direction& cDirection, const Direction& collidedFace)
+{
+	
+	switch (collidedFace)
 	{
-		character->GetBody()->translation.x = this->GetBody()->Left() - character->GetBody()->LocalSize().x * 0.51f;
-	}
-	// RIGHT
-	else if (Vector2::IsBetween(dir, RU, RD) && character->GetBody()->GlobalPosition().x > this->GetBody()->GlobalPosition().x)
-	{
-		character->GetBody()->translation.x = this->GetBody()->Right() + character->GetBody()->LocalSize().x * 0.51f;
-	}
-	// UP
-	else if (Vector2::IsBetween(dir, LU, RU) && character->GetBody()->GlobalPosition().y > this->GetBody()->GlobalPosition().y)
-	{
-		character->GetBody()->translation.y = this->GetBody()->Top() + character->GetBody()->LocalSize().y * 0.51f;
-	}
-	// DOWN
-	else if (Vector2::IsBetween(dir, LD, RD) && character->GetBody()->GlobalPosition().y < this->GetBody()->GlobalPosition().y)
-	{
-		character->GetBody()->translation.y = this->GetBody()->Bottom() - character->GetBody()->LocalSize().y * 0.51f;
+	case DIR_UP:	return (cDirection == DIR_DOWN);
+	case DIR_DOWN:  return (cDirection == DIR_UP);
+	case DIR_LEFT:  return (cDirection == DIR_RIGHT);
+	case DIR_RIGHT: return (cDirection == DIR_LEFT);
+	default:
+		return false;
 	}
 
 }
