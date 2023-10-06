@@ -35,6 +35,10 @@ GameScene::GameScene()
 	player->SetLabel("Player");
 
 	GM->SetPlayer(player);
+
+	balloonManager = new BalloonManager;
+	GM->SetBalloonManager(balloonManager);
+
 }
 
 GameScene::~GameScene()
@@ -48,6 +52,7 @@ GameScene::~GameScene()
 	delete block2;*/
 
 	delete player;
+	delete balloonManager;
 }
 
 void GameScene::Update()
@@ -67,6 +72,7 @@ void GameScene::Update()
 
 	tileManager->Update();
 	blockManager->Update();
+	balloonManager->Update();
 
 	//block->Update();
 	//block2->Update();
@@ -134,6 +140,7 @@ void GameScene::Render()
 
 	tileManager->Render();
 	blockManager->Render();
+	balloonManager->Render();
 
 	/*block->Render();
 	block2->Render();*/
