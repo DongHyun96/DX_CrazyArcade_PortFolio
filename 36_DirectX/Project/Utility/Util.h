@@ -1,12 +1,23 @@
 #pragma once
 
+enum Direction
+{
+	DIR_UP,
+	DIR_DOWN,
+	DIR_LEFT,
+	DIR_RIGHT,
+	DIR_NONE
+};
 
 namespace Util
 {
 	struct Coord
 	{
-		UINT x;
-		UINT y;
+		Coord() {};
+		Coord(const UINT& x,const UINT& y) :x(x), y(y) {}
+			
+		UINT x{};
+		UINT y{};
 	};
 
 	static Vector2 ConvertBoardIdxToWorldPos(const UINT& x, const UINT& y)
@@ -22,6 +33,16 @@ namespace Util
 	{
 		return ConvertBoardIdxToWorldPos(xy.x, xy.y);
 	}
+
+	// 정확히 떨어지는 중점만 사용가능함 (거의 사용을 못함) -> AABB 충돌처리로 하면 끝남
+	//static Coord ConvertWorldPosToBoardIdx(const Vector2& pos)
+	//{
+	//	return Coord
+	//	(
+	//		(pos.x + WIN_CENTER.x) * (MAP_COL / WIN_WIDTH) - 0.5f,
+	//		(pos.y + WIN_CENTER.y) * (MAP_ROW / WIN_HEIGHT) - 0.5f
+	//	);
+	//}
 
 	static void SetTransformToGameBoard(Transform* target, const UINT& x, const UINT& y)
 	{
@@ -86,5 +107,3 @@ namespace Util
 		return (1 - alpha) * src + alpha * dst;
 	}
 }
-
-
