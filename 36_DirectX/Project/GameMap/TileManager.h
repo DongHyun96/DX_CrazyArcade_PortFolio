@@ -1,4 +1,5 @@
 #pragma once
+
 class TileManager
 {
 public:
@@ -14,7 +15,13 @@ private:
 					UINT targetX = 1, UINT targetY = 1,
 					Vector2 size = Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW));
 
+	void CreateTile(const TileInfo& info, UINT boardX, UINT boardY);
+
+	void Load();
+
 private:
 	Object* tiles[MAP_ROW][MAP_COL]{};
+
+	TileInfo infos[MAP_ROW][MAP_COL]{};
 
 };

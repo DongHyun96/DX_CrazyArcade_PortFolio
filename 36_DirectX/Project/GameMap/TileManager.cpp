@@ -3,11 +3,12 @@
 
 TileManager::TileManager()
 {
-	for (UINT y = 0; y < MAP_ROW; y++)
+	/*for (UINT y = 0; y < MAP_ROW; y++)
 	{
 		for (UINT x = 0; x < MAP_COL; x++)
 			CreateTile(x, y, L"InGame/Village/GroundTiles/Tile.png", 7, 1, 4, 1);
-	}
+	}*/
+	Load();
 
 }
 
@@ -56,4 +57,30 @@ void TileManager::CreateTile(UINT boardX, UINT boardY, wstring file, UINT frameX
 
 	Util::SetTransformToGameBoard(tiles[boardY][boardX], boardX, boardY);
 	tiles[boardY][boardX]->zDepth = FAR_Z - 10;
+}
+
+void TileManager::CreateTile(const TileInfo& info, UINT boardX, UINT boardY)
+{
+	tiles[boardY][boardX] = new Object(CELL_WORLD_SIZE, info.file, info.frameX, info.frameY, info.targetX, info.targetY);
+
+	Util::SetTransformToGameBoard(tiles[boardY][boardX], boardX, boardY);
+
+	tiles[boardY][boardX]->zDepth = FAR_Z - 10.f;
+}
+
+void TileManager::Load()
+{
+	BinaryReader reader(L"VillageTileData");
+
+	if (!reader.Succeeded())
+		return;
+
+	for (UINT i = 0; i < MAP_ROW; i++)
+	{
+		for (UINT j = 0; j < MAP_COL; j++)
+		{
+			infos[i][j].ReadAndCopy(reader);
+			CreateTile(infos[i][j], j, i);
+		}
+	}
 }
