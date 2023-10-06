@@ -5,15 +5,6 @@
 class Character;
 class Player;
 
-enum Direction
-{
-	DIR_UP,
-	DIR_DOWN,
-	DIR_LEFT,
-	DIR_RIGHT,
-	DIR_NONE
-};
-
 
 struct BlockProperty
 {
@@ -136,10 +127,6 @@ private:
 	void OnColliderRectStay(ColliderRect* targetCollider, Transform* owner);
 	void OnColliderRectExit(ColliderRect* targetCollider, Transform* owner);
 
-	Direction GetCollidedDirection(ColliderRect* collider);
-
-	void HandleCommonCollision(ColliderRect* targetBody);
-
 	bool IsPushing(const Direction& cDirection, const Direction& collidedFace);
 
 private:
@@ -165,7 +152,7 @@ private:
 	Vector2		destination{};
 	bool		currentlyMoving{};
 	float		appliedTime{};
-	const float appliedTimeLimit{ 0.2f };
+	const float APPLIED_TIME_LIMIT{ 0.2f };
 
 	// Bush Interaction ฐüทร
 	bool	currentlyBushing{};

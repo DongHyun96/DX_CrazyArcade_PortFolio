@@ -39,8 +39,8 @@ void BlockManager::Update()
 	}
 
 	HandleCharacterBlockCollision();
-	HandleMovableHidableCollision();
-	HandleCharacterMovableCollision();
+	HandleHidableCollisions();
+	HandleMovableCollisions();
 }
 
 
@@ -93,6 +93,7 @@ Block* BlockManager::CreateBlock(const BlockInfo& info, Util::Coord boardXY)
 void BlockManager::Load()
 {
 	// VillageBlockData
+	//VillageBlockSampleData
 	BinaryReader reader(L"VillageBlockSampleData");
 
 	if (!reader.Succeeded())
@@ -128,37 +129,66 @@ void BlockManager::HandleCharacterBlockCollision()
 
 				Transform* character = (Transform*)(GM->GetPlayer());
 
-				blocks[y][x]->GetBody()->Collision(GM->GetPlayer()->GetBody(), character);
-				blocks[y][x]->GetBody()->Collision(GM->GetPlayer()->GetBody()->GlobalPosition(), character);
+				blocks[y][x]->GetBody()->AABBCollision(GM->GetPlayer()->GetBody(), character);
+				blocks[y][x]->GetBody()->AABBCollision(GM->GetPlayer()->GetBody()->GlobalPosition(), character);
 			}
 		}
 	}
 }
 
-void BlockManager::HandleCharacterMovableCollision()
+void BlockManager::HandleMovableCollisions()
 {
 	for (Block* movable : movableBlocks)
 	{
 		if (!movable->IsActive())
 			continue;
 
-		movable->GetBody()->Collision(GM->GetPlayer()->GetPushCollider(), (Transform*)(GM->GetPlayer()));
+		// Player vs movable
+		movable->GetBody()->AABBCollision(GM->GetPlayer()->GetPushCollider(), (Transform*)(GM->GetPlayer()));
 	}
 }
 
-void BlockManager::HandleMovableHidableCollision()
+void BlockManager::HandleHidableCollisions()
 {
-	for (Block* movable : movableBlocks)
+	//for (Block* movable : movableBlocks)
+	//{
+	//	if (!movable->IsActive())
+	//		continue;
+
+	//	for (Block* hidable : hidableBlocks)
+	//	{
+	//		if (!hidable->IsActive())
+	//			continue;
+
+	//		hidable->GetBody()->Collision(movable->GetBody()->GlobalPosition(), movable);
+	//	}
+	//}
+
+	for (Block* hidable : hidableBlocks)
 	{
-		if (!movable->IsActive())
+		if (!hidable->IsActive())
 			continue;
 
-		for (Block* hidable : hidableBlocks)
+		// vs movables
+		for (Block* movable : movableBlocks)
 		{
-			if (!hidable->IsActive())
+			if (!movable->IsActive())
 				continue;
 
-			hidable->GetBody()->Collision(movable->GetBody()->GlobalPosition(), movable);
+			hidable->GetBody()->AABBCollision(movable->GetBody()->GlobalPosition(), movable);
+
+		}
+
+		// vs Balloons
+		BalloonManager* b_mgr = GM->GetBalloonManager();
+		vector<Balloon*> balloons = GM->GetBalloonManager()->GetBalloons();
+
+		for (Balloon* balloon : balloons)
+		{
+			if (!balloon->Active())
+				continue;
+
+			hidable->GetBody()->AABBCollision(balloon->GetBody()->GlobalPosition(), balloon);
 		}
 	}
 }

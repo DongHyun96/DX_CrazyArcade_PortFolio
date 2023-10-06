@@ -113,7 +113,13 @@ bool Block::Move(Vector2 destination)
 {
 	if (currentlyMoving)
 		return false;
-
+	
+	for (const Vector2& balloonPos : Balloon::GetActiveBalloonPositions())
+	{
+		if (destination == balloonPos)
+			return false;
+	}
+	
 	currentlyMoving = true;
 
 	this->destination = destination;
@@ -193,9 +199,24 @@ void Block::OnColliderPointStay(Transform* owner)
 			return;
 		}
 
+		// Block entered(Movable block)
 		Block* b = dynamic_cast<Block*>(owner);
 		
-		if (b) b->SetVisible(false);
+		if (b)
+		{
+			b->SetVisible(false);
+			return;
+		}
+
+		// Balloon entered
+		Balloon* balloon = dynamic_cast<Balloon*>(owner);
+
+		if (balloon)
+		{
+			balloon->SetVisible(false);
+			return;
+		}
+
 	}
 }
 
@@ -226,7 +247,7 @@ void Block::OnColliderRectEnter(ColliderRect* targetCollider, Transform* owner)
 	{
 		Character* c = dynamic_cast<Character*>(owner);
 
-		if (c) HandleCommonCollision(targetCollider);
+		if (c) CollisionUtil::HandleCommonCollision(rectBody, targetCollider);
 
 	}
 	else
@@ -250,7 +271,7 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, Transform* owner)
 		if (!character)
 			return;
 
-		Direction collidedFace = GetCollidedDirection(targetCollider);
+		Direction collidedFace = CollisionUtil::GetCollidedDirection(rectBody, targetCollider);
 
 		Vector2 cVelocity = character->GetVelocity();
 		Direction cDir = (cVelocity.x > 0) ? DIR_RIGHT	:
@@ -289,7 +310,7 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, Transform* owner)
 		appliedTime += Time::Delta();
 		
 		// 밀기 만족
-		if (appliedTime >= appliedTimeLimit)
+		if (appliedTime >= APPLIED_TIME_LIMIT)
 		{
 			Move(destCoord);
 			appliedTime = 0.f;
@@ -303,45 +324,6 @@ void Block::OnColliderRectExit(ColliderRect* targetCollider, Transform* owner)
 
 }
 
-Direction Block::GetCollidedDirection(ColliderRect* collider)
-{
-	Vector2 dir = collider->GlobalPosition() - this->GetBody()->GlobalPosition();
-
-	Vector2 size = this->GetBody()->GlobalSize();
-
-	Vector2 LU = Vector2(-size.x, +size.y);
-	Vector2 RU = Vector2(+size.x, +size.y);
-	Vector2 LD = Vector2(-size.x, -size.y);
-	Vector2 RD = Vector2(+size.x, -size.y);
-
-	if (Vector2::IsBetween(dir, LU, LD) && collider->GlobalPosition().x < this->GetBody()->GlobalPosition().x)
-		return DIR_LEFT;
-	else if (Vector2::IsBetween(dir, RU, RD) && collider->GlobalPosition().x > this->GetBody()->GlobalPosition().x)
-		return DIR_RIGHT;
-	else if (Vector2::IsBetween(dir, LU, RU) && collider->GlobalPosition().y > this->GetBody()->GlobalPosition().y)
-		return DIR_UP;
-	else if (Vector2::IsBetween(dir, LD, RD) && collider->GlobalPosition().y < this->GetBody()->GlobalPosition().y)
-		return DIR_DOWN;
-
-	return DIR_NONE;
-}
-
-void Block::HandleCommonCollision(ColliderRect* targetBody)
-{
-	Direction collidedFace = GetCollidedDirection(targetBody);
-	
-	if (collidedFace == DIR_LEFT)
-		targetBody->translation.x = this->GetBody()->Left() - targetBody->LocalSize().x * 0.51f;
-
-	else if (collidedFace == DIR_RIGHT)
-		targetBody->translation.x = this->GetBody()->Right() + targetBody->LocalSize().x * 0.51f;
-
-	else if (collidedFace == DIR_UP)
-		targetBody->translation.y = this->GetBody()->Top() + targetBody->LocalSize().y * 0.51f;
-
-	else if (collidedFace == DIR_DOWN)
-		targetBody->translation.y = this->GetBody()->Bottom() - targetBody->LocalSize().y * 0.51f;
-}
 
 bool Block::IsPushing(const Direction& cDirection, const Direction& collidedFace)
 {

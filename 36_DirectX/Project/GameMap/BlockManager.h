@@ -27,9 +27,11 @@ private:
 
 private:
 	
-	void HandleCharacterBlockCollision();
-	void HandleCharacterMovableCollision();
-	void HandleMovableHidableCollision();
+	void HandleCharacterBlockCollision();   // Common collision
+	void HandleMovableCollisions();
+	void HandleHidableCollisions();
+
+	
 
 private:
 
