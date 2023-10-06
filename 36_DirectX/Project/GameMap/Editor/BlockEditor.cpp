@@ -86,7 +86,7 @@ void BlockEditor::InitBlockMaps()
 	BlockInfo info{};
 
 	// Tree
-	info = { L"InGame/Village/Objects/tree.png", {0, 0}, {1, 1}, {1, 1}, {true, false, true}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f) };
+	info = { L"InGame/Village/Objects/tree.png", {0, 0}, {1, 1}, {1, 1}, {false, false, false}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f) };
 	block = new Block({ 16, 10 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
 
 	collider = new ColliderRect(CELL_WORLD_SIZE);
@@ -132,7 +132,7 @@ void BlockEditor::InitBlockMaps()
 		blockMapColliders.push_back(collider);
 	}
 
-	// Box
+	// 레고블럭들
 	for (UINT i = 0; i < 2; i++)
 	{
 		//block = new Block({ 6, 6 }, L"InGame/Village/Objects/box.png", { 3, 1 }, { 3, 1 }, CELL_WORLD_SIZE, { true, true, false });
@@ -147,6 +147,7 @@ void BlockEditor::InitBlockMaps()
 		blockMapColliders.push_back(collider);
 	}
 
+	// Movable Box
 	info = { L"InGame/Village/Objects/box.png", {0, 0}, {3, 1}, {3, 1}, {true, true, false} };
 
 	block = new Block({ 17, 6 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
@@ -180,7 +181,7 @@ void BlockEditor::SelectBlockMap()
 
 	for (auto& c : blockMapColliders)
 	{
-		if (c->Collision(mousePos))
+		if (c->OBBCollision(mousePos))
 		{
 			if (KEY_DOWN(VK_LBUTTON))
 			{
@@ -199,7 +200,7 @@ void BlockEditor::SetBlockToWorld()
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			if (MapEditor::GetInst()->cells[i][j]->Collision(mousePos)) // i, j 위치와 info가 필요
+			if (MapEditor::GetInst()->cells[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
 			{
 				if (KEY_DOWN(VK_LBUTTON))
 				{
@@ -261,7 +262,7 @@ void BlockEditor::EraseBlock(const Util::Coord& boardXY)
 
 void BlockEditor::Save()
 {
-	BinaryWriter binWriter(L"VillageBlockSampleData");
+	BinaryWriter binWriter(L"VillageBlockData");
 
 	for (UINT i = 0; i < MAP_ROW; i++)
 	{
@@ -272,7 +273,8 @@ void BlockEditor::Save()
 
 void BlockEditor::Load()
 {
-	BinaryReader reader(L"VillageBlockSampleData");
+	// VillageBlockSampleData
+	BinaryReader reader(L"VillageBlockData");
 
 	if (!reader.Succeeded())
 		return;
