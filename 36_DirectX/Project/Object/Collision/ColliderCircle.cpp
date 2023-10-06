@@ -33,19 +33,19 @@ void ColliderCircle::SetVertex()
     vertexBuffer = new VertexBuffer(vertices);
 }
 
-bool ColliderCircle::Collision(Vector2 point, Transform* owner)
+bool ColliderCircle::OBBCollision(const Vector2& point, Transform* owner)
 {
     float distance = (point - globalPosition).Length();
 
     return distance <= Radius();
 }
 
-bool ColliderCircle::Collision(ColliderRect* other, Transform* owner)
+bool ColliderCircle::OBBCollision(ColliderRect* other, Transform* owner)
 {
-    return other->Collision(this);
+    return other->OBBCollision(this);
 }
 
-bool ColliderCircle::Collision(ColliderCircle* other)
+bool ColliderCircle::OBBCollision(ColliderCircle* other)
 {
     float distance = (other->GlobalPosition() - this->globalPosition).Length();
 

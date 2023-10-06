@@ -45,7 +45,7 @@ void Collider::Render()
 	DC->Draw(vertices.size(), 0);
 }
 
-bool Collider::Collision(Collider* other)
+bool Collider::OBBCollision(Collider* other)
 {
 	if (!isActive)
 		return false;
@@ -53,12 +53,12 @@ bool Collider::Collision(Collider* other)
 	ColliderRect* rect = dynamic_cast<ColliderRect*>(other);
 
 	if (rect)
-		return Collision(rect);
+		return OBBCollision(rect);
 	else
 	{
 		ColliderCircle* circle = dynamic_cast<ColliderCircle*>(other);
 
-		return Collision(circle);
+		return OBBCollision(circle);
 	}
 
 	return false;

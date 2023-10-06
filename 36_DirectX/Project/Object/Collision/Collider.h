@@ -9,13 +9,13 @@ public:
 
 	virtual void SetVertex() = 0;
 
-	bool Collision(Collider* other);
+	bool OBBCollision(Collider* other);
 
-	virtual bool Collision(Vector2 point, Transform* owner = nullptr) = 0;
+	virtual bool OBBCollision(const Vector2& point, Transform* owner = nullptr) = 0;
+	virtual bool OBBCollision(class ColliderRect* other, Transform* owner = nullptr) = 0;
+	virtual bool OBBCollision(class ColliderCircle* other) = 0;
 
-	virtual bool Collision(class ColliderRect* other, Transform* owner = nullptr) = 0;
-
-	virtual bool Collision(class ColliderCircle* other) = 0;
+	
 
 	void SetColor(float r, float g, float b) { colorBuffer->SetData(Vector4(r, g, b, 1.f)); }
 

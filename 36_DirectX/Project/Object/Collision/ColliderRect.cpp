@@ -34,7 +34,7 @@ void ColliderRect::SetVertex()
     vertexBuffer = new VertexBuffer(vertices);
 }
 
-bool ColliderRect::Collision(Vector2 point, Transform* owner)
+bool ColliderRect::OBBCollision(const Vector2& point, Transform* owner)
 {
     Matrix invWorld = XMMatrixInverse(nullptr, this->world);
 
@@ -42,37 +42,37 @@ bool ColliderRect::Collision(Vector2 point, Transform* owner)
 
     if (abs(invPoint.x) < this->size.x * 0.5f && abs(invPoint.y) < this->size.y * 0.5f) // Collided
     {
-        if (owner)
+        if (!owner) return true;
+
+        if (enteredPointOwners.find(owner) == enteredPointOwners.end()) // new Point owner entered
         {
-            if (enteredPointOwners.find(owner) == enteredPointOwners.end()) // new Point owner entered
-            {
-                enteredPointOwners.insert(owner);
-                if (PointEnterEvent) PointEnterEvent(owner);
-            }
-            else // existing Point owner entered
-            {
-                if (PointStayEvent) PointStayEvent(owner);
-            }
+            enteredPointOwners.insert(owner);
+            if (PointEnterEvent) PointEnterEvent(owner);
         }
+        else // existing Point owner entered
+        {
+            if (PointStayEvent) PointStayEvent(owner);
+        }
+
         return true;
     }
     else // Not Collided
     {
-        if (owner)
-        {
-            auto targetIt = enteredPointOwners.find(owner);
+        if (!owner) return false;
 
-            if (targetIt != enteredPointOwners.end())
-            {
-                enteredPointOwners.erase(targetIt);
-                if (PointExitEvent) PointExitEvent(owner);
-            }
+        auto targetIt = enteredPointOwners.find(owner);
+
+        if (targetIt != enteredPointOwners.end())
+        {
+            enteredPointOwners.erase(targetIt);
+            if (PointExitEvent) PointExitEvent(owner);
         }
+        
         return false;
     }
 }
 
-bool ColliderRect::Collision(ColliderRect* rect, Transform* owner)
+bool ColliderRect::OBBCollision(ColliderRect* rect, Transform* owner)
 {
     Vector2 distance = this->globalPosition - rect->globalPosition;
 
@@ -101,6 +101,8 @@ bool ColliderRect::Collision(ColliderRect* rect, Transform* owner)
 
         if (sum <= abs(Vector2::Dot(axes[i], distance)))
         {
+            if (!owner) return false;
+
             auto targetIt = enteredBodies.find(rect);
 
             if (targetIt != enteredBodies.end())
@@ -112,24 +114,23 @@ bool ColliderRect::Collision(ColliderRect* rect, Transform* owner)
         }
     }
 
-    if (owner)
+    if (!owner) return true;
+ 
+    if (enteredBodies.find(rect) == enteredBodies.end()) // new rect owner entered
     {
-        if (enteredBodies.find(rect) == enteredBodies.end()) // new rect owner entered
-        {
-            enteredBodies.insert(rect);
+        enteredBodies.insert(rect);
 
-            if (RectEnterEvent) RectEnterEvent(rect, owner);
-        }
-        else // Existing rect owner collided
-        {
-            if (RectStayEvent) RectStayEvent(rect, owner);
-        }
+        if (RectEnterEvent) RectEnterEvent(rect, owner);
+    }
+    else // Existing rect owner collided
+    {
+        if (RectStayEvent) RectStayEvent(rect, owner);
     }
 
     return true;
 }
 
-bool ColliderRect::Collision(ColliderCircle* other)
+bool ColliderRect::OBBCollision(ColliderCircle* other)
 {
     Vector2 distance = this->globalPosition - other->GlobalPosition();
 
@@ -156,4 +157,80 @@ bool ColliderRect::Collision(ColliderCircle* other)
     float edgeToCircle = sqrt(pow(x, 2) + pow(y, 2));
 
     return edgeToCircle < radius;
+}
+
+bool ColliderRect::AABBCollision(const Vector2& point, Transform* owner)
+{
+    float x = abs(point.x - this->GlobalPosition().x);
+    float y = abs(point.y - this->GlobalPosition().y);
+
+    if (x < this->GlobalSize().x * 0.5f && y < this->GlobalSize().y * 0.5f)
+    {
+        // Collided
+        if (!owner) return true;
+
+        if (enteredPointOwners.find(owner) == enteredPointOwners.end()) // new Point owner entered
+        {
+            enteredPointOwners.insert(owner);
+            if (PointEnterEvent) PointEnterEvent(owner);
+        }
+        else // existing Point owner entered
+        {
+            if (PointStayEvent) PointStayEvent(owner);
+        }
+
+        return true;
+    }
+
+    if (!owner) return false;
+
+    auto targetIt = enteredPointOwners.find(owner);
+
+    if (targetIt != enteredPointOwners.end())
+    {
+        enteredPointOwners.erase(targetIt);
+        if (PointExitEvent) PointExitEvent(owner);
+    }
+
+    return false;
+}
+
+bool ColliderRect::AABBCollision(ColliderRect* rect, Transform* owner)
+{
+    float x = abs(this->GlobalPosition().x - rect->GlobalPosition().x);
+    float y = abs(this->GlobalPosition().y - rect->GlobalPosition().y);
+
+    float sizeX = (this->GlobalSize().x + rect->GlobalSize().x) * 0.5f;
+    float sizeY = (this->GlobalSize().y + rect->GlobalSize().y) * 0.5f;
+
+    if (x <= sizeX && y <= sizeY) // Collided
+    {
+        if (!owner) return true;
+
+        if (enteredBodies.find(rect) == enteredBodies.end()) // new rect owner entered
+        {
+            enteredBodies.insert(rect);
+
+            if (RectEnterEvent) RectEnterEvent(rect, owner);
+        }
+        else // Existing rect owner collided
+        {
+            if (RectStayEvent) RectStayEvent(rect, owner);
+        }
+
+        return true;
+    }
+
+    // Not collided
+    if (!owner) return false;
+
+    auto targetIt = enteredBodies.find(rect);
+
+    if (targetIt != enteredBodies.end())
+    {
+        enteredBodies.erase(targetIt);
+        if (RectExitEvent) RectExitEvent(rect, owner);
+    }
+
+    return false;
 }

@@ -16,9 +16,14 @@ public:
 
 	void SetVertex() override;
 
-	bool Collision(Vector2 point, Transform* owner = nullptr)			override;
-	bool Collision(ColliderRect* rect, Transform* owner = nullptr)		override;
-	bool Collision(ColliderCircle* other) override;
+	bool OBBCollision(const Vector2& point, Transform* owner = nullptr)		override;
+	bool OBBCollision(ColliderRect* rect, Transform* owner = nullptr)		override;
+	bool OBBCollision(ColliderCircle* other) override;
+
+	// ¡÷¿« : Always use Global Position for Collision detection
+	bool AABBCollision(const Vector2& point,	Transform* owner = nullptr);
+	bool AABBCollision(ColliderRect* rect,		Transform* owner = nullptr);
+
 
 	Vector2 GlobalSize() const { return Vector2(size.x * globalScale.x, size.y * globalScale.y); } // Get global size
 
@@ -41,6 +46,9 @@ public:
 	void SetRectEnterEvent(function<void(ColliderRect*, Transform*)> E) { this->RectEnterEvent = E; }
 	void SetRectStayEvent(function<void(ColliderRect*, Transform*)> E) { this->RectStayEvent = E; }
 	void SetRectExitEvent(function<void(ColliderRect*, Transform*)> E) { this->RectExitEvent = E; }
+
+public:
+	set<ColliderRect*>& EnteredBodies() { return enteredBodies; }
 
 private:
 
