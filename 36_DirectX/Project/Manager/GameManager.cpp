@@ -16,14 +16,63 @@ GameManager::GameManager()
 	mapT = LT.y + CELL_WORLD_SIZE.y * 0.5f;
 	mapR = RB.x + CELL_WORLD_SIZE.x * 0.5f;
 	mapB = RB.y - CELL_WORLD_SIZE.y * 0.5f;
+
+	for (UINT y = 0; y < MAP_ROW; y++)
+	{
+		for (UINT x = 0; x < MAP_COL; x++)
+		{
+			mapCells[y][x] = new ColliderRect(CELL_WORLD_SIZE);
+		}
+	}
+
+	SOUND->AddSound("BalloonDeploy", "_Sound/BalloonDeploy.wav");
 }
 
 GameManager::~GameManager()
 {
 	delete gameFieldTransform;
+
+	for (UINT y = 0; y < MAP_ROW; y++)
+	{
+		for (UINT x = 0; x < MAP_COL; x++)
+			delete mapCells[y][x];
+	}
 }
 
 void GameManager::Update()
 {
 	gameFieldTransform->Update();
+
+	static bool cellInitialized = false;
+
+	if (!cellInitialized)
+	{
+		for (UINT y = 0; y < MAP_ROW; y++)
+		{
+			for (UINT x = 0; x < MAP_COL; x++)
+				Util::SetTransformToGameBoard(mapCells[y][x], { x, y });
+		}
+		cellInitialized = true;
+	}
+
+
+	for (UINT y = 0; y < MAP_ROW; y++)
+	{
+		for (UINT x = 0; x < MAP_COL; x++)
+			mapCells[y][x]->Update();
+	}
+}
+
+Vector2 GameManager::GetCollidedMapCellPos(const Vector2& point)
+{
+	for (UINT y = 0; y < MAP_ROW; y++)
+	{
+		for (UINT x = 0; x < MAP_COL; x++)
+		{
+			if (mapCells[y][x]->AABBCollision(point))
+				return mapCells[y][x]->translation;
+		}
+	}
+
+	return Vector2();
 }
