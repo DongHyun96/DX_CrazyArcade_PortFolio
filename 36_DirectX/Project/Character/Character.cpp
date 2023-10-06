@@ -17,12 +17,13 @@ Character::Character(const CharacterType& cType)
 	pushCollider->SetColliderTag(CHARACTER_PUSH);
 	pushCollider->SetColor(1, 0, 0);
 
-	Util::SetTransformToGameBoard(body, { 10, 10 });
+	Util::SetTransformToGameBoard(body, { 7, MAP_ROW - 7 });
 	pushCollider->SetParent(body);
 
 	actionHandler = CharacterAnimFactory::CreateCharacterAnim(cType, body);
 
 	colorBuffer = new ColorBuffer();
+
 }
 
 Character::~Character()
@@ -33,6 +34,7 @@ Character::~Character()
 	delete pushCollider;
 
 	delete colorBuffer;
+
 }
 
 void Character::Update()
@@ -43,6 +45,7 @@ void Character::Update()
 	body->UpdateZDepthToY();
 
 	Move();
+	DeployBalloon();
 
 	actionHandler->Update();
 	actionHandler->UpdateAction(mainState, velocity);

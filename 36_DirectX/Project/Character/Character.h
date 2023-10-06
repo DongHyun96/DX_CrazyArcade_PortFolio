@@ -58,7 +58,10 @@ public:
 	Vector2 GetVelocity() const { return velocity; }
 
 private:
+
 	void HandleBoundary();
+
+	virtual void DeployBalloon() = 0;
 
 protected:
 
@@ -80,6 +83,7 @@ protected:
 
 	ColliderRect* pushCollider{}; // 밀어낼 수 있는 블록용도로 쓸 것임
 
+
 protected:
 
 	/*
@@ -93,7 +97,7 @@ protected:
 	UINT streamLvMax{};
 
 	UINT speedLv{ 1 };
-	UINT balloonCnt{ 1 };
+	UINT leftBalloonCnt{ 10 };
 	UINT streamLv{ 1 };
 
 };

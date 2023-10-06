@@ -9,4 +9,7 @@ public:
 
 private:
 
+	virtual void DeployBalloon() override;
+
+
 };

@@ -15,7 +15,7 @@ void Player::Move()
 {
 	velocity = Vector2();
 
-	if (KEY_DOWN(VK_SPACE))
+	if (KEY_DOWN(VK_LSHIFT))
 		speedLv++;
 
 	if (KEY_DOWN('1'))
@@ -51,4 +51,22 @@ void Player::Move()
 
 	// 4 way movements 라 noramlize할 필요가 없음
 	body->translation += velocity * Time::Delta();
+}
+
+void Player::DeployBalloon()
+{
+	if (leftBalloonCnt <= 0)
+		return;
+
+	if (KEY_DOWN(VK_SPACE))
+	{
+		Vector2 deployPos = GM->GetCollidedMapCellPos(body->GlobalPosition());
+		
+		if (GM->GetBalloonManager()->Spawn(deployPos))
+		{
+			SOUND->Play("BalloonDeploy", 1.f);
+
+			leftBalloonCnt--;
+		}
+	}
 }
