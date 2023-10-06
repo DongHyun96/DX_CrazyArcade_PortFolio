@@ -49,6 +49,12 @@ using namespace DirectX;
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
 
+#include <fmod.hpp>
+
+#pragma comment(lib, "fmod_vc.lib")
+
+using namespace FMOD;
+
 #define	WIN_WIDTH		1920.f
 #define	WIN_HEIGHT		1080.f
 
@@ -70,6 +76,7 @@ using namespace DirectX;
 #define CELL_WORLD_SIZE	Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW)
 
 #define GM				GameManager::GetInst()
+#define SOUND			SoundManager::GetInstance()
 
 #define NEAR_Z			-10.f
 #define FAR_Z			1090.f
@@ -90,6 +97,7 @@ typedef XMMATRIX Matrix;
 
 #include "Utility/Util.h"
 
+#include "Utility/SoundManager.h"
 #include "Utility/BinaryWriter.h"
 #include "Utility/BinaryReader.h"
 
@@ -123,16 +131,21 @@ typedef XMMATRIX Matrix;
 #include "Object/Collision/ColliderRect.h"
 #include "Object/Collision/ColliderCircle.h"
 
+#include "Object/Collision/CollisionUtil.h"
+
 // 실제 게임 관련
 
-#include "GameMap/TileManager.h"
 #include "GameMap/Block.h"
-#include "GameMap/BlockManager.h"
 
 #include "GameMap/Editor/TileEditor.h"
 #include "GameMap/Editor/BlockEditor.h"
 #include "GameMap/Editor/MapEditor.h"
 
+#include "GameMap/TileManager.h"
+#include "GameMap/BlockManager.h"
+
+#include "Balloon/Balloon.h"
+#include "Balloon/BalloonManager.h"
 
 #include "Character/Character.h"
 #include "Character/Player.h"
