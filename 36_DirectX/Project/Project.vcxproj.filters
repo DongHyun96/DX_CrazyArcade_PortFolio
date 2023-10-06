@@ -195,6 +195,45 @@
     <ClInclude Include="Utility\Font.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Balloon\Balloon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Balloon\BalloonManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Object\Collision\CollisionUtil.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\DirectXTex.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\fmod.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\fmod.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\fmod_codec.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\fmod_common.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\fmod_dsp.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\fmod_dsp_effects.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\fmod_errors.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="_Include\fmod_output.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility\SoundManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -329,6 +368,18 @@
     <ClCompile Include="Utility\Font.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Balloon\Balloon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Balloon\BalloonManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Object\Collision\CollisionUtil.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility\SoundManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="__Others\Project.rc">
@@ -354,8 +405,19 @@
   <ItemGroup>
     <None Include="_Library\IMGui.idb" />
     <None Include="_Library\IMGui.pdb" />
+    <None Include="_Include\DirectXTex.inl">
+      <Filter>헤더 파일</Filter>
+    </None>
+    <None Include="_Include\fmod.cs" />
+    <None Include="_Include\fmod_dsp.cs" />
+    <None Include="_Include\fmod_errors.cs" />
+    <None Include="_Library\fmod.dll" />
+    <None Include="_Library\fmodL.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="_Library\IMGui.lib" />
+    <Library Include="_Library\DirectXTex.lib" />
+    <Library Include="_Library\fmod_vc.lib" />
+    <Library Include="_Library\fmodL_vc.lib" />
   </ItemGroup>
 </Project>
