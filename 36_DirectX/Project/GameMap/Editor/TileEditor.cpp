@@ -109,7 +109,7 @@ void TileEditor::SelectTileMap()
 	UINT idx{};
 	for (auto& tMapC : tileMapColliders)
 	{
-		if (tMapC->Collision(mousePos))
+		if (tMapC->OBBCollision(mousePos))
 		{
 			if (KEY_DOWN(VK_LBUTTON))
 			{
@@ -128,7 +128,7 @@ void TileEditor::SetTileToWorld()
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			if (MapEditor::GetInst()->cells[i][j]->Collision(mousePos)) // i, j 위치와 info가 필요
+			if (MapEditor::GetInst()->cells[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
 			{
 				if (KEY_DOWN(VK_LBUTTON))
 				{
