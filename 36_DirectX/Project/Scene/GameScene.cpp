@@ -42,6 +42,7 @@ GameScene::GameScene()
 	GM->SetBalloonManager(balloonManager);
 
 	streamManager = new StreamManager;
+	GM->SetStreamManager(streamManager);
 }
 
 GameScene::~GameScene()
@@ -58,7 +59,6 @@ GameScene::~GameScene()
 	delete balloonManager;
 
 	delete streamManager;
-
 }
 
 void GameScene::Update()
@@ -82,8 +82,6 @@ void GameScene::Update()
 
 	streamManager->Update();
 
-	if (KEY_DOWN(VK_F3))
-		streamManager->Spawn({ 6, 7 }, 1);
 }
 
 void GameScene::Render()
@@ -97,18 +95,14 @@ void GameScene::Render()
 		return;
 	}
 
-	streamManager->Render();
-
 	tileManager->Render();
-	//blockManager->Render();
+	blockManager->Render();
 	balloonManager->Render();
 
-	/*block->Render();
-	block2->Render();*/
 	player->Render();
+	streamManager->Render();
 
 	player->Debug();
-	//block2->Debug("Block2");
 }
 
 

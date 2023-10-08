@@ -154,7 +154,10 @@ typedef XMMATRIX Matrix;
 #include "Stream/StreamBlocks/StreamBlock_Right.h"
 #include "Stream/StreamBlocks/StreamBlock_Up.h"
 #include "Stream/StreamBlocks/StreamBlock_Down.h"
+#include "Stream/StreamBlocks/StreamBlockManager.h"
+
 #include "Stream/Stream.h"
+
 #include "Stream/StreamManager.h"
 
 

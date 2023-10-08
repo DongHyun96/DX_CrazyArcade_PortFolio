@@ -16,6 +16,7 @@ BlockManager::BlockManager()
 		for (UINT x = 5; x < 8; x++)
 			CreateBlock({ x, y }, L"InGame/Village/Objects/box.png", {3, 1}, {2, 1}, CELL_WORLD_SIZE, {true, false, false});
 	}*/
+
 	Load();
 }
 

@@ -4,7 +4,7 @@
 
 StreamBlock_Center::StreamBlock_Center()
 {
-	mainAnim = new Animation(CELL_WORLD_SIZE, L"InGame/Stream/center.png", 3, 1, 3, 0.045f);
+	mainAnim = new Animation(CELL_WORLD_SIZE, L"InGame/Stream/center.png", 3, 1, 3, ANIM_SPEED);
 	// 20¹ø
 	
 	vector<UINT> indices{};

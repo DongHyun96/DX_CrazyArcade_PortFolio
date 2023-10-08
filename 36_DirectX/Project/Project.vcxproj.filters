@@ -258,6 +258,9 @@
     <ClInclude Include="Stream\Stream.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Stream\StreamBlocks\StreamBlockManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -426,6 +429,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Stream\Stream.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamBlocks\StreamBlockManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

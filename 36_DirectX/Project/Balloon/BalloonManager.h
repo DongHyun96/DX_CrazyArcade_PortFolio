@@ -18,7 +18,7 @@ public:
 
 private:
 
-	const UINT POOL_CNT = 100;
+	const UINT POOL_CNT = 80;
 
 	vector<Balloon*> balloons{};
 

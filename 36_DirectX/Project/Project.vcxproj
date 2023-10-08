@@ -175,6 +175,7 @@
     <ClInclude Include="Scene\GameScene.h" />
     <ClInclude Include="GameMap\TileManager.h" />
     <ClInclude Include="GameMap\Editor\TileEditor.h" />
+    <ClInclude Include="Stream\StreamBlocks\StreamBlockManager.h" />
     <ClInclude Include="Stream\Stream.h" />
     <ClInclude Include="Stream\StreamManager.h" />
     <ClInclude Include="Stream\StreamBlocks\StreamBlock.h" />
@@ -257,6 +258,7 @@
     <ClCompile Include="Scene\GameScene.cpp" />
     <ClCompile Include="GameMap\TileManager.cpp" />
     <ClCompile Include="GameMap\Editor\TileEditor.cpp" />
+    <ClCompile Include="Stream\StreamBlocks\StreamBlockManager.cpp" />
     <ClCompile Include="Stream\Stream.cpp" />
     <ClCompile Include="Stream\StreamManager.cpp" />
     <ClCompile Include="Stream\StreamBlocks\StreamBlock.cpp" />
