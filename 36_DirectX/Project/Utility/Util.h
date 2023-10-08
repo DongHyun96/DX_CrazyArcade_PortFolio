@@ -14,6 +14,7 @@ namespace Util
 	struct Coord
 	{
 		Coord() {};
+
 		Coord(const UINT& x,const UINT& y) :x(x), y(y) {}
 			
 		UINT x{};
