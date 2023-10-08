@@ -183,8 +183,7 @@ void Block::HandleBushInteract()
 
 void Block::OnColliderPointEnter(Transform* owner)
 {
-	if (hidable)
-		PlayBushInteraction();
+	if (hidable) PlayBushInteraction();
 }
 
 void Block::OnColliderPointStay(Transform* owner)
@@ -208,12 +207,19 @@ void Block::OnColliderPointStay(Transform* owner)
 			return;
 		}
 
-		// Balloon entered
+		// Balloon staying
 		Balloon* balloon = dynamic_cast<Balloon*>(owner);
 
 		if (balloon)
 		{
-			balloon->SetVisible(false);
+			if (balloon->Active())
+			{
+				balloon->SetVisible(false);
+				return;
+			}
+
+			// balloon이 active하지 않은 경우, entererdSet에서 빼줘야 함
+			rectBody->EnteredPointOwners().erase(owner);
 			return;
 		}
 
@@ -236,7 +242,20 @@ void Block::OnColliderPointExit(Transform* owner)
 
 		Block* b = dynamic_cast<Block*>(owner);
 
-		if (b) b->SetVisible(true);
+		if (b)
+		{
+			b->SetVisible(true);
+			return;
+		}
+
+		Balloon* balloon = dynamic_cast<Balloon*>(owner);
+
+		if (balloon) // 나중에 balloon 발차기 같은 아이템 때문에 놔두는게 나을지도?
+		{
+			balloon->SetVisible(true);
+			return;
+		}
+			
 	}
 }
 
