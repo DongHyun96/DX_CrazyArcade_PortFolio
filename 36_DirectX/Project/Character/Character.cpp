@@ -24,6 +24,10 @@ Character::Character(const CharacterType& cType)
 
 	colorBuffer = new ColorBuffer();
 
+	// ½ºÅÈ ¼³Á¤
+	InitStat(cType);
+	
+
 }
 
 Character::~Character()
@@ -74,6 +78,13 @@ void Character::Debug()
 	body->Debug(label);
 }
 
+void Character::AddLeftBalloonCnt(const UINT& addAmount)
+{
+	if (leftBalloonCnt >= balloonCntMax) return;
+
+	leftBalloonCnt += addAmount;
+}
+
 void Character::HandleBoundary()
 {
 	if (body->Left() < GM->GetMapL())
@@ -85,4 +96,61 @@ void Character::HandleBoundary()
 	if (body->Bottom() < GM->GetMapB())
 		body->translation.y = GM->GetMapB() + body->LocalSize().y * 0.51f;
 	//else if (body->Bottom() < 0)
+}
+
+void Character::InitStat(const CharacterType& cType)
+{
+	switch (cType)
+	{
+	case BAZZI:
+		speedLvMin = 5;
+		speedLvMax = 9;
+
+		balloonCntMin = 1;
+		balloonCntMax = 6;
+
+		streamLvMin = 1;
+		streamLvMax = 7;
+		break;
+	case DAO:
+		speedLvMin = 5;
+		speedLvMax = 7;
+
+		balloonCntMin = 1;
+		balloonCntMax = 10;
+
+		streamLvMin = 1;
+		streamLvMax = 7;
+		break;
+	case CAPPI:
+		speedLvMin = 4;
+		speedLvMax = 8;
+
+		balloonCntMin = 1;
+		balloonCntMax = 9;
+
+		streamLvMin = 2;
+		streamLvMax = 8;
+		break;
+	case MARID:
+		speedLvMin = 4;
+		speedLvMax = 8;
+
+		balloonCntMin = 2;
+		balloonCntMax = 9;
+
+		streamLvMin = 1;
+		streamLvMax = 6;
+		break;
+	default:
+		break;
+	}
+
+	//speedLv = speedLvMin;
+	//leftBalloonCnt = balloonCntMin;
+	//streamLv = streamLvMin;
+
+	speedLv = speedLvMin;
+	leftBalloonCnt = 6;
+	streamLv = streamLvMax;
 }

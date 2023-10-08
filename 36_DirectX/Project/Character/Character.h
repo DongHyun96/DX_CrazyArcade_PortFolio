@@ -2,7 +2,7 @@
 
 class CharacterAnim;
 
-#define SPEED_BASE 50.f
+#define SPEED_BASE 70.f
 
 enum CharacterType
 {
@@ -57,6 +57,10 @@ public:
 
 	Vector2 GetVelocity() const { return velocity; }
 
+	UINT GetStreamLv() const { return streamLv; }
+
+	void AddLeftBalloonCnt(const UINT& addAmount = 1);
+
 private:
 
 	void HandleBoundary();
@@ -67,6 +71,8 @@ protected:
 
 	ColorBuffer* colorBuffer{};
 	bool visible{ true };
+
+	void InitStat(const CharacterType& cType);
 
 protected:
 
@@ -98,8 +104,8 @@ protected:
 	UINT streamLvMin{};
 	UINT streamLvMax{};
 
-	UINT speedLv{ 1 };
-	UINT leftBalloonCnt{ 10 };
-	UINT streamLv{ 1 };
+	UINT speedLv{};
+	UINT leftBalloonCnt{};
+	UINT streamLv{};
 
 };
