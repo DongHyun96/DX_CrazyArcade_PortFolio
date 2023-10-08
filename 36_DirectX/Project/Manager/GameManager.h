@@ -3,6 +3,7 @@
 class Transform;
 class BalloonManager;
 class BlockManager;
+class StreamManager;
 class Character;
 class Collider;
 class ColliderRect;
@@ -35,6 +36,10 @@ public:
 
 	void SetBlockManager(BlockManager* blockManager) { this->blockManager = blockManager; }
 	BlockManager* GetBlockManager() const { return blockManager; }
+
+	void SetStreamManager(StreamManager* streamManager) { this->streamManager = streamManager; }
+	StreamManager* GetStreamManager() const { return streamManager; }
+
 
 public:
 
@@ -75,5 +80,6 @@ private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
 	Character* player{};
 	BalloonManager* balloonManager{};
 	BlockManager* blockManager{};
+	StreamManager* streamManager{};
 
 };

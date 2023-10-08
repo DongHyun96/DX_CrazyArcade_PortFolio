@@ -26,6 +26,8 @@ GameManager::GameManager()
 	}
 
 	SOUND->AddSound("BalloonDeploy", "_Sound/BalloonDeploy.wav");
+	SOUND->AddSound("BalloonExplode", "_Sound/bombExplode.wav");
+
 }
 
 GameManager::~GameManager()
