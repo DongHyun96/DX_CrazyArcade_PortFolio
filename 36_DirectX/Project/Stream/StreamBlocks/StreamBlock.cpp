@@ -11,6 +11,7 @@ StreamBlock::StreamBlock()
 	vertexShader	= new VertexShader(L"VertexTexture");
 	pixelShader		= new PixelShader(L"PixelTexture");
 	worldBuffer		= new MatrixBuffer();
+	colorBuffer		= new ColorBuffer();
 }
 
 StreamBlock::~StreamBlock()
@@ -22,6 +23,7 @@ StreamBlock::~StreamBlock()
 	delete vertexShader;
 	delete pixelShader;
 	delete worldBuffer;
+	delete colorBuffer;
 
 }
 
@@ -46,12 +48,14 @@ void StreamBlock::Render()
 	vertexShader->SetShader();
 	pixelShader->SetShader();
 
+	colorBuffer->PSSetBuffer(0);
+
 	curAction->Render();
 	body->Render();
 
 }
 
-void StreamBlock::Spawn(const Util::Coord spawnCoord, const bool& isEnd)
+StreamBlock* StreamBlock::Spawn(const Util::Coord& spawnCoord, const bool& isEnd)
 {
 	this->isEnd = isEnd;
 	isActive = true;
@@ -61,4 +65,6 @@ void StreamBlock::Spawn(const Util::Coord spawnCoord, const bool& isEnd)
 	curAction = isEnd ? endAnim : mainAnim;
 
 	curAction->Play();
+
+	return this;
 }

@@ -8,7 +8,7 @@ public:
 	virtual void Update();
 	virtual void Render();
 	
-	void Spawn(const Util::Coord spawnCoord, const bool& isEnd = false);
+	StreamBlock* Spawn(const Util::Coord& spawnCoord, const bool& isEnd = false);
 
 	bool IsActive() const { return isActive; }
 
@@ -33,9 +33,12 @@ protected:
 	PixelShader*  pixelShader;
 
 	MatrixBuffer*	worldBuffer{};
+	ColorBuffer*	colorBuffer{};
 
 	//const vector<UINT> ANIM_INDICES{ 3, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10 };
 	const vector<UINT> ANIM_INDICES{ 3, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 4, 5, 6, 7, 8, 9, 10 };
+	
+	const float ANIM_SPEED{ 0.04f };
 
 	
 };
