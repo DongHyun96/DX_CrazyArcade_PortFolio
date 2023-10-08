@@ -36,26 +36,14 @@ void BalloonManager::Render()
 		balloon->Render();
 }
 
-bool BalloonManager::Spawn(const Util::Coord& spawnCoord)
+bool BalloonManager::Spawn(const Util::Coord& spawnCoord, Character* owner)
 {
 	for (Balloon* balloon : balloons)
 	{
 		if (balloon->Active())
 			continue;
 
-		return balloon->Spawn(spawnCoord);
-	}
-	return false;
-}
-
-bool BalloonManager::Spawn(const Vector2& spawnPos)
-{
-	for (Balloon* balloon : balloons)
-	{
-		if (balloon->Active())
-			continue;
-
-		return balloon->Spawn(spawnPos);
+		return balloon->Spawn(spawnCoord, owner);
 	}
 
 	return false;
