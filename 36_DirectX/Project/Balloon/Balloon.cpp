@@ -41,6 +41,8 @@ void Balloon::Update()
 	body->UpdateZDepthToY();
 
 	balloonAnim->Update();
+
+	HandleExplode();
 }
 
 void Balloon::Render()
@@ -79,9 +81,7 @@ bool Balloon::Spawn(const Util::Coord& spawnCoord, Character* owner) // public
 
 void Balloon::Explode()
 {
-	isActive = false;
-
-	owner = nullptr;
+	owner->AddLeftBalloonCnt();
 
 	explodeTime = 0.f;
 
@@ -96,14 +96,15 @@ void Balloon::Explode()
 
 	body->EnteredBodies().clear();
 
-	// StreamManager와 협업
+	GM->GetStreamManager()->SpawnStream(spawnCoord, owner->GetStreamLv());
 
+	isActive = false;
+	owner = nullptr;
+	SOUND->Play("BalloonExplode", 1.f);
 }
 
 bool Balloon::Spawn(const Vector2& spawnPos) // private
 {
-	//if (isActive)
-	//	return false;
 	
 	// 이미 해당위치에 벌룬이 존재
 	if (find(activeBalloonPositions.begin(), activeBalloonPositions.end(), spawnPos) != activeBalloonPositions.end())
@@ -114,6 +115,7 @@ bool Balloon::Spawn(const Vector2& spawnPos) // private
 	
 	visible = true;
 	isActive = true;
+	explodeTime = 0.f;
 
 	// TODO :
 	// Spawn 시에 현재 위에 있는 플레이어들을 모두(나머지 플레이어들은 Update한번하고 충돌검사 한번은 해야함) entered set에 포함시킴으로써 처음에는
@@ -122,6 +124,18 @@ bool Balloon::Spawn(const Vector2& spawnPos) // private
 	activeBalloonPositions.push_back(spawnPos);
 
 	return true;
+}
+
+void Balloon::HandleExplode()
+{
+	explodeTime += Time::Delta();
+
+	if (explodeTime < EXPLODE_TIME_LIMIT)
+		return;
+
+	explodeTime = 0.f;
+
+	Explode();
 }
 
 void Balloon::OnColliderRectEnter(ColliderRect* targetCollider, Transform* owner)

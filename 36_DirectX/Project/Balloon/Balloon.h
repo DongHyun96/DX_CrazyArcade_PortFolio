@@ -29,7 +29,8 @@ public:
 private:
 
 	bool Spawn(const Vector2& spawnPos);
-	
+
+	void HandleExplode();
 
 private:
 
@@ -45,7 +46,7 @@ private:
 
 
 	float		explodeTime{};
-	const float EXPLODE_TIME_LIMIT{ 1.5f };
+	const float EXPLODE_TIME_LIMIT{ 2.5f };
 
 
 	ColorBuffer*	colorBuffer{};
