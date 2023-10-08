@@ -2,11 +2,10 @@
 class Stream
 {
 public:
-	Stream();
+	Stream(StreamBlockManager* streamBlockManager);
 	~Stream();
 
 	void Update();
-	void Render();
 
 	void Spawn(const Util::Coord& spawnCoord, const UINT& streamLv);
 
@@ -19,25 +18,24 @@ private:
 	void HandleSpawning();
 
 	// 모두 다 꺼지면 자신의 active도 끔
-	void HandleActive();
+	void HandleSelfActive();
 
 private:
 
 	bool isActive{};
 
-	StreamBlock* centerStream{};
+	StreamBlockManager* streamBlockManager; // StreamManager에서 받아옴
 
-	static const UINT DIR_STREAM_CNT{ 80 };
-
-	map<Direction, vector<StreamBlock*>> dirStreamMap{};
 	map<Direction, deque<Util::Coord>> reachedCoordMap{};
 
 private:
 	
-	const float BLOCK_SPAWN_DELTA{ 0.1f };
+	const float BLOCK_SPAWN_DELTA{ 0.05f };
 
 	float blockSpawnTime = 0.f;
-	UINT curSpawnIdx{};
 	bool stopSpawning{true};
+
+private:
+	vector<StreamBlock*> activatedBlocks{};
 
 };
