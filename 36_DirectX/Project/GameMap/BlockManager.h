@@ -14,6 +14,8 @@ public:
 	// 움직이고자 하는 위치가 valid한지 체크
 	static bool IsValidDestCoord(const Util::Coord& dest);
 
+	static Block* GetCoordBlock(const Util::Coord& coord) { return blocks[coord.y][coord.x]; }
+
 private:
 	Block* CreateBlock(Util::Coord coord, wstring file,
 					 Util::Coord frameXY = { 1, 1 },
