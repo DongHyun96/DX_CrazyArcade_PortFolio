@@ -4,14 +4,19 @@
 
 StreamManager::StreamManager()
 {
+	streamBlockManager = new StreamBlockManager;
+
 	for (UINT i = 0; i < POOL_CNT; i++)
-		streams.push_back(new Stream);
+		streams.push_back(new Stream(streamBlockManager));
+
 }
 
 StreamManager::~StreamManager()
 {
 	for (Stream* stream : streams)
 		delete stream;
+
+	delete streamBlockManager;
 }
 
 void StreamManager::Update()
@@ -23,20 +28,16 @@ void StreamManager::Update()
 
 		stream->Update();
 	}
+	
+	streamBlockManager->Update();
 }
 
 void StreamManager::Render()
 {
-	for (Stream* stream : streams)
-	{
-		if (!stream->IsActive())
-			continue;
-
-		stream->Render();
-	}
+	streamBlockManager->Render();
 }
 
-void StreamManager::Spawn(const Util::Coord& spawnCoord, const UINT& streamLv) // Call once
+void StreamManager::SpawnStream(const Util::Coord& spawnCoord, const UINT& streamLv)
 {
 	for (Stream* stream : streams)
 	{

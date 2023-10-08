@@ -8,12 +8,15 @@ public:
 	void Update();
 	void Render();
 
-	void Spawn(const Util::Coord& spawnCoord, const UINT& streamLv);
+	void SpawnStream(const Util::Coord& spawnCoord, const UINT& streamLv);
 
 private:
-
-	const UINT POOL_CNT{ 30 };
+	
+	const UINT POOL_CNT{ 80 };
 
 	vector<Stream*> streams{};
+
+	StreamBlockManager* streamBlockManager{};
+
 
 };
