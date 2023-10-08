@@ -234,6 +234,30 @@
     <ClInclude Include="Utility\SoundManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Stream\StreamBlocks\StreamBlock.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamBlocks\StreamBlock_Center.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamBlocks\StreamBlock_Left.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamBlocks\StreamBlock_Right.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamBlocks\StreamBlock_Up.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamBlocks\StreamBlock_Down.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\StreamManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Stream\Stream.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -378,6 +402,30 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Utility\SoundManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamBlocks\StreamBlock.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamBlocks\StreamBlock_Center.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamBlocks\StreamBlock_Left.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamBlocks\StreamBlock_Right.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamBlocks\StreamBlock_Up.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamBlocks\StreamBlock_Down.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\StreamManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Stream\Stream.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

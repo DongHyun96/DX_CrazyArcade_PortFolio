@@ -29,8 +29,8 @@ public:
 	void Render();
 
 public:
-	EditMode GetMode() const { return mode; }
-	bool GetRenderColliderFlag() const { return renderColliderFlag; }
+	EditMode GetMode()				const { return mode; }
+	bool GetRenderColliderFlag()	const { return renderColliderFlag; }
 
 	//Collider* (*GetCells())[MAP_COL] { return cells; }
 

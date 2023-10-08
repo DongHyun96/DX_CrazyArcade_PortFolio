@@ -15,6 +15,7 @@
 #include <functional>
 #include <algorithm>
 #include <set>
+#include <deque>
 using namespace std;
 
 
@@ -146,6 +147,16 @@ typedef XMMATRIX Matrix;
 
 #include "Balloon/Balloon.h"
 #include "Balloon/BalloonManager.h"
+
+#include "Stream/StreamBlocks/StreamBlock.h"
+#include "Stream/StreamBlocks/StreamBlock_Center.h"
+#include "Stream/StreamBlocks/StreamBlock_Left.h"
+#include "Stream/StreamBlocks/StreamBlock_Right.h"
+#include "Stream/StreamBlocks/StreamBlock_Up.h"
+#include "Stream/StreamBlocks/StreamBlock_Down.h"
+#include "Stream/Stream.h"
+#include "Stream/StreamManager.h"
+
 
 #include "Character/Character.h"
 #include "Character/Player.h"

@@ -91,8 +91,10 @@ protected:
 	*/
 	UINT speedLvMin{};
 	UINT speedLvMax{};
+
 	UINT balloonCntMin{};
 	UINT balloonCntMax{};
+
 	UINT streamLvMin{};
 	UINT streamLvMax{};
 

@@ -26,5 +26,8 @@ private:
 	Block* block2{};
 
 	Character* player{};
+
+	StreamManager* streamManager{};
+
 };
 

@@ -12,7 +12,9 @@ GameScene::GameScene()
 	mapBoundary->SetLabel("MapBoundary");
 
 	tileManager = new TileManager;
+
 	blockManager = new BlockManager;
+	GM->SetBlockManager(blockManager);
 
 	//BlockInfo info{};
 	//info.file = ""
@@ -39,6 +41,7 @@ GameScene::GameScene()
 	balloonManager = new BalloonManager;
 	GM->SetBalloonManager(balloonManager);
 
+	streamManager = new StreamManager;
 }
 
 GameScene::~GameScene()
@@ -53,6 +56,9 @@ GameScene::~GameScene()
 
 	delete player;
 	delete balloonManager;
+
+	delete streamManager;
+
 }
 
 void GameScene::Update()
@@ -74,57 +80,10 @@ void GameScene::Update()
 	blockManager->Update();
 	balloonManager->Update();
 
-	//block->Update();
-	//block2->Update();
+	streamManager->Update();
 
-
-	//if (KEY_DOWN(VK_DOWN))
-	//{
-	//	block->PlayBushInteraction();
-	//}
-
-	/*block->GetBody()->Collision(player->GetBody()->GlobalPosition(), (Transform*)player);
-	block2->GetBody()->Collision(player->GetBody(), (Transform*)player);*/
-
-	/*if (KEY_DOWN(VK_LEFT))
-	{
-		Util::Coord c = curBlockPos;
-
-		c.x--;
-
-		if (block2->Move(c))
-			curBlockPos = c;
-
-	}
-	else if (KEY_DOWN(VK_RIGHT))
-	{
-		Util::Coord c = curBlockPos;
-
-		c.x++;
-
-		if (block2->Move(c))
-			curBlockPos = c;
-
-	}
-	else if (KEY_DOWN(VK_UP))
-	{
-		Util::Coord c = curBlockPos;
-
-		c.y++;
-
-		if (block2->Move(c))
-			curBlockPos = c;
-
-	}
-	else if (KEY_DOWN(VK_DOWN))
-	{
-		Util::Coord c = curBlockPos;
-
-		c.y--;
-
-		if (block2->Move(c))
-			curBlockPos = c;
-	}*/
+	if (KEY_DOWN(VK_F3))
+		streamManager->Spawn({ 6, 7 }, 1);
 }
 
 void GameScene::Render()
@@ -138,8 +97,10 @@ void GameScene::Render()
 		return;
 	}
 
+	streamManager->Render();
+
 	tileManager->Render();
-	blockManager->Render();
+	//blockManager->Render();
 	balloonManager->Render();
 
 	/*block->Render();
