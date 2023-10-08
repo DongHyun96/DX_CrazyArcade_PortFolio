@@ -48,6 +48,7 @@ public:
 	void SetRectExitEvent(function<void(ColliderRect*, Transform*)> E) { this->RectExitEvent = E; }
 
 public:
+	set<Transform*>& EnteredPointOwners() { return enteredPointOwners; }
 	set<ColliderRect*>& EnteredBodies() { return enteredBodies; }
 
 private:
