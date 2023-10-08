@@ -60,9 +60,9 @@ void Player::DeployBalloon()
 
 	if (KEY_DOWN(VK_SPACE))
 	{
-		Vector2 deployPos = GM->GetCollidedMapCellPos(body->GlobalPosition());
+		Util::Coord deployCoord = GM->GetCollidedMapCellCoord(body->GlobalPosition());
 		
-		if (GM->GetBalloonManager()->Spawn(deployPos))
+		if (GM->GetBalloonManager()->Spawn(deployCoord, this))
 		{
 			SOUND->Play("BalloonDeploy", 1.f);
 
