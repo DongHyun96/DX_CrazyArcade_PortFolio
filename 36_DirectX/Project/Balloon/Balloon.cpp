@@ -63,12 +63,44 @@ void Balloon::Render()
 	body->Render();
 }
 
-bool Balloon::Spawn(const Util::Coord& spawnCoord)
+bool Balloon::Spawn(const Util::Coord& spawnCoord, Character* owner) // public
 {
-	return Spawn(Util::ConvertBoardIdxToWorldPos(spawnCoord));
+	
+	if (Spawn(Util::ConvertBoardIdxToWorldPos(spawnCoord)))
+	{
+		this->spawnCoord = spawnCoord;
+		this->owner = owner;
+
+		return true;
+	}
+
+	return false;
 }
 
-bool Balloon::Spawn(const Vector2& spawnPos)
+void Balloon::Explode()
+{
+	isActive = false;
+
+	owner = nullptr;
+
+	explodeTime = 0.f;
+
+	for (auto it = activeBalloonPositions.begin(); it != activeBalloonPositions.end(); it++)
+	{
+		if (*it == body->translation)
+		{
+			activeBalloonPositions.erase(it);
+			break;
+		}
+	}
+
+	body->EnteredBodies().clear();
+
+	// StreamManager¿Í Çù¾÷
+
+}
+
+bool Balloon::Spawn(const Vector2& spawnPos) // private
 {
 	//if (isActive)
 	//	return false;
@@ -79,7 +111,7 @@ bool Balloon::Spawn(const Vector2& spawnPos)
 
 	body->translation = spawnPos;
 	balloonAnim->Play();
-
+	
 	visible = true;
 	isActive = true;
 

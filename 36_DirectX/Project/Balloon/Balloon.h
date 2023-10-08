@@ -1,4 +1,6 @@
 #pragma once
+
+
 class Balloon : public Transform
 {
 public:
@@ -8,8 +10,9 @@ public:
 	void Update();
 	void Render();
 
-	bool Spawn(const Util::Coord& spawnCoord);
-	bool Spawn(const Vector2& spawnPos);
+	bool Spawn(const Util::Coord& spawnCoord, Character* owner);
+
+	void Explode();
 
 	void OnColliderRectEnter(ColliderRect*	targetCollider, Transform* owner);
 
@@ -22,7 +25,15 @@ public:
 
 	static vector<Vector2> GetActiveBalloonPositions() { return activeBalloonPositions; }
 
+
 private:
+
+	bool Spawn(const Vector2& spawnPos);
+	
+
+private:
+
+	Util::Coord spawnCoord{};
 
 	static vector<Vector2> activeBalloonPositions;
 
@@ -42,5 +53,10 @@ private:
 	PixelShader*	pixelShader{};
 
 	MatrixBuffer*	worldBuffer{};
+
+private:
+	
+	// 터졌을 때 owner의 물풍선 개수 회복해주기
+	Character* owner{}; // spawn시에 자신의 owener를 받아올 것임
 
 };
