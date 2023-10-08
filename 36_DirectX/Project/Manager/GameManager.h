@@ -2,9 +2,13 @@
 
 class Transform;
 class BalloonManager;
+class BlockManager;
 class Character;
 class Collider;
 class ColliderRect;
+
+
+namespace Util { struct Coord; }
 
 class GameManager
 {
@@ -29,6 +33,9 @@ public:
 	void SetBalloonManager(BalloonManager* balloonManager) { this->balloonManager = balloonManager; }
 	BalloonManager* GetBalloonManager() const { return balloonManager; }
 
+	void SetBlockManager(BlockManager* blockManager) { this->blockManager = blockManager; }
+	BlockManager* GetBlockManager() const { return blockManager; }
+
 public:
 
 	Transform* GetGameFieldTransform() const { return gameFieldTransform; }
@@ -42,6 +49,7 @@ public:
 
 	/// <param name="point"> --> Use Global Position</param>
 	Vector2 GetCollidedMapCellPos(const Vector2& point);
+	Util::Coord GetCollidedMapCellCoord(const Vector2& point);
 
 
 private: // Board 및 GameField 관련
@@ -66,5 +74,6 @@ private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
 
 	Character* player{};
 	BalloonManager* balloonManager{};
+	BlockManager* blockManager{};
 
 };

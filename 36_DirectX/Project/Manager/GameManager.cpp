@@ -76,3 +76,17 @@ Vector2 GameManager::GetCollidedMapCellPos(const Vector2& point)
 
 	return Vector2();
 }
+
+Util::Coord GameManager::GetCollidedMapCellCoord(const Vector2& point)
+{
+	for (UINT y = 0; y < MAP_ROW; y++)
+	{
+		for (UINT x = 0; x < MAP_COL; x++)
+		{
+			if (mapCells[y][x]->AABBCollision(point)) return { x, y };
+		}
+	}
+
+	return Util::Coord();
+}
+
