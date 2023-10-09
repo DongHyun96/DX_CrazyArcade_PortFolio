@@ -14,6 +14,8 @@ public:
 	void Render();
 
 	void Play();
+	void Play(const bool& isLoop);
+
 	void Stop();
 
 	void Stop(UINT rewindIdx);

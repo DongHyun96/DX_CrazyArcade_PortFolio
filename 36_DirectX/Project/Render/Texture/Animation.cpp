@@ -109,6 +109,12 @@ void Animation::Play()
 	curPlayIndex = 0;
 }
 
+void Animation::Play(const bool& isLoop)
+{
+	Play();
+	this->isLoop = isLoop;
+}
+
 void Animation::Stop()
 {
 	isPlay = false;
