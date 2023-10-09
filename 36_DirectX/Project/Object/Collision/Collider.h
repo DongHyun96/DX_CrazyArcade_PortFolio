@@ -11,8 +11,8 @@ public:
 
 	bool OBBCollision(Collider* other);
 
-	virtual bool OBBCollision(const Vector2& point, Transform* owner = nullptr) = 0;
-	virtual bool OBBCollision(class ColliderRect* other, Transform* owner = nullptr) = 0;
+	virtual bool OBBCollision(const Vector2& point, ColliderHolder* owner = nullptr) = 0;
+	virtual bool OBBCollision(class ColliderRect* other, ColliderHolder* owner = nullptr) = 0;
 	virtual bool OBBCollision(class ColliderCircle* other) = 0;
 
 	

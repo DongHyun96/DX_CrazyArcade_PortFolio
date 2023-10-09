@@ -30,6 +30,7 @@ enum CharacterState
 };
 
 class Character : public Transform
+class Character : public ColliderHolder
 {
 public:
 	Character(const CharacterType& cType);

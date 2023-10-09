@@ -34,8 +34,10 @@ void ColliderRect::SetVertex()
     vertexBuffer = new VertexBuffer(vertices);
 }
 
-bool ColliderRect::OBBCollision(const Vector2& point, Transform* owner)
+bool ColliderRect::OBBCollision(const Vector2& point, ColliderHolder* owner)
 {
+    if (!isActive) return false;
+
     Matrix invWorld = XMMatrixInverse(nullptr, this->world);
 
     Vector2 invPoint = point * invWorld;
@@ -72,8 +74,10 @@ bool ColliderRect::OBBCollision(const Vector2& point, Transform* owner)
     }
 }
 
-bool ColliderRect::OBBCollision(ColliderRect* rect, Transform* owner)
+bool ColliderRect::OBBCollision(ColliderRect* rect, ColliderHolder* owner)
 {
+    if (!isActive) return false;
+
     Vector2 distance = this->globalPosition - rect->globalPosition;
 
     Vector2 axes[4] =
@@ -132,6 +136,8 @@ bool ColliderRect::OBBCollision(ColliderRect* rect, Transform* owner)
 
 bool ColliderRect::OBBCollision(ColliderCircle* other)
 {
+    if (!isActive)  return false;
+
     Vector2 distance = this->globalPosition - other->GlobalPosition();
 
     Vector2 axes[2] =
@@ -159,8 +165,10 @@ bool ColliderRect::OBBCollision(ColliderCircle* other)
     return edgeToCircle < radius;
 }
 
-bool ColliderRect::AABBCollision(const Vector2& point, Transform* owner)
+bool ColliderRect::AABBCollision(const Vector2& point, ColliderHolder* owner)
 {
+    if (!isActive)  return false;
+
     float x = abs(point.x - this->GlobalPosition().x);
     float y = abs(point.y - this->GlobalPosition().y);
 
@@ -195,8 +203,10 @@ bool ColliderRect::AABBCollision(const Vector2& point, Transform* owner)
     return false;
 }
 
-bool ColliderRect::AABBCollision(ColliderRect* rect, Transform* owner)
+bool ColliderRect::AABBCollision(ColliderRect* rect, ColliderHolder* owner)
 {
+    if (!isActive)  return false;
+
     float x = abs(this->GlobalPosition().x - rect->GlobalPosition().x);
     float y = abs(this->GlobalPosition().y - rect->GlobalPosition().y);
 
