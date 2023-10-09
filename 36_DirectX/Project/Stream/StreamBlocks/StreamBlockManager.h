@@ -7,10 +7,12 @@ public:
 
 	void Update();
 	void Render();
-	
-	StreamBlock* GetAvailableBlock(const Direction& dir);
 
 	StreamBlock* Spawn(const Direction& dir, const Util::Coord& spawnCoord, const bool& isEnd = false);
+
+private:
+	
+	void HandleCollision();
 
 
 private:

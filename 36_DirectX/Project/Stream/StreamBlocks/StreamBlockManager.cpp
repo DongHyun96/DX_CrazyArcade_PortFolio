@@ -54,7 +54,7 @@ void StreamBlockManager::Update()
 		}
 	}
 
-
+	HandleCollision();
 }
 
 void StreamBlockManager::Render()
@@ -79,27 +79,6 @@ void StreamBlockManager::Render()
 	}
 }
 
-StreamBlock* StreamBlockManager::GetAvailableBlock(const Direction& dir)
-{
-	if (dir == DIR_NONE)
-	{
-		for (StreamBlock* block : centerBlocks)
-		{
-			if (block->IsActive()) continue;
-
-			return block;
-		}
-		return nullptr;
-	}
-
-	for (StreamBlock* block : dirStreamMap[dir])
-	{
-		if (block->IsActive()) continue;
-
-		return block;
-	}
-	return nullptr;
-}
 
 StreamBlock* StreamBlockManager::Spawn(const Direction& dir, const Util::Coord& spawnCoord, const bool& isEnd)
 {
@@ -124,6 +103,46 @@ StreamBlock* StreamBlockManager::Spawn(const Direction& dir, const Util::Coord& 
 	}
 	return nullptr;
 
+}
+
+void StreamBlockManager::HandleCollision()
+{
+
+	for (StreamBlock* streamBlock : centerBlocks)
+	{
+		if (!streamBlock->IsActive())
+			continue;
+
+		//가운데의 경우 플레이어만 따짐
+		Character* player = GM->GetPlayer();
+		streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
+		
+		Block* block = GM->GetBlockManager()->GetCoordBlock(streamBlock->GetSpawnCoord());
+
+		if (!block) continue;
+		if (!block->IsActive()) continue;
+
+		streamBlock->GetBody()->AABBCollision(block->GetBody(), block);
+	}
+
+	for (auto& p : dirStreamMap)
+	{
+		for (StreamBlock* streamBlock : p.second)
+		{
+			if (!streamBlock->IsActive())
+				continue;
+
+			Character* player = GM->GetPlayer();
+			streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
+
+			Block* block = GM->GetBlockManager()->GetCoordBlock(streamBlock->GetSpawnCoord());
+
+			if (!block) continue;
+			if (!block->IsActive()) continue;
+
+			streamBlock->GetBody()->AABBCollision(block->GetBody(), block);
+		}
+	}
 }
 
 
