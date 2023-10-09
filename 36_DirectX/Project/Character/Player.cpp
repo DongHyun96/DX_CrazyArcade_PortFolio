@@ -55,6 +55,10 @@ void Player::Move()
 
 void Player::DeployBalloon()
 {
+	switch (mainState)
+		case C_SPAWN: case C_CAPTURED:
+		case C_RETURN_IDLE: case C_DEAD: return;
+
 	if (leftBalloonCnt <= 0)
 		return;
 
