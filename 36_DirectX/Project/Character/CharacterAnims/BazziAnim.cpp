@@ -65,7 +65,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 
 	Vector2 bubbleSize = { CELL_WORLD_SIZE.x + 50, CELL_WORLD_SIZE.y + 50 };
 
-	bubbleActions[A_BUBBLE_CAPTURED] = new Animation(bubbleSize, L"InGame/Characters/Bazzi/playerBubble.png", 6, 4, 24, 0.3f);
+	bubbleActions[A_BUBBLE_CAPTURED] = new Animation(bubbleSize, L"InGame/Characters/Bazzi/playerBubble.png", 6, 4, 24, 2.f);
 	bubbleActions[A_BUBBLE_CAPTURED]->SetPart(0, 3, false);
 
 	bubbleActions[A_BUBBLE_SAVED] = new Animation(bubbleSize, L"InGame/Characters/Bazzi/playerBubble.png", 6, 4, 24, 0.2f);

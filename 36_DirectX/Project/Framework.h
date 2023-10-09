@@ -128,6 +128,7 @@ typedef XMMATRIX Matrix;
 #include "Object/Basic/Polygons.h"
 #include "Object/SolarSystem/Planet.h"
 
+#include "Object/Collision/ColliderHolder.h"
 #include "Object/Collision/Collider.h"
 #include "Object/Collision/ColliderRect.h"
 #include "Object/Collision/ColliderCircle.h"

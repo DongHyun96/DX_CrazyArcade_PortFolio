@@ -26,7 +26,7 @@ void BalloonManager::Update()
 			continue;
 
 		balloon->Update();
-		balloon->GetBody()->OBBCollision(player->GetBody(), (Transform*)player);
+		balloon->GetBody()->OBBCollision(player->GetBody(), (ColliderHolder*)player);
 	}
 }
 

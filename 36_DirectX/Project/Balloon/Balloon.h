@@ -1,7 +1,7 @@
 #pragma once
 
 
-class Balloon : public Transform
+class Balloon : public ColliderHolder
 {
 public:
 	Balloon();
@@ -14,7 +14,7 @@ public:
 
 	void Explode();
 
-	void OnColliderRectEnter(ColliderRect*	targetCollider, Transform* owner);
+	void OnColliderRectEnter(ColliderRect*	targetCollider, ColliderHolder* owner);
 
 public:
 
@@ -24,6 +24,8 @@ public:
 	void SetVisible(const bool& visible) { this->visible = visible; }
 
 	static vector<Vector2> GetActiveBalloonPositions() { return activeBalloonPositions; }
+	
+	Util::Coord GetSpawnCoord() const { return spawnCoord; }
 
 
 private:
@@ -46,7 +48,7 @@ private:
 
 
 	float		explodeTime{};
-	const float EXPLODE_TIME_LIMIT{ 2.5f };
+	const float EXPLODE_TIME_LIMIT{ 3.f };
 
 
 	ColorBuffer*	colorBuffer{};

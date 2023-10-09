@@ -81,6 +81,8 @@ bool Balloon::Spawn(const Util::Coord& spawnCoord, Character* owner) // public
 
 void Balloon::Explode()
 {
+	isActive = false;
+
 	owner->AddLeftBalloonCnt();
 
 	explodeTime = 0.f;
@@ -98,9 +100,9 @@ void Balloon::Explode()
 
 	GM->GetStreamManager()->SpawnStream(spawnCoord, owner->GetStreamLv());
 
-	isActive = false;
 	owner = nullptr;
-	SOUND->Play("BalloonExplode", 1.f);
+
+	SOUND->Play("BalloonExplode", 0.25f);
 }
 
 bool Balloon::Spawn(const Vector2& spawnPos) // private
@@ -138,7 +140,7 @@ void Balloon::HandleExplode()
 	Explode();
 }
 
-void Balloon::OnColliderRectEnter(ColliderRect* targetCollider, Transform* owner)
+void Balloon::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner)
 {
 	if (!isActive)
 		return;

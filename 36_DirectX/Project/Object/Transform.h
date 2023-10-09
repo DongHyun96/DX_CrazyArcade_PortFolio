@@ -9,7 +9,7 @@ public:
 	virtual ~Transform();
 	
 	void Debug();
-	void Debug(const string& label);
+	virtual void Debug(const string& label);
 
 	virtual void Update();
 	void UpdateWorld();
