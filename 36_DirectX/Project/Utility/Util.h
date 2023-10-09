@@ -16,6 +16,11 @@ namespace Util
 		Coord() {};
 
 		Coord(const UINT& x,const UINT& y) :x(x), y(y) {}
+
+		bool operator==(const Coord& other)
+		{
+			return (this->x == other.x && this->y == other.y);
+		}
 			
 		UINT x{};
 		UINT y{};
