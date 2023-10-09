@@ -6,8 +6,6 @@ Block* BlockManager::blocks[MAP_ROW][MAP_COL]{};
 
 BlockManager::BlockManager()
 {
-	destroyedAnim = new Animation(L"InGame/BlockDestroyedSprite/common_block.png", 4, 1, 4, 1.f);
-	destroyedAnim->SetAll(false);
 
 	//block = new Block({ 6, 6 }, L"InGame/Village/Objects/box.png", { 3, 1 }, { 3, 1 }, CELL_WORLD_SIZE, { true, true, false });
 
@@ -22,7 +20,6 @@ BlockManager::BlockManager()
 
 BlockManager::~BlockManager()
 {
-	delete destroyedAnim;
 
 	for (UINT y = 0; y < MAP_ROW; y++)
 	{
@@ -128,7 +125,7 @@ void BlockManager::HandleCharacterBlockCollision()
 				if (!blocks[y][x]->IsActive())
 					continue;
 
-				Transform* character = (Transform*)(GM->GetPlayer());
+				ColliderHolder* character = (ColliderHolder*)(GM->GetPlayer());
 
 				blocks[y][x]->GetBody()->AABBCollision(GM->GetPlayer()->GetBody(), character);
 				blocks[y][x]->GetBody()->AABBCollision(GM->GetPlayer()->GetBody()->GlobalPosition(), character);
@@ -145,7 +142,7 @@ void BlockManager::HandleMovableCollisions()
 			continue;
 
 		// Player vs movable
-		movable->GetBody()->AABBCollision(GM->GetPlayer()->GetPushCollider(), (Transform*)(GM->GetPlayer()));
+		movable->GetBody()->AABBCollision(GM->GetPlayer()->GetPushCollider(), (ColliderHolder*)(GM->GetPlayer()));
 	}
 }
 
@@ -189,7 +186,7 @@ void BlockManager::HandleHidableCollisions()
 			if (!balloon->Active())
 				continue;
 
-			hidable->GetBody()->AABBCollision(balloon->GetBody()->GlobalPosition(), balloon);
+			hidable->GetBody()->AABBCollision(balloon->GetBody()->GlobalPosition(), (ColliderHolder*)balloon);
 		}
 	}
 }

@@ -43,6 +43,4 @@ private:
 	vector<Block*> hidableBlocks{};
 
 	BlockInfo infos[MAP_ROW][MAP_COL]{};
-
-	Animation* destroyedAnim{};
 };
