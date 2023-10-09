@@ -54,6 +54,42 @@ void Character::Update()
 	actionHandler->Update();
 	actionHandler->UpdateAction(mainState, velocity);
 
+	switch (mainState)
+	{
+	case C_SPAWN:
+		break;
+	case C_IDLE:
+		break;
+	case C_SPACECRAFT:
+		break;
+	case C_OWL:
+		break;
+	case C_TURTLE:
+		break;
+	case C_CAPTURED: // 상하로 올라갔다 내려갔다 조절
+
+		captured_yUpdateTime += Time::Delta();
+
+		if (captured_yUpdateTime < CAPTURED_Y_UPDATE_TICK)
+			actionHandler->translation.y += captured_ySpeed * Time::Delta();
+		else
+		{
+			captured_yUpdateTime -= CAPTURED_Y_UPDATE_TICK;
+			captured_ySpeed = -captured_ySpeed;
+		}
+
+
+		break;
+	case C_RETURN_IDLE:
+		actionHandler->translation.y = 0.f;
+		captured_yUpdateTime = 0.f;
+		break;
+	case C_DEAD:
+		break;
+	default:
+		break;
+	}
+
 	HandleBoundary();
 }
 
@@ -76,6 +112,42 @@ void Character::Debug()
 	assert(label != "");
 
 	body->Debug(label);
+	actionHandler->Debug("ActionHandler");
+}
+
+void Character::SetCharacterState(const CharacterState& state)
+{
+	//this->mainState = state;
+	switch (state)
+	{
+	case C_IDLE:
+		speedLv = curIdleSpeedLv;
+		break;
+	case C_SPACECRAFT:
+		curIdleSpeedLv = speedLv;
+		speedLv = SpeedLv::spaceSpeedLv;
+		break;
+	case C_OWL:
+		curIdleSpeedLv = speedLv;
+		speedLv = SpeedLv::owlSpeedLv;
+		break;
+	case C_TURTLE:
+		curIdleSpeedLv = speedLv;
+		speedLv = SpeedLv::turtleSpeedLv;
+		break;
+	case C_CAPTURED:
+		curIdleSpeedLv = speedLv;
+		speedLv = SpeedLv::capturedSpeedLv;
+		break;
+	case C_RETURN_IDLE:
+		break;
+	case C_DEAD:
+		break;
+	default:
+		break;
+	}
+
+	this->mainState = state;
 }
 
 void Character::AddLeftBalloonCnt(const UINT& addAmount)
