@@ -184,6 +184,13 @@ Object::~Object()
 
 void Object::Render() // 모든 data 세팅은 "draw call전에 해야함
 {
+    SetData();
+    
+    DC->DrawIndexed(indices.size(), 0, 0);
+}
+
+void Object::SetData()
+{
     vertexBuffer->SetBuffer();
     indexBuffer->SetBuffer();
 
@@ -197,7 +204,5 @@ void Object::Render() // 모든 data 세팅은 "draw call전에 해야함
 
     if (texture)
         texture->SetPS();
-    
-    DC->DrawIndexed(indices.size(), 0, 0);
 }
 

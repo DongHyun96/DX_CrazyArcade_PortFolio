@@ -20,6 +20,7 @@ public:
 
 	void SetColor(const float& r, const float& g, const float& b, const float& a) { colorBuffer->SetData(Vector4(r, g, b, a)); }
 
+	void SetData();
 
 private:
 	vector<VertexTexture>	vertices{};
