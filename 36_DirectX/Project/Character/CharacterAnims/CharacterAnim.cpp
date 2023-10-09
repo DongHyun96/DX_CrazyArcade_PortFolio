@@ -54,7 +54,7 @@ void CharacterAnim::Update()
 	Transform::Update();
 	curAction->Update();
 	
-	translation.y = (curAction->Size().y - parent->LocalSize().y) / 2;
+	if (isTransYSetToBodyFeet) translation.y = (curAction->Size().y - parent->LocalSize().y) / 2;
 }
 
 void CharacterAnim::Render()
@@ -143,7 +143,8 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		}
 	}
 		break;
-	case C_CAPTURED: 
+	case C_CAPTURED:
+		isTransYSetToBodyFeet = false;
 		curAction = bubbleActions[A_BUBBLE_CAPTURED];
 		curAction->Play();
 		break;
@@ -154,9 +155,12 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		else if (ownerPrevState == C_TURTLE)		curAction = turtleActions[A_TURTLE_DESTROYED];
 		curAction->Play();
 
+		isTransYSetToBodyFeet = true;
 			
 		break;
-	case C_DEAD: curAction = bubbleActions[A_BUBBLE_DEAD];
+	case C_DEAD: 
+		isTransYSetToBodyFeet = true;
+		curAction = bubbleActions[A_BUBBLE_DEAD];
 		curAction->Play();
 
 		break;
@@ -166,6 +170,11 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 
 	ownerPrevState = cState;
 	ownerPrevVelocity = velocity;
+}
+
+void CharacterAnim::Debug(const string& label)
+{
+	Transform::Debug(label);
 }
 
 int CharacterAnim::GetDirRelativeFrameIdx(const Vector2& velocity)

@@ -15,9 +15,15 @@ public:
 	
 	void UpdateAction(const CharacterState& cState, const Vector2& velocity);
 
+	void Debug(const string& label);
+
 protected:
 
 	int GetDirRelativeFrameIdx(const Vector2& velocity);
+
+protected:
+
+	bool isTransYSetToBodyFeet{ true };
 
 protected:
 
