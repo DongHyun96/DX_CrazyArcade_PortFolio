@@ -39,12 +39,19 @@ Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Co
 		rectBody->SetRectStayEvent(bind(&Block::OnColliderRectStay, this, placeholders::_1, placeholders::_2));
 		rectBody->SetRectExitEvent(bind(&Block::OnColliderRectExit, this, placeholders::_1, placeholders::_2));
 	}
+
+	destroyedAnim = new Animation({CELL_WORLD_SIZE.x + 50.f, CELL_WORLD_SIZE.y + 50.f}, L"InGame/BlockDestroyedSprite/common_block.png", 4, 1, 4);
+	destroyedAnim->Stop();
+	destroyedAnim->SetEndEvent(bind(&Block::SetActive, this, false));
 }
 
 Block::~Block()
 {
 	delete rectBody;
 	delete texObj;
+
+	delete destroyedAnim;
+
 }
 
 void Block::Update()
@@ -60,20 +67,26 @@ void Block::Update()
 	rectBody->Update();
 	texObj->Update();
 
+	destroyedAnim->Update();
 }
 
 void Block::Render()
 {
-	if (!isActive)
-		return;
+	if (!isActive) return;
 
-	if (!visible)
-		return;
-
+	if (!visible) return;
+	
 	rectBody->Render();
-	texObj->Render();
 
-	//Debug();
+	if (destroyed)
+	{
+		texObj->SetData();
+		destroyedAnim->Render();
+
+		return;
+	}
+
+	texObj->Render();
 }
 
 void Block::PlayBushInteraction()
@@ -132,10 +145,16 @@ void Block::ApplyDamage()
 	if (!isActive)
 		return;
 
+	if (!breakable)
+		return;
+
 	hp--;
 
 	if (hp <= 0)
-		isActive = false;
+	{
+		destroyed = true;
+		destroyedAnim->Play(false);
+	}
 }
 
 void Block::Move()
@@ -181,12 +200,12 @@ void Block::HandleBushInteract()
 
 }
 
-void Block::OnColliderPointEnter(Transform* owner)
+void Block::OnColliderPointEnter(ColliderHolder* owner)
 {
 	if (hidable) PlayBushInteraction();
 }
 
-void Block::OnColliderPointStay(Transform* owner)
+void Block::OnColliderPointStay(ColliderHolder* owner)
 {
 	if (hidable)
 	{
@@ -226,7 +245,7 @@ void Block::OnColliderPointStay(Transform* owner)
 	}
 }
 
-void Block::OnColliderPointExit(Transform* owner)
+void Block::OnColliderPointExit(ColliderHolder* owner)
 {
 	if (hidable)
 	{
@@ -259,7 +278,7 @@ void Block::OnColliderPointExit(Transform* owner)
 	}
 }
 
-void Block::OnColliderRectEnter(ColliderRect* targetCollider, Transform* owner)
+void Block::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner)
 {
 	// Hidable 배제 (등록도 하지 않는다)
 	if (targetCollider->GetColliderTag() != CHARACTER_PUSH)
@@ -275,7 +294,7 @@ void Block::OnColliderRectEnter(ColliderRect* targetCollider, Transform* owner)
 	}
 }
 
-void Block::OnColliderRectStay(ColliderRect* targetCollider, Transform* owner)
+void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* owner)
 {
 	if (movable && targetCollider->GetColliderTag() == CHARACTER_PUSH)
 	{
@@ -337,7 +356,7 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, Transform* owner)
 	}
 }
 
-void Block::OnColliderRectExit(ColliderRect* targetCollider, Transform* owner)
+void Block::OnColliderRectExit(ColliderRect* targetCollider, ColliderHolder* owner)
 {
 	// Hidable 배제 (등록도 하지 않는다)
 
@@ -384,4 +403,5 @@ void Block::Debug()
 void Block::Debug(const string& label)
 {
 	rectBody->Debug(label);
+
 }

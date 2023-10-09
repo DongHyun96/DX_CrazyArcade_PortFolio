@@ -59,7 +59,7 @@ struct BlockInfo
 	Vector2			texWorldSize{ CELL_WORLD_SIZE };
 };
 
-class Block : public Transform
+class Block : public ColliderHolder
 {
 public:
 
@@ -100,7 +100,9 @@ public:
 	void SetBoardPos(const Util::Coord& coord) { this->boardPos = coord; }
 	Util::Coord GetBoardPos() const { return boardPos; }
 
-	bool& IsActive() { return isActive; }
+	bool IsActive() { return isActive; }
+	void SetActive(const bool& active) { this->isActive = active; }
+
 	bool IsMovable() const { return movable; }
 	bool IsBreakable() const { return breakable; }
 	bool IsHidable() const { return hidable; }
@@ -119,13 +121,13 @@ private:
 	
 private:
 
-	void OnColliderPointEnter(Transform* owner);
-	void OnColliderPointStay(Transform* owner);
-	void OnColliderPointExit(Transform* owner);
+	void OnColliderPointEnter(ColliderHolder* owner);
+	void OnColliderPointStay(ColliderHolder* owner);
+	void OnColliderPointExit(ColliderHolder* owner);
 
-	void OnColliderRectEnter(ColliderRect* targetCollider, Transform* owner);
-	void OnColliderRectStay(ColliderRect* targetCollider, Transform* owner);
-	void OnColliderRectExit(ColliderRect* targetCollider, Transform* owner);
+	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner);
+	void OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* owner);
+	void OnColliderRectExit(ColliderRect* targetCollider, ColliderHolder* owner);
 
 	bool IsPushing(const Direction& cDirection, const Direction& collidedFace);
 
@@ -137,15 +139,16 @@ private:
 	Object*			texObj{};
 
 	bool isActive = true;
+	bool visible{ true };
+	bool destroyed{ false };
 
 	bool breakable{};
 	bool movable{};
 	bool hidable{};
 
-	bool visible{ true };
 
-	UINT hp{};
-	Animation* destroyedAnim{}; // BlockManager에서 받아옴
+	UINT hp{1};
+	Animation* destroyedAnim{};
 
 	// Movable 관련
 	Util::Coord boardPos{};
