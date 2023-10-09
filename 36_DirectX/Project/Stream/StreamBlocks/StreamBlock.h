@@ -12,11 +12,25 @@ public:
 
 	bool IsActive() const { return isActive; }
 
+	ColliderRect* GetBody() const { return body; }
+
+	Util::Coord GetSpawnCoord() const { return spawnCoord; }
+
+
 protected:
 
 	void SetActive(const bool& isActive) { this->isActive = isActive; }
 
+protected:
+
+	void OnColliderPointEnter(ColliderHolder* owner);
+	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner);
+
+protected:
+
 	bool isActive{};
+
+	Util::Coord spawnCoord{};
 
 	ColliderRect* body{};
 	
@@ -29,8 +43,8 @@ protected:
 	
 	bool isEnd{}; // isEnd이면 endAnim을 사용
 
-	VertexShader* vertexShader;
-	PixelShader*  pixelShader;
+	VertexShader*	vertexShader{};
+	PixelShader*	pixelShader{};
 
 	MatrixBuffer*	worldBuffer{};
 	ColorBuffer*	colorBuffer{};
