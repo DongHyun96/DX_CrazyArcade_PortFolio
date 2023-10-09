@@ -29,7 +29,14 @@ enum CharacterState
 	C_DEAD
 };
 
-class Character : public Transform
+static struct SpeedLv
+{
+	static const UINT capturedSpeedLv	= 1;
+	static const UINT spaceSpeedLv		= 10;
+	static const UINT owlSpeedLv		= 7;
+	static const UINT turtleSpeedLv		= 3;
+};
+
 class Character : public ColliderHolder
 {
 public:
@@ -49,7 +56,9 @@ public:
 
 public:
 
-	void SetCharacterState(const CharacterState& state) { this->mainState = state; }
+	void SetCharacterState(const CharacterState& state);
+	CharacterState GetCharacterState() const { return mainState; }
+
 	void SetVisible(const bool& visible) { this->visible = visible; }
 
 	ColliderRect* GetBody() const { return body; }
@@ -99,6 +108,9 @@ protected:
 	UINT speedLvMin{};
 	UINT speedLvMax{};
 
+	UINT curIdleSpeedLv{};
+	
+
 	UINT balloonCntMin{};
 	UINT balloonCntMax{};
 
@@ -109,4 +121,11 @@ protected:
 	UINT leftBalloonCnt{};
 	UINT streamLv{};
 
+protected:
+	
+	float captured_yUpdateTime = 0.f;
+	float captured_ySpeed = 10.f;
+
+	const float CAPTURED_Y_UPDATE_TICK = 1.f;
 };
+
