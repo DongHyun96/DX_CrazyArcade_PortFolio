@@ -27,96 +27,67 @@ void Stream::Spawn(const Util::Coord& spawnCoord, const UINT& streamLv)
 	InitReachedMap(spawnCoord, streamLv);
 
 	isActive = true;
-
 	blockSpawnTime = 0.f;
 	stopSpawning = false;
 	activatedBlocks.clear();
 
-	// Center먼저 여기서 처리
+	// Center 먼저 스폰 시킴
 	StreamBlock* block = streamBlockManager->Spawn(DIR_NONE, spawnCoord);
+
 	activatedBlocks.push_back(block);
+
+	HandleChainExplosion();
 }
 
 void Stream::InitReachedMap(const Util::Coord& spawnCoord, const UINT& streamLv)
 {
 	reachedCoordMap.clear();
 
-	pair<int, int> curCoord{ spawnCoord.x, spawnCoord.y }; // 6, 7
+	vector<int> dx = {0, 0, -1, 1}; // U, D, L, R
+	vector<int> dy = { 1, -1, 0, 0};
 
-	// Left
-	for (UINT i = 1; i <= streamLv; i++)
+	for (UINT i = 0; i < 4; i++)
 	{
-		curCoord.first--;
-
-		if (curCoord.first < 0) // 범위 판정
-			break;
-
-		reachedCoordMap[DIR_LEFT].push_back(Util::Coord(curCoord.first, curCoord.second));
-
-		Block* targetBlock = GM->GetBlockManager()->GetCoordBlock(Util::Coord(curCoord.first, curCoord.second));
-
-		if (!targetBlock) continue;
+		Direction dir = (Direction)i;
+		pair<int, int> curCoord{ spawnCoord.x, spawnCoord.y };
 		
-		if (!targetBlock->IsActive() || targetBlock->IsHidable()) continue;
 
-		break;
-	}
+		for (UINT j = 1; j <= streamLv; j++)
+		{
+			curCoord.first += dx[i];
+			curCoord.second += dy[i];
+			
+			// 범위 판정
+			if ( curCoord.first < 0 || curCoord.first >= MAP_COL ||
+				curCoord.second < 0 || curCoord.second >= MAP_ROW )
+				break;
 
-	// Right
-	curCoord = { spawnCoord.x, spawnCoord.y };
+			reachedCoordMap[dir].push_back(Util::Coord(curCoord.first, curCoord.second));
 
-	for (UINT i = 1; i <= streamLv; i++)
-	{
-		curCoord.first++;
+			Block* targetBlock = GM->GetBlockManager()->GetCoordBlock(Util::Coord(curCoord.first, curCoord.second));
 
-		if (curCoord.first >= MAP_COL) // 범위 판정
+			if (!targetBlock) continue;
+			if (!targetBlock->IsActive() || targetBlock->IsHidable()) continue;
 			break;
-
-		reachedCoordMap[DIR_RIGHT].push_back(Util::Coord(curCoord.first, curCoord.second));
-
-		Block* targetBlock = GM->GetBlockManager()->GetCoordBlock(Util::Coord(curCoord.first, curCoord.second));
-
-		if (!targetBlock) continue;
-		if (!targetBlock->IsActive() || targetBlock->IsHidable()) continue;
-		break;
+		}
 	}
+}
 
-	// Up
-	curCoord = { spawnCoord.x, spawnCoord.y };
-
-	for (UINT i = 1; i <= streamLv; i++)
+void Stream::HandleChainExplosion()
+{
+	for (Balloon* balloon : GM->GetBalloonManager()->GetBalloons())
 	{
-		curCoord.second++;
+		if (!balloon->Active())
+			continue;
 
-		if (curCoord.second >= MAP_ROW) // 범위 판정
-			break;
-
-		reachedCoordMap[DIR_UP].push_back(Util::Coord(curCoord.first, curCoord.second));
-
-		Block* targetBlock = GM->GetBlockManager()->GetCoordBlock(Util::Coord(curCoord.first, curCoord.second));
-
-		if (!targetBlock) continue;
-		if (!targetBlock->IsActive() || targetBlock->IsHidable()) continue;
-		break;
-	}
-
-	// Down
-	curCoord = { spawnCoord.x, spawnCoord.y };
-
-	for (UINT i = 1; i <= streamLv; i++)
-	{
-		curCoord.second--;
-
-		if (curCoord.second < 0) // 범위 판정
-			break;
-
-		reachedCoordMap[DIR_DOWN].push_back(Util::Coord(curCoord.first, curCoord.second));
-
-		Block* targetBlock = GM->GetBlockManager()->GetCoordBlock(Util::Coord(curCoord.first, curCoord.second));
-
-		if (!targetBlock) continue;
-		if (!targetBlock->IsActive() || targetBlock->IsHidable()) continue;
-		break;
+		for (auto& p : reachedCoordMap)
+		{
+			for (auto& coord : p.second)
+			{
+				if (balloon->GetSpawnCoord() == coord)
+					balloon->Explode();
+			}
+		}
 	}
 }
 
@@ -162,14 +133,11 @@ void Stream::HandleSpawning()
 
 void Stream::HandleSelfActive()
 {
-	
-
 	for (StreamBlock* block : activatedBlocks)
 	{
 		if (block->IsActive()) return;
 	}
-
-	// isActive가 모두 꺼진 상태
-
+	
+	activatedBlocks.clear();
 	isActive = false;
 }

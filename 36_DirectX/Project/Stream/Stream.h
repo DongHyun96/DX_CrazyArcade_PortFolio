@@ -15,6 +15,8 @@ private:
 
 	void InitReachedMap(const Util::Coord& spawnCoord, const UINT& streamLv);
 
+	void HandleChainExplosion();
+
 	void HandleSpawning();
 
 	// 모두 다 꺼지면 자신의 active도 끔
