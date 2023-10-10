@@ -27,6 +27,9 @@ GameManager::GameManager()
 
 	SOUND->AddSound("BalloonDeploy", "_Sound/BalloonDeploy.wav");
 	SOUND->AddSound("BalloonExplode", "_Sound/bombExplode.wav");
+	SOUND->AddSound("ItemSpawned", "_Sound/ItemGen.mp3");
+	SOUND->AddSound("ItemEarned", "_Sound/SetItem.wav");
+	SOUND->AddSound("VillageBGM", "_Sound/Boomhill.mp3", true);
 
 }
 

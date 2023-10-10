@@ -4,6 +4,8 @@
 
 MainGame::MainGame()
 {
+	srand(time(NULL));
+
 	SetUpImGui();
 
 	//scene = new CollisionScene;

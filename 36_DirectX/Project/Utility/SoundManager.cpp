@@ -6,6 +6,7 @@ SoundManager::SoundManager()
 	System_Create(&system);
 
 	system->init(MAX_CHANNEL, FMOD_INIT_NORMAL, nullptr);
+
 }
 
 SoundManager::~SoundManager()

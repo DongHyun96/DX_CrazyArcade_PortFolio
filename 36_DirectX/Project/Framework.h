@@ -16,6 +16,8 @@
 #include <algorithm>
 #include <set>
 #include <deque>
+#include <time.h>
+
 using namespace std;
 
 
@@ -163,6 +165,9 @@ typedef XMMATRIX Matrix;
 
 #include "Item/ItemStrategy/ItemStrategy.h"
 #include "Item/Item.h"
+#include "Item/ImmediateItem.h"
+#include "Item/Initializer/ItemInitializer.h"
+#include "Item/ItemManager.h"
 
 #include "Character/Character.h"
 #include "Character/Player.h"

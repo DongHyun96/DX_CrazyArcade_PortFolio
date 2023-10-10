@@ -270,6 +270,15 @@
     <ClInclude Include="Item\ItemStrategy\ItemStrategy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Item\ImmediateItem.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\Initializer\ItemInitializer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Item\ItemManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -450,6 +459,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Item\ItemStrategy\ItemStrategy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\ImmediateItem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\Initializer\ItemInitializer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Item\ItemManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

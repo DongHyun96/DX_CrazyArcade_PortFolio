@@ -29,5 +29,7 @@ private:
 
 	StreamManager* streamManager{};
 
+	ItemManager* itemManager{};
+
 };
 

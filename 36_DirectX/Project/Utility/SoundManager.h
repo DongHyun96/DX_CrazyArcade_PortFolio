@@ -35,4 +35,6 @@ private:
 	map<string, SoundInfo*> sounds;
 
 	System* system;
+
+	ChannelGroup* channelGroup;
 };

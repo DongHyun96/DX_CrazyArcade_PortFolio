@@ -43,6 +43,10 @@ GameScene::GameScene()
 
 	streamManager = new StreamManager;
 	GM->SetStreamManager(streamManager);
+
+	itemManager = new ItemManager;
+
+	SOUND->Play("VillageBGM", 1.f);
 }
 
 GameScene::~GameScene()
@@ -59,6 +63,8 @@ GameScene::~GameScene()
 	delete balloonManager;
 
 	delete streamManager;
+
+	delete itemManager;
 }
 
 void GameScene::Update()
@@ -82,6 +88,8 @@ void GameScene::Update()
 
 	streamManager->Update();
 
+	itemManager->Update();
+
 }
 
 void GameScene::Render()
@@ -101,6 +109,7 @@ void GameScene::Render()
 
 	player->Render();
 	streamManager->Render();
+	itemManager->Render();
 
 	player->Debug();
 }

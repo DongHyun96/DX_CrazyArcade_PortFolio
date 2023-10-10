@@ -155,6 +155,9 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Item\ItemManager.h" />
+    <ClInclude Include="Item\Initializer\ItemInitializer.h" />
+    <ClInclude Include="Item\ImmediateItem.h" />
     <ClInclude Include="Item\ItemStrategy\ItemStrategy.h" />
     <ClInclude Include="Item\Item.h" />
     <ClInclude Include="Object\Collision\ColliderHolder.h" />
@@ -242,6 +245,9 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Item\ItemManager.cpp" />
+    <ClCompile Include="Item\Initializer\ItemInitializer.cpp" />
+    <ClCompile Include="Item\ImmediateItem.cpp" />
     <ClCompile Include="Item\ItemStrategy\ItemStrategy.cpp" />
     <ClCompile Include="Item\Item.cpp" />
     <ClCompile Include="Object\Collision\ColliderHolder.cpp" />
