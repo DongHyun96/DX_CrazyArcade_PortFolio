@@ -27,6 +27,8 @@ public:
 	
 	Util::Coord GetSpawnCoord() const { return spawnCoord; }
 
+	static void SetExplodeSoundPlayed(const bool& played) { explodeSoundPlayed = played; }
+
 
 private:
 
@@ -61,5 +63,8 @@ private:
 	
 	// 터졌을 때 owner의 물풍선 개수 회복해주기
 	Character* owner{}; // spawn시에 자신의 owener를 받아올 것임
+
+private: // 볼륨 조절 용도 (1 tick에 풍선이 터졌는지 안터졌는지 체크)
+	static bool explodeSoundPlayed;
 
 };

@@ -3,6 +3,8 @@
 
 vector<Vector2> Balloon::activeBalloonPositions{};
 
+bool Balloon::explodeSoundPlayed{};
+
 
 Balloon::Balloon()
 {
@@ -102,7 +104,11 @@ void Balloon::Explode()
 
 	owner = nullptr;
 
-	SOUND->Play("BalloonExplode", 0.25f);
+	if (!explodeSoundPlayed)
+	{
+		SOUND->Play("BalloonExplode", 1.f);
+		explodeSoundPlayed = true;
+	}
 }
 
 bool Balloon::Spawn(const Vector2& spawnPos) // private

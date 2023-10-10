@@ -28,6 +28,8 @@ void BalloonManager::Update()
 		balloon->Update();
 		balloon->GetBody()->OBBCollision(player->GetBody(), (ColliderHolder*)player);
 	}
+
+	Balloon::SetExplodeSoundPlayed(false);
 }
 
 void BalloonManager::Render()
