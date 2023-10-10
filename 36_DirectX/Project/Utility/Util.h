@@ -112,4 +112,18 @@ namespace Util
 
 		return (1 - alpha) * src + alpha * dst;
 	}
+	
+	// TODO : Init float& parameters
+	static void PlayFloatingEffect(float& targetSrc, float& timeChecker, float& effectSpeed, const float& UPDATE_TICK)
+	{
+		timeChecker += Time::Delta();
+
+		if (timeChecker < UPDATE_TICK)
+			targetSrc += effectSpeed * Time::Delta();
+		else
+		{
+			timeChecker = 0.f;
+			effectSpeed = -effectSpeed;
+		}
+	}
 }

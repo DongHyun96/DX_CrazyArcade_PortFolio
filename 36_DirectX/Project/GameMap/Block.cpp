@@ -43,6 +43,8 @@ Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Co
 	destroyedAnim = new Animation({CELL_WORLD_SIZE.x + 50.f, CELL_WORLD_SIZE.y + 50.f}, L"InGame/BlockDestroyedSprite/common_block.png", 4, 1, 4);
 	destroyedAnim->Stop();
 	destroyedAnim->SetEndEvent(bind(&Block::SetActive, this, false));
+
+	HandleAddItem();
 }
 
 Block::~Block()
@@ -51,7 +53,6 @@ Block::~Block()
 	delete texObj;
 
 	delete destroyedAnim;
-
 }
 
 void Block::Update()
@@ -154,6 +155,9 @@ void Block::ApplyDamage()
 	{
 		destroyed = true;
 		destroyedAnim->Play(false);
+
+		if (item) item->Spawn(rectBody->translation);
+		
 	}
 }
 
@@ -306,8 +310,13 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* own
 
 		Character* character = dynamic_cast<Character*>(owner);
 
-		if (!character)
-			return;
+		if (!character) return;
+		
+		switch (character->GetCharacterState())
+		{
+		case C_SPAWN: case C_SPACECRAFT: case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: return;
+		default: break;
+		}
 
 		Direction collidedFace = CollisionUtil::GetCollidedDirection(rectBody, targetCollider);
 
@@ -376,6 +385,18 @@ bool Block::IsPushing(const Direction& cDirection, const Direction& collidedFace
 		return false;
 	}
 
+}
+
+void Block::HandleAddItem()
+{
+	if (hidable || !breakable) return;
+
+	// 테스팅 (50%의 확률로 스폰)
+	if (rand() % 1 == 0)
+	{
+		item = new ImmediateItem((ItemName)(rand() % 5));
+		ItemManager::AddItem(item);
+	}
 }
 
 void Block::Debug()

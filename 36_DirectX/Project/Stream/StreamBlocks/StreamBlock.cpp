@@ -92,6 +92,18 @@ void StreamBlock::OnColliderPointEnter(ColliderHolder* owner)
 			break;
 		}
 	}
+
+	Item* item = dynamic_cast<Item*>(owner);
+
+	if (item)
+	{
+		if (!item->GetIsActive()) return;
+		if (item->GetItemState() != SPAWNED) return;
+
+		item->SetActive(false);
+
+		return;
+	}
 }
 
 void StreamBlock::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner)
@@ -106,16 +118,18 @@ void StreamBlock::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHold
 		return;
 	}
 
+
 	Block* block = dynamic_cast<Block*>(owner);
 
 	if (block)
 	{
 		if (!block->IsActive()) return;
 
-		block->ApplyDamage();
-		
 		if (!block->IsHidable()) isActive = false;
+
+		block->ApplyDamage();
 
 		return;
 	}
+	
 }

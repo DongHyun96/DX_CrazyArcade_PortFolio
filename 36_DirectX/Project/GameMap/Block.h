@@ -4,6 +4,7 @@
 
 class Character;
 class Player;
+class Item;
 
 
 struct BlockProperty
@@ -64,7 +65,6 @@ class Block : public ColliderHolder
 public:
 
 	Block(const BlockInfo& info);
-
 
 	// texWorldSize에 디폴트로 y offset을 조금 두어 머리부분이 뒤로 조금 넘어가게끔 미세하게 조정할 것임
 	Block
@@ -131,6 +131,10 @@ private:
 
 	bool IsPushing(const Direction& cDirection, const Direction& collidedFace);
 
+private: // 아이템 생성 관련
+
+	void HandleAddItem();
+
 private:
 	
 	string label{};
@@ -160,5 +164,9 @@ private:
 	// Bush Interaction 관련
 	bool	currentlyBushing{};
 	float	interactTime{};
+
+private: // 아이템 관련 ( 가지고 있을 수도 없을 수도 있음)
+	
+	Item* item{}; // 아이템 매니저에서 일괄 삭제, Update, Render할 예정
 
 };

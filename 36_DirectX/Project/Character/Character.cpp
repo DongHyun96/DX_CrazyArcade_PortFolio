@@ -68,21 +68,13 @@ void Character::Update()
 		break;
 	case C_CAPTURED: // 상하로 올라갔다 내려갔다 조절
 
-		captured_yUpdateTime += Time::Delta();
-
-		if (captured_yUpdateTime < CAPTURED_Y_UPDATE_TICK)
-			actionHandler->translation.y += captured_ySpeed * Time::Delta();
-		else
-		{
-			captured_yUpdateTime -= CAPTURED_Y_UPDATE_TICK;
-			captured_ySpeed = -captured_ySpeed;
-		}
-
+		Util::PlayFloatingEffect(actionHandler->translation.y, captured_yUpdateTime, captured_ySpeed, CAPTURED_Y_UPDATE_TICK);
 
 		break;
 	case C_RETURN_IDLE:
 		actionHandler->translation.y = 0.f;
-		captured_yUpdateTime = 0.f;
+		captured_yUpdateTime		= 0.f;
+		captured_ySpeed				= 0.f;
 		break;
 	case C_DEAD:
 		break;
@@ -150,20 +142,33 @@ void Character::SetCharacterState(const CharacterState& state)
 	this->mainState = state;
 }
 
-void Character::AddLeftBalloonCnt(const UINT& addAmount)
+bool Character::AddLeftBalloonCnt(const UINT& addAmount)
 {
-	if (leftBalloonCnt >= balloonCntMax) return;
+	if (leftBalloonCnt >= balloonCntMax) return false;
 
 	leftBalloonCnt += addAmount;
+
+	return true;
 }
 
-void Character::IncreaseSpeed(bool increaseToMax)
+bool Character::IncreaseSpeed(bool increaseToMax)
 {
-	if (curIdleSpeedLv >= speedLvMax) return;
+	// curIdleSpeed가 현재 저장해놓은 IdleSpeed
 
-	curIdleSpeedLv++;
+	if (curIdleSpeedLv >= speedLvMax) return false;
 
-	if (mainState == C_IDLE) speedLvMax++;
+	curIdleSpeedLv = increaseToMax ? speedLvMax : curIdleSpeedLv + 1;
+
+	if (mainState == C_IDLE) speedLv = curIdleSpeedLv;
+
+	return true;
+}
+
+bool Character::IncreaseStreamLv(bool increaseToMax)
+{
+	if (streamLv >= streamLvMax) return false;
+	streamLv = increaseToMax ? streamLvMax : streamLv + 1;
+	return true;
 }
 
 void Character::HandleBoundary()
@@ -227,11 +232,10 @@ void Character::InitStat(const CharacterType& cType)
 		break;
 	}
 
-	//speedLv = speedLvMin;
-	//leftBalloonCnt = balloonCntMin;
-	//streamLv = streamLvMin;
-
 	speedLv = speedLvMin;
-	leftBalloonCnt = 6;
-	streamLv = streamLvMax;
+	curIdleSpeedLv = speedLv;
+	
+	leftBalloonCnt = balloonCntMin;
+	streamLv = streamLvMin;
+
 }

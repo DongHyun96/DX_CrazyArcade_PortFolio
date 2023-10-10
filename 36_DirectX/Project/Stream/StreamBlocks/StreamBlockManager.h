@@ -9,11 +9,12 @@ public:
 	void Render();
 
 	StreamBlock* Spawn(const Direction& dir, const Util::Coord& spawnCoord, const bool& isEnd = false);
-
+		
 private:
 	
 	void HandleCollision();
-
+	void HandleBlockCollision(StreamBlock* streamBlock);
+	void HandleItemCollision(StreamBlock* streamBlock);
 
 private:
 

@@ -6,7 +6,7 @@ public:
 	ItemStrategy();
 	virtual ~ItemStrategy() = default;
 
-	virtual void UseStrategy(class Character* itemUser) = 0;
+	virtual bool UseStrategy(class Character* itemUser) = 0;
 	
 };
 
@@ -16,20 +16,56 @@ public:
 	RollerStrategy();
 	~RollerStrategy();
 
-
 	// ItemStrategy을(를) 통해 상속됨
-	virtual void UseStrategy(Character* itemUser) override;
+	virtual bool UseStrategy(Character* itemUser) override;
 
 };
 
 
-class RedDeamonStrategy
+class RedDevilStrategy :public ItemStrategy
 {
 public:
-	RedDeamonStrategy();
-	~RedDeamonStrategy();
+	RedDevilStrategy();
+	~RedDevilStrategy();
 
-private:
+	virtual bool UseStrategy(Character* itemUser) override;
 
 };
 
+class FluidStrategy : public ItemStrategy
+{
+public:
+	FluidStrategy();
+	~FluidStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+};
+
+class FluidUltraStrategy : public ItemStrategy
+{
+public:
+	FluidUltraStrategy();
+	~FluidUltraStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+
+};
+
+class BubbleStrategy : public ItemStrategy
+{
+public:
+	BubbleStrategy();
+	~BubbleStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+};
+
+class NeedleStrategy : public ItemStrategy
+{
+public:
+	NeedleStrategy();
+	~NeedleStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+
+};

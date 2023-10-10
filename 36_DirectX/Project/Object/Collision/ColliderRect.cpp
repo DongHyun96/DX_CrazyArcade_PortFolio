@@ -213,7 +213,7 @@ bool ColliderRect::AABBCollision(ColliderRect* rect, ColliderHolder* owner)
     float sizeX = (this->GlobalSize().x + rect->GlobalSize().x) * 0.5f;
     float sizeY = (this->GlobalSize().y + rect->GlobalSize().y) * 0.5f;
 
-    if (x <= sizeX && y <= sizeY) // Collided
+    if (x < sizeX && y < sizeY) // Collided
     {
         if (!owner) return true;
 

@@ -69,12 +69,12 @@ public:
 
 	UINT GetStreamLv() const { return streamLv; }
 
-	void AddLeftBalloonCnt(const UINT& addAmount = 1);
+	bool AddLeftBalloonCnt(const UINT& addAmount = 1); // Balloon 회수 또는 Item Usage에 사용
 
 public: // Item Usage
 
-	void IncreaseSpeed(bool increaseToMax = false);
-
+	bool IncreaseSpeed(bool increaseToMax = false);
+	bool IncreaseStreamLv(bool increaseToMax = false);
 
 private:
 
@@ -113,8 +113,8 @@ protected:
 	UINT speedLvMin{};
 	UINT speedLvMax{};
 
-	UINT curIdleSpeedLv{};
-	UINT speedLv{};
+	UINT curIdleSpeedLv{}; // Idle 상태일 때의 speed를 저장하기 위한 변수
+	UINT speedLv{}; // 현재(탈 것 포함)의 speed
 
 	UINT balloonCntMin{};
 	UINT balloonCntMax{};
@@ -122,7 +122,7 @@ protected:
 
 	UINT streamLvMin{};
 	UINT streamLvMax{};
-	UINT streamLv{};
+	UINT streamLv{}; // CurrentStreamLv
 
 
 protected:
