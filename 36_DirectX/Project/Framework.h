@@ -161,6 +161,8 @@ typedef XMMATRIX Matrix;
 
 #include "Stream/StreamManager.h"
 
+#include "Item/ItemStrategy/ItemStrategy.h"
+#include "Item/Item.h"
 
 #include "Character/Character.h"
 #include "Character/Player.h"

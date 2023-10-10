@@ -71,6 +71,11 @@ public:
 
 	void AddLeftBalloonCnt(const UINT& addAmount = 1);
 
+public: // Item Usage
+
+	void IncreaseSpeed(bool increaseToMax = false);
+
+
 private:
 
 	void HandleBoundary();
@@ -109,17 +114,16 @@ protected:
 	UINT speedLvMax{};
 
 	UINT curIdleSpeedLv{};
-	
+	UINT speedLv{};
 
 	UINT balloonCntMin{};
 	UINT balloonCntMax{};
+	UINT leftBalloonCnt{};
 
 	UINT streamLvMin{};
 	UINT streamLvMax{};
-
-	UINT speedLv{};
-	UINT leftBalloonCnt{};
 	UINT streamLv{};
+
 
 protected:
 	

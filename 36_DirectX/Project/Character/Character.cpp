@@ -101,7 +101,7 @@ void Character::Render()
 
 	colorBuffer->PSSetBuffer(0);
 
-	actionHandler->Render();
+	actionHandler->Render(); // 여기에서 shader 세팅
 
 	body->Render();
 	pushCollider->Render();
@@ -155,6 +155,15 @@ void Character::AddLeftBalloonCnt(const UINT& addAmount)
 	if (leftBalloonCnt >= balloonCntMax) return;
 
 	leftBalloonCnt += addAmount;
+}
+
+void Character::IncreaseSpeed(bool increaseToMax)
+{
+	if (curIdleSpeedLv >= speedLvMax) return;
+
+	curIdleSpeedLv++;
+
+	if (mainState == C_IDLE) speedLvMax++;
 }
 
 void Character::HandleBoundary()
