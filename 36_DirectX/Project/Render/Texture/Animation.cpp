@@ -85,6 +85,8 @@ void Animation::Update()
 		{
 			curPlayIndex--;
 
+			if (EndEvent) EndEvent();
+
 			Stop();
 		}
 	}
@@ -121,9 +123,7 @@ void Animation::Stop()
 
 	frameTime = 0.f;
 	playTime = 0.f;
-
-	if (EndEvent)
-		EndEvent();
+		
 }
 
 void Animation::Stop(UINT rewindIdx)
@@ -164,8 +164,6 @@ void Animation::SetPart(int start, int end, bool isLoop)
 			actions.push_back(frames[i]);
 		}
 	}
-
-
 }
 
 void Animation::SetIndex(vector<UINT> indices, bool isLoop)

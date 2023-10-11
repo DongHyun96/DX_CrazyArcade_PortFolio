@@ -46,7 +46,7 @@ GameScene::GameScene()
 
 	itemManager = new ItemManager;
 
-	SOUND->Play("VillageBGM", 1.f);
+	//SOUND->Play("VillageBGM", 1.f);
 }
 
 GameScene::~GameScene()
@@ -79,7 +79,7 @@ void GameScene::Update()
 		return;
 	}
 
-		
+
 	player->Update();
 
 	tileManager->Update();

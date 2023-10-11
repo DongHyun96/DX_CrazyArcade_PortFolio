@@ -21,6 +21,8 @@ Character::Character(const CharacterType& cType)
 	pushCollider->SetParent(body);
 
 	actionHandler = CharacterAnimFactory::CreateCharacterAnim(cType, body);
+	actionHandler->SetReturnIdleEndEvent(bind(&Character::OnEndReturnToIdle, this));
+	actionHandler->SetCapturedEndEvent(bind(&Character::OnCapturedEnd, this));
 
 	colorBuffer = new ColorBuffer();
 
@@ -48,8 +50,7 @@ void Character::Update()
 
 	body->UpdateZDepthToY();
 
-	Move();
-	DeployBalloon();
+
 
 	actionHandler->Update();
 	actionHandler->UpdateAction(mainState, velocity);
@@ -69,19 +70,25 @@ void Character::Update()
 	case C_TURTLE:
 		break;
 	case C_CAPTURED: // 상하로 올라갔다 내려갔다 조절
-
-		Util::PlayFloatingEffect(actionHandler->translation.y, captured_yUpdateTime, captured_ySpeed, CAPTURED_Y_UPDATE_TICK);
-
 		break;
 	case C_RETURN_IDLE:
-		actionHandler->translation.y = 0.f;
-		captured_yUpdateTime		= 0.f;
-		captured_ySpeed				= 0.f;
 		break;
 	case C_DEAD:
 		break;
 	default:
 		break;
+	}
+
+	if (mainState == C_DEAD || mainState == C_RETURN_IDLE)
+		return;
+
+	Move();
+	DeployBalloon();
+
+	if (KEY_DOWN(VK_LSHIFT)) // TESTING
+	{
+		if (mainState == C_CAPTURED)
+			mainState = C_RETURN_IDLE;
 	}
 
 	HandleBoundary();
@@ -104,6 +111,12 @@ void Character::Render()
 void Character::Debug()
 {
 	assert(label != "");
+
+	if (ImGui::BeginMenu(label.c_str()))
+	{
+		ImGui::InputInt("MainState", (int*)&mainState);
+		ImGui::EndMenu();
+	}
 
 	body->Debug(label);
 	actionHandler->Debug("ActionHandler");
@@ -133,9 +146,11 @@ void Character::SetCharacterState(const CharacterState& state)
 		curIdleSpeedLv = speedLv;
 		speedLv = SpeedLv::capturedSpeedLv;
 		break;
-	case C_RETURN_IDLE:
+	case C_RETURN_IDLE: // 이 때 속도가 0
+		speedLv = 0;
 		break;
 	case C_DEAD:
+		speedLv = 0;
 		break;
 	default:
 		break;

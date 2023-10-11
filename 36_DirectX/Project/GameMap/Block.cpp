@@ -406,7 +406,12 @@ void Block::HandleAddItem()
 	// 테스팅 (50%의 확률로 스폰)
 	if (rand() % 1 == 0)
 	{
-		item = new ImmediateItem((ItemName)(rand() % 8));
+		//item = new ImmediateItem((ItemName)(rand() % 8));
+		if (rand() % 4 == 1)
+			item = new ImmediateItem((ItemName)(rand() % 3 + 5));
+		else
+			item = new ImmediateItem((ItemName)(rand() % 5));
+
 		ItemManager::AddItem(item);
 	}
 }

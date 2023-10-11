@@ -17,13 +17,15 @@ public:
 
 	void Debug(const string& label);
 
+	void SetReturnIdleEndEvent(function<void()> E);
+	void SetCapturedEndEvent(function<void()> E) { bubbleActions[A_BUBBLE_CAPTURED]->SetEndEvent(E); }
 protected:
 
 	int GetDirRelativeFrameIdx(const Vector2& velocity);
 
 protected:
 
-	bool isTransYSetToBodyFeet{ true };
+	//bool isTransYSetToBodyFeet{ true };
 
 protected:
 
@@ -34,9 +36,10 @@ protected:
 	map<OwlAnimState, Animation*>		owlActions{};
 	map<TurtleAnimState, Animation*>	turtleActions{};
 	map<BubbleAnimState, Animation*>	bubbleActions{};
+	
 
 	Animation*							curAction{};
-
+	
 	CharacterState						ownerPrevState{};
 	Vector2								ownerPrevVelocity{};
 
@@ -46,5 +49,27 @@ protected:
 	PixelShader*						pixelShader{};
 
 	MatrixBuffer*						worldBuffer{};
+
+protected:
+
+	// 부모의 상태를 RETURN_IDLE에서 Idle로 돌아가려면 이것을 사용
+	function<void()> ReturnIdleEndEvent{};
+
+
+protected: // Captured상태의 translation y Update 관련 field
+
+	float		captured_yUpdateTime = 0.f;
+	float		captured_ySpeed = 10.f;
+
+	const float CAPTURED_Y_UPDATE_TICK = 1.f;
+
+protected: // ReturnToIdle 상태에서 Ridable 관련 field
+
+	bool ridableReturningToIdle{};
+	
+	float jump_UpdateTime = 0.f;
+	float jump_ySpeed = 150.f;
+	
+	const float JUMP_TICK = 0.5f;
 
 };

@@ -57,6 +57,7 @@ public:
 public:
 
 	void SetCharacterState(const CharacterState& state);
+
 	CharacterState GetCharacterState() const { return mainState; }
 
 	void SetVisible(const bool& visible) { this->visible = visible; }
@@ -89,6 +90,9 @@ protected:
 
 	void InitStat(const CharacterType& cType);
 
+	void OnEndReturnToIdle()	{ SetCharacterState(C_IDLE); }
+	void OnCapturedEnd()		{ SetCharacterState(C_DEAD); }
+
 protected:
 
 	ColliderRect*	body{};
@@ -96,7 +100,7 @@ protected:
 
 	CharacterState	mainState{C_IDLE};
 
-	CharacterAnim*	actionHandler;
+	CharacterAnim*	actionHandler; // 실질적인 캐릭터 출력물 담당
 
 	string			label{};
 	
@@ -125,11 +129,5 @@ protected:
 	UINT streamLv{}; // CurrentStreamLv
 
 
-protected:
-	
-	float captured_yUpdateTime = 0.f;
-	float captured_ySpeed = 10.f;
-
-	const float CAPTURED_Y_UPDATE_TICK = 1.f;
 };
 

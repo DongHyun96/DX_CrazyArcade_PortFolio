@@ -53,8 +53,50 @@ void CharacterAnim::Update()
 
 	Transform::Update();
 	curAction->Update();
+
+	// 직접적인 y 좌표 handling을 여기서 함
+
+	if (curAction == bubbleActions[A_BUBBLE_CAPTURED])
+	{
+		Util::PlayFloatingEffect(translation.y, captured_yUpdateTime, captured_ySpeed, CAPTURED_Y_UPDATE_TICK);
+		return;
+	}
+	else
+	{
+		captured_yUpdateTime = 0.f;
+		captured_ySpeed = 10.f;
+	}
+
+	if (ridableReturningToIdle)
+	{
+		// 처음에는 점프했다가 도로 제자리로 와야 함
+		jump_UpdateTime += Time::Delta();
+		
+		if (jump_UpdateTime >= JUMP_TICK)
+		{
+			jump_ySpeed = -jump_ySpeed - 10.f;
+			jump_UpdateTime = -100.f;
+			return;
+		}
+
+		translation.y += jump_ySpeed * Time::Delta();
+
+		if (translation.y < (curAction->Size().y - parent->LocalSize().y) / 2) // 점프 동작 끝 (착지함)
+		{
+			jump_UpdateTime = 0.f;
+			jump_ySpeed = 150.f;
+
+			ridableReturningToIdle = false;
+
+			ReturnIdleEndEvent();
+		}
+
+		return;
+	}
 	
-	if (isTransYSetToBodyFeet) translation.y = (curAction->Size().y - parent->LocalSize().y) / 2;
+
+	// floor을 parent floor에 맞추는 작업
+	translation.y = (curAction->Size().y - parent->LocalSize().y) / 2;
 }
 
 void CharacterAnim::Render()
@@ -143,22 +185,34 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 	}
 		break;
 	case C_CAPTURED:
-		isTransYSetToBodyFeet = false;
+
+		if (ownerPrevState == C_CAPTURED) return;
+
 		curAction = bubbleActions[A_BUBBLE_CAPTURED];
-		curAction->Play();
+		curAction->Play(false);
+
 		break;
 	case C_RETURN_IDLE: // TODO -> EndEvent로 owner의 상태를 변화시켜야 함
-		if (ownerPrevState == C_CAPTURED)			curAction = bubbleActions[A_BUBBLE_SAVED];
-		else if (ownerPrevState == C_SPACECRAFT)	curAction = spaceActions[A_SPACE_DESTROYED];
-		else if (ownerPrevState == C_OWL)			curAction = owlActions[A_OWL_DESTROYED];
-		else if (ownerPrevState == C_TURTLE)		curAction = turtleActions[A_TURTLE_DESTROYED];
-		curAction->Play();
 
-		isTransYSetToBodyFeet = true;
-			
+		if (ownerPrevState == C_CAPTURED)
+		{
+			curAction->Stop(0); // Stopping Captured anim here once
+
+			curAction = bubbleActions[A_BUBBLE_SAVED];
+			curAction->Play();
+
+		}
+		else //ownerPrevState was C_RIDABLE_S
+		{
+			ridableReturningToIdle = true;
+			curAction = idleActions[A_IDLE_DOWN];
+			curAction->Stop(0);
+			return;
+		}
+
 		break;
 	case C_DEAD: 
-		isTransYSetToBodyFeet = true;
+
 		curAction = bubbleActions[A_BUBBLE_DEAD];
 		curAction->Play();
 
@@ -174,6 +228,13 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 void CharacterAnim::Debug(const string& label)
 {
 	Transform::Debug(label);
+}
+
+void CharacterAnim::SetReturnIdleEndEvent(function<void()> E)
+{
+	this->ReturnIdleEndEvent = E;
+	
+	bubbleActions[A_BUBBLE_SAVED]->SetEndEvent(E);
 }
 
 

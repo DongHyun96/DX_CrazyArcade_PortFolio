@@ -26,9 +26,6 @@ Item::~Item()
 
 void Item::Update()
 {
-	if (KEY_DOWN(VK_F3))
-		SetItemState(SPAWNED);
-
 	if (!isActive)
 		return;
 

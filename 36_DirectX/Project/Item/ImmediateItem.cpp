@@ -26,7 +26,11 @@ void ImmediateItem::OnColliderPointEnter(ColliderHolder* owner)
 
 	if (character)
 	{
-		if (character->GetCharacterState() == C_SPACECRAFT) return;
+
+		switch (character->GetCharacterState()) 
+		{ 
+		case C_SPACECRAFT: case C_CAPTURED: return;
+		}
 
 		UseItem(character); // Immediate use
 		SetItemState(EARNED);

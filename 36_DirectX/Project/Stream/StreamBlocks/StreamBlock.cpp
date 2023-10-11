@@ -62,6 +62,9 @@ StreamBlock* StreamBlock::Spawn(const Util::Coord& spawnCoord, const bool& isEnd
 	this->isEnd = isEnd;
 	isActive = true;
 
+	body->EnteredPointOwners().clear();
+	body->EnteredBodies().clear();
+
 	body->translation = Util::ConvertBoardIdxToWorldPos(spawnCoord);
 
 	this->spawnCoord = spawnCoord;
@@ -80,17 +83,21 @@ void StreamBlock::OnColliderPointEnter(ColliderHolder* owner)
 	if (c)
 	{
 		CharacterState cs = c->GetCharacterState();
+
 		switch (cs)
 		{
 		case C_IDLE:
 			c->SetCharacterState(C_CAPTURED);
 			break;
 		case C_SPACECRAFT: case C_OWL: case C_TURTLE:
+			c->SetCharacterState(C_RETURN_IDLE);
 			break;
 		case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: return;
 		default:
 			break;
 		}
+
+		return;
 	}
 
 	Item* item = dynamic_cast<Item*>(owner);

@@ -15,9 +15,6 @@ void Player::Move()
 {
 	velocity = Vector2();
 
-	if (KEY_DOWN(VK_LSHIFT))
-		speedLv++;
-
 	if (KEY_DOWN('1'))
 		mainState = C_SPACECRAFT;
 	else if (KEY_DOWN('2'))

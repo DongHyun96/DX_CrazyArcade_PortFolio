@@ -112,28 +112,32 @@ void StreamBlockManager::HandleCollision()
 
 	for (StreamBlock* streamBlock : centerBlocks)
 	{
-		if (!streamBlock->IsActive())
-			continue;
+		if (!streamBlock->IsActive()) continue;
+
+		HandleBlockCollision(streamBlock);
+		HandleItemCollision(streamBlock);
+
+		if (!streamBlock->IsActive()) continue;
 
 		Character* player = GM->GetPlayer();
 		streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
 
-		HandleBlockCollision(streamBlock);
-		HandleItemCollision(streamBlock);
 	}
 
 	for (auto& p : dirStreamMap)
 	{
 		for (StreamBlock* streamBlock : p.second)
 		{
-			if (!streamBlock->IsActive())
-				continue;
+			if (!streamBlock->IsActive()) continue;
+
+			HandleBlockCollision(streamBlock);
+			HandleItemCollision(streamBlock);
+
+			if (!streamBlock->IsActive()) continue;
 
 			Character* player = GM->GetPlayer();
 			streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
 
-			HandleBlockCollision(streamBlock);
-			HandleItemCollision(streamBlock);
 		}
 	}
 }
