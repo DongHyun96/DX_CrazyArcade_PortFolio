@@ -33,8 +33,8 @@ static struct SpeedLv
 {
 	static const UINT capturedSpeedLv	= 1;
 	static const UINT spaceSpeedLv		= 10;
-	static const UINT owlSpeedLv		= 7;
-	static const UINT turtleSpeedLv		= 3;
+	static const UINT owlSpeedLv		= 6;
+	static const UINT turtleSpeedLv		= 2;
 };
 
 class Character : public ColliderHolder

@@ -61,6 +61,8 @@ void Character::Update()
 	case C_IDLE:
 		break;
 	case C_SPACECRAFT:
+		// y Depth °íÁ¤½ÃÅ´
+		body->zDepth = -1.f;
 		break;
 	case C_OWL:
 		break;

@@ -60,6 +60,37 @@ public:
 	virtual bool UseStrategy(Character* itemUser) override;
 };
 
+class SpaceStrategy : public ItemStrategy
+{
+public:
+	SpaceStrategy();
+	~SpaceStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+
+};
+
+class OwlStrategy : public ItemStrategy
+{
+public:
+	OwlStrategy();
+	~OwlStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+
+};
+
+class TurtleStrategy : public ItemStrategy
+{
+public:
+	TurtleStrategy();
+	~TurtleStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+
+};
+
+
 class NeedleStrategy : public ItemStrategy
 {
 public:

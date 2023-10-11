@@ -5,8 +5,6 @@
 
 class ItemInitializer
 {
-
-	friend class Item;
 public:
 
 	ItemInitializer();

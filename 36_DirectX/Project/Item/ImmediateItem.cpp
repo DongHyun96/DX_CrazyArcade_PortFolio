@@ -26,6 +26,8 @@ void ImmediateItem::OnColliderPointEnter(ColliderHolder* owner)
 
 	if (character)
 	{
+		if (character->GetCharacterState() == C_SPACECRAFT) return;
+
 		UseItem(character); // Immediate use
 		SetItemState(EARNED);
 		SOUND->Play("ItemEarned", 1.f);

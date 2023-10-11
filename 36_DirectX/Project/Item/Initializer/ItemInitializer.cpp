@@ -34,6 +34,18 @@ void ItemInitializer::CreateCommonFields(const ItemName& itemName, Object** texO
 		*texObj			= new Object(CELL_WORLD_SIZE, L"InGame/Item/balloon2.png");
 		*itemStrategy	= new BubbleStrategy;
 		break;
+	case I_SPCAECRAFT:
+		*texObj			= new Object(CELL_WORLD_SIZE, L"InGame/Item/Space.png");
+		*itemStrategy	= new SpaceStrategy;
+		break;
+	case I_OWL:
+		*texObj			= new Object(CELL_WORLD_SIZE, L"InGame/Item/Owl.png");
+		*itemStrategy	= new OwlStrategy;
+		break;
+	case I_TURTLE:
+		*texObj			= new Object(CELL_WORLD_SIZE, L"InGame/Item/Turtle.png");
+		*itemStrategy	= new TurtleStrategy;
+		break;
 	case NEEDLE:
 		*texObj			= new Object(CELL_WORLD_SIZE, L"InGame/Item/Needle.png");
 		*itemStrategy	= new NeedleStrategy;

@@ -18,9 +18,17 @@ FluidUltraStrategy::~FluidUltraStrategy() {}
 BubbleStrategy::BubbleStrategy() {}
 BubbleStrategy::~BubbleStrategy() {}
 
+SpaceStrategy::SpaceStrategy() {}
+SpaceStrategy::~SpaceStrategy() {}
+
+OwlStrategy::OwlStrategy() {}
+OwlStrategy::~OwlStrategy() {}
+
+TurtleStrategy::TurtleStrategy() {}
+TurtleStrategy::~TurtleStrategy() {}
+
 NeedleStrategy::NeedleStrategy() {}
 NeedleStrategy::~NeedleStrategy() {}
-
 
 bool RollerStrategy::UseStrategy(Character* itemUser)
 {
@@ -49,9 +57,39 @@ bool BubbleStrategy::UseStrategy(Character* itemUser)
 	return itemUser->AddLeftBalloonCnt();
 }
 
+bool SpaceStrategy::UseStrategy(Character* itemUser)
+{
+	if (itemUser->GetCharacterState() != C_IDLE) return false;
+
+	itemUser->SetCharacterState(C_SPACECRAFT);
+
+	return true;
+}
+
+bool OwlStrategy::UseStrategy(Character* itemUser)
+{
+	if (itemUser->GetCharacterState() != C_IDLE) return false;
+	itemUser->SetCharacterState(C_OWL);
+
+	return true;
+}
+
+
+bool TurtleStrategy::UseStrategy(Character* itemUser)
+{
+	if (itemUser->GetCharacterState() != C_IDLE) return false;
+
+	itemUser->SetCharacterState(C_TURTLE);
+
+	return true;
+}
+
+
 bool NeedleStrategy::UseStrategy(Character* itemUser)
 {
 	if (itemUser->GetCharacterState() != C_CAPTURED) return false;
 
 	itemUser->SetCharacterState(C_RETURN_IDLE);
+
+	return true;
 }

@@ -113,7 +113,6 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		break;
 	case C_OWL:
 	{
-
 		int frameIdx = GetDirRelativeFrameIdx(velocity);
 
 		if (frameIdx == -1)
@@ -177,6 +176,8 @@ void CharacterAnim::Debug(const string& label)
 	Transform::Debug(label);
 }
 
+
+/// <returns> 속도가 0이면 -1 return </returns>
 int CharacterAnim::GetDirRelativeFrameIdx(const Vector2& velocity)
 {
 	if (velocity.Length() == 0.f)	return -1;

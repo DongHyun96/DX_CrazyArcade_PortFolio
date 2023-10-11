@@ -35,7 +35,7 @@ protected:
 	map<TurtleAnimState, Animation*>	turtleActions{};
 	map<BubbleAnimState, Animation*>	bubbleActions{};
 
-	Animation* curAction{};
+	Animation*							curAction{};
 
 	CharacterState						ownerPrevState{};
 	Vector2								ownerPrevVelocity{};

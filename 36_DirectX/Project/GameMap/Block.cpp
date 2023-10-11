@@ -289,7 +289,19 @@ void Block::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* ow
 	{
 		Character* c = dynamic_cast<Character*>(owner);
 
-		if (c) CollisionUtil::HandleCommonCollision(rectBody, targetCollider);
+		if (c)
+		{
+			if (!breakable) // 안 부서지는 블록의 경우 캐릭터가 어느 상태이든 CommonCollision을 처리
+			{
+				CollisionUtil::HandleCommonCollision(rectBody, targetCollider);
+				return;
+			}
+			
+			if (c->GetCharacterState() == C_SPACECRAFT) return;
+			
+			CollisionUtil::HandleCommonCollision(rectBody, targetCollider);
+
+		}
 
 	}
 	else
@@ -394,7 +406,7 @@ void Block::HandleAddItem()
 	// 테스팅 (50%의 확률로 스폰)
 	if (rand() % 1 == 0)
 	{
-		item = new ImmediateItem((ItemName)(rand() % 5));
+		item = new ImmediateItem((ItemName)(rand() % 8));
 		ItemManager::AddItem(item);
 	}
 }

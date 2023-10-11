@@ -23,6 +23,10 @@ enum ItemName
 	FLUID_ULTRA,
 	BUBBLE,
 
+	I_SPCAECRAFT,
+	I_OWL,
+	I_TURTLE,
+
 	NEEDLE
 };
 
