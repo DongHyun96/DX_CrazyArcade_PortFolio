@@ -7,7 +7,16 @@ class StreamManager;
 class Character;
 class Collider;
 class ColliderRect;
+class DartManager;
 
+enum GameMode
+{
+	PVP,
+	PVE
+};
+
+enum Direction;
+enum PlayerType;
 
 namespace Util { struct Coord; }
 
@@ -27,6 +36,9 @@ public:
 	}
 
 	void Update();
+
+	void SetGameMode(const GameMode& gameMode);
+	GameMode GetGameMode() const { return gameMode; }
 	
 	void SetPlayer(Character* player) { this->player = player; }
 	Character* GetPlayer() const { return player; }
@@ -39,6 +51,9 @@ public:
 
 	void SetStreamManager(StreamManager* streamManager) { this->streamManager = streamManager; }
 	StreamManager* GetStreamManager() const { return streamManager; }
+
+	void SetDartManager(DartManager* dartManager) { this->dartManager = dartManager; }
+	DartManager* GetDartManager() const { return dartManager; }
 
 
 public:
@@ -56,8 +71,16 @@ public:
 	Vector2 GetCollidedMapCellPos(const Vector2& point);
 	Util::Coord GetCollidedMapCellCoord(const Vector2& point);
 
+public: // Players' keyCode
+
+	map<PlayerType, map<Direction, byte>> P_DIR_KEYCODE{};
+	map<PlayerType, byte> P_BALLOON_KEYCODE{};
+	map<PlayerType, byte> P_ITEM_KEYCODE{};
+
 
 private: // Board 및 GameField 관련
+
+	GameMode gameMode{PVP};
 
 	Transform* gameFieldTransform{};
 
@@ -81,5 +104,7 @@ private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
 	BalloonManager* balloonManager{};
 	BlockManager* blockManager{};
 	StreamManager* streamManager{};
+
+	DartManager* dartManager{};
 
 };

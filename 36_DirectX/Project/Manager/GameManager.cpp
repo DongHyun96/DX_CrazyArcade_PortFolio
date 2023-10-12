@@ -31,6 +31,27 @@ GameManager::GameManager()
 	SOUND->AddSound("ItemEarned", "_Sound/SetItem.wav");
 	SOUND->AddSound("VillageBGM", "_Sound/Boomhill.mp3", true);
 
+	P_DIR_KEYCODE[P1] =
+	{
+		{DIR_LEFT,	'D'},
+		{DIR_RIGHT, 'G'},
+		{DIR_UP,	'R'},
+		{DIR_DOWN,	'F'}
+	};
+
+	P_BALLOON_KEYCODE[P1]	= VK_LSHIFT;
+	P_ITEM_KEYCODE[P1]		= VK_LCONTROL;
+
+	P_DIR_KEYCODE[P2] =
+	{
+		{DIR_LEFT,	VK_LEFT},
+		{DIR_RIGHT, VK_RIGHT},
+		{DIR_UP,	VK_UP},
+		{DIR_DOWN,	VK_DOWN}
+	};
+
+	P_BALLOON_KEYCODE[P2]	= VK_RSHIFT;
+	P_ITEM_KEYCODE[P2]		= VK_HANJA;
 }
 
 GameManager::~GameManager()
@@ -46,6 +67,9 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
+	if (KEY_DOWN(VK_ESCAPE))
+		PostQuitMessage(0);
+
 	gameFieldTransform->Update();
 
 	static bool cellInitialized = false;
@@ -66,6 +90,43 @@ void GameManager::Update()
 		for (UINT x = 0; x < MAP_COL; x++)
 			mapCells[y][x]->Update();
 	}
+}
+
+void GameManager::SetGameMode(const GameMode& gameMode)
+{
+	switch (gameMode)
+	{
+	case PVP:
+		P_DIR_KEYCODE[P1] =
+		{
+			{DIR_LEFT,	'D'},
+			{DIR_RIGHT, 'G'},
+			{DIR_UP,	'R'},
+			{DIR_DOWN,	'F'}
+		};
+
+		P_BALLOON_KEYCODE[P1] = VK_LSHIFT;
+		P_ITEM_KEYCODE[P1] = VK_LCONTROL;
+
+		break;
+	case PVE:
+		P_DIR_KEYCODE[P1] =
+		{
+			{DIR_LEFT,	VK_LEFT},
+			{DIR_RIGHT, VK_RIGHT},
+			{DIR_UP,	VK_UP},
+			{DIR_DOWN,	VK_DOWN}
+		};
+
+		P_BALLOON_KEYCODE[P1] = VK_SPACE;
+		P_ITEM_KEYCODE[P1] = VK_LCONTROL;
+
+		break;
+	default:
+		break;
+	}
+
+	this->gameMode = gameMode;
 }
 
 Vector2 GameManager::GetCollidedMapCellPos(const Vector2& point)
