@@ -13,7 +13,12 @@ MainGame::MainGame()
 
 	//rgb(4, 54, 74)
 	//rgb(216, 0, 50)
+
 	FONT->Add("D2Coding", L"D2Coding", {1.f, 1.f, 1.f}, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_TRAILING, DWRITE_FONT_WEIGHT_BOLD);
+
+	FONT->Add("BazziFont", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER);
+	FONT->Add("BazziFontBold", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
+
 }
 
 MainGame::~MainGame()
@@ -41,7 +46,10 @@ void MainGame::Update()
 	Time::GetInstance()->Update();
 	Keyboard::GetInstance()->Update();
 	Camera::GetInstance()->Update();
+
 	SOUND->Update();
+
+	UI->Update();
 
 	scene->Update();
 
@@ -58,6 +66,7 @@ void MainGame::Render()
 	Environment::GetInstance()->Set();
 	Camera::GetInstance()->Set();
 
+	UI->Render();
 	scene->Render();
 
 	if (!hiddenInGame)
