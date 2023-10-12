@@ -5,6 +5,8 @@ bool Item::spawnSoundPlayed{};
 
 Item::Item(const ItemName& itemName)
 {
+	this->itemName = itemName;
+
 	body = new ColliderRect(CELL_WORLD_SIZE);
 
 	body->SetPointEnterEvent(bind(&Item::OnColliderPointEnter, this, placeholders::_1));
@@ -51,6 +53,7 @@ void Item::Update()
 	}
 		break;
 	case EARNED:
+		EarnedUpdateHook();
 		break;
 	case RESPAWN:
 		break;
@@ -114,9 +117,18 @@ void Item::SetItemState(const ItemState& itemState)
 	if (this->itemState == SPAWNED)
 	{
 		body->scale = { 1, 1 };
+
 		texObj->translation = { 0, 0 };
+
 		spawned_timeChecker = 0.f;
 		spawned_ySpeed = 50.f;
+	}
+
+	// prevItemState
+	if (this->itemState == EARNED)
+	{
+		body->SetParent(GM->GetGameFieldTransform());
+		body->scale = { 1, 1 };
 	}
 
 	switch (itemState)

@@ -23,11 +23,12 @@ enum ItemName
 	FLUID_ULTRA,
 	BUBBLE,
 
-	I_SPCAECRAFT,
+	I_SPACECRAFT,
 	I_OWL,
 	I_TURTLE,
 
-	NEEDLE
+	NEEDLE,
+	DART,
 };
 
 
@@ -67,6 +68,8 @@ protected:
 protected:
 
 	virtual void OnColliderPointEnter(ColliderHolder* owner) = 0; // 캐릭터와 충돌했을 때 이용
+
+	virtual void EarnedUpdateHook() = 0;
 	virtual void EarnedRenderHook() = 0;
 	virtual void EarnedSetterHook() = 0;
 
@@ -74,6 +77,8 @@ private:
 	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner); // 물줄기 등과 충돌했을 때 이용
 
 protected:
+
+	ItemName		itemName{};
 
 	ColliderRect*	body{};
 	Object*			texObj{}; // Body의 transform을 따라감
