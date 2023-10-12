@@ -100,3 +100,13 @@ public:
 	virtual bool UseStrategy(Character* itemUser) override;
 
 };
+
+class DartStrategy : public ItemStrategy
+{
+public:
+	DartStrategy();
+	~DartStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+
+};

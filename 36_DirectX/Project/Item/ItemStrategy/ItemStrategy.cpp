@@ -30,6 +30,12 @@ TurtleStrategy::~TurtleStrategy() {}
 NeedleStrategy::NeedleStrategy() {}
 NeedleStrategy::~NeedleStrategy() {}
 
+DartStrategy::DartStrategy() {}
+DartStrategy::~DartStrategy() {}
+
+
+
+
 bool RollerStrategy::UseStrategy(Character* itemUser)
 {
 	return itemUser->IncreaseSpeed();
@@ -92,4 +98,20 @@ bool NeedleStrategy::UseStrategy(Character* itemUser)
 	itemUser->SetCharacterState(C_RETURN_IDLE);
 
 	return true;
+}
+
+bool DartStrategy::UseStrategy(Character* itemUser)
+{
+	switch (itemUser->GetCharacterState())
+	{
+	case C_IDLE: case C_SPACECRAFT: case C_OWL: case C_TURTLE:
+
+		GM->GetDartManager()->Spawn(itemUser->GetBody()->translation, itemUser->GetCurFaceDir());
+
+		return true;
+	default:
+		return false;
+	}
+
+	return false;
 }
