@@ -48,6 +48,7 @@ private:
 	ColliderRect*	body{};
 	Animation*		balloonAnim{};
 
+	UINT		streamLv{};
 
 	float		explodeTime{};
 	const float EXPLODE_TIME_LIMIT{ 3.f };

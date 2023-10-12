@@ -73,6 +73,7 @@ bool Balloon::Spawn(const Util::Coord& spawnCoord, Character* owner) // public
 	if (Spawn(Util::ConvertBoardIdxToWorldPos(spawnCoord)))
 	{
 		this->spawnCoord = spawnCoord;
+		this->streamLv = owner->GetStreamLv();
 		this->owner = owner;
 
 		return true;
@@ -100,7 +101,7 @@ void Balloon::Explode()
 
 	body->EnteredBodies().clear();
 
-	GM->GetStreamManager()->SpawnStream(spawnCoord, owner->GetStreamLv());
+	GM->GetStreamManager()->SpawnStream(spawnCoord, streamLv);
 
 	owner = nullptr;
 
