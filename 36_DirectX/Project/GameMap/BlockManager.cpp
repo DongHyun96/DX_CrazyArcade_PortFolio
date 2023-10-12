@@ -36,7 +36,7 @@ void BlockManager::Update()
 			if (blocks[y][x]) blocks[y][x]->Update();
 	}
 
-	HandleCharacterBlockCollision();
+	HandleCommonCollisions();
 	HandleHidableCollisions();
 	HandleMovableCollisions();
 }
@@ -114,25 +114,44 @@ void BlockManager::Load()
 	}
 }
 
-void BlockManager::HandleCharacterBlockCollision()
+void BlockManager::HandleCommonCollisions()
 {
 	for (UINT y = 0; y < MAP_ROW; y++)
 	{
 		for (UINT x = 0; x < MAP_COL; x++)
 		{
-			if (blocks[y][x])
-			{
-				if (!blocks[y][x]->IsActive())
-					continue;
+			if (!blocks[y][x]) continue;
+			if (!blocks[y][x]->IsActive()) continue;
 
-				ColliderHolder* character = (ColliderHolder*)(GM->GetPlayer());
-
-				blocks[y][x]->GetBody()->AABBCollision(GM->GetPlayer()->GetBody(), character);
-				blocks[y][x]->GetBody()->AABBCollision(GM->GetPlayer()->GetBody()->GlobalPosition(), character);
-			}
+			HandleCharacterCommonCollision(blocks[y][x]);
+			HandleDartCollision(blocks[y][x]);
 		}
 	}
 }
+
+void BlockManager::HandleCharacterCommonCollision(Block* block)
+{
+	ColliderHolder* character = (ColliderHolder*)(GM->GetPlayer());
+
+	block->GetBody()->AABBCollision(GM->GetPlayer()->GetBody(), character);
+	block->GetBody()->AABBCollision(GM->GetPlayer()->GetBody()->GlobalPosition(), character);
+}
+
+void BlockManager::HandleDartCollision(Block* block)
+{
+	for (Dart* dart : GM->GetDartManager()->GetDarts())
+	{
+		if (!dart->GetIsActive()) continue;
+
+		if (block->IsHidable()) continue;
+
+		if (block->GetBody()->AABBCollision(dart->GetBody()))
+			dart->SetActive(false);
+		
+	}
+}
+
+
 
 void BlockManager::HandleMovableCollisions()
 {

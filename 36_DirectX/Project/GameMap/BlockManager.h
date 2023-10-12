@@ -29,7 +29,11 @@ private:
 
 private:
 	
-	void HandleCharacterBlockCollision();   // Common collision
+	// Common collision
+	void HandleCommonCollisions();
+	void HandleCharacterCommonCollision(Block* block); // HandleCommonCollisions에서 call
+	void HandleDartCollision(Block* block);  // HandleCommonCollisions에서 call
+
 	void HandleMovableCollisions();
 	void HandleHidableCollisions();
 
