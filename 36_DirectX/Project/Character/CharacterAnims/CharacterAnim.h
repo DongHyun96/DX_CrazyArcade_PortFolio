@@ -8,6 +8,7 @@ protected:
 	CharacterAnim(ColliderRect* parent);
 
 public:
+
 	virtual ~CharacterAnim();
 
 	void Update();
@@ -19,13 +20,18 @@ public:
 
 	void SetReturnIdleEndEvent(function<void()> E);
 	void SetCapturedEndEvent(function<void()> E) { bubbleActions[A_BUBBLE_CAPTURED]->SetEndEvent(E); }
+
+	Direction GetCurFaceDir() const { return curFaceDir; }
+
 protected:
 
 	int GetDirRelativeFrameIdx(const Vector2& velocity);
+	//int GetDirRelativeFrameIdx(const Direction& direction);
+	void SetCurFaceDir(const Vector2& velocity);
 
 protected:
 
-	//bool isTransYSetToBodyFeet{ true };
+	Direction curFaceDir{};
 
 protected:
 

@@ -11,6 +11,8 @@ CharacterAnim::CharacterAnim(ColliderRect* parent)
 	worldBuffer = new MatrixBuffer();
 
 	this->SetParent(parent);
+
+	curFaceDir = DIR_DOWN;
 }
 
 CharacterAnim::~CharacterAnim()
@@ -124,6 +126,8 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 	case C_IDLE:
 	{
 		int frameIdx = GetDirRelativeFrameIdx(velocity);
+
+		SetCurFaceDir(velocity);
 		
 		if (frameIdx == -1)
 		{
@@ -142,6 +146,8 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 
 		int frameIdx = GetDirRelativeFrameIdx(velocity);
 
+		SetCurFaceDir(velocity);
+
 		if (frameIdx == -1)
 		{
 			if (ownerPrevState != C_SPACECRAFT) curAction = spaceActions[(A_SPACE_DOWN)];
@@ -156,6 +162,8 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 	case C_OWL:
 	{
 		int frameIdx = GetDirRelativeFrameIdx(velocity);
+
+		SetCurFaceDir(velocity);
 
 		if (frameIdx == -1)
 		{
@@ -172,6 +180,8 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 	{
 
 		int frameIdx = GetDirRelativeFrameIdx(velocity);
+
+		SetCurFaceDir(velocity);
 
 		if (frameIdx == -1)
 		{
@@ -242,9 +252,19 @@ void CharacterAnim::SetReturnIdleEndEvent(function<void()> E)
 int CharacterAnim::GetDirRelativeFrameIdx(const Vector2& velocity)
 {
 	if (velocity.Length() == 0.f)	return -1;
-	else if (velocity.x < 0.f)		return 0;
-	else if (velocity.x > 0.f)		return 1;
-	else if (velocity.y > 0.f)		return 2;
-	else                            return 3;
+	else if (velocity.x < 0.f)		return 0; // LEFT
+	else if (velocity.x > 0.f)		return 1; // RIGHT
+	else if (velocity.y > 0.f)		return 2; // UP
+	else                            return 3; // DOWN
+}
+
+
+
+void CharacterAnim::SetCurFaceDir(const Vector2& velocity)
+{
+	curFaceDir = (velocity.Length() == 0.f)	? curFaceDir	:
+				 (velocity.x < 0.f)			? DIR_LEFT		:
+				 (velocity.x > 0.f)			? DIR_RIGHT		:
+				 (velocity.y > 0.f)			? DIR_UP		: DIR_DOWN;
 }
 
