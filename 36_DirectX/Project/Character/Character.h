@@ -29,6 +29,14 @@ enum CharacterState
 	C_DEAD
 };
 
+enum PlayerType
+{
+	P1,
+	P2,
+	COMPUTER
+};
+
+
 static struct SpeedLv
 {
 	static const UINT capturedSpeedLv	= 1;
@@ -40,7 +48,7 @@ static struct SpeedLv
 class Character : public ColliderHolder
 {
 public:
-	Character(const CharacterType& cType);
+	Character(const CharacterType& cType, const PlayerType& playerType);
 
 	virtual ~Character();
 
@@ -50,14 +58,10 @@ public:
 	virtual void Move() = 0;
 
 public:
-	void Debug();
 
-	void SetLabel(const string& label) { this->label = label; }
-
-public:
+	PlayerType GetPlayerType() const { return playerType; }
 
 	void SetCharacterState(const CharacterState& state);
-
 	CharacterState GetCharacterState() const { return mainState; }
 
 	void SetVisible(const bool& visible) { this->visible = visible; }
@@ -72,10 +76,24 @@ public:
 
 	bool AddLeftBalloonCnt(const UINT& addAmount = 1); // Balloon 회수 또는 Item Usage에 사용
 
+	Direction GetCurFaceDir() const;
+
 public: // Item Usage
+	
+	void SetConsumableItem(Item* consumable) { this->consumableItem = consumable; }
+	Item* GetConsumableItem() const { return consumableItem; }
 
 	bool IncreaseSpeed(bool increaseToMax = false);
 	bool IncreaseStreamLv(bool increaseToMax = false);
+	
+protected: 
+
+	virtual void HandleUseConsumableItem() = 0;
+	bool UseConsumableItem();
+
+public:
+	void Debug();
+	void SetLabel(const string& label) { this->label = label; }
 
 private:
 
@@ -95,19 +113,16 @@ protected:
 
 protected:
 
+	PlayerType		playerType{};
+
 	ColliderRect*	body{};
+	ColliderRect*	pushCollider{}; // 밀어낼 수 있는 블록용도로 쓸 것임
+
 	Vector2			velocity{};
-
 	CharacterState	mainState{C_IDLE};
-
 	CharacterAnim*	actionHandler; // 실질적인 캐릭터 출력물 담당
 
-	string			label{};
-	
-protected:
-
-	ColliderRect* pushCollider{}; // 밀어낼 수 있는 블록용도로 쓸 것임
-
+	Item*			consumableItem{};
 
 protected:
 
@@ -127,6 +142,9 @@ protected:
 	UINT streamLvMin{};
 	UINT streamLvMax{};
 	UINT streamLv{}; // CurrentStreamLv
+
+protected:
+	string	label{};
 
 
 };

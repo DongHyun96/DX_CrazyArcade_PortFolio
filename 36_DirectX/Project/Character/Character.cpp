@@ -2,8 +2,10 @@
 #include "Character.h"
 
 
-Character::Character(const CharacterType& cType)
+Character::Character(const CharacterType& cType, const PlayerType& playerType)
 {
+	this->playerType = playerType;
+
 	Vector2 characterBodySize = { CELL_WORLD_SIZE.x - 30.f, CELL_WORLD_SIZE.y - 30.f };
 	Vector2 pushColSize = { CELL_WORLD_SIZE.x - 15.f, CELL_WORLD_SIZE.y - 15.f };
 
@@ -84,12 +86,7 @@ void Character::Update()
 
 	Move();
 	DeployBalloon();
-
-	if (KEY_DOWN(VK_LSHIFT)) // TESTING
-	{
-		if (mainState == C_CAPTURED)
-			mainState = C_RETURN_IDLE;
-	}
+	HandleUseConsumableItem();
 
 	HandleBoundary();
 }
@@ -166,6 +163,18 @@ bool Character::AddLeftBalloonCnt(const UINT& addAmount)
 	leftBalloonCnt += addAmount;
 
 	return true;
+}
+
+Direction Character::GetCurFaceDir() const
+{
+	return actionHandler->GetCurFaceDir();
+}
+
+bool Character::UseConsumableItem()
+{
+	if (!consumableItem) return false; // 가지고 있는 아이템이 없음
+	
+	return consumableItem->UseItem(this);
 }
 
 bool Character::IncreaseSpeed(bool increaseToMax)
