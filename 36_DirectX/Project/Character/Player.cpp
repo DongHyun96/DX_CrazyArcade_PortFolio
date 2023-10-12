@@ -1,10 +1,9 @@
 #include "Framework.h"
 #include "Player.h"
 
-Player::Player(const CharacterType& cType)
-	:Character(cType)
+Player::Player(const CharacterType& cType, const PlayerType& playerType)
+	:Character(cType, playerType)
 {
-	speedLv = 5;
 }
 
 Player::~Player()
@@ -15,33 +14,21 @@ void Player::Move()
 {
 	velocity = Vector2();
 
-	if (KEY_DOWN('1'))
-		mainState = C_SPACECRAFT;
-	else if (KEY_DOWN('2'))
-		mainState = C_OWL;
-	else if (KEY_DOWN('3'))
-		mainState = C_TURTLE;
-	else if (KEY_DOWN('4'))
-		mainState = C_CAPTURED;
-	else if (KEY_DOWN('5'))
-		mainState = C_IDLE;
-
-
-
-	if (KEY_PRESS(VK_LEFT))
+	
+	if (KEY_PRESS(GM->P_DIR_KEYCODE[playerType][DIR_LEFT]))
 	{
 		velocity = { -SPEED_BASE * speedLv, 0.f };
 	}
-	else if (KEY_PRESS(VK_RIGHT))
+	else if (KEY_PRESS(GM->P_DIR_KEYCODE[playerType][DIR_RIGHT]))
 	{
 		velocity = { SPEED_BASE * speedLv, 0.f };
 	}
-	else if (KEY_PRESS(VK_UP))
+	else if (KEY_PRESS(GM->P_DIR_KEYCODE[playerType][DIR_UP]))
 	{
 		velocity = { 0.f, SPEED_BASE * speedLv };
 
 	}
-	else if (KEY_PRESS(VK_DOWN))
+	else if (KEY_PRESS(GM->P_DIR_KEYCODE[playerType][DIR_DOWN]))
 	{
 		velocity = { 0.f, -SPEED_BASE * speedLv };
 	}
@@ -59,7 +46,7 @@ void Player::DeployBalloon()
 	if (leftBalloonCnt <= 0)
 		return;
 
-	if (KEY_DOWN(VK_SPACE))
+	if (KEY_DOWN(GM->P_BALLOON_KEYCODE[playerType]))
 	{
 		Util::Coord deployCoord = GM->GetCollidedMapCellCoord(body->GlobalPosition());
 		
@@ -70,4 +57,16 @@ void Player::DeployBalloon()
 			leftBalloonCnt--;
 		}
 	}
+}
+
+void Player::HandleUseConsumableItem()
+{
+	//?????????????????????????????
+	if (playerType == P1 && GetAsyncKeyState(VK_RCONTROL))
+		UseConsumableItem();
+	else if (playerType == P2 && KEY_DOWN(VK_LCONTROL))
+		UseConsumableItem();
+
+	if (KEY_DOWN(GM->P_ITEM_KEYCODE[playerType]))
+		UseConsumableItem();
 }
