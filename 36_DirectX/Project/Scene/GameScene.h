@@ -12,8 +12,7 @@ public:
 
 private:
 
-	Object* mainUI{};
-	Collider* mapBoundary{};
+	//Collider* mapBoundary{};
 
 	TileManager* tileManager{};
 	BlockManager* blockManager{};
@@ -30,6 +29,8 @@ private:
 	StreamManager* streamManager{};
 
 	ItemManager* itemManager{};
+
+	DartManager* dartManager{};
 
 };
 

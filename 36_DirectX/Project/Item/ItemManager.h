@@ -12,7 +12,7 @@ public:
 
 	static vector<Item*>& GetItems() { return items; }
 	
-	static void AddItem(Item* item);
+	static void AddItem(Item* item); // 각 블록에서 아이템을 생성했다면 ItemManager에 넣어둠
 
 private:
 	void HandleCollisions();

@@ -80,6 +80,7 @@ using namespace FMOD;
 
 #define GM				GameManager::GetInst()
 #define SOUND			SoundManager::GetInstance()
+#define UI				UIManager::GetInst()
 
 #define NEAR_Z			-10.f
 #define FAR_Z			1090.f
@@ -163,11 +164,17 @@ typedef XMMATRIX Matrix;
 
 #include "Stream/StreamManager.h"
 
+#include "UI/UIManager.h"
+
+
 #include "Item/ItemStrategy/ItemStrategy.h"
 #include "Item/Item.h"
 #include "Item/ImmediateItem.h"
+#include "Item/ConsumableItem.h"
 #include "Item/Initializer/ItemInitializer.h"
 #include "Item/ItemManager.h"
+#include "Item/GameField/Dart.h"
+#include "Item/GameField/DartManager.h"
 
 #include "Character/Character.h"
 #include "Character/Player.h"

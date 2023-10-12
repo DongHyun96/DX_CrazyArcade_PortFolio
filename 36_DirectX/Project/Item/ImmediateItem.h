@@ -15,6 +15,6 @@ private:
 	virtual void EarnedRenderHook() override;
 	virtual void EarnedSetterHook() override;
 
-
+	virtual void EarnedUpdateHook() override; // Not in use
 
 };

@@ -3,13 +3,10 @@
 
 GameScene::GameScene()
 {
-	mainUI = new Object(WIN_SIZE, L"InGame/UI/mapToolMap.png");
-	mainUI->translation = WIN_CENTER;
-	mainUI->zDepth = FAR_Z - 1;
 
-	mapBoundary = new ColliderRect(WIN_SIZE);
+	/*mapBoundary = new ColliderRect(WIN_SIZE);
 	mapBoundary->translation = WIN_CENTER;
-	mapBoundary->SetLabel("MapBoundary");
+	mapBoundary->SetLabel("MapBoundary");*/
 
 	tileManager = new TileManager;
 
@@ -33,7 +30,7 @@ GameScene::GameScene()
 	curBlockPos = { 7, 6 };*/
 
 
-	player = new Player(BAZZI);
+	player = new Player(BAZZI, P1);
 	player->SetLabel("Player");
 
 	GM->SetPlayer(player);
@@ -46,13 +43,16 @@ GameScene::GameScene()
 
 	itemManager = new ItemManager;
 
+	dartManager = new DartManager;
+	GM->SetDartManager(dartManager);
+
 	//SOUND->Play("VillageBGM", 1.f);
 }
 
 GameScene::~GameScene()
 {
-	delete mainUI;
-	delete mapBoundary;
+	//delete mapBoundary;
+
 	delete tileManager;
 	delete blockManager;
 
@@ -65,13 +65,14 @@ GameScene::~GameScene()
 	delete streamManager;
 
 	delete itemManager;
+
+	delete dartManager;
 }
 
 void GameScene::Update()
 {
 	GM->Update();
 
-	mainUI->Update();
 
 	if (GM->IsEditMode())
 	{
@@ -90,12 +91,11 @@ void GameScene::Update()
 
 	itemManager->Update();
 
+	dartManager->Update();
 }
 
 void GameScene::Render()
 {
-
-	mainUI->Render();
 
 	if (GM->IsEditMode())
 	{
@@ -111,7 +111,8 @@ void GameScene::Render()
 	streamManager->Render();
 	itemManager->Render();
 
-	player->Debug();
+	dartManager->Render();
+	//player->Debug();
 }
 
 

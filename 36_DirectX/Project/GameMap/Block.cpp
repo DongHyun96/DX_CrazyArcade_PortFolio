@@ -407,10 +407,13 @@ void Block::HandleAddItem()
 	if (rand() % 1 == 0)
 	{
 		//item = new ImmediateItem((ItemName)(rand() % 8));
-		if (rand() % 4 == 1)
+	/*	if (rand() % 4 == 1)
 			item = new ImmediateItem((ItemName)(rand() % 3 + 5));
 		else
-			item = new ImmediateItem((ItemName)(rand() % 5));
+			item = new ImmediateItem((ItemName)(rand() % 5));*/
+
+		//item = new ConsumableItem(NEEDLE);
+		item = new ConsumableItem(DART);
 
 		ItemManager::AddItem(item);
 	}

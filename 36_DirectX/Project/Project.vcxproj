@@ -155,6 +155,9 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Item\GameField\DartManager.h" />
+    <ClInclude Include="Item\GameField\Dart.h" />
+    <ClInclude Include="Item\ConsumableItem.h" />
     <ClInclude Include="Item\ItemManager.h" />
     <ClInclude Include="Item\Initializer\ItemInitializer.h" />
     <ClInclude Include="Item\ImmediateItem.h" />
@@ -190,6 +193,7 @@
     <ClInclude Include="Stream\StreamBlocks\StreamBlock_Left.h" />
     <ClInclude Include="Stream\StreamBlocks\StreamBlock_Right.h" />
     <ClInclude Include="Stream\StreamBlocks\StreamBlock_Up.h" />
+    <ClInclude Include="UI\UIManager.h" />
     <ClInclude Include="Utility\Font.h" />
     <ClInclude Include="Utility\SoundManager.h" />
     <ClInclude Include="Utility\Util.h" />
@@ -245,6 +249,9 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Item\GameField\DartManager.cpp" />
+    <ClCompile Include="Item\GameField\Dart.cpp" />
+    <ClCompile Include="Item\ConsumableItem.cpp" />
     <ClCompile Include="Item\ItemManager.cpp" />
     <ClCompile Include="Item\Initializer\ItemInitializer.cpp" />
     <ClCompile Include="Item\ImmediateItem.cpp" />
@@ -279,6 +286,7 @@
     <ClCompile Include="Stream\StreamBlocks\StreamBlock_Left.cpp" />
     <ClCompile Include="Stream\StreamBlocks\StreamBlock_Right.cpp" />
     <ClCompile Include="Stream\StreamBlocks\StreamBlock_Up.cpp" />
+    <ClCompile Include="UI\UIManager.cpp" />
     <ClCompile Include="Utility\BinaryReader.cpp" />
     <ClCompile Include="Utility\BinaryWriter.cpp" />
     <ClCompile Include="System\Camera.cpp" />

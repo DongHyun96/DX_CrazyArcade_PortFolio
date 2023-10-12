@@ -34,18 +34,16 @@ void ImmediateItem::OnColliderPointEnter(ColliderHolder* owner)
 
 		UseItem(character); // Immediate use
 		SetItemState(EARNED);
-		SOUND->Play("ItemEarned", 1.f);
+		SOUND->Play("ItemEarned", 0.5f);
 		return;
 	}
 }
 
-
-void ImmediateItem::EarnedRenderHook()
-{
-	
-}
+void ImmediateItem::EarnedUpdateHook() {}
+void ImmediateItem::EarnedRenderHook() {}
 
 void ImmediateItem::EarnedSetterHook()
 {
 	isActive = false;
 }
+
