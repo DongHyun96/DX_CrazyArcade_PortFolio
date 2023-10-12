@@ -22,6 +22,8 @@ public:
 
 	void SetData();
 
+	Vector2 GetSize() const { return texture->GetSize(); }
+
 private:
 	vector<VertexTexture>	vertices{};
 	vector<UINT>			indices{};
