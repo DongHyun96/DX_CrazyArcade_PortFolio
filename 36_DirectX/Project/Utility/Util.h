@@ -126,4 +126,9 @@ namespace Util
 			effectSpeed = -effectSpeed;
 		}
 	}
+
+	static Vector2 ConvertDxPosToAPIPos(const Vector2& dxPos)
+	{
+		return { dxPos.x, WIN_HEIGHT - dxPos.y };
+	}
 }
