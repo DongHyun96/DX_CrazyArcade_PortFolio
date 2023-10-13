@@ -88,6 +88,16 @@ public:
 	Vector2 GetCollidedMapCellPos(const Vector2& point);
 	Util::Coord GetCollidedMapCellCoord(const Vector2& point);
 
+
+
+
+
+
+
+
+
+
+
 public: // Players' keyCode
 
 	map<PlayerType, map<Direction, byte>> P_DIR_KEYCODE{};
@@ -96,6 +106,8 @@ public: // Players' keyCode
 
 public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
 	
+	map<GameMap, vector<Util::Coord>> spawnPosMap{};
+
 	map<GameMap, wstring> tileBinFile{};
 	map<GameMap, wstring> blockBinFile{};
 
@@ -103,12 +115,10 @@ public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
 
 private:
 
+	GameMode gameMode{PVP};
 	GameMap curMap{ VILLAGE };
 
-
 private: // Board 및 GameField 관련
-
-	GameMode gameMode{PVP};
 
 	Transform* gameFieldTransform{};
 
@@ -137,7 +147,6 @@ private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
 	Character* p2{};
 	
 	vector<Character*> comEnemies{};
-
 
 	BalloonManager* balloonManager{};
 	BlockManager* blockManager{};

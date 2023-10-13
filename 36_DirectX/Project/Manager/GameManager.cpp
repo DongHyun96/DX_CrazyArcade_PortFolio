@@ -4,6 +4,12 @@
 
 GameManager::GameManager()
 {
+	spawnPosMap =
+	{
+		{VILLAGE, {{1, 1}, {6, 0}, {14, 0}, {0, 12}, {7, 12}, {13, 11}}},
+		{FACTORY, {}},
+		{FOREST, {}}
+	};
 
 	tileBinFile =
 	{
@@ -19,8 +25,6 @@ GameManager::GameManager()
 		{FACTORY, L""},
 		{FOREST, L""}
 	};
-
-
 
 	gameFieldTransform = new Transform;
 
