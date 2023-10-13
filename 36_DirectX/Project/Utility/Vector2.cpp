@@ -51,6 +51,11 @@ float Vector2::Distance(const Vector2& p1, const Vector2& p2)
 	return distance;
 }
 
+Vector2 Vector2::Lerp(const Vector2& start, const Vector2& end, const float& factor)
+{
+	return start + (end - start) * factor;
+}
+
 Vector2 Vector2::operator+(const Vector2& other) const
 {
 	return Vector2(this->x + other.x, this->y + other.y);

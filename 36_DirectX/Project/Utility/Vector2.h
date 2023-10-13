@@ -21,6 +21,9 @@ struct Vector2 : public XMFLOAT2
 
 	static float Distance(const Vector2& p1, const Vector2& p2);
 
+	static Vector2 Lerp(const Vector2& start, const Vector2& end, const float& factor);
+
+
 	Vector2 operator+(const Vector2& other) const;
 	Vector2 operator-(const Vector2& other) const;
 	
