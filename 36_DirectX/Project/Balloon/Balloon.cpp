@@ -129,7 +129,13 @@ bool Balloon::Spawn(const Vector2& spawnPos) // private
 	// TODO :
 	// Spawn 시에 현재 위에 있는 플레이어들을 모두(나머지 플레이어들은 Update한번하고 충돌검사 한번은 해야함) entered set에 포함시킴으로써 처음에는
 	// OnColliderRectEnter 콜백을 받지 말아야 함
-	body->EnteredBodies().insert(GM->GetPlayer()->GetBody());
+
+	//body->EnteredBodies().insert(GM->GetPlayer()->GetBody());
+
+	for (Character* p : GM->GetWholePlayers())
+	{
+		body->EnteredBodies().insert(p->GetBody());
+	}
 	activeBalloonPositions.push_back(spawnPos);
 
 	return true;

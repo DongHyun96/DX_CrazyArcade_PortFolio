@@ -30,10 +30,13 @@ GameScene::GameScene()
 	curBlockPos = { 7, 6 };*/
 
 
-	player = new Player(BAZZI, P1);
-	player->SetLabel("Player");
+	p1 = new Player(BAZZI, P1);
+	p1->SetLabel("P1");
 
-	GM->SetPlayer(player);
+	p2 = new Player(BAZZI, P2);
+	p2->SetLabel("P2");
+
+	GM->SetPlayers(p1, p2);
 
 	balloonManager = new BalloonManager;
 	GM->SetBalloonManager(balloonManager);
@@ -59,7 +62,9 @@ GameScene::~GameScene()
 	/*delete block;
 	delete block2;*/
 
-	delete player;
+	delete p1;
+	delete p2;
+
 	delete balloonManager;
 
 	delete streamManager;
@@ -80,7 +85,8 @@ void GameScene::Update()
 		return;
 	}
 
-	player->Update();
+	p1->Update();
+	p2->Update();
 
 	dartManager->Update();
 	tileManager->Update();
@@ -105,12 +111,16 @@ void GameScene::Render()
 	blockManager->Render();
 	balloonManager->Render();
 
-	player->Render();
+	p1->Render();
+	p2->Render();
+
 	streamManager->Render();
 	itemManager->Render();
 
 	dartManager->Render();
-	player->Debug();
+
+	//p1->Debug();
+	//p2->Debug();
 }
 
 

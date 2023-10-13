@@ -24,7 +24,8 @@ private:
 
 	Block* block2{};
 
-	Character* player{};
+	Character* p1{};
+	Character* p2{};
 
 	StreamManager* streamManager{};
 

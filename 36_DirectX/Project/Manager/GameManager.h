@@ -15,6 +15,13 @@ enum GameMode
 	PVE
 };
 
+enum GameMap
+{
+	VILLAGE,
+	FACTORY,
+	FOREST
+};
+
 enum Direction;
 enum PlayerType;
 
@@ -40,8 +47,18 @@ public:
 	void SetGameMode(const GameMode& gameMode);
 	GameMode GetGameMode() const { return gameMode; }
 	
-	void SetPlayer(Character* player) { this->player = player; }
-	Character* GetPlayer() const { return player; }
+	//void SetPlayer(Character* player) { this->player = player; }
+	//Character* GetPlayer() const { return player; }
+
+	void SetPlayers(Character* p1, Character* p2);
+	void SetPlayers(Character* p1, vector<Character*> enemies);
+	
+	vector<Character*>& GetWholePlayers() { return wholePlayers; }
+
+	Character* GetP1() const { return p1; }
+	Character* GetP2() const { return p2; }
+
+	vector<Character*>& GetComEnemies() { return comEnemies; }
 
 	void SetBalloonManager(BalloonManager* balloonManager) { this->balloonManager = balloonManager; }
 	BalloonManager* GetBalloonManager() const { return balloonManager; }
@@ -77,6 +94,17 @@ public: // Players' keyCode
 	map<PlayerType, byte> P_BALLOON_KEYCODE{};
 	map<PlayerType, byte> P_ITEM_KEYCODE{};
 
+public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
+	
+	map<GameMap, wstring> tileBinFile{};
+	map<GameMap, wstring> blockBinFile{};
+
+	GameMap GetCurMapType() const { return curMap; }
+
+private:
+
+	GameMap curMap{ VILLAGE };
+
 
 private: // Board 및 GameField 관련
 
@@ -100,7 +128,17 @@ private: // Board 및 GameField 관련
 
 private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
 
+	// 캐릭터가 누구인지는 Character가 들고있는 PlayerType으로 구분가능함
 	Character* player{};
+	
+	vector<Character*> wholePlayers{};
+
+	Character* p1{};
+	Character* p2{};
+	
+	vector<Character*> comEnemies{};
+
+
 	BalloonManager* balloonManager{};
 	BlockManager* blockManager{};
 	StreamManager* streamManager{};

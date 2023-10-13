@@ -119,8 +119,8 @@ void StreamBlockManager::HandleCollision()
 
 		if (!streamBlock->IsActive()) continue;
 
-		Character* player = GM->GetPlayer();
-		streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
+		for (Character* player : GM->GetWholePlayers())
+			streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
 
 	}
 
@@ -135,8 +135,8 @@ void StreamBlockManager::HandleCollision()
 
 			if (!streamBlock->IsActive()) continue;
 
-			Character* player = GM->GetPlayer();
-			streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
+			for (Character* player : GM->GetWholePlayers())
+				streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
 
 		}
 	}

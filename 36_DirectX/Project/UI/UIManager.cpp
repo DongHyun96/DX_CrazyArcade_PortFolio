@@ -14,6 +14,8 @@ UIManager::UIManager()
 	itemUI->translation = {1727, 175};
 	itemUI->scale = { 2.0f, 1.2f };
 	itemUI->zDepth = FAR_Z - 2;
+
+
 }
 
 UIManager::~UIManager()

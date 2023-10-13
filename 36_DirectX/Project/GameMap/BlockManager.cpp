@@ -90,9 +90,7 @@ Block* BlockManager::CreateBlock(const BlockInfo& info, Util::Coord boardXY)
 
 void BlockManager::Load()
 {
-	// VillageBlockData
-	//VillageBlockSampleData
-	BinaryReader reader(L"VillageBlockData");
+	BinaryReader reader(GM->blockBinFile[GM->GetCurMapType()]);
 
 	if (!reader.Succeeded())
 		return;
@@ -131,10 +129,12 @@ void BlockManager::HandleCommonCollisions()
 
 void BlockManager::HandleCharacterCommonCollision(Block* block)
 {
-	ColliderHolder* character = (ColliderHolder*)(GM->GetPlayer());
+	for (Character* player : GM->GetWholePlayers())
+	{
+		block->GetBody()->AABBCollision(player->GetBody(), player);
+		block->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
+	}
 
-	block->GetBody()->AABBCollision(GM->GetPlayer()->GetBody(), character);
-	block->GetBody()->AABBCollision(GM->GetPlayer()->GetBody()->GlobalPosition(), character);
 }
 
 void BlockManager::HandleDartCollision(Block* block)
@@ -160,7 +160,8 @@ void BlockManager::HandleMovableCollisions()
 			continue;
 
 		// Player vs movable
-		movable->GetBody()->AABBCollision(GM->GetPlayer()->GetPushCollider(), (ColliderHolder*)(GM->GetPlayer()));
+		for (Character* player : GM->GetWholePlayers())
+			movable->GetBody()->AABBCollision(player->GetPushCollider(), player);
 	}
 }
 

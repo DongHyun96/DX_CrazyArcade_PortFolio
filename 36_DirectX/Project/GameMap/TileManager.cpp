@@ -3,13 +3,7 @@
 
 TileManager::TileManager()
 {
-	/*for (UINT y = 0; y < MAP_ROW; y++)
-	{
-		for (UINT x = 0; x < MAP_COL; x++)
-			CreateTile(x, y, L"InGame/Village/GroundTiles/Tile.png", 7, 1, 4, 1);
-	}*/
 	Load();
-
 }
 
 TileManager::~TileManager()
@@ -70,7 +64,7 @@ void TileManager::CreateTile(const TileInfo& info, UINT boardX, UINT boardY)
 
 void TileManager::Load()
 {
-	BinaryReader reader(L"VillageTileData");
+	BinaryReader reader(GM->tileBinFile[GM->GetCurMapType()]);
 
 	if (!reader.Succeeded())
 		return;

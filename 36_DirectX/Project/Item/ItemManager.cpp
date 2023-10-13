@@ -41,7 +41,8 @@ void ItemManager::HandleCollisions()
 	{
 		if (!item->GetIsActive()) continue;
 
-		item->GetBody()->AABBCollision(GM->GetPlayer()->GetBody()->GlobalPosition(), GM->GetPlayer());
+		for (Character* player : GM->GetWholePlayers())
+			item->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
 
 	}
 }

@@ -58,12 +58,15 @@ void ConsumableItem::OnColliderPointEnter(ColliderHolder* owner)
 		switch (character->GetPlayerType())
 		{
 		case P1:
-			body->translation = { 1655, 175 };
+			body->translation = { 1655, 180 };
 			// 1694 157
 			leftCntTextPos = { 1694, 157 };
 
 			break;
 		case P2:
+			body->translation = { 1780, 180 };
+
+			leftCntTextPos = { 1815, 157 };
 			break;
 		default:
 			break;

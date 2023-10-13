@@ -28,7 +28,7 @@ BalloonManager::~BalloonManager()
 
 void BalloonManager::Update()
 {
-	Character* player = GM->GetPlayer();
+	//Character* player = GM->GetPlayer();
 
 	for (Balloon* balloon : normalBalloons)
 	{
@@ -36,7 +36,9 @@ void BalloonManager::Update()
 			continue;
 
 		balloon->Update();
-		balloon->GetBody()->AABBCollision(player->GetBody(), (ColliderHolder*)player);
+
+		for (Character* player : GM->GetWholePlayers())
+			balloon->GetBody()->AABBCollision(player->GetBody(), player);
 	}
 
 	for (TimerBalloon* t_balloon : timerBalloons)
@@ -45,7 +47,9 @@ void BalloonManager::Update()
 			continue;
 
 		t_balloon->Update();
-		t_balloon->GetBody()->AABBCollision(player->GetBody(), player);
+
+		for (Character* player : GM->GetWholePlayers())
+			t_balloon->GetBody()->AABBCollision(player->GetBody(), player);
 	}
 
 	Balloon::SetExplodeSoundPlayed(false);

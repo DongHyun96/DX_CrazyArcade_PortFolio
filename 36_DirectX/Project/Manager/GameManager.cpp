@@ -4,6 +4,24 @@
 
 GameManager::GameManager()
 {
+
+	tileBinFile =
+	{
+		{VILLAGE, L"VillageTileData"},
+		{FACTORY, L""},
+		{FOREST, L""}
+	}; 
+
+	//VillageBlockSampleData
+	blockBinFile =
+	{
+		{VILLAGE, L"VillageBlockData"},
+		{FACTORY, L""},
+		{FOREST, L""}
+	};
+
+
+
 	gameFieldTransform = new Transform;
 
 	gameFieldTransform->scale = Vector2(0.76f, 0.88f);
@@ -127,6 +145,28 @@ void GameManager::SetGameMode(const GameMode& gameMode)
 	}
 
 	this->gameMode = gameMode;
+}
+
+void GameManager::SetPlayers(Character* p1, Character* p2)
+{
+	this->p1 = p1;
+	this->p2 = p2;
+
+	wholePlayers.clear();
+
+	wholePlayers.push_back(p1);
+	wholePlayers.push_back(p2);
+}
+
+void GameManager::SetPlayers(Character* p1, vector<Character*> enemies)
+{
+	this->p1 = p1;
+	this->comEnemies = enemies;
+
+	wholePlayers.clear();
+
+	wholePlayers = enemies;
+	wholePlayers.push_back(p1);
 }
 
 Vector2 GameManager::GetCollidedMapCellPos(const Vector2& point)

@@ -21,6 +21,7 @@ public:
 	IDXGISwapChain* GetSwapChain() const { return swapChain; }
 
 private:
+
 	void CreateDepthStencil();
 
 private:
