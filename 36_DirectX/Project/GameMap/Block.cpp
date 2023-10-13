@@ -403,17 +403,51 @@ void Block::HandleAddItem()
 {
 	if (hidable || !breakable) return;
 
-	// 테스팅 (100%의 확률로 스폰)
+	if (rand() % 2 != 0) return;
 
-	if (rand() % 2 == 0)
+
+	// BUBBLE, ROLLER가 많이 스폰되어야 함
+	if (Util::GetRandom(0, 9) < 8) // 80% 확률로 Immediate Item 스폰
 	{
-		item = new ImmediateItem((ItemName(rand() % 8)));
-	}
-	else
+		// 붉은 악마 먼저 스폰 시도
+		if (Util::GetRandom(0, 19) < 1) // 붉은 악마 스폰확률 5%
+		{
+			item = new ImmediateItem(RED_DEVIL);
+			ItemManager::AddItem(item);
+			return;
+		}
+		
+		// 90%의 확률로 Power-up 스폰
+		if (Util::GetRandom(0, 9) != 9)
+		{
+			// 60%의 확률로 ROLLER나 BUBBLE 스폰
+			if (Util::GetRandom(0, 9) < 6)
+			{
+				item = new ImmediateItem((ItemName)(rand() % 2));
+				ItemManager::AddItem(item);
+				return;
+			}
+			else // 40%의 확률로 나머지 스폰
+			{
+				item = new ImmediateItem((ItemName)(Util::GetRandom(2, 4)));
+				ItemManager::AddItem(item);
+				return;
+			}
+		}
+		else // 10%의 확률로 탈 것 스폰
+		{
+			item = new ImmediateItem((ItemName(Util::GetRandom(5, 7))));
+			ItemManager::AddItem(item);
+			return;
+		}
+	} 
+	else  // 20%의 확률로 Consumable 아이템 스폰
 	{
-		item = new ConsumableItem((ItemName)(rand() % 3 + 8));
+		item = new ConsumableItem((ItemName)(Util::GetRandom(8, 10))); 
+		ItemManager::AddItem(item);
 	}
-	ItemManager::AddItem(item);
+	
+
 
 }
 
