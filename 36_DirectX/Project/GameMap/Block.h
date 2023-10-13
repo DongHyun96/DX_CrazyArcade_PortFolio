@@ -18,11 +18,16 @@ struct BlockInfo
 {
 	BlockInfo() {}
 
-	BlockInfo(wstring file, Util::Coord boardXY, Util::Coord frameXY, Util::Coord targetXY, BlockProperty bProp, Vector2 texWorldSize = CELL_WORLD_SIZE)
+	BlockInfo
+	(
+		wstring file, 
+		Util::Coord boardXY,
+		Util::Coord frameXY, Util::Coord targetXY,
+		BlockProperty bProp,
+		Vector2 texWorldSize = CELL_WORLD_SIZE
+	)
 		:file(file), boardXY(boardXY), frameXY(frameXY), targetXY(targetXY), bProp(bProp), texWorldSize(texWorldSize)
-	{
-		initialized = true;
-	}
+	{ initialized = true; }
 
 	void SaveData(BinaryWriter& binWriter)
 	{

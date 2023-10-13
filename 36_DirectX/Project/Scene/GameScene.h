@@ -12,17 +12,9 @@ public:
 
 private:
 
-	//Collider* mapBoundary{};
-
 	TileManager* tileManager{};
 	BlockManager* blockManager{};
 	BalloonManager* balloonManager{}; // TODO 터졌을 때 콜백으로 플레이어의 balloonCnt에서 1을 돌려줘야 함
-
-
-	Block* block{};
-	Util::Coord curBlockPos{};
-
-	Block* block2{};
 
 	Character* p1{};
 	Character* p2{};

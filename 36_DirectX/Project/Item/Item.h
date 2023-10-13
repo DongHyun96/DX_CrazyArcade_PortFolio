@@ -15,19 +15,19 @@ enum ItemState
 	RESPAWN		// 캐릭터가 죽었을 때 먹은 아이템이 반환될 때 사용
 };
 
-enum ItemName
+enum ItemName	// 전체 아이템 스폰률(블록 당 1/3)
 {
-	ROLLER,
-	RED_DEVIL,
+	ROLLER,		
+	BUBBLE,
 	FLUID,
 	FLUID_ULTRA,
-	BUBBLE,
+	RED_DEVIL,
 
-	I_SPACECRAFT,
+	I_SPACECRAFT, // 5
 	I_OWL,
 	I_TURTLE,
 
-	NEEDLE,
+	NEEDLE, // 8
 	DART,
 	TIMER_BALLOON
 };
