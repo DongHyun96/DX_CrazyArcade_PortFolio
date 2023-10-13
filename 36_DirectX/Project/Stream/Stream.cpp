@@ -75,7 +75,7 @@ void Stream::InitReachedMap(const Util::Coord& spawnCoord, const UINT& streamLv)
 
 void Stream::HandleChainExplosion()
 {
-	for (Balloon* balloon : GM->GetBalloonManager()->GetBalloons())
+	for (Balloon* balloon : GM->GetBalloonManager()->GetNormalBalloons())
 	{
 		if (!balloon->Active())
 			continue;

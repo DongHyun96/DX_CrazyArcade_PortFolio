@@ -193,6 +193,7 @@
     <ClInclude Include="Stream\StreamBlocks\StreamBlock_Left.h" />
     <ClInclude Include="Stream\StreamBlocks\StreamBlock_Right.h" />
     <ClInclude Include="Stream\StreamBlocks\StreamBlock_Up.h" />
+    <ClInclude Include="Balloon\TimerBalloon.h" />
     <ClInclude Include="UI\UIManager.h" />
     <ClInclude Include="Utility\Font.h" />
     <ClInclude Include="Utility\SoundManager.h" />
@@ -286,6 +287,7 @@
     <ClCompile Include="Stream\StreamBlocks\StreamBlock_Left.cpp" />
     <ClCompile Include="Stream\StreamBlocks\StreamBlock_Right.cpp" />
     <ClCompile Include="Stream\StreamBlocks\StreamBlock_Up.cpp" />
+    <ClCompile Include="Balloon\TimerBalloon.cpp" />
     <ClCompile Include="UI\UIManager.cpp" />
     <ClCompile Include="Utility\BinaryReader.cpp" />
     <ClCompile Include="Utility\BinaryWriter.cpp" />

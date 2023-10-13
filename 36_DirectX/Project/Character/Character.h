@@ -85,7 +85,12 @@ public: // Item Usage
 
 	bool IncreaseSpeed(bool increaseToMax = false);
 	bool IncreaseStreamLv(bool increaseToMax = false);
+
+public:
 	
+	void AddTimerBalloon(TimerBalloon* timerBalloon) { this->timerBalloons.push_back(timerBalloon); }
+	
+
 protected: 
 
 	virtual void HandleUseConsumableItem() = 0;
@@ -123,6 +128,10 @@ protected:
 	CharacterAnim*	actionHandler; // 실질적인 캐릭터 출력물 담당
 
 	Item*			consumableItem{};
+
+protected:
+
+	vector<TimerBalloon*> timerBalloons{}; // 타이머 벌룬을 스폰시킬 때 여기로 해당 포인터를 받음
 
 protected:
 

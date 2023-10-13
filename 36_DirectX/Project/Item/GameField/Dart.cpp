@@ -48,7 +48,6 @@ void Dart::Update()
 void Dart::Render()
 {
 	//Debug();
-
 	if (!isActive) return;
 
 	body->Render();

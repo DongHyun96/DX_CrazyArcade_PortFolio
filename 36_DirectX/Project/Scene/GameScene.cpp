@@ -46,7 +46,7 @@ GameScene::GameScene()
 	dartManager = new DartManager;
 	GM->SetDartManager(dartManager);
 
-	//SOUND->Play("VillageBGM", 1.f);
+	SOUND->Play("VillageBGM", 1.f);
 }
 
 GameScene::~GameScene()
@@ -80,9 +80,9 @@ void GameScene::Update()
 		return;
 	}
 
-
 	player->Update();
 
+	dartManager->Update();
 	tileManager->Update();
 	blockManager->Update();
 	balloonManager->Update();
@@ -91,12 +91,10 @@ void GameScene::Update()
 
 	itemManager->Update();
 
-	dartManager->Update();
 }
 
 void GameScene::Render()
 {
-
 	if (GM->IsEditMode())
 	{
 		MapEditor::GetInst()->Render();
@@ -112,7 +110,7 @@ void GameScene::Render()
 	itemManager->Render();
 
 	dartManager->Render();
-	//player->Debug();
+	player->Debug();
 }
 
 

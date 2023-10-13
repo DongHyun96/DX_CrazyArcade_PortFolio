@@ -4,15 +4,15 @@
 class Balloon : public ColliderHolder
 {
 public:
-	Balloon();
-	~Balloon();
+	Balloon(Animation* animation);
+	virtual ~Balloon();
 
 	void Update();
 	void Render();
 
-	bool Spawn(const Util::Coord& spawnCoord, Character* owner);
+	virtual bool Spawn(const Util::Coord& spawnCoord, Character* owner);
 
-	void Explode();
+	virtual void Explode();
 
 	void OnColliderRectEnter(ColliderRect*	targetCollider, ColliderHolder* owner);
 
@@ -23,20 +23,20 @@ public:
 	
 	void SetVisible(const bool& visible) { this->visible = visible; }
 
-	static vector<Vector2> GetActiveBalloonPositions() { return activeBalloonPositions; }
+	static vector<Vector2>& GetActiveBalloonPositions() { return activeBalloonPositions; }
 	
 	Util::Coord GetSpawnCoord() const { return spawnCoord; }
 
 	static void SetExplodeSoundPlayed(const bool& played) { explodeSoundPlayed = played; }
 
 
-private:
+protected:
 
 	bool Spawn(const Vector2& spawnPos);
 
-	void HandleExplode();
+	virtual void HandleExplode();
 
-private:
+protected:
 
 	Util::Coord spawnCoord{};
 
@@ -50,22 +50,24 @@ private:
 
 	UINT		streamLv{};
 
-	float		explodeTime{};
-	const float EXPLODE_TIME_LIMIT{ 3.f };
-
-
 	ColorBuffer*	colorBuffer{};
 	VertexShader*	vertexShader{};
 	PixelShader*	pixelShader{};
 
 	MatrixBuffer*	worldBuffer{};
 
-private:
+protected:
 	
 	// 터졌을 때 owner의 물풍선 개수 회복해주기
 	Character* owner{}; // spawn시에 자신의 owener를 받아올 것임
 
-private: // 볼륨 조절 용도 (1 tick에 풍선이 터졌는지 안터졌는지 체크)
+protected: // 볼륨 조절 용도 (1 tick에 풍선이 터졌는지 안터졌는지 체크)
+
 	static bool explodeSoundPlayed;
+
+private:
+
+	float		explodeTime{};
+	const float EXPLODE_TIME_LIMIT{ 3.f };
 
 };

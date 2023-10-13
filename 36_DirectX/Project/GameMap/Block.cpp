@@ -403,20 +403,18 @@ void Block::HandleAddItem()
 {
 	if (hidable || !breakable) return;
 
-	// 테스팅 (50%의 확률로 스폰)
-	if (rand() % 1 == 0)
+	// 테스팅 (100%의 확률로 스폰)
+
+	if (rand() % 2 == 0)
 	{
-		//item = new ImmediateItem((ItemName)(rand() % 8));
-	/*	if (rand() % 4 == 1)
-			item = new ImmediateItem((ItemName)(rand() % 3 + 5));
-		else
-			item = new ImmediateItem((ItemName)(rand() % 5));*/
-
-		//item = new ConsumableItem(NEEDLE);
-		item = new ConsumableItem(DART);
-
-		ItemManager::AddItem(item);
+		item = new ImmediateItem((ItemName(rand() % 8)));
 	}
+	else
+	{
+		item = new ConsumableItem((ItemName)(rand() % 3 + 8));
+	}
+	ItemManager::AddItem(item);
+
 }
 
 void Block::Debug()

@@ -33,7 +33,8 @@ NeedleStrategy::~NeedleStrategy() {}
 DartStrategy::DartStrategy() {}
 DartStrategy::~DartStrategy() {}
 
-
+TimerBalloonStrategy::TimerBalloonStrategy() {}
+TimerBalloonStrategy::~TimerBalloonStrategy() {}
 
 
 bool RollerStrategy::UseStrategy(Character* itemUser)
@@ -109,6 +110,27 @@ bool DartStrategy::UseStrategy(Character* itemUser)
 		GM->GetDartManager()->Spawn(itemUser->GetBody()->translation, itemUser->GetCurFaceDir());
 
 		return true;
+	default:
+		return false;
+	}
+
+	return false;
+}
+
+bool TimerBalloonStrategy::UseStrategy(Character* itemUser)
+{
+	switch (itemUser->GetCharacterState())
+	{
+	case C_IDLE: case C_SPACECRAFT: case C_OWL: case C_TURTLE:
+	{
+		Util::Coord deployCoord = GM->GetCollidedMapCellCoord(itemUser->GetBody()->GlobalPosition());
+		
+		if (GM->GetBalloonManager()->Spawn(deployCoord, itemUser, false))
+		{
+			SOUND->Play("BalloonDeploy", 1.f);
+			return true;
+		}
+	}
 	default:
 		return false;
 	}

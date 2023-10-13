@@ -1,6 +1,6 @@
 #pragma once
 
-#define Y_OFFSET 20.f
+#define Y_OFFSET 10.f
 
 class Character;
 class Player;

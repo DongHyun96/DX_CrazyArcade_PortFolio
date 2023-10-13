@@ -6,12 +6,12 @@ vector<Vector2> Balloon::activeBalloonPositions{};
 bool Balloon::explodeSoundPlayed{};
 
 
-Balloon::Balloon()
+Balloon::Balloon(Animation* animation)
 {
 	body = new ColliderRect(CELL_WORLD_SIZE);
 	body->SetParent(GM->GetGameFieldTransform());
 
-	balloonAnim = new Animation(CELL_WORLD_SIZE, L"InGame/Balloon/1.png", 4, 1, 4, 0.15f);
+	balloonAnim = animation;
 
 	vertexShader = new VertexShader(L"VertexTexture");
 	pixelShader = new PixelShader(L"PixelTexture");

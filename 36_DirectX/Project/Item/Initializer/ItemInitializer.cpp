@@ -54,6 +54,11 @@ void ItemInitializer::CreateCommonFields(const ItemName& itemName, Object** texO
 		*texObj			= new Object(CELL_WORLD_SIZE, L"InGame/Item/Dart.png");
 		*itemStrategy	= new DartStrategy;
 		break;
+	case TIMER_BALLOON:
+		//*texObj			= new Object({CELL_WORLD_SIZE.x * 0.8f, CELL_WORLD_SIZE.y * 0.8f}, L"InGame/Item/Timer.png");
+		*texObj			= new Object(CELL_WORLD_SIZE * 0.9f, L"InGame/Item/Timer.png");
+		*itemStrategy	= new TimerBalloonStrategy;
+		break;
 	default:
 		*texObj			= nullptr;
 		*itemStrategy	= nullptr;

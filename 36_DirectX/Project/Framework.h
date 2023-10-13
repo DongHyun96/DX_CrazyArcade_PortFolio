@@ -150,6 +150,7 @@ typedef XMMATRIX Matrix;
 #include "GameMap/BlockManager.h"
 
 #include "Balloon/Balloon.h"
+#include "Balloon/TimerBalloon.h"
 #include "Balloon/BalloonManager.h"
 
 #include "Stream/StreamBlocks/StreamBlock.h"

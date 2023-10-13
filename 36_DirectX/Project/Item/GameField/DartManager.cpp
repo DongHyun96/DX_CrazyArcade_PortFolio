@@ -47,11 +47,11 @@ void DartManager::HandleCollision()
 	{
 		if (!dart->GetIsActive()) continue;
 		
-		for (Balloon* balloon : GM->GetBalloonManager()->GetBalloons())
+		for (Balloon* balloon : GM->GetBalloonManager()->GetNormalBalloons())
 		{
 			if (!balloon->Active()) continue;
 
-			balloon->GetBody()->AABBCollision(balloon->GetBody(), balloon);
+			dart->GetBody()->AABBCollision(balloon->GetBody(), balloon);
 		}
 	}
 }

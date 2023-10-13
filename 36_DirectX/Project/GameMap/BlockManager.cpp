@@ -92,7 +92,7 @@ void BlockManager::Load()
 {
 	// VillageBlockData
 	//VillageBlockSampleData
-	BinaryReader reader(L"VillageBlockSampleData");
+	BinaryReader reader(L"VillageBlockData");
 
 	if (!reader.Succeeded())
 		return;
@@ -143,11 +143,10 @@ void BlockManager::HandleDartCollision(Block* block)
 	{
 		if (!dart->GetIsActive()) continue;
 
-		if (block->IsHidable()) continue;
+		if (block->IsHidable()) continue; // Hidable을 제외한 블록들에 dart가 맞으면 dart 끔
 
 		if (block->GetBody()->AABBCollision(dart->GetBody()))
 			dart->SetActive(false);
-		
 	}
 }
 
@@ -167,20 +166,6 @@ void BlockManager::HandleMovableCollisions()
 
 void BlockManager::HandleHidableCollisions()
 {
-	//for (Block* movable : movableBlocks)
-	//{
-	//	if (!movable->IsActive())
-	//		continue;
-
-	//	for (Block* hidable : hidableBlocks)
-	//	{
-	//		if (!hidable->IsActive())
-	//			continue;
-
-	//		hidable->GetBody()->Collision(movable->GetBody()->GlobalPosition(), movable);
-	//	}
-	//}
-
 	for (Block* hidable : hidableBlocks)
 	{
 		if (!hidable->IsActive())
@@ -197,10 +182,15 @@ void BlockManager::HandleHidableCollisions()
 		}
 
 		// vs Balloons
-		BalloonManager* b_mgr = GM->GetBalloonManager();
-		vector<Balloon*> balloons = GM->GetBalloonManager()->GetBalloons();
+		for (Balloon* balloon : GM->GetBalloonManager()->GetNormalBalloons()) // 일반 벌룬들
+		{
+			if (!balloon->Active())
+				continue;
 
-		for (Balloon* balloon : balloons)
+			hidable->GetBody()->AABBCollision(balloon->GetBody()->GlobalPosition(), (ColliderHolder*)balloon);
+		}
+
+		for (TimerBalloon* balloon : GM->GetBalloonManager()->GetTimerBalloons())
 		{
 			if (!balloon->Active())
 				continue;

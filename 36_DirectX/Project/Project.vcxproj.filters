@@ -291,6 +291,9 @@
     <ClInclude Include="Item\GameField\DartManager.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Balloon\TimerBalloon.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -492,6 +495,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Item\GameField\DartManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Balloon\TimerBalloon.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -10,16 +10,20 @@ public:
 	void Update();
 	void Render();
 
-	bool Spawn(const Util::Coord& spawnCoord, Character* owner);
+	bool Spawn(const Util::Coord& spawnCoord, Character* owner, const bool& isNormalBalloon = true);
 
-public:
+ public:
 
-	const vector<Balloon*>& GetBalloons() { return balloons; } // Collision ¶§¹®¿¡ ¶Õ¾îµÒ
+	const vector<Balloon*>& GetNormalBalloons() { return normalBalloons; } // Collision ¶§¹®¿¡ ¶Õ¾îµÒ
+	const vector<TimerBalloon*>& GetTimerBalloons() { return timerBalloons; }
 
 private:
 
 	const UINT POOL_CNT = 80;
+	const UINT TIMERB_POOL_CNT = 24;
 
-	vector<Balloon*> balloons{};
+	vector<Balloon*> normalBalloons{}; // ÀÏ¹Ý ¹ú·é
+
+	vector<TimerBalloon*> timerBalloons{}; // Å¸ÀÌ¸Ó ¹ú·é
 
 };

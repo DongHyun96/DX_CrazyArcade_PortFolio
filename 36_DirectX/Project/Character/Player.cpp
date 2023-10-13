@@ -40,22 +40,37 @@ void Player::Move()
 void Player::DeployBalloon()
 {
 	switch (mainState)
-		case C_SPAWN: case C_CAPTURED:
-		case C_RETURN_IDLE: case C_DEAD: return;
-
-	if (leftBalloonCnt <= 0)
-		return;
-
-	if (KEY_DOWN(GM->P_BALLOON_KEYCODE[playerType]))
 	{
-		Util::Coord deployCoord = GM->GetCollidedMapCellCoord(body->GlobalPosition());
-		
-		if (GM->GetBalloonManager()->Spawn(deployCoord, this))
-		{
-			SOUND->Play("BalloonDeploy", 1.f);
+		case C_SPAWN: case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: return;
+	}
 
-			leftBalloonCnt--;
+	if (!KEY_DOWN(GM->P_BALLOON_KEYCODE[playerType])) return;
+
+	if (!timerBalloons.empty()) // 타이머 벌룬이 세팅되어있을 때
+	{
+
+		// 타이머 벌룬을 한번에 터침
+		for (TimerBalloon* t_balloon : timerBalloons)
+		{
+			if (!t_balloon) continue;
+
+			t_balloon->Explode();
 		}
+
+		timerBalloons.clear();
+
+		return;
+	}
+
+	if (leftBalloonCnt <= 0) return;
+		
+	Util::Coord deployCoord = GM->GetCollidedMapCellCoord(body->GlobalPosition());
+	
+	if (GM->GetBalloonManager()->Spawn(deployCoord, this))
+	{
+		SOUND->Play("BalloonDeploy", 1.f);
+
+		leftBalloonCnt--;
 	}
 }
 

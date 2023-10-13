@@ -110,3 +110,13 @@ public:
 	virtual bool UseStrategy(Character* itemUser) override;
 
 };
+
+class TimerBalloonStrategy : public ItemStrategy
+{
+public:
+	TimerBalloonStrategy();
+	~TimerBalloonStrategy();
+
+	virtual bool UseStrategy(Character* itemUser) override;
+
+};
