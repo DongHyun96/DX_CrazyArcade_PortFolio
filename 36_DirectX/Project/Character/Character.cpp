@@ -19,7 +19,7 @@ Character::Character(const CharacterType& cType, const PlayerType& playerType)
 	pushCollider->SetColliderTag(CHARACTER_PUSH);
 	pushCollider->SetColor(1, 0, 0);
 
-	Util::SetTransformToGameBoard(body, { 7, MAP_ROW - 7 });
+	//Util::SetTransformToGameBoard(body, { 7, MAP_ROW - 7 });
 
 	pushCollider->SetParent(body);
 

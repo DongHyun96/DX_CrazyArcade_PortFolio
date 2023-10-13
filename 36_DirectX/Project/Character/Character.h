@@ -78,6 +78,8 @@ public:
 
 	Direction GetCurFaceDir() const;
 
+	void SetSpawnPos(const Util::Coord& spawnPos) { Util::SetTransformToGameBoard(body, spawnPos); }
+
 public: // Item Usage
 	
 	void SetConsumableItem(Item* consumable) { this->consumableItem = consumable; }
@@ -96,9 +98,6 @@ protected:
 	virtual void HandleUseConsumableItem() = 0;
 	bool UseConsumableItem();
 
-public:
-	void Debug();
-	void SetLabel(const string& label) { this->label = label; }
 
 private:
 
@@ -106,9 +105,22 @@ private:
 
 	virtual void DeployBalloon() = 0;
 
+
+public:
+	void Debug();
+	void SetLabel(const string& label) { this->label = label; }
+
+
+
+
+
+
+
+
 protected:
 
 	ColorBuffer* colorBuffer{};
+
 	bool visible{ true };
 
 	void InitStat(const CharacterType& cType);
