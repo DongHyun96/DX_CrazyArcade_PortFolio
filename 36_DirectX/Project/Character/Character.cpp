@@ -15,11 +15,14 @@ Character::Character(const CharacterType& cType, const PlayerType& playerType)
 	body = new ColliderRect(characterBodySize);
 	body->SetColliderTag(CHARACTER);
 
+	shadow = new Object({ characterBodySize.x, characterBodySize.y}, L"InGame/Characters/CharacterShadow.png");
+	shadow->translation.y -= 10.f;
+	shadow->SetColor(1, 1, 1, 0.6f);
+	shadow->SetParent(body);
+	
 	pushCollider = new ColliderRect(pushColSize);
 	pushCollider->SetColliderTag(CHARACTER_PUSH);
 	pushCollider->SetColor(1, 0, 0);
-
-	//Util::SetTransformToGameBoard(body, { 7, MAP_ROW - 7 });
 
 	pushCollider->SetParent(body);
 
@@ -28,6 +31,23 @@ Character::Character(const CharacterType& cType, const PlayerType& playerType)
 	actionHandler->SetCapturedEndEvent(bind(&Character::OnCapturedEnd, this));
 
 	colorBuffer = new ColorBuffer();
+
+	arrow = (playerType == P1) ? new Object(L"InGame/Characters/PlayerArrow/1p.png") :
+			(playerType == P2) ? new Object(L"InGame/Characters/PlayerArrow/2p.png") : nullptr;
+
+	if (arrow)
+	{
+		arrow->scale = { 2.f, 1.5f };
+		arrow->translation.y = actionHandler->GetCurActionSize().y * 1.3f;
+
+		arrowYDestMap =
+		{
+			{false, actionHandler->GetCurActionSize().y * 1.6f},
+			{true, actionHandler->GetCurActionSize().y * 1.4f}
+		};
+
+		arrow->SetParent(body);
+	}
 
 	// 스탯 설정
 	InitStat(cType);
@@ -44,6 +64,10 @@ Character::~Character()
 
 	delete colorBuffer;
 
+	delete shadow;
+
+	if (arrow) delete arrow;
+
 }
 
 void Character::Update()
@@ -53,37 +77,52 @@ void Character::Update()
 
 	body->UpdateZDepthToY();
 
+	shadow->Update();
+	
+	if (arrow)
+	{
+		arrowYDestMap =
+		{
+			{false, actionHandler->GetCurActionSize().y * 1.5f},
+			{true, actionHandler->GetCurActionSize().y * 1.2f}
+		};
 
+		if (abs(arrow->translation.y - arrowYDestMap[arrowYSwitched]) < 0.99f)
+			arrowYSwitched = !arrowYSwitched;
+		else arrow->translation.y = Util::Lerp(arrow->translation.y, arrowYDestMap[arrowYSwitched], 0.01f);
+	}
+	
+	arrow->Update();
 
 	actionHandler->Update();
 	actionHandler->UpdateAction(mainState, velocity);
 
 	switch (mainState)
-	{
-	case C_SPAWN:
+	{ 
+	case C_IDLE: case C_OWL: case C_TURTLE: case C_CAPTURED:
 		break;
-	case C_IDLE:
-		break;
-	case C_SPACECRAFT:
-		// y Depth 고정시킴
+	case C_SPACECRAFT: // y Depth 고정시킴
 		body->zDepth = -1.f;
 		break;
-	case C_OWL:
-		break;
-	case C_TURTLE:
-		break;
-	case C_CAPTURED: // 상하로 올라갔다 내려갔다 조절
-		break;
-	case C_RETURN_IDLE:
-		break;
-	case C_DEAD:
-		break;
+	case C_SPAWN:
+
+		flicker += Time::Delta();
+
+		if (flicker >= 0.05f)
+		{
+			if (flicked) colorBuffer->SetData({ 1,1,1,1 });
+			else colorBuffer->SetData(SPAWN_COLOR);
+			
+			flicked = !flicked;
+			flicker -= 0.05f;
+		}
+
+		return;
+	case C_RETURN_IDLE: case C_DEAD: case C_WIN:
+		return;
 	default:
 		break;
 	}
-
-	if (mainState == C_DEAD || mainState == C_RETURN_IDLE)
-		return;
 
 	Move();
 	DeployBalloon();
@@ -94,7 +133,8 @@ void Character::Update()
 
 void Character::Render()
 {
-	//colorBuffer->SetData(Vector4(1, 0, 1, 1.f));
+	arrow->Render();
+
 	if (!visible)
 		return;
 
@@ -102,8 +142,11 @@ void Character::Render()
 
 	actionHandler->Render(); // 여기에서 shader 세팅
 
+	shadow->Render();
+
 	body->Render();
 	pushCollider->Render();
+
 }
 
 void Character::Debug()
@@ -127,6 +170,7 @@ void Character::SetCharacterState(const CharacterState& state)
 	{
 	case C_IDLE:
 		speedLv = curIdleSpeedLv;
+		colorBuffer->SetData({ 1,1,1,1 });
 		break;
 	case C_SPACECRAFT:
 		curIdleSpeedLv = speedLv;
@@ -143,12 +187,15 @@ void Character::SetCharacterState(const CharacterState& state)
 	case C_CAPTURED:
 		curIdleSpeedLv = speedLv;
 		speedLv = SpeedLv::capturedSpeedLv;
+		SOUND->Play("Captured", 1.f);
 		break;
 	case C_RETURN_IDLE: // 이 때 속도가 0
 		speedLv = 0;
 		break;
 	case C_DEAD:
+		SOUND->Play("Die", 1.f);
 		speedLv = 0;
+
 		break;
 	default:
 		break;

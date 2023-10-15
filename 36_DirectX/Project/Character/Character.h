@@ -4,6 +4,7 @@ class CharacterAnim;
 
 #define SPEED_BASE 70.f
 
+
 enum CharacterType
 {
 	BAZZI,
@@ -26,7 +27,9 @@ enum CharacterState
 
 	C_RETURN_IDLE,
 
-	C_DEAD
+	C_DEAD,
+
+	C_WIN
 };
 
 enum PlayerType
@@ -113,13 +116,7 @@ public:
 
 
 
-
-
-
-
 protected:
-
-	ColorBuffer* colorBuffer{};
 
 	bool visible{ true };
 
@@ -132,11 +129,18 @@ protected:
 
 	PlayerType		playerType{};
 
+	ColorBuffer* colorBuffer{};
+
 	ColliderRect*	body{};
 	ColliderRect*	pushCollider{}; // 밀어낼 수 있는 블록용도로 쓸 것임
 
+	Object*			shadow{};
+	Object*			arrow{};
+	map<bool, float> arrowYDestMap{};
+	bool arrowYSwitched{};
+
 	Vector2			velocity{};
-	CharacterState	mainState{C_IDLE};
+	CharacterState	mainState{C_SPAWN};
 	CharacterAnim*	actionHandler; // 실질적인 캐릭터 출력물 담당
 
 	Item*			consumableItem{};
@@ -167,6 +171,12 @@ protected:
 protected:
 	string	label{};
 
+
+protected: // 스폰 컬러 관련
+
+	const Vector4 SPAWN_COLOR{ 0, 0, 0, 1 };
+	float flicker{};
+	bool flicked{};
 
 };
 
