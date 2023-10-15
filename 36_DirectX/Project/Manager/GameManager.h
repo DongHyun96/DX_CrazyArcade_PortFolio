@@ -4,10 +4,11 @@ class Transform;
 class BalloonManager;
 class BlockManager;
 class StreamManager;
-class Character;
 class Collider;
 class ColliderRect;
 class DartManager;
+class PlayerManager;
+
 
 enum GameMode
 {
@@ -22,10 +23,13 @@ enum GameMap
 	FOREST
 };
 
+
+
 enum Direction;
 enum PlayerType;
 
 namespace Util { struct Coord; }
+
 
 class GameManager
 {
@@ -50,16 +54,9 @@ public:
 	//void SetPlayer(Character* player) { this->player = player; }
 	//Character* GetPlayer() const { return player; }
 
-	void SetPlayers(Character* p1, Character* p2);
-	void SetPlayers(Character* p1, vector<Character*> enemies);
+	void SetPlayerManager(PlayerManager* playerManager) { this->playerMananger = playerManager; }
+	PlayerManager* GetPlayerManager() const { return playerMananger; }
 	
-	vector<Character*>& GetWholePlayers() { return wholePlayers; }
-
-	Character* GetP1() const { return p1; }
-	Character* GetP2() const { return p2; }
-
-	vector<Character*>& GetComEnemies() { return comEnemies; }
-
 	void SetBalloonManager(BalloonManager* balloonManager) { this->balloonManager = balloonManager; }
 	BalloonManager* GetBalloonManager() const { return balloonManager; }
 
@@ -90,24 +87,8 @@ public:
 
 
 
-
-
-
-
-
-
-
-
-public: // Players' keyCode
-
-	map<PlayerType, map<Direction, byte>> P_DIR_KEYCODE{};
-	map<PlayerType, byte> P_BALLOON_KEYCODE{};
-	map<PlayerType, byte> P_ITEM_KEYCODE{};
-
 public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
 	
-	map<GameMap, vector<Util::Coord>> spawnPosMap{};
-
 	map<GameMap, wstring> tileBinFile{};
 	map<GameMap, wstring> blockBinFile{};
 
@@ -121,11 +102,6 @@ private:
 private: // Board 및 GameField 관련
 
 	Transform* gameFieldTransform{};
-
-	//VillageBlockSampleData
-	//VillageTileData
-	const wstring blockDataPath = L"VillageBlockData";
-	const wstring tileDataPath  = L"VillageTileData";
 	
 	bool editMode = false;
 
@@ -138,15 +114,7 @@ private: // Board 및 GameField 관련
 
 private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
 
-	// 캐릭터가 누구인지는 Character가 들고있는 PlayerType으로 구분가능함
-	Character* player{};
-	
-	vector<Character*> wholePlayers{};
-
-	Character* p1{};
-	Character* p2{};
-	
-	vector<Character*> comEnemies{};
+	PlayerManager* playerMananger{};
 
 	BalloonManager* balloonManager{};
 	BlockManager* blockManager{};

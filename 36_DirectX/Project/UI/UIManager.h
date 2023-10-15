@@ -2,31 +2,16 @@
 
 class UIManager
 {
-private:
-	UIManager();
-	~UIManager();
-
 public:
 
-	static UIManager* GetInst()
-	{
-		static UIManager singleton;
-		return &singleton;
-	}
+	virtual ~UIManager() = default;
 
 public:
 	
-	void Update();
-	void Render();
+	virtual void Update() = 0;
+	virtual void Render() = 0;
 
-private:
+	virtual void Init() = 0;
 
-	void Debug();
-
-private:
-	
-	Object* mainUI{};
-	
-	Object* itemUI{};
 
 };

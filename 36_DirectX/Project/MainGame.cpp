@@ -9,7 +9,7 @@ MainGame::MainGame()
 	SetUpImGui();
 
 	//scene = new CollisionScene;
-	scene = new GameScene;
+	//scene = new GameScene;
 
 	//rgb(4, 54, 74)
 	//rgb(216, 0, 50)
@@ -19,11 +19,15 @@ MainGame::MainGame()
 	FONT->Add("BazziFont", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER);
 	FONT->Add("BazziFontBold", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
 
+	FONT->Add("NumberFont", L"µÕ±Ù¸ð²Ã", { 0.9764f, 0.5803f, 0.0901f }, 50.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
+
+	//rgb(249, 148, 23)
+
 }
 
 MainGame::~MainGame()
 {
-	delete scene;
+	//delete scene;
 
 	Device::Delete();
 	Environment::Delete();
@@ -49,9 +53,8 @@ void MainGame::Update()
 
 	SOUND->Update();
 
-	UI->Update();
-
-	scene->Update();
+	//scene->Update();
+	SM->Update();
 
 	if (KEY_DOWN(VK_TAB))
 		ToggleHideUI();
@@ -66,8 +69,8 @@ void MainGame::Render()
 	Environment::GetInstance()->Set();
 	Camera::GetInstance()->Set();
 
-	UI->Render();
-	scene->Render();
+	//scene->Render();
+	SM->Render();
 
 	if (!hiddenInGame)
 	{

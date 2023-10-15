@@ -1,5 +1,11 @@
 #pragma once
 
+enum GameStatus
+{
+	START,
+	PLAY,
+	GAME_OVER
+};
 
 class GameScene : public Scene
 {
@@ -12,18 +18,32 @@ public:
 
 private:
 
+	void StartGameFromSpawn();
+	void UpdateTimer();
+
+
+private:
+
+	GameUIManager* uiManager{};
+
+	PlayerManager* playerManager{};
+
 	TileManager* tileManager{};
 	BlockManager* blockManager{};
+
 	BalloonManager* balloonManager{}; // TODO 터졌을 때 콜백으로 플레이어의 balloonCnt에서 1을 돌려줘야 함
-
-	Character* p1{};
-	Character* p2{};
-
 	StreamManager* streamManager{};
 
 	ItemManager* itemManager{};
 
 	DartManager* dartManager{};
+
+private:
+
+	GameStatus gameStatus{ START };
+
+	const float GAME_TIME_LIMIT = 180.f;
+	float gameTimer = GAME_TIME_LIMIT;
 
 };
 

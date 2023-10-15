@@ -12,5 +12,6 @@ public:
 	void ImGuiNewFrame();
 
 private:
-	Scene* scene = nullptr;
+
+	//Scene* scene = nullptr;
 };

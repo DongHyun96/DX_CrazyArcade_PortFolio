@@ -4,12 +4,6 @@
 
 GameManager::GameManager()
 {
-	spawnPosMap =
-	{
-		{VILLAGE, {{1, 1}, {6, 0}, {14, 0}, {0, 12}, {7, 12}, {13, 11}}},
-		{FACTORY, {}},
-		{FOREST, {}}
-	};
 
 	tileBinFile =
 	{
@@ -47,33 +41,8 @@ GameManager::GameManager()
 		}
 	}
 
-	SOUND->AddSound("BalloonDeploy", "_Sound/BalloonDeploy.wav");
-	SOUND->AddSound("BalloonExplode", "_Sound/bombExplode.wav");
-	SOUND->AddSound("ItemSpawned", "_Sound/ItemGen.mp3");
-	SOUND->AddSound("ItemEarned", "_Sound/SetItem.wav");
-	SOUND->AddSound("VillageBGM", "_Sound/Boomhill.mp3", true);
 
-	P_DIR_KEYCODE[P1] =
-	{
-		{DIR_LEFT,	'D'},
-		{DIR_RIGHT, 'G'},
-		{DIR_UP,	'R'},
-		{DIR_DOWN,	'F'}
-	};
 
-	P_BALLOON_KEYCODE[P1]	= VK_LSHIFT;
-	P_ITEM_KEYCODE[P1]		= VK_LCONTROL;
-
-	P_DIR_KEYCODE[P2] =
-	{
-		{DIR_LEFT,	VK_LEFT},
-		{DIR_RIGHT, VK_RIGHT},
-		{DIR_UP,	VK_UP},
-		{DIR_DOWN,	VK_DOWN}
-	};
-
-	P_BALLOON_KEYCODE[P2]	= VK_RSHIFT;
-	P_ITEM_KEYCODE[P2]		= VK_HANJA;
 }
 
 GameManager::~GameManager()
@@ -116,62 +85,10 @@ void GameManager::Update()
 
 void GameManager::SetGameMode(const GameMode& gameMode)
 {
-	switch (gameMode)
-	{
-	case PVP:
-		P_DIR_KEYCODE[P1] =
-		{
-			{DIR_LEFT,	'D'},
-			{DIR_RIGHT, 'G'},
-			{DIR_UP,	'R'},
-			{DIR_DOWN,	'F'}
-		};
-
-		P_BALLOON_KEYCODE[P1] = VK_LSHIFT;
-		P_ITEM_KEYCODE[P1] = VK_LCONTROL;
-
-		break;
-	case PVE:
-		P_DIR_KEYCODE[P1] =
-		{
-			{DIR_LEFT,	VK_LEFT},
-			{DIR_RIGHT, VK_RIGHT},
-			{DIR_UP,	VK_UP},
-			{DIR_DOWN,	VK_DOWN}
-		};
-
-		P_BALLOON_KEYCODE[P1] = VK_SPACE;
-		P_ITEM_KEYCODE[P1] = VK_LCONTROL;
-
-		break;
-	default:
-		break;
-	}
 
 	this->gameMode = gameMode;
 }
 
-void GameManager::SetPlayers(Character* p1, Character* p2)
-{
-	this->p1 = p1;
-	this->p2 = p2;
-
-	wholePlayers.clear();
-
-	wholePlayers.push_back(p1);
-	wholePlayers.push_back(p2);
-}
-
-void GameManager::SetPlayers(Character* p1, vector<Character*> enemies)
-{
-	this->p1 = p1;
-	this->comEnemies = enemies;
-
-	wholePlayers.clear();
-
-	wholePlayers = enemies;
-	wholePlayers.push_back(p1);
-}
 
 Vector2 GameManager::GetCollidedMapCellPos(const Vector2& point)
 {

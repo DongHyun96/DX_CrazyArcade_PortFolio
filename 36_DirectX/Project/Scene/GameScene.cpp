@@ -5,23 +5,11 @@ GameScene::GameScene()
 {
 	tileManager = new TileManager;
 
+	playerManager = new PlayerManager;
+	GM->SetPlayerManager(playerManager);
+
 	blockManager = new BlockManager;
 	GM->SetBlockManager(blockManager);
-
-	p1 = new Player(BAZZI, P1);
-	p1->SetLabel("P1");
-
-	p2 = new Player(BAZZI, P2);
-	p2->SetLabel("P2");
-
-	GM->SetPlayers(p1, p2);
-	
-	vector<Util::Coord> spawnPos = GM->spawnPosMap[GM->GetCurMapType()];
-
-	random_shuffle(spawnPos.begin(), spawnPos.end());
-
-	p1->SetSpawnPos(spawnPos[0]);
-	p2->SetSpawnPos(spawnPos[1]);
 
 	balloonManager = new BalloonManager;
 	GM->SetBalloonManager(balloonManager);
@@ -33,6 +21,10 @@ GameScene::GameScene()
 
 	dartManager = new DartManager;
 	GM->SetDartManager(dartManager);
+	
+	uiManager = new GameUIManager;
+
+	uiManager->SetLogoFinEvent(bind(&GameScene::StartGameFromSpawn, this));
 
 	//SOUND->Play("VillageBGM", 1.f);
 }
@@ -40,10 +32,10 @@ GameScene::GameScene()
 GameScene::~GameScene()
 {
 	delete tileManager;
+
 	delete blockManager;
 
-	delete p1;
-	delete p2;
+	delete playerManager;
 
 	delete balloonManager;
 
@@ -52,12 +44,15 @@ GameScene::~GameScene()
 	delete itemManager;
 
 	delete dartManager;
+
+	delete uiManager;
 }
 
 void GameScene::Update()
 {
 	GM->Update();
 
+	uiManager->Update();
 
 	if (GM->IsEditMode())
 	{
@@ -65,8 +60,8 @@ void GameScene::Update()
 		return;
 	}
 
-	p1->Update();
-	p2->Update();
+
+	playerManager->Update();
 
 	dartManager->Update();
 	tileManager->Update();
@@ -76,11 +71,15 @@ void GameScene::Update()
 	streamManager->Update();
 
 	itemManager->Update();
-
+	
+	UpdateTimer();
 }
 
 void GameScene::Render()
 {
+
+	uiManager->Render();
+
 	if (GM->IsEditMode())
 	{
 		MapEditor::GetInst()->Render();
@@ -91,16 +90,42 @@ void GameScene::Render()
 	blockManager->Render();
 	balloonManager->Render();
 
-	p1->Render();
-	p2->Render();
+	playerManager->Render();
 
 	streamManager->Render();
 	itemManager->Render();
 
 	dartManager->Render();
 
+	uiManager->RenderTimer(gameTimer);
 	//p1->Debug();
 	//p2->Debug();
+}
+
+
+void GameScene::StartGameFromSpawn()
+{
+	gameStatus = PLAY;
+
+	for (Character* player : playerManager->GetWholePlayers())
+		player->SetCharacterState(C_IDLE);
+}
+
+void GameScene::UpdateTimer()
+{
+	if (gameStatus != PLAY) return;
+
+	if (gameStatus == GAME_OVER) return;
+
+	gameTimer -= Time::Delta();
+
+	// TODO : 타이머 출력
+
+	if (gameTimer <= 0.f)
+	{
+		gameTimer = 0.f;
+		gameStatus = GAME_OVER;
+	}
 }
 
 
