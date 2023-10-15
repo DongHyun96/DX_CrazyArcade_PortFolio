@@ -19,6 +19,8 @@ float4 main(VertexOutput input) : SV_TARGET
 {
     float4 textureColor = map.Sample(samp, input.uv);
 
+
+
    /* if (all(textureColor == float4(1, 0, 1, 1)))
         textureColor.a = 0.f;
 
@@ -26,6 +28,8 @@ float4 main(VertexOutput input) : SV_TARGET
         discard;*/
 
     //discard;
+    if (all(color == float4(0, 0, 0, 1)) && textureColor.a != 0.f)
+        return float4(1,1,1,1);
 
     return textureColor * color;
 }
