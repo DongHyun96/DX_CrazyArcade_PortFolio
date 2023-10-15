@@ -21,7 +21,10 @@ public:
 	void SetReturnIdleEndEvent(function<void()> E);
 	void SetCapturedEndEvent(function<void()> E) { bubbleActions[A_BUBBLE_CAPTURED]->SetEndEvent(E); }
 
+
 	Direction GetCurFaceDir() const { return curFaceDir; }
+
+	Vector2 GetCurActionSize() const { return curAction->Size(); }
 
 protected:
 
@@ -35,15 +38,15 @@ protected:
 
 protected:
 
-	Animation*							spawnAction{};
 	Animation*							winAction{};
+
 	map<IdleAnimState, Animation*>		idleActions{};
 	map<SpaceAnimState, Animation*>		spaceActions{};
 	map<OwlAnimState, Animation*>		owlActions{};
 	map<TurtleAnimState, Animation*>	turtleActions{};
 	map<BubbleAnimState, Animation*>	bubbleActions{};
 	
-
+		
 	Animation*							curAction{};
 	
 	CharacterState						ownerPrevState{};

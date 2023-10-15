@@ -92,7 +92,7 @@ void StreamBlock::OnColliderPointEnter(ColliderHolder* owner)
 		case C_SPACECRAFT: case C_OWL: case C_TURTLE:
 			c->SetCharacterState(C_RETURN_IDLE);
 			break;
-		case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: return;
+		case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: case C_WIN: return;
 		default:
 			break;
 		}

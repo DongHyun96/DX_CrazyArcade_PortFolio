@@ -129,7 +129,7 @@ void BlockManager::HandleCommonCollisions()
 
 void BlockManager::HandleCharacterCommonCollision(Block* block)
 {
-	for (Character* player : GM->GetWholePlayers())
+	for (Character* player : PM->GetWholePlayers())
 	{
 		block->GetBody()->AABBCollision(player->GetBody(), player);
 		block->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
@@ -160,7 +160,7 @@ void BlockManager::HandleMovableCollisions()
 			continue;
 
 		// Player vs movable
-		for (Character* player : GM->GetWholePlayers())
+		for (Character* player : PM->GetWholePlayers())
 			movable->GetBody()->AABBCollision(player->GetPushCollider(), player);
 	}
 }

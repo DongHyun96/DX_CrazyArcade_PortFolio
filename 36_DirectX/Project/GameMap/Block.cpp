@@ -155,6 +155,8 @@ void Block::ApplyDamage()
 	{
 		destroyed = true;
 		destroyedAnim->Play(false);
+		
+
 
 		if (item) item->Spawn(rectBody->translation);
 		
@@ -403,6 +405,9 @@ void Block::HandleAddItem()
 {
 	if (hidable || !breakable) return;
 
+	/*item = new ImmediateItem((ItemName)Util::GetRandom(5, 7));
+	ItemManager::AddItem(item);*/
+
 	if (rand() % 2 != 0) return;
 
 
@@ -410,7 +415,7 @@ void Block::HandleAddItem()
 	if (Util::GetRandom(0, 9) < 8) // 80% È®·ü·Î Immediate Item ½ºÆù
 	{
 		// ºÓÀº ¾Ç¸¶ ¸ÕÀú ½ºÆù ½Ãµµ
-		if (Util::GetRandom(0, 19) < 1) // ºÓÀº ¾Ç¸¶ ½ºÆùÈ®·ü 5%
+		if (Util::GetRandom(1, 100) == 30) // ºÓÀº ¾Ç¸¶ ½ºÆùÈ®·ü 1%
 		{
 			item = new ImmediateItem(RED_DEVIL);
 			ItemManager::AddItem(item);

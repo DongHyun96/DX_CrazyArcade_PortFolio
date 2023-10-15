@@ -7,6 +7,14 @@ SoundManager::SoundManager()
 
 	system->init(MAX_CHANNEL, FMOD_INIT_NORMAL, nullptr);
 
+	AddSound("BalloonDeploy", "_Sound/BalloonDeploy.wav");
+	AddSound("BalloonExplode", "_Sound/bombExplode.wav");
+	AddSound("ItemSpawned", "_Sound/ItemGen.mp3");
+	AddSound("ItemEarned", "_Sound/SetItem.wav");
+	AddSound("VillageBGM", "_Sound/Boomhill.mp3", true);
+
+	AddSound("Captured", "_Sound/inBalloon.mp3");
+	AddSound("Die", "_Sound/Die.wav");
 }
 
 SoundManager::~SoundManager()

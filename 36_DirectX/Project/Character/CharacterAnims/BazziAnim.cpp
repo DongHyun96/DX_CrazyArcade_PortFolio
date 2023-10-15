@@ -4,8 +4,6 @@
 BazziAnim::BazziAnim(ColliderRect* parent)
 	:CharacterAnim(parent)
 {
-	//spawnAction = new Animation // TODO - 스폰 애님 통일 작업 및 생성 & EndEvent로 owner의 MainState를 Idle로 바꿔줘야 함
-
 	winAction = new Animation(CELL_WORLD_SIZE, L"InGame/Characters/Bazzi/playerBubble.png", 6, 4, 24, 0.15f);
 	winAction->SetPart(18, 19);
 

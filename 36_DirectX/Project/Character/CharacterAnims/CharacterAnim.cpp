@@ -17,8 +17,6 @@ CharacterAnim::CharacterAnim(ColliderRect* parent)
 
 CharacterAnim::~CharacterAnim()
 {
-	if (spawnAction)
-		delete spawnAction;
 	if (winAction)
 		delete winAction;
 
@@ -117,12 +115,17 @@ void CharacterAnim::Render()
 
 void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& velocity)
 {
+	if (cState == C_SPAWN)
+	{
+		curAction = idleActions[A_IDLE_DOWN];
+		curAction->Stop(0);
+		return;
+	}
+
 	if (ownerPrevState == cState && ownerPrevVelocity == velocity) return;
 
 	switch (cState)
 	{
-	case C_SPAWN: curAction = spawnAction;
-		break;
 	case C_IDLE:
 	{
 		int frameIdx = GetDirRelativeFrameIdx(velocity);
@@ -226,6 +229,10 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		curAction = bubbleActions[A_BUBBLE_DEAD];
 		curAction->Play();
 
+		break;
+	case C_WIN:
+		curAction = winAction;
+		curAction->Play();
 		break;
 	default:
 		break;

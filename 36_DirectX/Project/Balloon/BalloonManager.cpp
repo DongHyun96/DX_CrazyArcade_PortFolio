@@ -37,7 +37,7 @@ void BalloonManager::Update()
 
 		balloon->Update();
 
-		for (Character* player : GM->GetWholePlayers())
+		for (Character* player : PM->GetWholePlayers())
 			balloon->GetBody()->AABBCollision(player->GetBody(), player);
 	}
 
@@ -48,7 +48,7 @@ void BalloonManager::Update()
 
 		t_balloon->Update();
 
-		for (Character* player : GM->GetWholePlayers())
+		for (Character* player : PM->GetWholePlayers())
 			t_balloon->GetBody()->AABBCollision(player->GetBody(), player);
 	}
 

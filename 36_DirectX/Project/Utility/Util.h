@@ -111,6 +111,8 @@ namespace Util
 			return src;
 
 		return (1 - alpha) * src + alpha * dst;
+
+		//return start + (end - start) * factor;
 	}
 	
 	// TODO : Init float& parameters

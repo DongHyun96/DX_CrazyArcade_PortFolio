@@ -294,6 +294,18 @@
     <ClInclude Include="Balloon\TimerBalloon.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Character\PlayerManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GameUIManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\IntroScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -488,9 +500,6 @@
     <ClCompile Include="Item\ConsumableItem.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="UI\UIManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Item\GameField\Dart.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -498,6 +507,18 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Balloon\TimerBalloon.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Character\PlayerManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\GameUIManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\IntroScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

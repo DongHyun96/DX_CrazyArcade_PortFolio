@@ -119,7 +119,7 @@ void StreamBlockManager::HandleCollision()
 
 		if (!streamBlock->IsActive()) continue;
 
-		for (Character* player : GM->GetWholePlayers())
+		for (Character* player : PM->GetWholePlayers())
 			streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
 
 	}
@@ -135,7 +135,7 @@ void StreamBlockManager::HandleCollision()
 
 			if (!streamBlock->IsActive()) continue;
 
-			for (Character* player : GM->GetWholePlayers())
+			for (Character* player : PM->GetWholePlayers())
 				streamBlock->GetBody()->AABBCollision(player->GetBody()->GlobalPosition(), player);
 
 		}

@@ -80,7 +80,10 @@ using namespace FMOD;
 
 #define GM				GameManager::GetInst()
 #define SOUND			SoundManager::GetInstance()
-#define UI				UIManager::GetInst()
+
+#define SM				SceneManager::GetInst()
+
+#define PM				GM->GetPlayerManager()
 
 #define NEAR_Z			-10.f
 #define FAR_Z			1090.f
@@ -166,6 +169,7 @@ typedef XMMATRIX Matrix;
 #include "Stream/StreamManager.h"
 
 #include "UI/UIManager.h"
+#include "UI/GameUIManager.h"
 
 
 #include "Item/ItemStrategy/ItemStrategy.h"
@@ -189,13 +193,17 @@ typedef XMMATRIX Matrix;
 #include "Character/CharacterAnims/CappiAnim.h"
 #include "Character/CharacterAnims/MaridAnim.h"
 
-
+#include "Character/PlayerManager.h"
 
 
 #include "Scene/Scene.h"
 #include "Scene/CollisionScene.h"
 
+#include "Scene/IntroScene.h"
+
 #include "Scene/GameScene.h"
+
+#include "Scene/SceneManager.h"
 
 #include "MainGame.h"
 

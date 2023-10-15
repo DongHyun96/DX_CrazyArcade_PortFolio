@@ -132,7 +132,7 @@ bool Balloon::Spawn(const Vector2& spawnPos) // private
 
 	//body->EnteredBodies().insert(GM->GetPlayer()->GetBody());
 
-	for (Character* p : GM->GetWholePlayers())
+	for (Character* p : PM->GetWholePlayers())
 	{
 		body->EnteredBodies().insert(p->GetBody());
 	}
