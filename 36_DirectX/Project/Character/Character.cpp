@@ -6,17 +6,17 @@ Character::Character(const CharacterType& cType, const PlayerType& playerType)
 {
 	this->playerType = playerType;
 
-	Vector2 characterBodySize = { CELL_WORLD_SIZE.x - 30.f, CELL_WORLD_SIZE.y - 30.f };
-	Vector2 pushColSize = { CELL_WORLD_SIZE.x - 15.f, CELL_WORLD_SIZE.y - 15.f };
+	/*Vector2 characterBodySize = { CELL_WORLD_SIZE.x - 30.f, CELL_WORLD_SIZE.y - 30.f };
+	Vector2 pushColSize = { CELL_WORLD_SIZE.x - 15.f, CELL_WORLD_SIZE.y - 15.f };*/
 
-	//Vector2 characterBodySize = { CELL_WORLD_SIZE.x - 10.f, CELL_WORLD_SIZE.y - 10.f };
-	//Vector2 pushColSize = { CELL_WORLD_SIZE.x + 10.f, CELL_WORLD_SIZE.y + 10.f };
+	Vector2 characterBodySize = { CELL_WORLD_SIZE.x - 1.f, CELL_WORLD_SIZE.y - 1.f };
+	Vector2 pushColSize = { CELL_WORLD_SIZE.x + 10.f, CELL_WORLD_SIZE.y + 10.f };
 
 	body = new ColliderRect(characterBodySize);
 	body->SetColliderTag(CHARACTER);
 
-	shadow = new Object({ characterBodySize.x, characterBodySize.y}, L"InGame/Characters/CharacterShadow.png");
-	shadow->translation.y -= 10.f;
+	shadow = new Object({ CELL_WORLD_SIZE.x - 30.f, CELL_WORLD_SIZE.y - 30.f }, L"InGame/Characters/CharacterShadow.png");
+	shadow->translation.y -= 25.f;
 	shadow->SetColor(1, 1, 1, 0.6f);
 	shadow->SetParent(body);
 	
@@ -29,6 +29,7 @@ Character::Character(const CharacterType& cType, const PlayerType& playerType)
 	actionHandler = CharacterAnimFactory::CreateCharacterAnim(cType, body);
 	actionHandler->SetReturnIdleEndEvent(bind(&Character::OnEndReturnToIdle, this));
 	actionHandler->SetCapturedEndEvent(bind(&Character::OnCapturedEnd, this));
+	actionHandler->SetDeadEndEvent(bind(&Character::OnDeadEnd, this));
 
 	colorBuffer = new ColorBuffer();
 
@@ -133,10 +134,10 @@ void Character::Update()
 
 void Character::Render()
 {
-	arrow->Render();
-
 	if (!visible)
 		return;
+
+	arrow->Render();
 
 	colorBuffer->PSSetBuffer(0);
 
@@ -190,12 +191,15 @@ void Character::SetCharacterState(const CharacterState& state)
 		SOUND->Play("Captured", 1.f);
 		break;
 	case C_RETURN_IDLE: // 이 때 속도가 0
+		if (mainState == C_CAPTURED)
+			SOUND->Play("Saved", 1.f);
 		speedLv = 0;
 		break;
 	case C_DEAD:
-		SOUND->Play("Die", 1.f);
+		SOUND->Play("Die", 0.6f);
 		speedLv = 0;
-
+	case C_WIN:
+		actionHandler->SetReturnIdleEndEvent(bind(&Character::OnEndReturnToIdle, this));
 		break;
 	default:
 		break;
@@ -216,6 +220,19 @@ bool Character::AddLeftBalloonCnt(const UINT& addAmount)
 Direction Character::GetCurFaceDir() const
 {
 	return actionHandler->GetCurFaceDir();
+}
+
+void Character::SetGameOver()
+{
+	if (mainState == C_DEAD) return;
+
+	if (mainState == C_IDLE || mainState == C_CAPTURED) SetCharacterState(C_WIN);
+
+	if (mainState == C_SPACECRAFT || mainState == C_OWL || mainState == C_TURTLE)
+	{
+		actionHandler->SetReturnIdleEndEvent(bind(&Character::OnEndReturnToIdleOnGameOver, this));
+		SetCharacterState(C_RETURN_IDLE);
+	}
 }
 
 bool Character::UseConsumableItem()

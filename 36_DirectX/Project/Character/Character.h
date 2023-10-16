@@ -83,6 +83,8 @@ public:
 
 	void SetSpawnPos(const Util::Coord& spawnPos) { Util::SetTransformToGameBoard(body, spawnPos); }
 
+	void SetGameOver();
+
 public: // Item Usage
 	
 	void SetConsumableItem(Item* consumable) { this->consumableItem = consumable; }
@@ -122,22 +124,24 @@ protected:
 
 	void InitStat(const CharacterType& cType);
 
-	void OnEndReturnToIdle()	{ SetCharacterState(C_IDLE); }
-	void OnCapturedEnd()		{ SetCharacterState(C_DEAD); }
+	void OnEndReturnToIdle()			{ SetCharacterState(C_IDLE); }
+	void OnEndReturnToIdleOnGameOver()	{ SetCharacterState(C_WIN); }
+	void OnCapturedEnd()				{ SetCharacterState(C_DEAD); }
+	void OnDeadEnd()					{ visible = false; }
 
 protected:
 
 	PlayerType		playerType{};
 
-	ColorBuffer* colorBuffer{};
+	ColorBuffer*	colorBuffer{};
 
 	ColliderRect*	body{};
 	ColliderRect*	pushCollider{}; // 밀어낼 수 있는 블록용도로 쓸 것임
 
-	Object*			shadow{};
-	Object*			arrow{};
-	map<bool, float> arrowYDestMap{};
-	bool arrowYSwitched{};
+	Object*				shadow{};
+	Object*				arrow{};
+	map<bool, float>	arrowYDestMap{};
+	bool				arrowYSwitched{};
 
 	Vector2			velocity{};
 	CharacterState	mainState{C_SPAWN};
