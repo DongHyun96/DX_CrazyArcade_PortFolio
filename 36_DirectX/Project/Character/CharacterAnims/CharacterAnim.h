@@ -20,6 +20,7 @@ public:
 
 	void SetReturnIdleEndEvent(function<void()> E);
 	void SetCapturedEndEvent(function<void()> E) { bubbleActions[A_BUBBLE_CAPTURED]->SetEndEvent(E); }
+	void SetDeadEndEvent(function<void()> E) { bubbleActions[A_BUBBLE_DEAD]->SetEndEvent(E); }
 
 
 	Direction GetCurFaceDir() const { return curFaceDir; }
