@@ -71,6 +71,8 @@ void PlayerManager::Update()
 		player->Update();
 
 	HandlePlayerCollisions();
+
+	CheckGameOver();
 }
 
 void PlayerManager::Render()
@@ -115,6 +117,12 @@ void PlayerManager::SetPlayers(Character* p1, vector<Character*> enemies)
 	wholePlayers.push_back(p1);
 }
 
+void PlayerManager::SetGameOver()
+{
+	for (Character* player : wholePlayers)
+		player->SetGameOver();
+}
+
 void PlayerManager::HandlePlayerCollisions()
 {
 	for (Character* player : wholePlayers)
@@ -137,5 +145,59 @@ void PlayerManager::HandlePlayerCollisions()
 					target->SetCharacterState(C_DEAD);
 			}
 		}
+	}
+}
+
+void PlayerManager::CheckGameOver()
+{
+	if (gameOverChecked) return;
+
+	switch (GM->GetGameMode())
+	{
+	case PVP:
+
+		for (Character* player : wholePlayers)
+		{
+			if (player->GetCharacterState() == C_DEAD)
+			{
+				deathTimerTriggered = true;
+				break;
+			}
+		}
+
+		if (deathTimerTriggered)
+		{
+			deathTimer += Time::Delta();
+			
+			if (deathTimer >= 0.3f) // 한 플레이어가 죽은 후 0.4초가 넘어가면 승패를 결정지을 시간
+			{
+				deathTimerTriggered = false;
+				deathTimer = 0.f;
+
+				if (p1->GetCharacterState() == C_DEAD && p2->GetCharacterState() == C_DEAD)
+				{
+					// draw
+					GM->GetGameScene()->SetGameEnd(DRAW);
+				}
+				else if (p1->GetCharacterState() == C_DEAD)
+				{
+					// p2 win
+					GM->GetGameScene()->SetGameEnd(P2_WIN);
+				}
+				else if (p2->GetCharacterState() == C_DEAD)
+				{
+					// p1 win
+					GM->GetGameScene()->SetGameEnd(P1_WIN);
+				}
+
+				gameOverChecked = true;
+			}
+		}
+
+		break;
+	case PVE:
+		break;
+	default:
+		break;
 	}
 }
