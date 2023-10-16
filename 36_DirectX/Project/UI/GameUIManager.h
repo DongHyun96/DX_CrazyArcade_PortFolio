@@ -1,4 +1,14 @@
 #pragma once
+
+enum GameOverResult
+{
+	P1_WIN,
+	P2_WIN,
+	ENEMY_WIN,
+	DRAW
+};
+
+
 class GameUIManager : public UIManager
 {
 public:
@@ -15,11 +25,16 @@ public:
 
 	void SetLogoFinEvent(function<void()> LogoEndEvent);
 	void RenderTimer(const float& gameTimer);
+	
+	void StartRenderGameOver(const GameOverResult& result);
 
 private:
 
 	void RenderStartLogo();
+	void UpdateStartLogo();
 
+	void RenderGameOver();
+	void UpdateGameOver();
 
 	void Debug();
 
@@ -40,6 +55,16 @@ private:
 
 	function<void()> LogoFinEvent{};
 
+private:
 
+	map<GameOverResult, Object*> gameOverPanel{};
+	
+	bool gameOver{ };
+	GameOverResult gameOverResult{};
+
+	const Vector4 FLICKER_COLOR{ 0, 0, 0, 1 };
+	float flicker{};
+	bool flicked{};
+	UINT flickedCnt{};
 
 };

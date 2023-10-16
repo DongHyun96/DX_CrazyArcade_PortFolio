@@ -26,6 +26,28 @@ GameUIManager::GameUIManager()
 		startLogo.push_back(letter);
 	}
 
+	//{600, 300},
+	//{ 600, 300 },
+
+	gameOverPanel =
+	{
+		{P1_WIN,	new Object(L"InGame/UI/player1win.png")},
+		{P2_WIN,	new Object(L"InGame/UI/player2win.png")},
+		{ENEMY_WIN, new Object({500, 300}, L"InGame/UI/Lose.png")},
+		{DRAW,		new Object(L"InGame/UI/draw.png")}
+	};
+
+	gameOverPanel[P1_WIN]->scale = { 2.f, 2.f };
+	gameOverPanel[P2_WIN]->scale = { 2.f, 2.f };
+	gameOverPanel[DRAW]->scale = { 2.f, 2.f };
+	
+	for (auto& p : gameOverPanel)
+	{
+		Object* o = p.second;
+
+		o->SetParent(GM->GetGameFieldTransform());
+	}
+
 }
 
 GameUIManager::~GameUIManager()
@@ -35,6 +57,10 @@ GameUIManager::~GameUIManager()
 
 	for (Object* letter : startLogo)
 		delete letter;
+
+	for (auto& p : gameOverPanel)
+		delete p.second;
+
 }
 
 void GameUIManager::Update()
@@ -42,7 +68,8 @@ void GameUIManager::Update()
 	mainUI->Update();
 	itemUI->Update();
 
-	RenderStartLogo();
+	UpdateStartLogo();
+	UpdateGameOver();
 }
 
 
@@ -51,13 +78,19 @@ void GameUIManager::Render()
 	mainUI->Render();
 	itemUI->Render();
 
-	for (Object* letter : startLogo)
-		letter->Render();
+	RenderStartLogo();
+	RenderGameOver();
 
 	Debug();
 }
 
 void GameUIManager::RenderStartLogo()
+{
+	for (Object* letter : startLogo)
+		letter->Render();
+}
+
+void GameUIManager::UpdateStartLogo()
 {
 	if (hasGameStarted)
 	{
@@ -80,6 +113,40 @@ void GameUIManager::RenderStartLogo()
 	}
 }
 
+void GameUIManager::RenderGameOver()
+{
+	if (!gameOver)
+		return;
+
+	// TODO -> GameOverResult gameOverResult{};에 맞추어 result 출력
+
+
+	gameOverPanel[gameOverResult]->Render();
+
+}
+
+void GameUIManager::UpdateGameOver()
+{
+	if (!gameOver)
+		return;
+
+	flicker += Time::Delta();
+
+	if (flicker >= 0.05f && flickedCnt < 8)
+	{
+		if (flicked) gameOverPanel[gameOverResult]->SetColor(1,1,1,1);
+		else gameOverPanel[gameOverResult]->SetColor(FLICKER_COLOR);
+
+		flicked = !flicked;
+		flicker -= 0.05f;
+
+		flickedCnt++;
+	}
+
+	// TODO -> GameOverResult gameOverResult{};에 맞추어 result 출력
+	gameOverPanel[gameOverResult]->Update();
+}
+
 
 void GameUIManager::RenderTimer(const float& gameTimer)
 {
@@ -92,6 +159,12 @@ void GameUIManager::RenderTimer(const float& gameTimer)
 		: L"0" + to_wstring(minute) + L":0" + to_wstring(second);
 
 	FONT->RenderText(watch, "NumberFont", Util::ConvertDxPosToAPIPos({ 1723, 1000 }));
+}
+
+void GameUIManager::StartRenderGameOver(const GameOverResult& result)
+{
+	gameOver = true;
+	this->gameOverResult = result;
 }
 
 void GameUIManager::SetLogoFinEvent(function<void()> LogoEndEvent)
