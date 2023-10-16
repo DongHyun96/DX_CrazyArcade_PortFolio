@@ -156,6 +156,29 @@ void Block::ApplyDamage()
 		destroyed = true;
 		destroyedAnim->Play(false);
 		
+		if (hidable) // 숨겨져 있는 물체들 visible모두 켜주고 해제
+		{
+			for (ColliderHolder* owner : rectBody->EnteredPointOwners())
+			{
+				Character* character = dynamic_cast<Character*>(owner);
+
+				if (character)
+				{
+					character->SetVisible(true);
+					continue;
+				}
+
+				Block* b = dynamic_cast<Block*>(owner);
+
+				if (b)
+				{
+					b->SetVisible(true);
+					continue;
+				}
+			}
+
+			rectBody->EnteredPointOwners().clear();
+		}
 
 
 		if (item) item->Spawn(rectBody->translation);
@@ -213,6 +236,8 @@ void Block::OnColliderPointEnter(ColliderHolder* owner)
 
 void Block::OnColliderPointStay(ColliderHolder* owner)
 {
+	if (destroyed) return;
+
 	if (hidable)
 	{
 		Character* c = dynamic_cast<Character*>(owner);
@@ -295,13 +320,13 @@ void Block::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* ow
 		{
 			if (!breakable) // 안 부서지는 블록의 경우 캐릭터가 어느 상태이든 CommonCollision을 처리
 			{
-				CollisionUtil::HandleCommonCollision(rectBody, targetCollider);
+				CollisionUtil::HandleCharacterCommonCollision(rectBody, targetCollider);
 				return;
 			}
 			
 			if (c->GetCharacterState() == C_SPACECRAFT) return;
 			
-			CollisionUtil::HandleCommonCollision(rectBody, targetCollider);
+			CollisionUtil::HandleCharacterCommonCollision(rectBody, targetCollider);
 
 		}
 
