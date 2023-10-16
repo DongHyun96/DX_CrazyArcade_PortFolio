@@ -4,11 +4,20 @@
 BazziAnim::BazziAnim(ColliderRect* parent)
 	:CharacterAnim(parent)
 {
-	winAction = new Animation(CELL_WORLD_SIZE, L"InGame/Characters/Bazzi/playerBubble.png", 6, 4, 24, 0.15f);
-	winAction->SetPart(18, 19);
+	vector<Frame*> frames{};
+
+	Vector2 winActionSize = { CELL_WORLD_SIZE.x - 5, CELL_WORLD_SIZE.y + 15 };
+
+	for (UINT i = 0; i < 4; i++)
+	{
+		wstring path = L"InGame/Characters/Bazzi/Win/" + to_wstring(i) + L".png";
+		frames.push_back(new Frame(winActionSize, path));
+	}
+
+	winAction = new Animation(frames, 0.2f);
+	frames.clear();
 
 
-	Vector2 idleSize = { CELL_WORLD_SIZE.x - 5, CELL_WORLD_SIZE.y + 15 };
 	//Vector2 idleSize = CELL_WORLD_SIZE;
 
 	//idleActions[A_IDLE_UP] = new Animation(idleSize, L"InGame/Characters/Bazzi/playerMove.png", 5, 4);
@@ -23,7 +32,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 	//idleActions[A_IDLE_LEFT] = new Animation(idleSize, L"InGame/Characters/Bazzi/playerMove.png", 5, 4);
 	//idleActions[A_IDLE_LEFT]->SetPart(18, 15);
 
-	vector<Frame*> frames{};
+	Vector2 idleSize = { CELL_WORLD_SIZE.x - 5, CELL_WORLD_SIZE.y + 15 };
 
 	for (UINT i = 0; i < 4; i++)
 	{
