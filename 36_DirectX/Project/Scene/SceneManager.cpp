@@ -24,8 +24,6 @@ SceneManager::~SceneManager()
 
 void SceneManager::Update()
 {
-
-
 	scenes[curScene]->Update();
 }
 

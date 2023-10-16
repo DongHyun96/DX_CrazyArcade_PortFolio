@@ -7,6 +7,8 @@ SoundManager::SoundManager()
 
 	system->init(MAX_CHANNEL, FMOD_INIT_NORMAL, nullptr);
 
+	AddSound("GameStart", "_Sound/GameStart.mp3");
+
 	AddSound("BalloonDeploy", "_Sound/BalloonDeploy.wav");
 	AddSound("BalloonExplode", "_Sound/bombExplode.wav");
 	AddSound("ItemSpawned", "_Sound/ItemGen.mp3");
@@ -14,7 +16,13 @@ SoundManager::SoundManager()
 	AddSound("VillageBGM", "_Sound/Boomhill.mp3", true);
 
 	AddSound("Captured", "_Sound/inBalloon.mp3");
+	AddSound("Saved", "_Sound/Saved.wav");
 	AddSound("Die", "_Sound/Die.wav");
+
+	AddSound("Lose", "_Sound/defeat.mp3");
+	AddSound("Win", "_Sound/win.wav");
+	AddSound("Draw", "_Sound/draw.mp3");
+
 }
 
 SoundManager::~SoundManager()

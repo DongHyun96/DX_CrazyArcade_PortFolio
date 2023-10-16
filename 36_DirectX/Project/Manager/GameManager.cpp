@@ -83,13 +83,6 @@ void GameManager::Update()
 	}
 }
 
-void GameManager::SetGameMode(const GameMode& gameMode)
-{
-
-	this->gameMode = gameMode;
-}
-
-
 Vector2 GameManager::GetCollidedMapCellPos(const Vector2& point)
 {
 	for (UINT y = 0; y < MAP_ROW; y++)

@@ -23,7 +23,15 @@ public:
 	void Update();
 	void Render();
 
-	void SetCurScene(const SceneName& sceneName) { curScene = sceneName; }
+	void SetCurScene(const SceneName& sceneName) 
+	{
+		if (sceneName == GAME_SCENE)
+		{
+			SOUND->Play("GameStart", 0.5f);
+			SOUND->Play("VillageBGM", 1.f);
+		}
+		curScene = sceneName; 
+	}
 
 private:
 	

@@ -147,10 +147,10 @@ Object::Object(Vector2 size, wstring file, UINT frameX, UINT frameY, UINT target
 
     vertices =
     {
-        {Vector3(L, T, 0.f), Vector2(uvStart.x,    uvStart.y)}, //LT
-        {Vector3(R, T, 0.f), Vector2(uvEnd.x,    uvStart.y)}, //RT
-        {Vector3(L, B, 0.f),  Vector2(uvStart.x,      uvEnd.y)}, //LB
-        {Vector3(R, B, 0.f),  Vector2(uvEnd.x,      uvEnd.y)}  //RB
+        {Vector3(L, T, 0.f), Vector2(uvStart.x,  uvStart.y)},   //LT
+        {Vector3(R, T, 0.f), Vector2(uvEnd.x,    uvStart.y)},   //RT
+        {Vector3(L, B, 0.f), Vector2(uvStart.x,  uvEnd.y)},     //LB
+        {Vector3(R, B, 0.f), Vector2(uvEnd.x,    uvEnd.y)}      //RB
     };
 
     indices =

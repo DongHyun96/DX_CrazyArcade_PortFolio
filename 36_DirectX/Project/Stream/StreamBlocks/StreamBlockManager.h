@@ -21,8 +21,8 @@ private:
 	/*const UINT CENTER_POOL_CNT = 80;
 	const UINT DIR_POOL_CNT = 64;*/
 
-	const UINT CENTER_POOL_CNT = 80;
-	const UINT DIR_POOL_CNT = 64;
+	const UINT CENTER_POOL_CNT = 60;
+	const UINT DIR_POOL_CNT = 48;
 
 	vector<StreamBlock*> centerBlocks{};
 	map<Direction, vector<StreamBlock*>> dirStreamMap{};

@@ -19,8 +19,8 @@ public:
 
 private:
 
-	const UINT POOL_CNT = 80;
-	const UINT TIMERB_POOL_CNT = 24;
+	const UINT POOL_CNT = 60;
+	const UINT TIMERB_POOL_CNT = 18;
 
 	vector<Balloon*> normalBalloons{}; // ÀÏ¹Ý ¹ú·é
 

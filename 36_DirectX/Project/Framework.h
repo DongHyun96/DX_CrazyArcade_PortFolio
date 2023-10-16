@@ -201,7 +201,8 @@ typedef XMMATRIX Matrix;
 
 #include "Scene/IntroScene.h"
 
-#include "Scene/GameScene.h"
+#include "Scene/GameScenes/GameScene.h"
+#include "Scene/GameScenes/VillageScene.h"
 
 #include "Scene/SceneManager.h"
 

@@ -185,7 +185,7 @@
     <ClInclude Include="Character\Player.h" />
     <ClInclude Include="Character\PlayerManager.h" />
     <ClInclude Include="Scene\SceneManager.h" />
-    <ClInclude Include="Scene\GameScene.h" />
+    <ClInclude Include="Scene\GameScenes\GameScene.h" />
     <ClInclude Include="GameMap\TileManager.h" />
     <ClInclude Include="GameMap\Editor\TileEditor.h" />
     <ClInclude Include="Stream\StreamBlocks\StreamBlockManager.h" />
@@ -233,6 +233,7 @@
     <ClInclude Include="Render\Shader\VertexShader.h" />
     <ClInclude Include="Utility\Time.h" />
     <ClInclude Include="Utility\Vector2.h" />
+    <ClInclude Include="Scene\GameScenes\VillageScene.h" />
     <ClInclude Include="_Include\DirectXTex.h" />
     <ClInclude Include="_Include\fmod.h" />
     <ClInclude Include="_Include\fmod.hpp" />
@@ -283,7 +284,7 @@
     <ClCompile Include="Character\Player.cpp" />
     <ClCompile Include="Character\PlayerManager.cpp" />
     <ClCompile Include="Scene\SceneManager.cpp" />
-    <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="Scene\GameScenes\GameScene.cpp" />
     <ClCompile Include="GameMap\TileManager.cpp" />
     <ClCompile Include="GameMap\Editor\TileEditor.cpp" />
     <ClCompile Include="Stream\StreamBlocks\StreamBlockManager.cpp" />
@@ -330,6 +331,7 @@
     <ClCompile Include="Utility\SoundManager.cpp" />
     <ClCompile Include="Utility\Time.cpp" />
     <ClCompile Include="Utility\Vector2.cpp" />
+    <ClCompile Include="Scene\GameScenes\VillageScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="__Others\Project.rc" />

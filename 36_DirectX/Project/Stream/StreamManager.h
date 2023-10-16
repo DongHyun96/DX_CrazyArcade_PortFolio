@@ -15,7 +15,7 @@ private:
 
 private:
 	
-	const UINT POOL_CNT{ 80 };
+	const UINT POOL_CNT{ 60 };
 
 	vector<Stream*> streams{};
 

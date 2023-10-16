@@ -160,6 +160,6 @@ void Balloon::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* 
 
 	Character* c = dynamic_cast<Character*>(owner);
 
-	if (c) CollisionUtil::HandleCommonCollision(body, targetCollider);
+	if (c) CollisionUtil::HandleCharacterCommonCollision(body, targetCollider);
 }
 

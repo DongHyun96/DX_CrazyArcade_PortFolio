@@ -19,7 +19,7 @@ public:
 	void Render();
 
 	void SetColor(const float& r, const float& g, const float& b, const float& a) { colorBuffer->SetData(Vector4(r, g, b, a)); }
-
+	void SetColor(const Vector4& color) { colorBuffer->SetData(color); }
 	void SetData();
 
 	Vector2 GetSize() const { return texture->GetSize(); }

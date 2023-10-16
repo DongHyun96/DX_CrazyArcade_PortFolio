@@ -141,7 +141,7 @@
     <ClInclude Include="Utility\Util.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\GameScene.h">
+    <ClInclude Include="Scene\GameScenes\GameScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameMap\TileManager.h">
@@ -306,6 +306,9 @@
     <ClInclude Include="Scene\IntroScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Scene\GameScenes\VillageScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -389,7 +392,7 @@
     <ClCompile Include="Utility\BinaryReader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\GameScene.cpp">
+    <ClCompile Include="Scene\GameScenes\GameScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameMap\TileManager.cpp">
@@ -519,6 +522,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Scene\IntroScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\GameScenes\VillageScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
