@@ -24,7 +24,9 @@ BlockManager::~BlockManager()
 	for (UINT y = 0; y < MAP_ROW; y++)
 	{
 		for (UINT x = 0; x < MAP_COL; x++)
+		{
 			if (blocks[y][x]) delete blocks[y][x];
+		}
 	}
 }
 

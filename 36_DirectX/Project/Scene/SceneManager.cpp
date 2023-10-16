@@ -31,3 +31,8 @@ void SceneManager::Render()
 {
 	scenes[curScene]->Render();
 }
+
+void SceneManager::LoadingThread()
+{
+
+}

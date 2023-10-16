@@ -23,7 +23,7 @@ public:
 	void Update();
 	void Render();
 
-	void SetCurScene(const SceneName& sceneName) 
+	void SetCurScene(const SceneName& sceneName)
 	{
 		if (sceneName == GAME_SCENE)
 		{
@@ -34,9 +34,18 @@ public:
 	}
 
 private:
+
+	void LoadingThread();
+
+private:
 	
 	map<SceneName, Scene*> scenes{};
 
 	SceneName curScene{ INTRO_SCENE };
+
+private:
+
+	mutex loadingMutex{};
+	bool isLoadingComplete = false;
 
 };

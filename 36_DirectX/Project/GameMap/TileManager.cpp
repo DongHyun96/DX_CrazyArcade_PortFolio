@@ -12,8 +12,8 @@ TileManager::~TileManager()
 	{
 		for (UINT x = 0; x < MAP_COL; x++)
 		{
-			if (tiles[y][x])
-				delete tiles[y][x];
+			if (tiles[y][x]) delete tiles[y][x];
+				
 		}
 	}
 }
