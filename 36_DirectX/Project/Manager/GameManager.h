@@ -8,7 +8,7 @@ class Collider;
 class ColliderRect;
 class DartManager;
 class PlayerManager;
-
+class GameScene;
 
 enum GameMode
 {
@@ -23,6 +23,12 @@ enum GameMap
 	FOREST
 };
 
+enum GameStatus
+{
+	START,
+	PLAY,
+	GAME_OVER
+};
 
 
 enum Direction;
@@ -48,11 +54,14 @@ public:
 
 	void Update();
 
-	void SetGameMode(const GameMode& gameMode);
+	void SetGameMode(const GameMode& gameMode) { this->gameMode = gameMode; }
 	GameMode GetGameMode() const { return gameMode; }
 	
 	//void SetPlayer(Character* player) { this->player = player; }
 	//Character* GetPlayer() const { return player; }
+
+	void SetGameScene(GameScene* gameScene) { this->gameScene = gameScene; }
+	GameScene* GetGameScene() const { return gameScene; }
 
 	void SetPlayerManager(PlayerManager* playerManager) { this->playerMananger = playerManager; }
 	PlayerManager* GetPlayerManager() const { return playerMananger; }
@@ -71,6 +80,9 @@ public:
 
 
 public:
+
+	GameStatus GetGameStatus() const { return gameStatus; }
+	void SetGameStatus(const GameStatus& gameStatus) { this->gameStatus = gameStatus; }
 
 	Transform* GetGameFieldTransform() const { return gameFieldTransform; }
 	bool IsEditMode() const { return editMode; }
@@ -114,6 +126,8 @@ private: // Board 및 GameField 관련
 
 private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
 
+	GameScene* gameScene{};
+
 	PlayerManager* playerMananger{};
 
 	BalloonManager* balloonManager{};
@@ -121,5 +135,7 @@ private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
 	StreamManager* streamManager{};
 
 	DartManager* dartManager{};
+
+	GameStatus gameStatus{ START };
 
 };
