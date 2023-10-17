@@ -1,5 +1,6 @@
 #pragma once
 
+class GameUIManager;
 
 class MapEditor
 {
@@ -10,20 +11,10 @@ public:
 		BLOCK_MODE
 	};
 
-private:
+public:
 
 	MapEditor();
 	~MapEditor();
-
-public:
-
-	static MapEditor* GetInst()
-	{
-		static MapEditor singleton;
-		return &singleton;
-	}
-
-public:
 
 	void Update();
 	void Render();
@@ -46,6 +37,8 @@ private:
 
 	TileEditor* tileEditor{};
 	BlockEditor* blockEditor{};
+
+	GameUIManager* uiManager{};
 
 	
 

@@ -56,13 +56,6 @@ void GameScene::Update()
 
 	uiManager->Update();
 
-	if (GM->IsEditMode())
-	{
-		MapEditor::GetInst()->Update();
-		return;
-	}
-
-
 	playerManager->Update();
 
 	dartManager->Update();
@@ -81,12 +74,6 @@ void GameScene::Render()
 {
 
 	uiManager->Render();
-
-	if (GM->IsEditMode())
-	{
-		MapEditor::GetInst()->Render();
-		return;
-	}
 
 	tileManager->Render();
 

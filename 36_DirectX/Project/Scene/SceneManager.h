@@ -42,6 +42,8 @@ private:
 	map<SceneName, Scene*> scenes{};
 
 	SceneName curScene{ INTRO_SCENE };
+	
+	MapEditor* mapEditor{};
 
 private:
 

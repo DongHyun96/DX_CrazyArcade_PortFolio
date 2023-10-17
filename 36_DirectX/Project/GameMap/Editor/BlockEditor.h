@@ -1,11 +1,12 @@
 #pragma once
 
+class MapEditor;
 
 
 class BlockEditor
 {
 public:
-	BlockEditor();
+	BlockEditor(MapEditor* mapEditor);
 	~BlockEditor();
 
 	void Update();
@@ -33,6 +34,8 @@ private:
 	void Load();
 
 private:
+
+	MapEditor* mapEditor{};
 
 	// 월드에 배치된 블록들 관련
 	Block*		cellBlocks[MAP_ROW][MAP_COL]{};

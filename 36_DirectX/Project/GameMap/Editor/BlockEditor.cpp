@@ -2,7 +2,8 @@
 #include "BlockEditor.h"
 
 
-BlockEditor::BlockEditor()
+BlockEditor::BlockEditor(MapEditor* mapEditor)
+	:mapEditor(mapEditor)
 {
 	InitBlockMaps();
 
@@ -29,7 +30,7 @@ void BlockEditor::Update()
 {
 	UpdateObjects();
 
-	if (MapEditor::GetInst()->GetMode() != MapEditor::BLOCK_MODE)
+	if (mapEditor->GetMode() != MapEditor::BLOCK_MODE)
 		return;
 
 	SelectBlockMap();
@@ -46,12 +47,12 @@ void BlockEditor::Render()
 		}
 	}
 
-	if (MapEditor::GetInst()->GetMode() != MapEditor::BLOCK_MODE)
+	if (mapEditor->GetMode() != MapEditor::BLOCK_MODE)
 		return;
 
 	for (auto& block : blockMaps) block.first->Render();
 
-	if (MapEditor::GetInst()->GetRenderColliderFlag())
+	if (mapEditor->GetRenderColliderFlag())
 		for (auto& c : blockMapColliders)	c->Render();
 }
 
@@ -200,7 +201,7 @@ void BlockEditor::SetBlockToWorld()
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			if (MapEditor::GetInst()->cells[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
+			if (mapEditor->cells[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
 			{
 				if (KEY_DOWN(VK_LBUTTON))
 				{

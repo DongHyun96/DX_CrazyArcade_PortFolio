@@ -31,8 +31,8 @@ void CollisionUtil::HandleCharacterCommonCollision(ColliderRect* myBody, Collide
 
 	if (collidedFace == DIR_LEFT || collidedFace == DIR_RIGHT)
 	{
-		enteredBody->translation.x = (collidedFace == DIR_LEFT) ? myBody->Left() - enteredBody->LocalSize().x * 0.501f
-																: myBody->Right() + enteredBody->LocalSize().x * 0.501f;
+		enteredBody->translation.x = (collidedFace == DIR_LEFT) ? myBody->Left() - enteredBody->LocalSize().x * 0.5001f
+																: myBody->Right() + enteredBody->LocalSize().x * 0.5001f;
 
 		// y값 조정
 		if (enteredBody->Bottom() < myBody->Bottom())
@@ -48,8 +48,8 @@ void CollisionUtil::HandleCharacterCommonCollision(ColliderRect* myBody, Collide
 	}
 	else if (collidedFace == DIR_UP || collidedFace == DIR_DOWN)
 	{
-		enteredBody->translation.y = (collidedFace == DIR_UP) ? myBody->Top() + enteredBody->LocalSize().y * 0.501f 
-															  : myBody->Bottom() - enteredBody->LocalSize().y * 0.501f;
+		enteredBody->translation.y = (collidedFace == DIR_UP) ? myBody->Top() + enteredBody->LocalSize().y * 0.5001f
+															  : myBody->Bottom() - enteredBody->LocalSize().y * 0.5001f;
 
 		// x값 조정
 		if (enteredBody->Left() < myBody->Left())

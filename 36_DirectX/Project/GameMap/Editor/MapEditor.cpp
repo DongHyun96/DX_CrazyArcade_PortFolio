@@ -6,8 +6,10 @@ MapEditor::MapEditor()
 {
 	InitCells();
 
-	tileEditor = new TileEditor;
-	blockEditor = new BlockEditor;
+	tileEditor = new TileEditor(this);
+	blockEditor = new BlockEditor(this);
+
+	uiManager = new GameUIManager;
 }
 
 MapEditor::~MapEditor()
@@ -20,6 +22,8 @@ MapEditor::~MapEditor()
 
 	delete tileEditor;
 	delete blockEditor;
+
+	delete uiManager;
 }
 
 void MapEditor::Update()
@@ -32,6 +36,7 @@ void MapEditor::Update()
 
 	tileEditor->Update();
 	blockEditor->Update();
+	uiManager->Update();
 }
 
 void MapEditor::Render()
@@ -47,6 +52,7 @@ void MapEditor::Render()
 
 	tileEditor->Render();
 	blockEditor->Render();
+	uiManager->Render();
 
 	Debug();
 }

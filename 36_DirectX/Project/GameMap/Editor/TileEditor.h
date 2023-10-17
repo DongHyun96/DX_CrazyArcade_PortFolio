@@ -1,5 +1,7 @@
 #pragma once
 
+class MapEditor;
+
 struct TileInfo
 {
 	TileInfo() {}
@@ -38,7 +40,7 @@ struct TileInfo
 class TileEditor
 {
 public:
-	TileEditor();
+	TileEditor(MapEditor* mapEditor);
 	~TileEditor();
 
 	void Update();
@@ -62,6 +64,8 @@ private:
 	void Load();
 
 private:
+
+	MapEditor* mapEditor{};
 	
 	// 월드 타일 관련
 	Object*		cellTiles[MAP_ROW][MAP_COL]{};

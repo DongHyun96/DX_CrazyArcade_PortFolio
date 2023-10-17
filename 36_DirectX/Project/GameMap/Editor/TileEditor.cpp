@@ -2,7 +2,8 @@
 #include "TileEditor.h"
 
 
-TileEditor::TileEditor()
+TileEditor::TileEditor(MapEditor* mapEditor)
+	:mapEditor(mapEditor)
 {
 	InitTileMaps();
 
@@ -31,7 +32,7 @@ void TileEditor::Update()
 {
 	UpdateObjects();
 
-	if (MapEditor::GetInst()->GetMode() != MapEditor::TILE_MODE)
+	if (mapEditor->GetMode() != MapEditor::TILE_MODE)
 		return;
 
 	SelectTileMap();
@@ -48,12 +49,12 @@ void TileEditor::Render()
 		}
 	}
 
-	if (MapEditor::GetInst()->GetMode() != MapEditor::TILE_MODE)
+	if (mapEditor->GetMode() != MapEditor::TILE_MODE)
 		return;
 
 	for (auto& tile : tileMaps) tile.first->Render();
 
-	if (MapEditor::GetInst()->GetRenderColliderFlag())
+	if (mapEditor->GetRenderColliderFlag())
 		for (auto& c : tileMapColliders) c->Render();
 }
 
@@ -128,7 +129,7 @@ void TileEditor::SetTileToWorld()
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			if (MapEditor::GetInst()->cells[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
+			if (mapEditor->cells[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
 			{
 				if (KEY_DOWN(VK_LBUTTON))
 				{

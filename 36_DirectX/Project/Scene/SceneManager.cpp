@@ -4,12 +4,19 @@
 
 SceneManager::SceneManager()
 {
-	scenes =
+	if (GM->IsEditMode())
 	{
-		{INTRO_SCENE, new IntroScene},
-		{LOBBY_SCENE, nullptr},
-		{GAME_SCENE, new GameScene}
-	};
+		mapEditor = new MapEditor;
+	}
+	else
+	{
+		scenes =
+		{
+			{INTRO_SCENE, new IntroScene},
+			{LOBBY_SCENE, nullptr},
+			{GAME_SCENE, new GameScene}
+		};
+	}
 }
 
 SceneManager::~SceneManager()
@@ -19,17 +26,25 @@ SceneManager::~SceneManager()
 		if (p.second) delete p.second;
 	}
 
+	if (mapEditor) delete mapEditor;
+
 	scenes.clear();
 }
 
 void SceneManager::Update()
 {
-	scenes[curScene]->Update();
+	if (GM->IsEditMode())
+		mapEditor->Update();
+	else
+		scenes[curScene]->Update();
 }
 
 void SceneManager::Render()
 {
-	scenes[curScene]->Render();
+	if (GM->IsEditMode())
+		mapEditor->Render();
+	else
+		scenes[curScene]->Render();
 }
 
 void SceneManager::LoadingThread()
