@@ -75,33 +75,72 @@ void TileEditor::UpdateObjects()
 
 void TileEditor::InitTileMaps()
 {
-	for (UINT i = 0; i < 7; i++)
+	switch (GM->GetCurMapType())
 	{
-		TileInfo info{ L"InGame/Village/GroundTiles/Tile.png", 7, 1, i + 1, 1 };
-		Object* tile = new Object(CELL_WORLD_SIZE, L"InGame/Village/GroundTiles/Tile.png", 7, 1, i + 1, 1);
+	case VILLAGE:
+		for (UINT i = 0; i < 7; i++)
+		{
+			TileInfo info{ L"InGame/Village/GroundTiles/Tile.png", 7, 1, i + 1, 1 };
+			Object* tile = new Object(CELL_WORLD_SIZE, L"InGame/Village/GroundTiles/Tile.png", 7, 1, i + 1, 1);
 
-		Util::SetTransformToGameBoard(tile, 16, 10 - i);
+			Util::SetTransformToGameBoard(tile, 16, 10 - i);
 
-		Collider* collider = new ColliderRect(CELL_WORLD_SIZE);
-		collider->SetParent(tile);
+			Collider* collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(tile);
 
-		tileMaps.push_back({ tile, info });
-		tileMapColliders.push_back(collider);
-	}
+			tileMaps.push_back({ tile, info });
+			tileMapColliders.push_back(collider);
+		}
 
-	for (UINT i = 0; i < 5; i++)
+		for (UINT i = 0; i < 5; i++)
+		{
+			TileInfo info{ L"InGame/Village/GroundTiles/Tile2.bmp", 5, 1, i + 1, 1 };
+			Object* tile = new Object(CELL_WORLD_SIZE, L"InGame/Village/GroundTiles/Tile2.bmp", 5, 1, i + 1, 1);
+
+			Util::SetTransformToGameBoard(tile, 17, 10 - i);
+
+			Collider* collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(tile);
+
+			tileMaps.push_back({ tile, info });
+			tileMapColliders.push_back(collider);
+		}
+		break;
+	case FOREST:
 	{
-		TileInfo info{ L"InGame/Village/GroundTiles/Tile2.bmp", 5, 1, i + 1, 1 };
-		Object* tile = new Object(CELL_WORLD_SIZE, L"InGame/Village/GroundTiles/Tile2.bmp", 5, 1, i + 1, 1);
+		for (UINT i = 0; i < 6; i++)
+		{
+			TileInfo info{ L"InGame/Forest/Tiles/tile" + to_wstring(5 + i) + L".bmp" };
+			Object* tile = new Object(CELL_WORLD_SIZE, L"InGame/Forest/Tiles/tile" + to_wstring(5 + i) + L".bmp");
 
-		Util::SetTransformToGameBoard(tile, 17, 10 - i);
+			Util::SetTransformToGameBoard(tile, 16, 10 - i);
 
-		Collider* collider = new ColliderRect(CELL_WORLD_SIZE);
-		collider->SetParent(tile);
+			Collider* collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(tile);
 
-		tileMaps.push_back({ tile, info });
-		tileMapColliders.push_back(collider);
+			tileMaps.push_back({ tile, info });
+			tileMapColliders.push_back(collider);
+		}
 	}
+	case FACTORY:
+		for (UINT i = 0; i < 5; i++)
+		{
+			TileInfo info{ L"InGame/Factory/Tiles/Tile.bmp", 15, 1, i + 1, 1 };
+			Object* tile = new Object(CELL_WORLD_SIZE, L"InGame/Factory/Tiles/Tile.bmp", 15, 1, i + 1, 1);
+
+			Util::SetTransformToGameBoard(tile, 16, 10 - i);
+
+			Collider* collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(tile);
+
+			tileMaps.push_back({ tile, info });
+			tileMapColliders.push_back(collider);
+		}
+		break;
+	default:
+		break;
+	}
+	
 
 }
 
@@ -182,7 +221,7 @@ void TileEditor::CreateTile(const TileInfo& info, UINT boardX, UINT boardY)
 
 void TileEditor::Save()
 {
-	BinaryWriter binWriter(L"VillageTileData");
+	BinaryWriter binWriter(GM->tileBinFile[GM->GetCurMapType()]);
 
 	for (UINT i = 0; i < MAP_ROW; i++)
 	{
@@ -193,7 +232,7 @@ void TileEditor::Save()
 
 void TileEditor::Load()
 {
-	BinaryReader reader(L"VillageTileData");
+	BinaryReader reader(GM->tileBinFile[GM->GetCurMapType()]);
 
 	if (!reader.Succeeded())
 		return;

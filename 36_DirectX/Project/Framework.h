@@ -19,6 +19,7 @@
 #include <time.h>
 #include <thread>
 #include <mutex>
+#include <chrono>
 
 using namespace std;
 
@@ -80,10 +81,10 @@ using namespace FMOD;
 
 #define CELL_WORLD_SIZE	Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW)
 
-#define GM				GameManager::GetInst()
+#define GM				GameManager::GetInstance()
 #define SOUND			SoundManager::GetInstance()
 
-#define SM				SceneManager::GetInst()
+#define SM				SceneManager::GetInstance()
 
 #define PM				GM->GetPlayerManager()
 
@@ -196,7 +197,6 @@ typedef XMMATRIX Matrix;
 #include "Character/CharacterAnims/MaridAnim.h"
 
 #include "Character/PlayerManager.h"
-
 
 #include "Scene/Scene.h"
 #include "Scene/CollisionScene.h"

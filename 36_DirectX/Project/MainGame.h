@@ -6,6 +6,7 @@ public:
 	~MainGame();
 
 	void Update();
+
 	void Render();
 	
 	void SetUpImGui();

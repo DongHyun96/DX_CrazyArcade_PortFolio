@@ -7,10 +7,52 @@ PlayerManager::PlayerManager()
 	spawnPosMap =
 	{
 		{VILLAGE, {{1, 1}, {6, 0}, {14, 0}, {0, 12}, {7, 12}, {13, 11}}},
-		{FACTORY, {}},
-		{FOREST, {}}
+		{FACTORY, {{1, 0}, {13, 0}, {0, 6}, {0, 12}, {14, 12}, {7, 10}, {14, 6}, {7, 3}}},
+		{FOREST, {{1, 1}, {8, 1}, {0, 4}, {1, 7}, {0, 12}, {5, 11}, {10, 9}, {10, 5}}}
 	};
 
+	P_DIR_KEYCODE[P2] =
+	{
+		{DIR_LEFT,	VK_LEFT},
+		{DIR_RIGHT, VK_RIGHT},
+		{DIR_UP,	VK_UP},
+		{DIR_DOWN,	VK_DOWN}
+	};
+
+	P_BALLOON_KEYCODE[P2] = VK_RSHIFT;
+	P_ITEM_KEYCODE[P2] = VK_HANJA;
+
+	// Setting up characters
+
+	p1Characters =
+	{
+		{BAZZI, new Player(BAZZI, P1)},
+		//{DAO, new Player(DAO, P1)},
+		//{CAPPI, new Player(CAPPI, P1)},
+		//{MARID, new Player(MARID, P1)},
+	};
+
+	p2Characters =
+	{
+		{BAZZI, new Player(BAZZI, P2)},
+		//{DAO, new Player(DAO, P2)},
+		//{CAPPI, new Player(CAPPI, P2)},
+		//{MARID, new Player(MARID, P2)},
+	};
+
+	// TODO: enemyCharacters 초기화
+
+}
+
+
+PlayerManager::~PlayerManager()
+{
+	for (Character* player : wholePlayers)
+		delete player;
+}
+
+void PlayerManager::Init()
+{
 	GameMode gameMode = GM->GetGameMode();
 
 	P_DIR_KEYCODE[P1] =
@@ -25,26 +67,13 @@ PlayerManager::PlayerManager()
 	P_ITEM_KEYCODE[P1] = VK_LCONTROL;
 
 
-	P_DIR_KEYCODE[P2] =
+	if (gameMode == PVP) // TODO p1과 p2 게임캐릭터 타입 가져오기
 	{
-		{DIR_LEFT,	VK_LEFT},
-		{DIR_RIGHT, VK_RIGHT},
-		{DIR_UP,	VK_UP},
-		{DIR_DOWN,	VK_DOWN}
-	};
-
-	P_BALLOON_KEYCODE[P2] = VK_RSHIFT;
-	P_ITEM_KEYCODE[P2] = VK_HANJA;
-
-	if (gameMode == PVP)
-	{
-		p1 = new Player(BAZZI, P1);
+		p1 = p1Characters[BAZZI];
 		p1->SetLabel("P1");
 
-		p2 = new Player(BAZZI, P2);
+		p2 = p2Characters[BAZZI];
 		p2->SetLabel("P2");
-
-		SetPlayers(p1, p2);
 
 		vector<Util::Coord> spawnPos = spawnPosMap[GM->GetCurMapType()];
 
@@ -52,17 +81,18 @@ PlayerManager::PlayerManager()
 
 		p1->SetSpawnPos(spawnPos[0]);
 		p2->SetSpawnPos(spawnPos[1]);
+
+		wholePlayers.clear();
+
+		wholePlayers.push_back(p1);
+		wholePlayers.push_back(p2);
+
 	}
 	else // PVE mode
 	{
 
 	}
-}
 
-PlayerManager::~PlayerManager()
-{
-	for (Character* player : wholePlayers)
-		delete player;
 }
 
 void PlayerManager::Update()
@@ -95,27 +125,6 @@ void PlayerManager::SetKeyCode(const GameMode& gameMode)
 	P_ITEM_KEYCODE[P1] = VK_LCONTROL;
 }
 
-void PlayerManager::SetPlayers(Character* p1, Character* p2)
-{
-	this->p1 = p1;
-	this->p2 = p2;
-
-	wholePlayers.clear();
-
-	wholePlayers.push_back(p1);
-	wholePlayers.push_back(p2);
-}
-
-void PlayerManager::SetPlayers(Character* p1, vector<Character*> enemies)
-{
-	this->p1 = p1;
-	this->comEnemies = enemies;
-
-	wholePlayers.clear();
-
-	wholePlayers = enemies;
-	wholePlayers.push_back(p1);
-}
 
 void PlayerManager::SetGameOver()
 {

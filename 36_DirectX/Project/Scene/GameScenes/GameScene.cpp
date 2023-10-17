@@ -10,25 +10,25 @@ GameScene::GameScene()
 	blockManager = new BlockManager;
 	GM->SetBlockManager(blockManager);
 
-	playerManager = new PlayerManager;
-	GM->SetPlayerManager(playerManager);
+	playerManager = GM->GetPlayerManager();
 
-	balloonManager = new BalloonManager;
-	GM->SetBalloonManager(balloonManager);
+	balloonManager = GM->GetBalloonManager();
 
-	streamManager = new StreamManager;
-	GM->SetStreamManager(streamManager);
+	streamManager = GM->GetStreamManager();
 
-	itemManager = new ItemManager;
+	itemManager = GM->GetItemManager();
 
-	dartManager = new DartManager;
-	GM->SetDartManager(dartManager);
+	dartManager = GM->GetDartManager();
 	
-	uiManager = new GameUIManager;
+	uiManager = GM->GetGameUIManager();
 
-	uiManager->SetLogoFinEvent(bind(&GameScene::StartGameFromSpawn, this));
+	uiManager->SetLogoFinEvent(bind(&GameScene::StartGameFromSpawn, this)); // 이게 게임 start 트리거
 
-	//SOUND->Play("VillageBGM", 1.f);
+	float volume =  GM->GetCurMapType() == VILLAGE ? 1.f :
+					GM->GetCurMapType() == FOREST ? 0.7f : 0.7f;
+
+	SOUND->Play(GM->mapBGM[GM->GetCurMapType()], volume);
+
 }
 
 GameScene::~GameScene()
@@ -36,24 +36,10 @@ GameScene::~GameScene()
 	delete tileManager;
 
 	delete blockManager;
-
-	delete playerManager;
-
-	delete balloonManager;
-
-	delete streamManager;
-
-	delete itemManager;
-
-	delete dartManager;
-
-	delete uiManager;
 }
 
 void GameScene::Update()
 {
-	GM->Update();
-
 	uiManager->Update();
 
 	playerManager->Update();
@@ -112,8 +98,9 @@ void GameScene::SetGameEnd(const GameOverResult& result)
 	else
 		SOUND->Play("Draw", 1.f);
 
-	SOUND->Pause("VillageBGM");
+	SOUND->Pause(GM->mapBGM[GM->GetCurMapType()]);
 }
+
 
 
 void GameScene::StartGameFromSpawn()
@@ -127,8 +114,6 @@ void GameScene::StartGameFromSpawn()
 void GameScene::UpdateTimer()
 {
 	if (GM->GetGameStatus() != PLAY) return;
-
-	if (GM->GetGameStatus() == GAME_OVER) return;
 
 	gameTimer -= Time::Delta();
 

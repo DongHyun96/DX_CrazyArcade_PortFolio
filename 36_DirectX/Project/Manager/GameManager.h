@@ -1,13 +1,19 @@
 #pragma once
 
 class Transform;
-class BalloonManager;
-class BlockManager;
-class StreamManager;
+
 class Collider;
 class ColliderRect;
-class DartManager;
+
+class GameUIManager;
 class PlayerManager;
+class BlockManager;
+class BalloonManager;
+class StreamManager;
+class ItemManager;
+class DartManager;
+
+
 class GameScene;
 
 enum GameMode
@@ -39,44 +45,52 @@ namespace Util { struct Coord; }
 
 class GameManager
 {
+	//friend class Singleton;
+
 private:
 
 	GameManager();
 	~GameManager();
 
 public:
-	
-	static GameManager* GetInst()
+
+	static GameManager* GetInstance()
 	{
 		static GameManager singleton;
 		return &singleton;
 	}
 
+public:
+
+	void CreateGameObjects(); // MainGame 생성자에서 call
+
+
+
+
+public:
+	
 	void Update();
 
 	void SetGameMode(const GameMode& gameMode) { this->gameMode = gameMode; }
 	GameMode GetGameMode() const { return gameMode; }
 	
-	//void SetPlayer(Character* player) { this->player = player; }
-	//Character* GetPlayer() const { return player; }
-
 	void SetGameScene(GameScene* gameScene) { this->gameScene = gameScene; }
 	GameScene* GetGameScene() const { return gameScene; }
 
-	void SetPlayerManager(PlayerManager* playerManager) { this->playerMananger = playerManager; }
-	PlayerManager* GetPlayerManager() const { return playerMananger; }
+	PlayerManager* GetPlayerManager() const { return playerManager; }
 	
-	void SetBalloonManager(BalloonManager* balloonManager) { this->balloonManager = balloonManager; }
 	BalloonManager* GetBalloonManager() const { return balloonManager; }
 
 	void SetBlockManager(BlockManager* blockManager) { this->blockManager = blockManager; }
 	BlockManager* GetBlockManager() const { return blockManager; }
 
-	void SetStreamManager(StreamManager* streamManager) { this->streamManager = streamManager; }
 	StreamManager* GetStreamManager() const { return streamManager; }
 
-	void SetDartManager(DartManager* dartManager) { this->dartManager = dartManager; }
+	ItemManager* GetItemManager() const { return itemManager; }
+
 	DartManager* GetDartManager() const { return dartManager; }
+
+	GameUIManager* GetGameUIManager() const { return gameUIManager; }
 
 
 public:
@@ -92,7 +106,6 @@ public:
 	float GetMapT() const { return mapT; }
 	float GetMapB() const { return mapB; }
 
-
 	/// <param name="point"> --> Use Global Position</param>
 	Vector2 GetCollidedMapCellPos(const Vector2& point);
 	Util::Coord GetCollidedMapCellCoord(const Vector2& point);
@@ -103,13 +116,14 @@ public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
 	
 	map<GameMap, wstring> tileBinFile{};
 	map<GameMap, wstring> blockBinFile{};
+	map<GameMap, string> mapBGM{};
 
 	GameMap GetCurMapType() const { return curMap; }
 
 private:
 
 	GameMode gameMode{PVP};
-	GameMap curMap{ VILLAGE };
+	GameMap curMap{ FACTORY };
 
 private: // Board 및 GameField 관련
 
@@ -124,15 +138,22 @@ private: // Board 및 GameField 관련
 
 	ColliderRect* mapCells[MAP_ROW][MAP_COL]{};
 
-private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당)
+private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당) -> 반대로 담당 // 실질적인 Update Render는 GameScene에서 담당
 
 	GameScene* gameScene{};
 
-	PlayerManager* playerMananger{};
+	GameUIManager* gameUIManager{};
+
+	PlayerManager* playerManager{};
+
+	// 타일매니저와 BlockManager는 늘상 바뀜 (GameScene에서 생성 해제 담당), BlockManager만 GameManager로 set해서 전역으로 뿌릴 것임
+	BlockManager* blockManager{}; 
 
 	BalloonManager* balloonManager{};
-	BlockManager* blockManager{};
+
 	StreamManager* streamManager{};
+
+	ItemManager* itemManager{};
 
 	DartManager* dartManager{};
 

@@ -8,16 +8,23 @@ GameManager::GameManager()
 	tileBinFile =
 	{
 		{VILLAGE, L"VillageTileData"},
-		{FACTORY, L""},
-		{FOREST, L""}
+		{FACTORY, L"FactoryTileData"},
+		{FOREST, L"ForestTileData"}
 	}; 
 
 	//VillageBlockSampleData
 	blockBinFile =
 	{
 		{VILLAGE, L"VillageBlockData"},
-		{FACTORY, L""},
-		{FOREST, L""}
+		{FACTORY, L"FactoryBlockData"},
+		{FOREST, L"ForestBlockData"}
+	};
+
+	mapBGM =
+	{
+		{VILLAGE, "VillageBGM"},
+		{FACTORY, "FactoryBGM"},
+		{FOREST, "ForestBGM"}
 	};
 
 	gameFieldTransform = new Transform;
@@ -41,8 +48,6 @@ GameManager::GameManager()
 		}
 	}
 
-
-
 }
 
 GameManager::~GameManager()
@@ -54,6 +59,18 @@ GameManager::~GameManager()
 		for (UINT x = 0; x < MAP_COL; x++)
 			delete mapCells[y][x];
 	}
+
+	delete gameUIManager;
+
+	delete playerManager;
+
+	delete balloonManager;
+
+	delete streamManager;
+
+	delete itemManager;
+
+	delete dartManager;
 }
 
 void GameManager::Update()
@@ -108,5 +125,20 @@ Util::Coord GameManager::GetCollidedMapCellCoord(const Vector2& point)
 	}
 
 	return Util::Coord();
+}
+
+void GameManager::CreateGameObjects()
+{
+	playerManager = new PlayerManager;
+
+	balloonManager = new BalloonManager;
+
+	streamManager = new StreamManager;
+
+	itemManager = new ItemManager;
+
+	dartManager = new DartManager;
+
+	gameUIManager = new GameUIManager;
 }
 

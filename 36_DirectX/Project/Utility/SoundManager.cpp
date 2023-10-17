@@ -13,7 +13,6 @@ SoundManager::SoundManager()
 	AddSound("BalloonExplode", "_Sound/bombExplode.wav");
 	AddSound("ItemSpawned", "_Sound/ItemGen.mp3");
 	AddSound("ItemEarned", "_Sound/SetItem.wav");
-	AddSound("VillageBGM", "_Sound/Boomhill.mp3", true);
 
 	AddSound("Captured", "_Sound/inBalloon.mp3");
 	AddSound("Saved", "_Sound/Saved.wav");
@@ -22,6 +21,11 @@ SoundManager::SoundManager()
 	AddSound("Lose", "_Sound/defeat.mp3");
 	AddSound("Win", "_Sound/win.wav");
 	AddSound("Draw", "_Sound/draw.mp3");
+
+	AddSound("VillageBGM", "_Sound/Boomhill.mp3", true);
+	AddSound("ForestBGM", "_Sound/Forest.mp3", true);
+	AddSound("FactoryBGM", "_Sound/BombFactory.mp3", true);
+
 
 }
 

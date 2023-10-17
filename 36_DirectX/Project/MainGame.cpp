@@ -21,6 +21,9 @@ MainGame::MainGame()
 
 	FONT->Add("NumberFont", L"µÕ±Ù¸ð²Ã", { 0.9764f, 0.5803f, 0.0901f }, 50.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
 
+	// Late Init GM GameObjects
+	GM->CreateGameObjects();
+
 	//rgb(249, 148, 23)
 
 }
@@ -39,6 +42,9 @@ MainGame::~MainGame()
 	Font::Delete();
 	SoundManager::Delete();
 
+	//GameManager::Delete();
+	SceneManager::Delete();
+
 	// Cleanup
 	ImGui_ImplDX11_Shutdown();
 	ImGui_ImplWin32_Shutdown();
@@ -53,7 +59,10 @@ void MainGame::Update()
 
 	SOUND->Update();
 
+	GM->Update();
+
 	//scene->Update();
+
 	SM->Update();
 
 	if (KEY_DOWN(VK_TAB))

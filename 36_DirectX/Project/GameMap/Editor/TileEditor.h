@@ -6,7 +6,7 @@ struct TileInfo
 {
 	TileInfo() {}
 
-	TileInfo(wstring file, UINT frameX, UINT frameY, UINT targetX, UINT targetY)
+	TileInfo(wstring file, UINT frameX=1, UINT frameY=1, UINT targetX=1, UINT targetY=1)
 		:file(file), frameX(frameX), frameY(frameY), targetX(targetX), targetY(targetY)
 	{
 	}
@@ -55,7 +55,7 @@ private:
 	void SelectTileMap();
 	void SetTileToWorld();
 
-	void CreateTile(UINT boardX, UINT boardY);						 // editor에서 edit할 떄의 용도
+	void CreateTile(UINT boardX, UINT boardY);						 // editor에서 edit할 때의 용도
 	void CreateTile(const TileInfo& info, UINT boardX, UINT boardY); // 시작 시 Load할 때 create하는 용도
 
 private:

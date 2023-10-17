@@ -69,6 +69,7 @@ void GameUIManager::Update()
 	itemUI->Update();
 
 	UpdateStartLogo();
+
 	UpdateGameOver();
 }
 
@@ -169,6 +170,8 @@ void GameUIManager::StartRenderGameOver(const GameOverResult& result)
 
 void GameUIManager::SetLogoFinEvent(function<void()> LogoEndEvent)
 {
+	SOUND->Play("GameStart", 0.5f);
+
 	this->LogoFinEvent = LogoEndEvent;
 
 	hasGameStarted = true;

@@ -5,6 +5,8 @@ public:
 	PlayerManager();
 	~PlayerManager();
 
+	void Init();
+
 	void Update();
 	void Render();
 
@@ -20,12 +22,6 @@ public:
 	vector<Character*>& GetComEnemies() { return comEnemies; }
 
 	void SetGameOver();
-
-private:
-
-	void SetPlayers(Character* p1, Character* p2);
-	void SetPlayers(Character* p1, vector<Character*> enemies);
-
 
 private:
 
@@ -54,6 +50,14 @@ private:
 	Character* p2{};
 
 	vector<Character*> comEnemies{};
+
+private: // 미리 초기화한 데이터들
+	
+	map<CharacterType, Character*> p1Characters{};
+	map<CharacterType, Character*> p2Characters{};
+
+	// comEnemies는 무조건 배찌만 사용
+
 
 private:
 	

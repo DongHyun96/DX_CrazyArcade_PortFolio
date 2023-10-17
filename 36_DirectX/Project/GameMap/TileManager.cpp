@@ -42,17 +42,6 @@ void TileManager::Render()
 	}
 }
 
-void TileManager::CreateTile(UINT boardX, UINT boardY, wstring file, UINT frameX, UINT frameY, UINT targetX, UINT targetY, Vector2 size)
-{
-
-	assert(!tiles[boardY][boardX]);
-
-	tiles[boardY][boardX] = new Object(size, file, frameX, frameY, targetX, targetY);
-
-	Util::SetTransformToGameBoard(tiles[boardY][boardX], boardX, boardY);
-	tiles[boardY][boardX]->zDepth = FAR_Z - 10;
-}
-
 void TileManager::CreateTile(const TileInfo& info, UINT boardX, UINT boardY)
 {
 	tiles[boardY][boardX] = new Object(CELL_WORLD_SIZE, info.file, info.frameX, info.frameY, info.targetX, info.targetY);

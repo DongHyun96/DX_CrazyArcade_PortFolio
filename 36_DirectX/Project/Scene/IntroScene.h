@@ -11,5 +11,6 @@ public:
 
 private:
 
+	bool pressed = false;
 
 };

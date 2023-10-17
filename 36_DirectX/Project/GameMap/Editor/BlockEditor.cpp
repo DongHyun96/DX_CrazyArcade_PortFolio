@@ -82,82 +82,229 @@ void BlockEditor::InitBlockMaps()
 
 	// BP - BREAKABLE / MOVABLE / HIDABLE
 
-	Block* block{};
-	Collider* collider{};
-	BlockInfo info{};
+	switch (GM->GetCurMapType())
+	{
+	case VILLAGE:
+	{
+		Block* block{};
+		Collider* collider{};
+		BlockInfo info{};
 
-	// Tree
-	info = { L"InGame/Village/Objects/tree.png", {0, 0}, {1, 1}, {1, 1}, {false, false, false}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f) };
-	block = new Block({ 16, 10 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+		// Tree
+		info = { L"InGame/Village/Objects/tree.png", {0, 0}, {1, 1}, {1, 1}, {false, false, false}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f) };
+		block = new Block({ 16, 10 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
 
-	collider = new ColliderRect(CELL_WORLD_SIZE);
-	collider->SetParent(block->GetBody());
+		collider = new ColliderRect(CELL_WORLD_SIZE);
+		collider->SetParent(block->GetBody());
 
-	blockMaps.push_back({ block, info });
-	blockMapColliders.push_back(collider);
+		blockMaps.push_back({ block, info });
+		blockMapColliders.push_back(collider);
+
+		// PushBox
+		info = { L"InGame/Village/Objects/Push.png", {0, 0}, {1, 1}, {1, 1}, {true, true, false} };
+		block = new Block({ 16, 9 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+		collider = new ColliderRect(CELL_WORLD_SIZE);
+		collider->SetParent(block->GetBody());
+
+		blockMaps.push_back({ block, info });
+		blockMapColliders.push_back(collider);
+
+		// House
+		for (UINT i = 0; i < 3; i++)
+		{
+			info = { L"InGame/Village/Objects/house.png", {0, 0}, {3, 1}, {i + 1, 1}, {false, false, false}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f) };
+			block = new Block({ 16 + i, 12 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+
+		// Bush
+		for (UINT i = 0; i < 2; i++)
+		{
+			info = { L"InGame/Village/Objects/Hide.png", {0, 0}, {2, 1}, {i + 1, 1}, {true, false, true},  Vector2(WIN_WIDTH / MAP_COL * 1.15f, WIN_HEIGHT / MAP_ROW) };
+
+			block = new Block({ 17, 10 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+
+		// 레고블럭들
+		for (UINT i = 0; i < 2; i++)
+		{
+			//block = new Block({ 6, 6 }, L"InGame/Village/Objects/box.png", { 3, 1 }, { 3, 1 }, CELL_WORLD_SIZE, { true, true, false });
+			info = { L"InGame/Village/Objects/box.png", {0, 0}, {3, 1}, {i + 1, 1}, {true, false, false} };
+
+			block = new Block({ 17, 8 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+
+		// Movable Box
+		info = { L"InGame/Village/Objects/box.png", {0, 0}, {3, 1}, {3, 1}, {true, true, false} };
+
+		block = new Block({ 17, 6 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+		collider = new ColliderRect(CELL_WORLD_SIZE);
+		collider->SetParent(block->GetBody());
+
+		blockMaps.push_back({ block, info });
+		blockMapColliders.push_back(collider);
+	}
+		break;
+	case FOREST:
+	{
+		Block* block{};
+		Collider* collider{};
+		BlockInfo info{};
+
+		// 벽돌 1, 2, 3
+		for (UINT i = 0; i < 3; i++) // 16, 10 9 8
+		{
+			info = { L"InGame/Forest/Objects/object"+ to_wstring(i + 1) + L".png", {0, 0}, {1, 1}, {1, 1}, {false, false, false} };
+
+			block = new Block({ 16, 10 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+
+		// PushBox
+		info = { L"InGame/Forest/Objects/block1.png", {0, 0}, {1, 1}, {1, 1}, {true, true, false} };
+		block = new Block({ 16, 7 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+		collider = new ColliderRect(CELL_WORLD_SIZE);
+		collider->SetParent(block->GetBody());
+
+		blockMaps.push_back({ block, info });
+		blockMapColliders.push_back(collider);
+
+		// 연못
+		for (UINT i = 0; i < 6; i++)
+		{
+			UINT x = i % 3 + 1;
+			UINT y = i / 3 + 1;
+
+			info = { L"InGame/Forest/Objects/Deco.png", {0, 0}, {3, 2}, {x, y}, {false, false, false} };
+
+			block = new Block({ 17, 10 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+
+		// 일반 블록들
+		for (UINT i = 0; i < 2; i++) // 18, 10 9 
+		{
+			info = { L"InGame/Forest/Objects/block" + to_wstring(i + 2) + L".png", {0, 0}, {1, 1}, {1, 1}, {true, false, false} };
+
+			block = new Block({ 18, 10 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+	}
+		break;
+	case FACTORY:
+	{
+		Block* block{};
+		Collider* collider{};
+		BlockInfo info{};
+
+		// 신호등
+		info = { L"InGame/Factory/Objects/TrafficLight.png", {0, 0}, {1, 1}, {1, 1}, {false, false, false}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 2.2f) };
+		block = new Block({ 16, 10 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+		collider = new ColliderRect(CELL_WORLD_SIZE);
+		collider->SetParent(block->GetBody());
+
+		blockMaps.push_back({ block, info });
+		blockMapColliders.push_back(collider);
+
+		// Arrows
+		for (UINT i = 0; i < 2; i++)
+		{
+			info = { L"InGame/Factory/Objects/Arrows.png", {0, 0}, {2, 1}, {i + 1, 1}, {false, false, false}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 2.2f) };
+
+			block = new Block({ 17, 8 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+
+		// Solid Blocks
+		for (UINT i = 0; i < 3; i++)
+		{
+			info = { L"InGame/Factory/Objects/Blocks.png", {0, 0}, {3, 1}, {i + 1, 1}, {false, false, false} };
+			block = new Block({ 16 + i, 12 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+
+
+		// Basic 파란색 블록들
+		for (UINT i = 0; i < 2; i++)
+		{
+			info = { L"InGame/Factory/Objects/Basic.bmp", {0, 0}, {2, 1}, {i + 1, 1}, {true, false, false} };
+
+			block = new Block({ 17, 6 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+
+		// Movables
+		for (UINT i = 0; i < 2; i++)
+		{
+			info = { L"InGame/Factory/Objects/Movable.png", {0, 0}, {2, 1}, {i + 1, 1}, {true, true, false} };
+
+			block = new Block({ 18, 8 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
+
+			collider = new ColliderRect(CELL_WORLD_SIZE);
+			collider->SetParent(block->GetBody());
+
+			blockMaps.push_back({ block, info });
+			blockMapColliders.push_back(collider);
+		}
+	}
+
+		break;
+	default:
+		break;
+	}
+
 	
-	// PushBox
-	info = { L"InGame/Village/Objects/Push.png", {0, 0}, {1, 1}, {1, 1}, {true, true, false} };
-	block = new Block({ 16, 9 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
-
-	collider = new ColliderRect(CELL_WORLD_SIZE);
-	collider->SetParent(block->GetBody());
-
-	blockMaps.push_back({ block, info });
-	blockMapColliders.push_back(collider);
-
-	// House
-	for (UINT i = 0; i < 3; i++)
-	{
-		info = { L"InGame/Village/Objects/house.png", {0, 0}, {3, 1}, {i + 1, 1}, {false, false, false}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 1.5f)};
-		block = new Block({ 16 + i, 12 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
-
-		collider = new ColliderRect(CELL_WORLD_SIZE);
-		collider->SetParent(block->GetBody());
-
-		blockMaps.push_back({ block, info });
-		blockMapColliders.push_back(collider);
-	}
-
-	// Bush
-	for (UINT i = 0; i < 2; i++)
-	{
-		info = { L"InGame/Village/Objects/Hide.png", {0, 0}, {2, 1}, {i + 1, 1}, {true, false, true},  Vector2(WIN_WIDTH / MAP_COL * 1.15f, WIN_HEIGHT / MAP_ROW) };
-		
-		block = new Block({ 17, 10 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
-
-		collider = new ColliderRect(CELL_WORLD_SIZE);
-		collider->SetParent(block->GetBody());
-
-		blockMaps.push_back({ block, info });
-		blockMapColliders.push_back(collider);
-	}
-
-	// 레고블럭들
-	for (UINT i = 0; i < 2; i++)
-	{
-		//block = new Block({ 6, 6 }, L"InGame/Village/Objects/box.png", { 3, 1 }, { 3, 1 }, CELL_WORLD_SIZE, { true, true, false });
-		info = { L"InGame/Village/Objects/box.png", {0, 0}, {3, 1}, {i + 1, 1}, {true, false, false} };
-
-		block = new Block({ 17, 8 - i }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
-
-		collider = new ColliderRect(CELL_WORLD_SIZE);
-		collider->SetParent(block->GetBody());
-
-		blockMaps.push_back({ block, info });
-		blockMapColliders.push_back(collider);
-	}
-
-	// Movable Box
-	info = { L"InGame/Village/Objects/box.png", {0, 0}, {3, 1}, {3, 1}, {true, true, false} };
-
-	block = new Block({ 17, 6 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
-
-	collider = new ColliderRect(CELL_WORLD_SIZE);
-	collider->SetParent(block->GetBody());
-
-	blockMaps.push_back({ block, info });
-	blockMapColliders.push_back(collider);
 
 
 }
@@ -263,7 +410,9 @@ void BlockEditor::EraseBlock(const Util::Coord& boardXY)
 
 void BlockEditor::Save()
 {
-	BinaryWriter binWriter(L"VillageBlockData");
+	//GM->tileBinFile[GM->GetCurMapType()]
+
+	BinaryWriter binWriter(GM->blockBinFile[GM->GetCurMapType()]);
 
 	for (UINT i = 0; i < MAP_ROW; i++)
 	{
@@ -275,7 +424,7 @@ void BlockEditor::Save()
 void BlockEditor::Load()
 {
 	// VillageBlockSampleData
-	BinaryReader reader(L"VillageBlockData");
+	BinaryReader reader(GM->blockBinFile[GM->GetCurMapType()]);
 
 	if (!reader.Succeeded())
 		return;

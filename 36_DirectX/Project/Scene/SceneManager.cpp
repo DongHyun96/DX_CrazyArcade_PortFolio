@@ -14,7 +14,8 @@ SceneManager::SceneManager()
 		{
 			{INTRO_SCENE, new IntroScene},
 			{LOBBY_SCENE, nullptr},
-			{GAME_SCENE, new GameScene}
+			//{GAME_SCENE, new GameScene}
+			{GAME_SCENE, nullptr}
 		};
 	}
 }
@@ -47,7 +48,3 @@ void SceneManager::Render()
 		scenes[curScene]->Render();
 }
 
-void SceneManager::LoadingThread()
-{
-
-}

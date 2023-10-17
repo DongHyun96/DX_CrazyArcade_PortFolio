@@ -23,7 +23,8 @@ public:
 
 public:
 
-	void SetLogoFinEvent(function<void()> LogoEndEvent);
+	void SetLogoFinEvent(function<void()> LogoEndEvent); // Whole GameStart Trigger
+
 	void RenderTimer(const float& gameTimer);
 	
 	void StartRenderGameOver(const GameOverResult& result);
@@ -50,7 +51,7 @@ private:
 	vector<Object*> startLogo{};
 
 	const float LOGO_TIME_TICK = 0.15f;
-	const float LOGO_SPEED = 2500.f;
+	const float LOGO_SPEED = 2000.f;
 	float logoTime = 0.f;
 
 	function<void()> LogoFinEvent{};

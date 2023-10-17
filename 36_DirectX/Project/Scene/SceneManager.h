@@ -7,18 +7,16 @@ enum SceneName
 	GAME_SCENE
 };
 
-class SceneManager
+class SceneManager : public Singleton<SceneManager>
 {
+
+	friend class Singleton;
+
 private:
 	SceneManager();
 	~SceneManager();
 
 public:
-	static SceneManager* GetInst()
-	{
-		static SceneManager singleton;
-		return &singleton;
-	}
 	
 	void Update();
 	void Render();
@@ -27,15 +25,19 @@ public:
 	{
 		if (sceneName == GAME_SCENE)
 		{
-			SOUND->Play("GameStart", 0.5f);
-			SOUND->Play("VillageBGM", 1.f);
+			scenes[GAME_SCENE] = new GameScene; // Load gameData
+
+			GM->GetPlayerManager()->Init();
+
+			// 한번 타임을 elapsed를 초기화 시켜줘야 함
+			Time::GetInstance()->RefreshTimer();
 		}
+
+
 		curScene = sceneName; 
 	}
 
-private:
-
-	void LoadingThread();
+	SceneName GetCurSceneName() const { return curScene; }
 
 private:
 	
@@ -47,7 +49,5 @@ private:
 
 private:
 
-	mutex loadingMutex{};
-	bool isLoadingComplete = false;
 
 };

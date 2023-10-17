@@ -13,6 +13,12 @@ public:
 
 	static float Delta() { return timeElapsed; }
 
+	void RefreshTimer() 
+	{
+		QueryPerformanceCounter((LARGE_INTEGER*)&lastTick);
+		timeElapsed = 0.f;
+	}
+
 	UINT GetFPS() { return frameRate; }
 
 private:
