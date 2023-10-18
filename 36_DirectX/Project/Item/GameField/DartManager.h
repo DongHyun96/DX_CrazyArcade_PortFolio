@@ -12,6 +12,8 @@ public:
 
 	void HandleCollision();
 
+	void Init();
+
 	vector<Dart*>& GetDarts() { return darts; }
 
 private:

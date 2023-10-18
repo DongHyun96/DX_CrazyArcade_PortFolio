@@ -48,3 +48,20 @@ void SceneManager::Render()
 		scenes[curScene]->Render();
 }
 
+void SceneManager::SetCurScene(const SceneName& sceneName)
+{
+	if (sceneName == GAME_SCENE)
+	{
+		GM->InitGame();
+
+		if (scenes[GAME_SCENE])
+			delete scenes[GAME_SCENE];
+
+		scenes[GAME_SCENE] = new GameScene; // Load gameData (블록과 타일정보 로드
+
+		// 한번 타임을 elapsed를 초기화 시켜줘야 함
+		Time::GetInstance()->RefreshTimer();
+	}
+
+	curScene = sceneName;
+}

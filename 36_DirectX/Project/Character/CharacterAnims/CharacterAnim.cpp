@@ -46,6 +46,22 @@ CharacterAnim::~CharacterAnim()
 	delete pixelShader;
 }
 
+void CharacterAnim::Init()
+{
+	curFaceDir = DIR_DOWN;
+
+	ownerPrevState = C_SPAWN;
+	ownerPrevVelocity *= 0.f;
+
+	captured_yUpdateTime = 0.f;
+	captured_ySpeed = 10.f;
+
+	ridableReturningToIdle = false;
+
+	jump_UpdateTime = 0.f;
+	jump_ySpeed = 150.f;
+}
+
 void CharacterAnim::Update()
 {
 	if (!curAction)

@@ -5,6 +5,8 @@ public:
 	StreamBlock();
 	virtual ~StreamBlock();
 
+	void Init();
+
 	virtual void Update();
 	virtual void Render();
 	

@@ -10,6 +10,8 @@ public:
 
 	void SpawnStream(const Util::Coord& spawnCoord, const UINT& streamLv);
 
+	void Init();
+
 private:
 
 

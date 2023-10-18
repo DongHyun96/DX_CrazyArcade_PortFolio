@@ -11,6 +11,8 @@ ItemManager::~ItemManager()
 {
 	for (Item* item : items)
 		delete item;
+
+	items.clear();
 }
 
 void ItemManager::Update()
@@ -27,6 +29,11 @@ void ItemManager::Render()
 {
 	for (Item* item : items)
 		item->Render();
+}
+
+void ItemManager::Init()
+{
+	items.clear();
 }
 
 void ItemManager::AddItem(Item* item)

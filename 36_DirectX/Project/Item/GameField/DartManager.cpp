@@ -55,3 +55,9 @@ void DartManager::HandleCollision()
 		}
 	}
 }
+
+void DartManager::Init()
+{
+	for (Dart* dart : darts)
+		dart->Init();
+}

@@ -48,3 +48,11 @@ void StreamManager::SpawnStream(const Util::Coord& spawnCoord, const UINT& strea
 		return;
 	}
 }
+
+void StreamManager::Init()
+{
+	for (Stream* stream : streams)
+		stream->Init();
+
+	streamBlockManager->Init();
+}

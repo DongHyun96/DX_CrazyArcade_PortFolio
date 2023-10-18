@@ -40,6 +40,13 @@ GameScene::~GameScene()
 
 void GameScene::Update()
 {
+	if (KEY_DOWN(VK_F3))
+	{
+		SM->SetCurScene(INTRO_SCENE);
+		SOUND->Stop(GM->mapBGM[GM->GetCurMapType()]);
+		return;
+	}
+
 	uiManager->Update();
 
 	playerManager->Update();

@@ -5,6 +5,8 @@ public:
 	Stream(StreamBlockManager* streamBlockManager);
 	~Stream();
 
+	void Init();
+
 	void Update();
 
 	void Spawn(const Util::Coord& spawnCoord, const UINT& streamLv);

@@ -55,6 +55,8 @@ public:
 
 	virtual ~Character();
 
+	void Init();
+
 	virtual void Update();
 	virtual void Render();
 
@@ -114,6 +116,7 @@ private:
 public:
 	void Debug();
 	void SetLabel(const string& label) { this->label = label; }
+
 
 
 

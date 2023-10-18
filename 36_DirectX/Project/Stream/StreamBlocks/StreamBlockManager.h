@@ -5,6 +5,8 @@ public:
 	StreamBlockManager();
 	~StreamBlockManager();
 
+	void Init();
+
 	void Update();
 	void Render();
 

@@ -98,3 +98,12 @@ bool BalloonManager::Spawn(const Util::Coord& spawnCoord, Character* owner, cons
 
 	return false;
 }
+
+void BalloonManager::Init()
+{
+	for (Balloon* balloon : normalBalloons)
+		balloon->Init();
+
+	for (TimerBalloon* balloon : timerBalloons)
+		balloon->Init();
+}

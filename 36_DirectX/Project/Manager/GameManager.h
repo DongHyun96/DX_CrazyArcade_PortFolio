@@ -38,6 +38,8 @@ enum GameStatus
 
 
 enum Direction;
+
+enum CharacterType;
 enum PlayerType;
 
 namespace Util { struct Coord; }
@@ -98,6 +100,8 @@ public:
 
 	Transform* GetGameFieldTransform() const { return gameFieldTransform; }
 
+	map<PlayerType, CharacterType>& P_SelectedCharacterMap() { return pSelectedCharacterMap; }
+
 public:
 
 	bool IsEditMode() const { return editMode; }
@@ -125,6 +129,10 @@ private:
 
 	GameMode gameMode{PVP};
 	GameMap curMap{ FACTORY };
+	
+	map<PlayerType, CharacterType> pSelectedCharacterMap{};
+
+
 
 private: // Board นื GameField ฐüทร
 

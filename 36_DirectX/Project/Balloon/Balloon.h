@@ -7,6 +7,8 @@ public:
 	Balloon(Animation* animation);
 	virtual ~Balloon();
 
+	void Init();
+
 	void Update();
 	void Render();
 

@@ -71,6 +71,32 @@ Character::~Character()
 
 }
 
+void Character::Init()
+{
+	visible = true;
+
+	colorBuffer->SetData({ 1,1,1,1 });
+
+	velocity *= 0.f;
+
+	mainState = C_SPAWN;
+
+	actionHandler->Init();
+
+	consumableItem = nullptr;
+
+	timerBalloons.clear();
+
+	speedLv = speedLvMin;
+	curIdleSpeedLv = speedLv;
+
+	leftBalloonCnt = balloonCntMin;
+	streamLv = streamLvMin;
+
+	flicker = 0.f;
+	flicked = false;
+}
+
 void Character::Update()
 {
 	body->Update();
@@ -147,6 +173,8 @@ void Character::Render()
 
 	body->Render();
 	pushCollider->Render();
+
+	Debug();
 
 }
 

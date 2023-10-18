@@ -34,6 +34,22 @@ Balloon::~Balloon()
 	delete worldBuffer;
 }
 
+void Balloon::Init()
+{
+	activeBalloonPositions.clear();
+
+	isActive = false;
+	visible = true;
+
+	streamLv = 0;
+
+	owner = nullptr;
+
+	explodeSoundPlayed = false;
+
+	explodeTime = 0.f;
+}
+
 void Balloon::Update()
 {
 	if (!isActive)

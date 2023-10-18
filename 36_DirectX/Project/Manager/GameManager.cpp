@@ -48,6 +48,11 @@ GameManager::GameManager()
 		}
 	}
 
+	pSelectedCharacterMap =
+	{
+		{P1, BAZZI},
+		{P2, BAZZI}
+	};
 }
 
 GameManager::~GameManager()
@@ -129,21 +134,28 @@ Util::Coord GameManager::GetCollidedMapCellCoord(const Vector2& point)
 
 void GameManager::CreateGameObjects()
 {
-	playerManager = new PlayerManager;
-
-	balloonManager = new BalloonManager;
-
-	streamManager = new StreamManager;
-
-	itemManager = new ItemManager;
-
-	dartManager = new DartManager;
-
-	gameUIManager = new GameUIManager;
+	playerManager	= new PlayerManager;
+	balloonManager	= new BalloonManager;
+	streamManager	= new StreamManager;
+	itemManager		= new ItemManager;
+	dartManager		= new DartManager;
+	gameUIManager	= new GameUIManager;
 }
 
 void GameManager::InitGame()
 {
+	gameUIManager->Init();
 
+	playerManager->Init();
+
+	balloonManager->Init();
+
+	streamManager->Init();
+
+	itemManager->Init();
+
+	dartManager->Init();
+
+	gameStatus = START;
 }
 

@@ -29,6 +29,11 @@ StreamBlock::~StreamBlock()
 	delete colorBuffer;
 }
 
+void StreamBlock::Init()
+{
+	isActive = false;
+}
+
 void StreamBlock::Update()
 {
 	if (!isActive)

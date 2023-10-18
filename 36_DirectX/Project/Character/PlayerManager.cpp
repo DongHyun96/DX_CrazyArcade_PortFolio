@@ -69,11 +69,13 @@ void PlayerManager::Init()
 
 	if (gameMode == PVP) // TODO p1과 p2 게임캐릭터 타입 가져오기
 	{
-		p1 = p1Characters[BAZZI];
+		p1 = p1Characters[GM->P_SelectedCharacterMap()[P1]];
 		p1->SetLabel("P1");
+		p1->Init();
 
-		p2 = p2Characters[BAZZI];
+		p2 = p2Characters[GM->P_SelectedCharacterMap()[P2]];
 		p2->SetLabel("P2");
+		p2->Init();
 
 		vector<Util::Coord> spawnPos = spawnPosMap[GM->GetCurMapType()];
 
@@ -92,6 +94,10 @@ void PlayerManager::Init()
 	{
 
 	}
+
+	deathTimerTriggered = false;
+	deathTimer = 0.f;
+	gameOverChecked = false;
 
 }
 

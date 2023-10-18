@@ -12,6 +12,8 @@ public:
 
 	bool Spawn(const Util::Coord& spawnCoord, Character* owner, const bool& isNormalBalloon = true);
 
+	void Init();
+
  public:
 
 	const vector<Balloon*>& GetNormalBalloons() { return normalBalloons; } // Collision ¶§¹®¿¡ ¶Õ¾îµÒ

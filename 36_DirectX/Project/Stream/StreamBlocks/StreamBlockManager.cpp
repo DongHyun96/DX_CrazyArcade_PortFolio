@@ -33,6 +33,16 @@ StreamBlockManager::~StreamBlockManager()
 	dirStreamMap.clear();
 }
 
+void StreamBlockManager::Init()
+{
+	for (StreamBlock* block : centerBlocks)
+		block->Init();
+
+	for (auto& p : dirStreamMap)
+		for (StreamBlock* block : p.second) block->Init();
+			
+}
+
 void StreamBlockManager::Update()
 {
 

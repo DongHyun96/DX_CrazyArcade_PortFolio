@@ -11,6 +11,8 @@ public:
 
 	virtual ~CharacterAnim();
 
+	void Init();
+
 	void Update();
 	void Render();
 	

@@ -33,6 +33,13 @@ Dart::~Dart()
 	delete body;
 }
 
+void Dart::Init()
+{
+	isActive = false;
+
+	direction = {};
+}
+
 void Dart::Update()
 {
 	if (!isActive) return;

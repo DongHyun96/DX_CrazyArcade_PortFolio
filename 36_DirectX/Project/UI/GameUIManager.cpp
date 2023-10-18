@@ -211,4 +211,22 @@ void GameUIManager::Debug()
 
 void GameUIManager::Init()
 {
+	hasGameStarted = false;
+
+	logoTime = 0.f;
+
+	LogoFinEvent = nullptr;
+
+	gameOver = false;
+
+	flicker = 0.f;
+	flicked = false;
+	flickedCnt = 0;
+
+	for (UINT i = 0; i < startLogo.size(); i++)
+	{
+		startLogo[i]->translation.y = 0;
+		startLogo[i]->translation.x = (WIN_CENTER.x - 500.f) + i * 200 - WIN_CENTER.x;
+	}
+
 }

@@ -13,6 +13,18 @@ Stream::~Stream()
 	activatedBlocks.clear();
 }
 
+void Stream::Init()
+{
+	isActive = false;
+
+	reachedCoordMap.clear();
+
+	blockSpawnTime = 0.f;
+	stopSpawning = true;
+	
+	activatedBlocks.clear();
+}
+
 void Stream::Update()
 {
 	if (!isActive)
