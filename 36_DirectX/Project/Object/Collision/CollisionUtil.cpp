@@ -25,42 +25,43 @@ Direction CollisionUtil::GetCollidedDirection(ColliderRect* myBody, ColliderRect
 	return DIR_NONE;
 }
 
-void CollisionUtil::HandleCharacterCommonCollision(ColliderRect* myBody, ColliderRect* enteredBody)
+
+void CollisionUtil::HandleCharacterCommonCollision(ColliderRect* block, ColliderRect* character)
 {
-	Direction collidedFace = GetCollidedDirection(myBody, enteredBody);
+	Direction collidedFace = GetCollidedDirection(block, character);
 
 	if (collidedFace == DIR_LEFT || collidedFace == DIR_RIGHT)
 	{
-		enteredBody->translation.x = (collidedFace == DIR_LEFT) ? myBody->Left() - enteredBody->LocalSize().x * 0.5001f
-																: myBody->Right() + enteredBody->LocalSize().x * 0.5001f;
+		character->translation.x = (collidedFace == DIR_LEFT) ? block->Left() - character->LocalSize().x * 0.5001f
+																: block->Right() + character->LocalSize().x * 0.5001f;
 
 		// y값 조정
-		if (enteredBody->Bottom() < myBody->Bottom())
+		if (character->Bottom() < block->Bottom())
 		{
-			if (enteredBody->Top() < myBody->Bottom() + myBody->LocalSize().y * 0.4f)
-				enteredBody->translation.y = Util::Lerp(enteredBody->translation.y, myBody->translation.y - CELL_WORLD_SIZE.y, 0.15f);
+			if (character->Top() < block->Bottom() + block->LocalSize().y * 0.4f)
+				character->translation.y = Util::Lerp(character->translation.y, block->translation.y - CELL_WORLD_SIZE.y, 0.15f);
 		}
 		else
 		{
-			if (enteredBody->Bottom() > myBody->Top() - myBody->LocalSize().y * 0.4f)
-				enteredBody->translation.y = Util::Lerp(enteredBody->translation.y, myBody->translation.y + CELL_WORLD_SIZE.y, 0.15f);
+			if (character->Bottom() > block->Top() - block->LocalSize().y * 0.4f)
+				character->translation.y = Util::Lerp(character->translation.y, block->translation.y + CELL_WORLD_SIZE.y, 0.15f);
 		}
 	}
 	else if (collidedFace == DIR_UP || collidedFace == DIR_DOWN)
 	{
-		enteredBody->translation.y = (collidedFace == DIR_UP) ? myBody->Top() + enteredBody->LocalSize().y * 0.5001f
-															  : myBody->Bottom() - enteredBody->LocalSize().y * 0.5001f;
+		character->translation.y = (collidedFace == DIR_UP) ? block->Top() + character->LocalSize().y * 0.5001f
+															  : block->Bottom() - character->LocalSize().y * 0.5001f;
 
 		// x값 조정
-		if (enteredBody->Left() < myBody->Left())
+		if (character->Left() < block->Left())
 		{
-			if (enteredBody->Right() < myBody->Left() + myBody->LocalSize().x * 0.4f)
-				enteredBody->translation.x = Util::Lerp(enteredBody->translation.x, myBody->translation.x - CELL_WORLD_SIZE.x, 0.15f);
+			if (character->Right() < block->Left() + block->LocalSize().x * 0.4f)
+				character->translation.x = Util::Lerp(character->translation.x, block->translation.x - CELL_WORLD_SIZE.x, 0.15f);
 		}
 		else
 		{
-			if (enteredBody->Left() > myBody->Right() - myBody->LocalSize().x * 0.4f)
-				enteredBody->translation.x = Util::Lerp(enteredBody->translation.x, myBody->translation.x + CELL_WORLD_SIZE.x, 0.15f);
+			if (character->Left() > block->Right() - block->LocalSize().x * 0.4f)
+				character->translation.x = Util::Lerp(character->translation.x, block->translation.x + CELL_WORLD_SIZE.x, 0.15f);
 		}
 
 	}

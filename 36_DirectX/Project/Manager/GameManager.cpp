@@ -142,3 +142,8 @@ void GameManager::CreateGameObjects()
 	gameUIManager = new GameUIManager;
 }
 
+void GameManager::InitGame()
+{
+
+}
+

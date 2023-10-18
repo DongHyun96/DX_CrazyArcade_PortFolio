@@ -62,9 +62,10 @@ public:
 
 public:
 
-	void CreateGameObjects(); // MainGame 생성자에서 call
+	void CreateGameObjects(); // MainGame 생성자에서 call (GM 생성자에서 부르면 Singleton 생성시기 때문에 오류남)
 
-
+	// GameScene 끝난 이후 (또는 시작 전) 한 번 처리
+	void InitGame();
 
 
 public:
@@ -92,13 +93,13 @@ public:
 
 	GameUIManager* GetGameUIManager() const { return gameUIManager; }
 
-
-public:
-
 	GameStatus GetGameStatus() const { return gameStatus; }
 	void SetGameStatus(const GameStatus& gameStatus) { this->gameStatus = gameStatus; }
 
 	Transform* GetGameFieldTransform() const { return gameFieldTransform; }
+
+public:
+
 	bool IsEditMode() const { return editMode; }
 
 	float GetMapL() const { return mapL; }
@@ -138,7 +139,7 @@ private: // Board 및 GameField 관련
 
 	ColliderRect* mapCells[MAP_ROW][MAP_COL]{};
 
-private: // 게임 오브젝트 관련 (생성 해제는 GameScene에서 담당) -> 반대로 담당 // 실질적인 Update Render는 GameScene에서 담당
+private: // 게임 오브젝트 관련 / 실질적인 Update Render는 GameScene에서 담당
 
 	GameScene* gameScene{};
 

@@ -11,7 +11,8 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
-	void SetGameEnd(const GameOverResult& result);
+	void SetGameEnd(const GameOverResult& result); // PM과 자기자신에서 Call(시간초과 draw)
+
 
 
 private:
