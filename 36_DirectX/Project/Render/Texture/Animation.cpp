@@ -101,7 +101,7 @@ void Animation::Render()
 
 void Animation::Play()
 {
-	if (isPlay) return;
+	//if (isPlay) return;
 
 	isPlay = true;
 

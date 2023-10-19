@@ -33,6 +33,9 @@ void ItemManager::Render()
 
 void ItemManager::Init()
 {
+	for (Item* item : items)
+		delete item;
+
 	items.clear();
 }
 

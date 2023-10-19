@@ -26,6 +26,8 @@ public:
 
 	void SetEndEvent(function<void()> EndEvent) { this->EndEvent = EndEvent; }
 
+	void SetLoop(const bool& loop) { this->isLoop = loop; }
+
 	Vector2 Size() const { return actions[0]->Size(); }
 
 private:

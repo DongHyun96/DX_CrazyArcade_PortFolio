@@ -27,17 +27,17 @@ PlayerManager::PlayerManager()
 	p1Characters =
 	{
 		{BAZZI, new Player(BAZZI, P1)},
-		//{DAO, new Player(DAO, P1)},
-		//{CAPPI, new Player(CAPPI, P1)},
-		//{MARID, new Player(MARID, P1)},
+		{DAO,	new Player(DAO, P1)},
+		{CAPPI, new Player(CAPPI, P1)},
+		{MARID, new Player(MARID, P1)}
 	};
 
 	p2Characters =
 	{
 		{BAZZI, new Player(BAZZI, P2)},
-		//{DAO, new Player(DAO, P2)},
-		//{CAPPI, new Player(CAPPI, P2)},
-		//{MARID, new Player(MARID, P2)},
+		{DAO,	new Player(DAO, P2)},
+		{CAPPI, new Player(CAPPI, P2)},
+		{MARID, new Player(MARID, P2)}
 	};
 
 	// TODO: enemyCharacters √ ±‚»≠

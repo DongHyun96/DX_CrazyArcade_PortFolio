@@ -45,22 +45,22 @@ enum PlayerType;
 namespace Util { struct Coord; }
 
 
-class GameManager
+class GameManager : public Singleton<GameManager>
 {
-	//friend class Singleton;
+	friend class Singleton;
 
 private:
 
 	GameManager();
 	~GameManager();
 
-public:
-
-	static GameManager* GetInstance()
-	{
-		static GameManager singleton;
-		return &singleton;
-	}
+//public:
+//
+//	static GameManager* GetInstance()
+//	{
+//		static GameManager singleton;
+//		return &singleton;
+//	}
 
 public:
 

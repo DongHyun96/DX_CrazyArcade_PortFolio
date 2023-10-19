@@ -34,40 +34,40 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 
 	Vector2 idleSize = { CELL_WORLD_SIZE.x - 5, CELL_WORLD_SIZE.y + 15 };
 
-	for (UINT i = 0; i < 4; i++)
+	for (UINT i = 0; i < 5; i++)
 	{
 		wstring path = L"InGame/Characters/Bazzi/BazziDownWalk_" + to_wstring(i) + L".png";
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_DOWN] = new Animation(frames);
+	idleActions[A_IDLE_DOWN] = new Animation(frames, 0.1f);
 	frames.clear();
 
-	for (UINT i = 0; i < 4; i++)
+	for (UINT i = 0; i < 5; i++)
 	{
 		wstring path = L"InGame/Characters/Bazzi/BazziUpWalk_" + to_wstring(i) + L".png";
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_UP] = new Animation(frames);
+	idleActions[A_IDLE_UP] = new Animation(frames, 0.1f);
 	frames.clear();
 
-	for (UINT i = 0; i < 4; i++)
+	for (UINT i = 0; i < 5; i++)
 	{
 		wstring path = L"InGame/Characters/Bazzi/BazziLeftWalk_" + to_wstring(i) + L".png";
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_LEFT] = new Animation(frames);
+	idleActions[A_IDLE_LEFT] = new Animation(frames, 0.1f);
 	frames.clear();
 
-	for (UINT i = 0; i < 4; i++)
+	for (UINT i = 0; i < 5; i++)
 	{
 		wstring path = L"InGame/Characters/Bazzi/BazziRightWalk_" + to_wstring(i) + L".png";
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_RIGHT] = new Animation(frames);
+	idleActions[A_IDLE_RIGHT] = new Animation(frames, 0.1f);
 	frames.clear();
 
 	Vector2 bubbleSize = { CELL_WORLD_SIZE.x + 50, CELL_WORLD_SIZE.y + 50 };
@@ -80,8 +80,6 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 
 	bubbleActions[A_BUBBLE_DEAD] = new Animation(bubbleSize, L"InGame/Characters/Bazzi/playerBubble.png", 6, 4, 24, 0.15f);
 	bubbleActions[A_BUBBLE_DEAD]->SetPart(12, 16, false);
-
-	//  TODO -> 각 vehicle destroyed anim 넣어줘야 함 + EndEvent로 owner의 MainState를 Idle로 바꿔줘야 함
 
 
 	Vector2 spaceSize = { CELL_WORLD_SIZE.x, CELL_WORLD_SIZE.y + 50 };
@@ -98,8 +96,11 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 	for (UINT i = 0; i < 4; i++)
 	{
 		vector<Frame*> frames{};
-		wstring path = L"InGame/Characters/Bazzi/BazziOwl" + to_wstring(i) + L".png";
-		frames.push_back(new Frame(owlSize, path));
+		for (UINT j = 0; j < 2; j++)
+		{
+			wstring path = L"InGame/Characters/Bazzi/BazziOwl" + to_wstring(i) + to_wstring(j) + L".png";
+			frames.push_back(new Frame(spaceSize, path));
+		}
 		owlActions[(OwlAnimState)i] = new Animation(frames);
 		frames.clear();
 	}
@@ -108,12 +109,12 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 	{
 		vector<Frame*> frames{};
 		wstring path = L"InGame/Characters/Bazzi/BazziTurtle" + to_wstring(i) + L".png";
-		frames.push_back(new Frame(owlSize, path));
+		frames.push_back(new Frame(spaceSize, path));
 		turtleActions[(TurtleAnimState)i] = new Animation(frames);
 		frames.clear();
 	}
 
-	curAction = idleActions[A_IDLE_DOWN]; // TODO -> Spawn으로 바꾸기
+	curAction = idleActions[A_IDLE_DOWN];
 
 	// 애니메이션 바닥면 parent의 body에 맞추기
 

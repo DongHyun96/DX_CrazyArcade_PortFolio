@@ -42,7 +42,7 @@ MainGame::~MainGame()
 	Font::Delete();
 	SoundManager::Delete();
 
-	//GameManager::Delete();
+	GameManager::Delete();
 	SceneManager::Delete();
 
 	// Cleanup

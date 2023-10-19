@@ -1,7 +1,6 @@
 #include "Framework.h"
 #include "GameManager.h"
 
-
 GameManager::GameManager()
 {
 
@@ -50,8 +49,8 @@ GameManager::GameManager()
 
 	pSelectedCharacterMap =
 	{
-		{P1, BAZZI},
-		{P2, BAZZI}
+		{P1, CAPPI},
+		{P2, DAO}
 	};
 }
 

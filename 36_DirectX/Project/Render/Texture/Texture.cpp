@@ -34,7 +34,14 @@ Texture* Texture::GetTexture(wstring file)
 
 	CreateShaderResourceView(DEVICE, image.GetImages(), image.GetImageCount(), image.GetMetadata(), &srv);
 
-	assert(srv);
+	if (!srv)
+	{
+		RaiseException(
+			1,                    // exception code
+			0,                    // continuable exception
+			0, NULL);             // no arguments
+	}
+	
 
 	textures.emplace(file, new Texture(srv, image));
 

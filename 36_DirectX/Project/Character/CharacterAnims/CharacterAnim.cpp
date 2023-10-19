@@ -187,6 +187,7 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		if (frameIdx == -1)
 		{
 			if (ownerPrevState != C_OWL) curAction = owlActions[(A_OWL_DOWN)];
+			curAction->Stop(0);
 		}
 		else
 		{
@@ -205,6 +206,8 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		if (frameIdx == -1)
 		{
 			if (ownerPrevState != C_TURTLE) curAction = turtleActions[(A_TURTLE_DOWN)];
+			curAction->Stop(0);
+
 		}
 		else
 		{
