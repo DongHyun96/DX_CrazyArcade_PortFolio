@@ -244,3 +244,9 @@ bool ColliderRect::AABBCollision(ColliderRect* rect, ColliderHolder* owner)
 
     return false;
 }
+
+void ColliderRect::SetColliderRect(const Vector4& UDLR)
+{
+    size = { UDLR.w - UDLR.z, UDLR.x - UDLR.y };
+    translation = { UDLR.z + size.x / 2.f, UDLR.y + size.y / 2.f };
+}

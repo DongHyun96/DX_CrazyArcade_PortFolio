@@ -13,7 +13,7 @@ SceneManager::SceneManager()
 		scenes =
 		{
 			{INTRO_SCENE, new IntroScene},
-			{LOBBY_SCENE, nullptr},
+			{LOBBY_SCENE, new LobbyScene},
 			//{GAME_SCENE, new GameScene}
 			{GAME_SCENE, nullptr}
 		};
@@ -52,6 +52,13 @@ void SceneManager::SetCurScene(const SceneName& sceneName)
 {
 	if (sceneName == GAME_SCENE)
 	{
+
+		for (UINT i = 0; i < 2; i++)
+		{
+			if (GM->P_SelectedCharacterMap()[(PlayerType)i] == RANDOM)
+				GM->P_SelectedCharacterMap()[(PlayerType)i] = (CharacterType)(Util::GetRandom(0, 3));
+		}
+
 		GM->InitGame();
 
 		if (scenes[GAME_SCENE])

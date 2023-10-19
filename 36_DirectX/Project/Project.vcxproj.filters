@@ -141,7 +141,7 @@
     <ClInclude Include="Utility\Util.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\GameScenes\GameScene.h">
+    <ClInclude Include="Scene\GameScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="GameMap\TileManager.h">
@@ -306,7 +306,13 @@
     <ClInclude Include="Scene\IntroScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Scene\GameScenes\VillageScene.h">
+    <ClInclude Include="Scene\LobbyScene.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Button\Button.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\Button\ToggleButton.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -392,7 +398,7 @@
     <ClCompile Include="Utility\BinaryReader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\GameScenes\GameScene.cpp">
+    <ClCompile Include="Scene\GameScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="GameMap\TileManager.cpp">
@@ -524,7 +530,13 @@
     <ClCompile Include="Scene\IntroScene.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Scene\GameScenes\VillageScene.cpp">
+    <ClCompile Include="Scene\LobbyScene.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Button\Button.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\Button\ToggleButton.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

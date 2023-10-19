@@ -171,6 +171,13 @@ Object::Object(Vector2 size, wstring file, UINT frameX, UINT frameY, UINT target
 
 }
 
+Object::Object(const Vector4& UDLR, const wstring& file, Vector2 uvStart, Vector2 uvEnd)
+    :Object({ UDLR.w - UDLR.z, UDLR.x - UDLR.y }, file, uvStart, uvEnd)
+{
+    Vector2 size = { UDLR.w - UDLR.z, UDLR.x - UDLR.y };
+    translation = { UDLR.z + size.x / 2.f, UDLR.y + size.y / 2.f };
+}
+
 Object::~Object()
 {
     delete vertexBuffer;

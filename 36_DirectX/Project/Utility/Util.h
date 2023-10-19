@@ -133,4 +133,14 @@ namespace Util
 	{
 		return { dxPos.x, WIN_HEIGHT - dxPos.y };
 	}
+
+	static Vector3 ConvertRGB_UINT_To_Float(const Vector3& color)
+	{
+		return Vector3(color.x / 255.f, color.y / 255.f, color.z / 255.f);
+	}
+
+	static Vector3 ConvertRGB_UINT_To_Float(const UINT& r, const UINT& g, const UINT& b)
+	{
+		return Vector3(r / 255.f, g / 255.f, b / 255.f);
+	}
 }

@@ -51,6 +51,10 @@ public:
 	set<ColliderHolder*>& EnteredPointOwners() { return enteredPointOwners; }
 	set<ColliderRect*>& EnteredBodies() { return enteredBodies; }
 
+public:
+	
+	void SetColliderRect(const Vector4& UDLR);
+
 private:
 
 	Vector2 size; // Local size

@@ -195,17 +195,17 @@ void GameUIManager::Debug()
 
 	// ImGui::InputFloat("Y", &itemUI->GetSize().y);
 
-	ImGui::BeginGroup();
+	//ImGui::BeginGroup();
 
-	ImGui::Begin("MousePos");
-	ImGui::InputFloat2("XY", (float*)&mousePos);
-	Vector2 size = itemUI->GetSize();
-	ImGui::InputFloat2("XY", (float*)&size);
-	Vector2 temp = startLogo[3]->GlobalPosition();
-	ImGui::InputFloat2("LogoXY", (float*)&temp);
-	ImGui::End();
+	//ImGui::Begin("MousePos");
+	//ImGui::InputFloat2("XY", (float*)&mousePos);
+	//Vector2 size = itemUI->GetSize();
+	//ImGui::InputFloat2("XY", (float*)&size);
+	//Vector2 temp = startLogo[3]->GlobalPosition();
+	//ImGui::InputFloat2("LogoXY", (float*)&temp);
+	//ImGui::End();
 
-	ImGui::EndGroup();
+	//ImGui::EndGroup();
 
 }
 

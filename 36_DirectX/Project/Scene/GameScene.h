@@ -6,7 +6,7 @@ class GameScene : public Scene
 {
 public:
 	GameScene();
-	virtual ~GameScene();
+	~GameScene();
 
 	virtual void Update() override;
 	virtual void Render() override;

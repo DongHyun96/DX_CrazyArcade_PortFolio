@@ -36,6 +36,11 @@ public:
 		this->data.color = color;
 	}
 
+	void SetAlpha(const float& alpha)
+	{
+		this->data.color.z = alpha;
+	}
+
 private:
 	struct Data
 	{

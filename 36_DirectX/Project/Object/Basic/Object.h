@@ -11,7 +11,9 @@ public:
 	Object(Vector2 size, wstring file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1)); 
 
 	// 타일맵처럼 여러장 있을 때 분리하기 위한 용도
-	Object(Vector2 size, wstring file, UINT frameX, UINT frameY, UINT targetX, UINT targetY); 
+	Object(Vector2 size, wstring file, UINT frameX, UINT frameY, UINT targetX, UINT targetY);
+
+	Object(const Vector4& UDLR, const wstring& file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1));
 
 
 	~Object();
@@ -20,6 +22,7 @@ public:
 
 	void SetColor(const float& r, const float& g, const float& b, const float& a) { colorBuffer->SetData(Vector4(r, g, b, a)); }
 	void SetColor(const Vector4& color) { colorBuffer->SetData(color); }
+	void SetAlpha(const float& alpha) { colorBuffer->SetAlpha(alpha); }
 	void SetData();
 
 	Vector2 GetSize() const { return texture->GetSize(); }

@@ -175,7 +175,8 @@ typedef XMMATRIX Matrix;
 
 #include "UI/UIManager.h"
 #include "UI/GameUIManager.h"
-
+#include "UI/Button/Button.h"
+#include "UI/Button/ToggleButton.h"
 
 #include "Item/ItemStrategy/ItemStrategy.h"
 #include "Item/Item.h"
@@ -204,9 +205,8 @@ typedef XMMATRIX Matrix;
 #include "Scene/CollisionScene.h"
 
 #include "Scene/IntroScene.h"
-
-#include "Scene/GameScenes/GameScene.h"
-#include "Scene/GameScenes/VillageScene.h"
+#include "Scene/LobbyScene.h"
+#include "Scene/GameScene.h"
 
 #include "Scene/SceneManager.h"
 

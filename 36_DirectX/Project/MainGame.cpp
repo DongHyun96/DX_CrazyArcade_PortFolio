@@ -19,6 +19,9 @@ MainGame::MainGame()
 	FONT->Add("BazziFont", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER);
 	FONT->Add("BazziFontBold", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
 
+
+		//rgb(35, 45, 63)
+
 	FONT->Add("NumberFont", L"µÕ±Ù¸ð²Ã", { 0.9764f, 0.5803f, 0.0901f }, 50.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
 
 	// Late Init GM GameObjects
@@ -80,6 +83,15 @@ void MainGame::Render()
 
 	//scene->Render();
 	SM->Render();
+
+	ImGui::BeginGroup();
+
+	ImGui::Begin("MousePos");
+	ImGui::InputFloat2("XY", (float*)&mousePos);
+	ImGui::End();
+
+	ImGui::EndGroup();
+
 
 	if (!hiddenInGame)
 	{

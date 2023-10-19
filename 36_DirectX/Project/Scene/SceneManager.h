@@ -29,7 +29,7 @@ private:
 	
 	map<SceneName, Scene*> scenes{};
 
-	SceneName curScene{ INTRO_SCENE };
+	SceneName curScene{ LOBBY_SCENE };
 	
 	MapEditor* mapEditor{};
 

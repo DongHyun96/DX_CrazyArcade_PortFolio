@@ -49,8 +49,8 @@ GameManager::GameManager()
 
 	pSelectedCharacterMap =
 	{
-		{P1, CAPPI},
-		{P2, DAO}
+		{P1, BAZZI},
+		{P2, BAZZI}
 	};
 }
 

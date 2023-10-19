@@ -10,7 +10,9 @@ enum CharacterType
 	BAZZI,
 	DAO,
 	CAPPI,
-	MARID
+	MARID,
+	RANDOM,
+	CHARACTER_MAX
 };
 
 enum CharacterState
@@ -36,7 +38,8 @@ enum PlayerType
 {
 	P1,
 	P2,
-	COMPUTER
+	COMPUTER,
+	PLAYER_MAX
 };
 
 

@@ -26,7 +26,8 @@ enum GameMap
 {
 	VILLAGE,
 	FACTORY,
-	FOREST
+	FOREST,
+	MAP_MAX
 };
 
 enum GameStatus
@@ -124,6 +125,7 @@ public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
 	map<GameMap, string> mapBGM{};
 
 	GameMap GetCurMapType() const { return curMap; }
+	void SetCurMapType(const GameMap& type) { this->curMap = type; }
 
 private:
 
