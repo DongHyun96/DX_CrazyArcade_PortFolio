@@ -25,7 +25,11 @@ BlockManager::~BlockManager()
 	{
 		for (UINT x = 0; x < MAP_COL; x++)
 		{
-			if (blocks[y][x]) delete blocks[y][x];
+			if (blocks[y][x])
+			{
+				delete blocks[y][x];
+				blocks[y][x] = nullptr;
+			}
 		}
 	}
 }

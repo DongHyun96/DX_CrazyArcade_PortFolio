@@ -10,6 +10,12 @@ GameScene::GameScene()
 	blockManager = new BlockManager;
 	GM->SetBlockManager(blockManager);
 
+	exitButton = new Button({ 68, 16, 1558, 1890 }, L"InGame/UI/ExitToLobby.png", 1, 2, 2);
+	exitButton->SetEvent(bind(&GameScene::ExitToLobby, this));
+
+	//gameStartButton = new Button({ 139, 37, 1228, 1690 }, L"InGame/UI/LobbyScene/gameStartButton.png", 2, 1, 2);
+	//gameStartButton->SetEvent(bind(&LobbyScene::OnGameStart, this));
+
 	playerManager = GM->GetPlayerManager();
 
 	balloonManager = GM->GetBalloonManager();
@@ -36,16 +42,12 @@ GameScene::~GameScene()
 	delete tileManager;
 
 	delete blockManager;
+
+	delete exitButton;
 }
 
 void GameScene::Update()
 {
-	if (KEY_DOWN(VK_F3))
-	{
-		SM->SetCurScene(INTRO_SCENE);
-		SOUND->Stop(GM->mapBGM[GM->GetCurMapType()]);
-		return;
-	}
 
 	uiManager->Update();
 
@@ -59,8 +61,12 @@ void GameScene::Update()
 	streamManager->Update();
 
 	itemManager->Update();
-	
+
 	UpdateTimer();
+
+	exitButton->Update();
+
+	CheckTimerAfterGameOver();
 }
 
 void GameScene::Render()
@@ -81,6 +87,8 @@ void GameScene::Render()
 
 	dartManager->Render();
 
+	exitButton->Render();
+
 	uiManager->RenderTimer(gameTimer);
 	//p1->Debug();
 	//p2->Debug();
@@ -94,10 +102,7 @@ void GameScene::SetGameEnd(const GameOverResult& result)
 
 	playerManager->SetGameOver();
 
-	//P1_WIN,
-	//P2_WIN,
-	//ENEMY_WIN,
-	//DRAW
+
 	if (result == P1_WIN || result == P2_WIN)
 		SOUND->Play("Win", 1.f);
 	else if (result == ENEMY_WIN)
@@ -106,6 +111,8 @@ void GameScene::SetGameEnd(const GameOverResult& result)
 		SOUND->Play("Draw", 1.f);
 
 	SOUND->Pause(GM->mapBGM[GM->GetCurMapType()]);
+
+
 }
 
 
@@ -129,5 +136,22 @@ void GameScene::UpdateTimer()
 		gameTimer = 0.f;
 		SetGameEnd(DRAW);
 	}
+}
+
+void GameScene::CheckTimerAfterGameOver()
+{
+	if (GM->GetGameStatus() == GAME_OVER)
+	{
+		afterGameOverTime += Time::Delta();
+
+		if (afterGameOverTime >= AFTER_GAMEOVER_TIME)
+			ExitToLobby();
+	}
+}
+
+void GameScene::ExitToLobby()
+{
+	SM->SetCurScene(LOBBY_SCENE);
+	SOUND->Stop(GM->mapBGM[GM->GetCurMapType()]);
 }
 

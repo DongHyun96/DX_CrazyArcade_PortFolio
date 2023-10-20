@@ -16,10 +16,12 @@ private:
 	void OnMapLeftButton();
 	void OnMapRightButton();
 
-private:
-
 	void OnModePVP();
 	void OnModePVE();
+
+	void OnCharacterSelect(const CharacterType& cType, const PlayerType& pType) { GM->P_SelectedCharacterMap()[pType] = cType; }
+
+	void OnGameStart();
 
 private:
 
@@ -42,5 +44,8 @@ private:
 
 	Object* xTex{};
 	bool xTexHide = true;
+
+	map<CharacterType, Object*> characterP1Thumbnail{};
+	map<CharacterType, Object*> characterP2Thumbnail{};
 
 };

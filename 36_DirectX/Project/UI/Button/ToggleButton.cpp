@@ -32,10 +32,16 @@ void ToggleButton::Update()
 		body->SetColor(1, 0, 0);
 
 		if (state != DOWN)
+		{
+			if (state != HOVER) SOUND->Play(hoverSound, 1.f);
 			state = HOVER;
+		}
 
 		if (KEY_PRESS(customKey))
+		{
+			if (state != DOWN) SOUND->Play("Click", 1.f);
 			state = DOWN;
+		}
 
 		if (KEY_UP(customKey))
 		{
@@ -52,6 +58,7 @@ void ToggleButton::Update()
 			}
 
 			if (Event) Event();
+			if (CharacterSelectEvent) CharacterSelectEvent(RANDOM, P1); // 여기의 param은 상관 x
 		}
 	}
 	else if (state != DOWN)

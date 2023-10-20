@@ -26,14 +26,28 @@ public:
 	SceneName GetCurSceneName() const { return curScene; }
 
 private:
+
+	void HandleGameExitPanel();
+	
+	void OnGameExit() { PostQuitMessage(0); }
+
+private:
 	
 	map<SceneName, Scene*> scenes{};
 
-	SceneName curScene{ LOBBY_SCENE };
+	SceneName curScene{ INTRO_SCENE };
 	
 	MapEditor* mapEditor{};
 
 private:
 
+	Object* mouse{};
+	Object* mouseClicked{};
+
+	Object* curMouse{};
+
+	Object* gameExitPanel{};
+	Button* gameExitButton{};
+	
 
 };

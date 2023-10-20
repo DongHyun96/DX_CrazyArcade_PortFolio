@@ -37,9 +37,12 @@ GameUIManager::GameUIManager()
 		{DRAW,		new Object(L"InGame/UI/draw.png")}
 	};
 
-	gameOverPanel[P1_WIN]->scale = { 2.f, 2.f };
-	gameOverPanel[P2_WIN]->scale = { 2.f, 2.f };
-	gameOverPanel[DRAW]->scale = { 2.f, 2.f };
+	for (auto& p : gameOverPanel)
+	{
+		p.second->scale = { 2.f, 2.f };
+		p.second->zDepth = -5.f;
+	}
+
 	
 	for (auto& p : gameOverPanel)
 	{

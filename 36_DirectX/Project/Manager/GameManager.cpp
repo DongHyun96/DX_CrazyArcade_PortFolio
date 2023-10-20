@@ -79,9 +79,6 @@ GameManager::~GameManager()
 
 void GameManager::Update()
 {
-	if (KEY_DOWN(VK_ESCAPE))
-		PostQuitMessage(0);
-
 	gameFieldTransform->Update();
 
 	static bool cellInitialized = false;

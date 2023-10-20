@@ -33,6 +33,8 @@ IntroScene::IntroScene()
 		{1357, 459},
 		{WIN_CENTER.x, 914}
 	};
+
+	SOUND->Play("IntroBGM", 1.f);
 }
 
 IntroScene::~IntroScene()
@@ -46,11 +48,6 @@ IntroScene::~IntroScene()
 
 void IntroScene::Update()
 {
-	if (KEY_DOWN(VK_SPACE))
-	{
-		SM->SetCurScene(GAME_SCENE);
-	}
-
 	if (KEY_DOWN(VK_LBUTTON))
 	{
 		clicked = true;
@@ -78,6 +75,7 @@ void IntroScene::Update()
 
 		if (Vector2::Distance(characters.back()->translation, destPos.back()) < 0.1f) // Scene ÀüÈ¯
 		{
+			SOUND->Stop("IntroBGM");
 			SM->SetCurScene(LOBBY_SCENE);
 		}
 	}

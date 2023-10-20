@@ -243,7 +243,7 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		}
 
 		break;
-	case C_DEAD: 
+	case C_DEAD:
 
 		curAction = bubbleActions[A_BUBBLE_DEAD];
 		curAction->Play();

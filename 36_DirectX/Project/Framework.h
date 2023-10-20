@@ -21,6 +21,8 @@
 #include <mutex>
 #include <chrono>
 
+#include <random>
+
 
 using namespace std;
 
@@ -216,4 +218,5 @@ typedef XMMATRIX Matrix;
 extern HWND hWnd;
 extern Vector2 mousePos;
 extern bool hiddenInGame;
+extern function<int()> randGenerator;
 extern void ToggleHideUI();

@@ -20,6 +20,9 @@ private:
 	void StartGameFromSpawn();
 	void UpdateTimer();
 
+	void CheckTimerAfterGameOver(); // 로비로 복귀하는 시간 체크
+	void ExitToLobby();
+
 
 private:
 
@@ -39,12 +42,20 @@ private:
 
 	DartManager*		dartManager{};
 
+	Button*				exitButton{};
+
 private:
 
 	const float GAME_TIME_TOTAL = 180.f;
 	float gameTimer = GAME_TIME_TOTAL;
 
 private:
+
 	bool renderedOnce{};
+
+private:
+
+	const float AFTER_GAMEOVER_TIME = 4.f; // 게임오버가 된 후 4초 뒤 로비로 복귀
+	float afterGameOverTime = 0.f;
 };
 

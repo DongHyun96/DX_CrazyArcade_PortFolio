@@ -35,10 +35,12 @@ public:
 
 	ColliderRect* GetBody() const { return body; }
 
+	void SetHoverSound(const string& hoverSound) { this->hoverSound = hoverSound; }
+
 public:
 
 	void SetBodyUDLR(const Vector4& UDLR) { body->SetColliderRect(UDLR); }
-
+	
 	void SetTexLocalTranslation(const Vector2& translation);
 	void SetTexLocalScale(const Vector2& scale);
 
@@ -49,8 +51,10 @@ protected:
 	ColliderRect* body{};
 
 	function<void()> Event = nullptr;
-
+	
 	State state = UP;
+
+	string hoverSound{ "HoverSound" };
 
 
 };

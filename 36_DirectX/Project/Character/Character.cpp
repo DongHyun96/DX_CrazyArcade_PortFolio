@@ -256,6 +256,13 @@ void Character::SetGameOver()
 
 	if (mainState == C_IDLE || mainState == C_CAPTURED) SetCharacterState(C_WIN);
 
+	if (mainState == C_SPACECRAFT)
+	{
+		Block* underFeetBlock = GM->GetBlockManager()->GetCoordBlock(GM->GetCollidedMapCellCoord(body->GlobalPosition()));
+
+		if (underFeetBlock) if (underFeetBlock->IsActive()) return;
+	}
+
 	if (mainState == C_SPACECRAFT || mainState == C_OWL || mainState == C_TURTLE)
 	{
 		actionHandler->SetReturnIdleEndEvent(bind(&Character::OnEndReturnToIdleOnGameOver, this));

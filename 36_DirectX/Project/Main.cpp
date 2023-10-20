@@ -7,6 +7,7 @@
 
 Vector2 mousePos; // API에서 DX 좌표계로 바꾼 mousePos 좌표
 bool hiddenInGame{};
+function<int()> randGenerator{};
 void ToggleHideUI() { hiddenInGame = !hiddenInGame; }
 
 HWND hWnd;

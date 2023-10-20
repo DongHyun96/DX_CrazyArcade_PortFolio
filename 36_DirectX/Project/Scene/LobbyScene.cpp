@@ -12,6 +12,7 @@ LobbyScene::LobbyScene()
 	instruction->zDepth = -1.f;
 
 	gameStartButton = new Button({ 139, 37, 1228, 1690 }, L"InGame/UI/LobbyScene/gameStartButton.png", 2, 1, 2);
+	gameStartButton->SetEvent(bind(&LobbyScene::OnGameStart, this));
 
 	//Button(const Vector4 & UDLR, const wstring & downFile, const wstring & upFile = L"", const wstring & hoverFile = L"");
 	mapLeftButton = new Button({ 260, 184, 1562, 1649 },
@@ -93,6 +94,19 @@ LobbyScene::LobbyScene()
 	characterSelectButtons[RANDOM][P2]->SetTexLocalScale({ 0.15f, 0.3f });
 	characterSelectButtons[RANDOM][P1]->SetTexLocalTranslation({ 50.f, -20.f });
 	characterSelectButtons[RANDOM][P2]->SetTexLocalTranslation({ 50.f, 20.f });
+
+	for (auto& p : characterSelectButtons)
+	{
+		CharacterType cType = p.first;
+
+		for (auto& p2 : p.second)
+		{
+			PlayerType pType = p2.first;
+			
+			p2.second->SetCSelectEvent(bind(&LobbyScene::OnCharacterSelect, this, cType, pType));
+			p2.second->SetHoverSound("HoverSound2");
+		}
+	}
 	
 	for (UINT i = 0; i < 4; i++)
 	{
@@ -103,10 +117,10 @@ LobbyScene::LobbyScene()
 		}
 	}
 
-	characterHoverObjects[BAZZI]	= new Object({ 245.f, 245.f }, L"InGame/UI/LobbyScene/BazziInfo.png");
-	characterHoverObjects[DAO]		= new Object({ 245.f, 245.f }, L"InGame/UI/LobbyScene/DaoInfo.png");
-	characterHoverObjects[CAPPI]	= new Object({ 245.f, 245.f }, L"InGame/UI/LobbyScene/CappiInfo.png");
-	characterHoverObjects[MARID]	= new Object({ 245.f, 245.f }, L"InGame/UI/LobbyScene/MaridInfo.png");
+	characterHoverObjects[BAZZI]	= new Object(L"InGame/UI/LobbyScene/BazziInfo.png");
+	characterHoverObjects[DAO]		= new Object(L"InGame/UI/LobbyScene/DaoInfo.png");
+	characterHoverObjects[CAPPI]	= new Object(L"InGame/UI/LobbyScene/CappiInfo.png");
+	characterHoverObjects[MARID]	= new Object(L"InGame/UI/LobbyScene/MaridInfo.png");
 	characterHoverObjects[BAZZI]->zDepth = -2.f;
 	characterHoverObjects[DAO]->zDepth = -2.f;
 	characterHoverObjects[CAPPI]->zDepth = -2.f;
@@ -122,7 +136,35 @@ LobbyScene::LobbyScene()
 
 	xTex = new Object({ 897, 722, 324, 548 }, L"InGame/UI/LobbyScene/X.jpg");
 	xTex->zDepth = -2.f;
+
+	Vector2 idleSize = { CELL_WORLD_SIZE.x - 5, CELL_WORLD_SIZE.y + 15 };
+
+	characterP1Thumbnail[BAZZI]		= new Object({ CELL_WORLD_SIZE.x - 5, CELL_WORLD_SIZE.y + 15 }, L"InGame/UI/LobbyScene/Bazzi.png");
+	characterP1Thumbnail[DAO]		= new Object({ CELL_WORLD_SIZE.x + 5, CELL_WORLD_SIZE.y + 25 }, L"InGame/UI/LobbyScene/Dao.png");
+	characterP1Thumbnail[CAPPI]		= new Object({ CELL_WORLD_SIZE.x + 5, CELL_WORLD_SIZE.y + 25 }, L"InGame/UI/LobbyScene/Cappi.png");
+	characterP1Thumbnail[MARID]		= new Object({ CELL_WORLD_SIZE.x + 5, CELL_WORLD_SIZE.y + 25 }, L"InGame/UI/LobbyScene/Marid.png");
+	characterP1Thumbnail[RANDOM]	= new Object({ CELL_WORLD_SIZE.x + 5, CELL_WORLD_SIZE.y + 25 }, L"InGame/UI/LobbyScene/Random1.png");
+
+	for (auto& p : characterP1Thumbnail)
+	{
+		p.second->translation = { 179, 808 };
+		p.second->zDepth = -1.f;
+	}
+
+	characterP2Thumbnail[BAZZI]		= new Object({ CELL_WORLD_SIZE.x - 5, CELL_WORLD_SIZE.y + 15 }, L"InGame/UI/LobbyScene/Bazzi.png");
+	characterP2Thumbnail[DAO]		= new Object({ CELL_WORLD_SIZE.x + 5, CELL_WORLD_SIZE.y + 25 }, L"InGame/UI/LobbyScene/Dao.png");
+	characterP2Thumbnail[CAPPI]		= new Object({ CELL_WORLD_SIZE.x + 5, CELL_WORLD_SIZE.y + 25 }, L"InGame/UI/LobbyScene/Cappi.png");
+	characterP2Thumbnail[MARID]		= new Object({ CELL_WORLD_SIZE.x + 5, CELL_WORLD_SIZE.y + 25 }, L"InGame/UI/LobbyScene/Marid.png");
+	characterP2Thumbnail[RANDOM]	= new Object({ CELL_WORLD_SIZE.x + 5, CELL_WORLD_SIZE.y + 25 }, L"InGame/UI/LobbyScene/Random2.png");
+
+	for (auto& p : characterP2Thumbnail)
+	{
+		p.second->translation = { 433, 808 };
+		p.second->zDepth = -1.f;
+	}
+
 }
+
 
 LobbyScene::~LobbyScene()
 {
@@ -154,6 +196,12 @@ LobbyScene::~LobbyScene()
 
 	delete xTex;
 
+	for (auto& p : characterP1Thumbnail)
+		delete p.second;
+
+	for (auto& p : characterP2Thumbnail)
+		delete p.second;
+
 }
 
 void LobbyScene::Update()
@@ -162,7 +210,6 @@ void LobbyScene::Update()
 
 	instruction->Update();
 
-	gameStartButton->Update();
 
 	mapLeftButton->Update();
 	mapRightButton->Update();
@@ -184,7 +231,15 @@ void LobbyScene::Update()
 
 	xTex->Update();
 
+	for (auto& p : characterP1Thumbnail)
+		p.second->Update();
+
+	for (auto& p : characterP2Thumbnail)
+		p.second->Update();
+
 	HandleInfoHover();
+
+	gameStartButton->Update();
 }
 
 void LobbyScene::Render()
@@ -216,6 +271,29 @@ void LobbyScene::Render()
 
 	if (curShowInfo != RANDOM)
 		characterHoverObjects[curShowInfo]->Render();
+
+	characterP1Thumbnail[GM->P_SelectedCharacterMap()[P1]]->Render();
+	characterP2Thumbnail[GM->P_SelectedCharacterMap()[P2]]->Render();
+
+	switch (GM->GetCurMapType())
+	{
+	case VILLAGE:
+		FONT->RenderText(L"ºô¸®Áö 10", "BazziFontBold50", Util::ConvertDxPosToAPIPos({1694, 350}));
+		break;
+	case FOREST:
+		FONT->RenderText(L"Æ÷·¹½ºÆ® 07", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
+		break;
+	case FACTORY:
+		FONT->RenderText(L"ÆÑÅä¸® 07", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
+		break;
+	default:
+		break;
+	}
+
+	FONT->RenderText(L"1P", "BazziFontBold", Util::ConvertDxPosToAPIPos({ 181, 689 }));
+	FONT->RenderText(L"2P", "BazziFontBold", Util::ConvertDxPosToAPIPos({ 434, 689 }));
+
+
 }
 
 void LobbyScene::HandleInfoHover()
@@ -231,9 +309,9 @@ void LobbyScene::HandleInfoHover()
 			if (curShowInfo == RANDOM) return;
 
 			if (curShowInfo == DAO || curShowInfo == MARID)
-				characterHoverObjects[curShowInfo]->translation = { mousePos.x - 200.f, mousePos.y };
+				characterHoverObjects[curShowInfo]->translation = { mousePos.x - 300.f, mousePos.y };
 			else
-				characterHoverObjects[curShowInfo]->translation = { mousePos.x + 200.f, mousePos.y };
+				characterHoverObjects[curShowInfo]->translation = { mousePos.x + 300.f, mousePos.y };
 
 			return;
 		}
@@ -275,4 +353,9 @@ void LobbyScene::OnModePVE()
 	xTexHide = false;
 
 	GM->SetGameMode(PVE);
+}
+
+void LobbyScene::OnGameStart()
+{
+	SM->SetCurScene(GAME_SCENE);
 }

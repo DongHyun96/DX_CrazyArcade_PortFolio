@@ -167,6 +167,8 @@ void Button::Update()
 	for (auto& p : texMap)
 		if (p.second) p.second->Update();
 
+	State prevState = state;
+
 	if (body->AABBCollision(mousePos))
 	{
 		body->SetColor(1, 0, 0);
@@ -174,7 +176,9 @@ void Button::Update()
 		state = HOVER;
 
 		if (KEY_PRESS(VK_LBUTTON))
+		{
 			state = DOWN;
+		}
 
 		if (KEY_UP(VK_LBUTTON))
 		{
@@ -187,6 +191,9 @@ void Button::Update()
 		state = UP;
 	}
 
+	if (prevState == UP && state == HOVER) SOUND->Play(hoverSound, 1.f);
+			
+	if (prevState == HOVER && state == DOWN) SOUND->Play("Click", 1.f);
 }
 
 void Button::Render()

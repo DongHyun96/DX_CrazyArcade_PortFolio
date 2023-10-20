@@ -26,6 +26,17 @@ SoundManager::SoundManager()
 	AddSound("ForestBGM", "_Sound/Forest.mp3", true);
 	AddSound("FactoryBGM", "_Sound/BombFactory.mp3", true);
 
+	AddSound("IntroBGM", "_Sound/Login.wav", true);
+	AddSound("LobbyBGM", "_Sound/MainMenu.mp3", true);
+
+	AddSound("HoverSound", "_Sound/ButtonEffect/Button.wav");
+	AddSound("HoverSound2", "_Sound/ButtonEffect/select.mp3");
+	AddSound("Click", "_Sound/ButtonEffect/btnClicked.wav");
+
+	AddSound("BushSound", "_Sound/bushIn.mp3");
+
+
+
 
 }
 

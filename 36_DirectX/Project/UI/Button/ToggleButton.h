@@ -1,4 +1,7 @@
 #pragma once
+
+#define C_SELECT_FUNC_P function<void(const CharacterType& cType, const PlayerType& pType)>
+
 class ToggleButton : public Button
 {
 public:
@@ -10,10 +13,14 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
+	void SetCSelectEvent(C_SELECT_FUNC_P Event) { this->CharacterSelectEvent = Event; }
+
 private:
 
 	// key & each toggle groups
 	static map<string, vector<ToggleButton*>> toggleGroups;
+	
+	C_SELECT_FUNC_P CharacterSelectEvent = nullptr;
 
 	string myToggleKey{};
 

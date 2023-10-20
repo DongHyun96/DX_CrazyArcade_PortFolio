@@ -13,6 +13,9 @@ public:
 	void ImGuiNewFrame();
 
 private:
+	void DebugMousePos();
+
+private:
 
 	//Scene* scene = nullptr;
 };

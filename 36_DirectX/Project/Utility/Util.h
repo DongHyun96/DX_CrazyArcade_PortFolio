@@ -1,5 +1,7 @@
 #pragma once
 
+extern function<int()> randGenerator;
+
 enum Direction
 {
 	DIR_UP,
@@ -77,7 +79,7 @@ namespace Util
 
 		int range = (int)(end - start + 1);
 
-		return (T)(start + rand() % range);
+		return (T)(start + randGenerator() % range);
 	}
 
 	template <typename T>
