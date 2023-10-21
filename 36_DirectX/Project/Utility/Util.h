@@ -19,14 +19,42 @@ namespace Util
 
 		Coord(const UINT& x,const UINT& y) :x(x), y(y) {}
 
-		bool operator==(const Coord& other)
+		bool operator==(const Coord& other) const
 		{
 			return (this->x == other.x && this->y == other.y);
+		}
+
+		bool operator!=(const Coord& other) const
+		{
+			return operator==(other);
+		}
+
+		bool operator<(const Coord& other) const
+		{
+			
+			if (this->x != other.x) return this->x < other.x;
+				
+
+			return this->y < other.y;
+
 		}
 			
 		UINT x{};
 		UINT y{};
 	};
+
+	static UINT GetDist(const Util::Coord& src, const Util::Coord& dst)
+	{
+		int sx = src.x;
+		int sy = src.y;
+		int dx = dst.x;
+		int dy = dst.y;
+
+		//return sqrtf(powf(x, 2) + powf(y, 2));
+
+		return sqrt(pow(sx - dx, 2) + pow(dx - dy, 2));
+	}
+	
 
 	static Vector2 ConvertBoardIdxToWorldPos(const UINT& x, const UINT& y)
 	{

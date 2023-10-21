@@ -13,14 +13,9 @@ TimerBalloon::~TimerBalloon()
 
 bool TimerBalloon::Spawn(const Util::Coord& spawnCoord, Character* owner)
 {
-	if (Balloon::Spawn(Util::ConvertBoardIdxToWorldPos(spawnCoord)))
+	if (Balloon::Spawn(spawnCoord, owner))
 	{
-		this->spawnCoord = spawnCoord;
-		this->streamLv = owner->GetStreamLv();
-		this->owner = owner;
-
 		owner->AddTimerBalloon(this);
-
 		return true;
 	}
 
@@ -31,11 +26,22 @@ void TimerBalloon::Explode()
 {
 	isActive = false;
 
+	// owner->AddLeftBalloonCnt(); -> ÀÌ ÁÙ »èÁ¦µÊ
+
 	for (auto it = activeBalloonPositions.begin(); it != activeBalloonPositions.end(); it++)
 	{
 		if (*it == body->translation)
 		{
 			activeBalloonPositions.erase(it);
+			break;
+		}
+	}
+
+	for (auto it = activeBalloonCoords.begin(); it != activeBalloonCoords.end(); it++)
+	{
+		if (*it == spawnCoord)
+		{
+			activeBalloonCoords.erase(it);
 			break;
 		}
 	}

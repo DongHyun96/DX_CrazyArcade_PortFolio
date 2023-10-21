@@ -2,6 +2,7 @@
 #include "Balloon.h"
 
 vector<Vector2> Balloon::activeBalloonPositions{};
+vector<Util::Coord> Balloon::activeBalloonCoords{};
 
 bool Balloon::explodeSoundPlayed{};
 
@@ -85,17 +86,18 @@ void Balloon::Render()
 
 bool Balloon::Spawn(const Util::Coord& spawnCoord, Character* owner) // public
 {
+	if (find(activeBalloonCoords.begin(), activeBalloonCoords.end(), spawnCoord) != activeBalloonCoords.end())
+		return false;
+
+	activeBalloonCoords.push_back(spawnCoord);
+
+	Spawn(Util::ConvertBoardIdxToWorldPos(spawnCoord));
 	
-	if (Spawn(Util::ConvertBoardIdxToWorldPos(spawnCoord)))
-	{
-		this->spawnCoord = spawnCoord;
-		this->streamLv = owner->GetStreamLv();
-		this->owner = owner;
-
-		return true;
-	}
-
-	return false;
+	this->spawnCoord = spawnCoord;
+	this->streamLv = owner->GetStreamLv();
+	this->owner = owner;
+	
+	return true;
 }
 
 void Balloon::Explode()
@@ -115,6 +117,15 @@ void Balloon::Explode()
 		}
 	}
 
+	for (auto it = activeBalloonCoords.begin(); it != activeBalloonCoords.end(); it++)
+	{
+		if (*it == spawnCoord)
+		{
+			activeBalloonCoords.erase(it);
+			break;
+		}
+	}
+
 	body->EnteredBodies().clear();
 
 	GM->GetStreamManager()->SpawnStream(spawnCoord, streamLv);
@@ -128,12 +139,20 @@ void Balloon::Explode()
 	}
 }
 
-bool Balloon::Spawn(const Vector2& spawnPos) // private
+bool Balloon::IsActiveBalloonOnCoord(const Util::Coord& coord)
+{
+	for (Util::Coord bCoord : activeBalloonCoords)
+		if (bCoord == coord) return true;
+
+	return false;
+}
+
+void Balloon::Spawn(const Vector2& spawnPos) // private
 {
 	
-	// 이미 해당위치에 벌룬이 존재
+	// 이미 해당위치에 벌룬이 존재 (double checking)
 	if (find(activeBalloonPositions.begin(), activeBalloonPositions.end(), spawnPos) != activeBalloonPositions.end())
-		return false;
+		return;
 
 	body->translation = spawnPos;
 	balloonAnim->Play();
@@ -142,19 +161,12 @@ bool Balloon::Spawn(const Vector2& spawnPos) // private
 	isActive = true;
 	explodeTime = 0.f;
 
-	// TODO :
-	// Spawn 시에 현재 위에 있는 플레이어들을 모두(나머지 플레이어들은 Update한번하고 충돌검사 한번은 해야함) entered set에 포함시킴으로써 처음에는
-	// OnColliderRectEnter 콜백을 받지 말아야 함
-
-	//body->EnteredBodies().insert(GM->GetPlayer()->GetBody());
-
 	for (Character* p : PM->GetWholePlayers())
 	{
 		body->EnteredBodies().insert(p->GetBody());
 	}
 	activeBalloonPositions.push_back(spawnPos);
 
-	return true;
 }
 
 void Balloon::HandleExplode()

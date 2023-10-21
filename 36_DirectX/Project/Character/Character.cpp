@@ -117,9 +117,10 @@ void Character::Update()
 		if (abs(arrow->translation.y - arrowYDestMap[arrowYSwitched]) < 0.99f)
 			arrowYSwitched = !arrowYSwitched;
 		else arrow->translation.y = Util::Lerp(arrow->translation.y, arrowYDestMap[arrowYSwitched], 0.01f);
+
+		arrow->Update();
 	}
 	
-	arrow->Update();
 
 	actionHandler->Update();
 	actionHandler->UpdateAction(mainState, velocity);
@@ -163,7 +164,7 @@ void Character::Render()
 	if (!visible)
 		return;
 
-	arrow->Render();
+	if (arrow) arrow->Render();
 
 	colorBuffer->PSSetBuffer(0);
 

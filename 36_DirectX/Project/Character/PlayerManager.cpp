@@ -8,7 +8,8 @@ PlayerManager::PlayerManager()
 	{
 		{VILLAGE, {{1, 1}, {6, 0}, {14, 0}, {0, 12}, {7, 12}, {13, 11}}},
 		{FACTORY, {{1, 0}, {13, 0}, {0, 6}, {0, 12}, {14, 12}, {7, 10}, {14, 6}, {7, 3}}},
-		{FOREST, {{1, 1}, {8, 1}, {0, 4}, {1, 7}, {0, 12}, {5, 11}, {10, 9}, {10, 5}}}
+		{FOREST, {{1, 1}, {8, 1}, {0, 4}, {1, 7}, {0, 12}, {5, 11}, {10, 9}, {10, 5}}},
+		{TEST_FIELD, {{1, 1}, {6, 0}, {14, 0}, {0, 12}, {7, 12}, {13, 11}}}
 	};
 
 	P_DIR_KEYCODE[P2] =
@@ -41,14 +42,20 @@ PlayerManager::PlayerManager()
 	};
 
 	// TODO: enemyCharacters ÃÊ±âÈ­
-
+	comEnemies.push_back(new Enemy(BAZZI));
 }
 
 
 PlayerManager::~PlayerManager()
 {
-	for (Character* player : wholePlayers)
-		delete player;
+
+	for (auto& p : p1Characters) delete p.second;
+	for (auto& p : p2Characters) delete p.second;
+	for (Character* c : comEnemies) delete c;
+
+	p1Characters.clear();
+	p2Characters.clear();
+	comEnemies.clear();
 }
 
 void PlayerManager::Init()
@@ -92,7 +99,26 @@ void PlayerManager::Init()
 	}
 	else // PVE mode
 	{
+		p1 = p1Characters[GM->P_SelectedCharacterMap()[P1]];
+		p1->SetLabel("P1");
+		p1->Init();
 
+		vector<Util::Coord> spawnPos = spawnPosMap[GM->GetCurMapType()];
+
+		random_shuffle(spawnPos.begin(), spawnPos.end());
+
+		p1->SetSpawnPos(spawnPos[0]);
+
+		wholePlayers.clear();
+		wholePlayers.push_back(p1);
+
+		for (UINT i = 0; i < comEnemies.size(); i++)
+		{
+			comEnemies[i]->Init();
+			comEnemies[i]->SetLabel("Enemy" + i);
+			comEnemies[i]->SetSpawnPos(spawnPos[1 + i]);
+			wholePlayers.push_back(comEnemies[i]);
+		}
 	}
 
 	deathTimerTriggered = false;

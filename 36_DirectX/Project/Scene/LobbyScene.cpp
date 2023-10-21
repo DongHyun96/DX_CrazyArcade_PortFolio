@@ -133,6 +133,8 @@ LobbyScene::LobbyScene()
 	mapThumbnails[FACTORY]->zDepth = -1.f;
 	mapThumbnails[FOREST]	= new Object({ 420, 175, 1170, 1531 }, L"InGame/UI/LobbyScene/MapThumbNail/Forest.png");
 	mapThumbnails[FOREST]->zDepth = -1.f;
+	mapThumbnails[TEST_FIELD] = new Object({ 420, 175, 1170, 1531 }, L"InGame/UI/LobbyScene/MapThumbNail/Testing.png");
+	mapThumbnails[TEST_FIELD]->zDepth = -1.f;
 
 	xTex = new Object({ 897, 722, 324, 548 }, L"InGame/UI/LobbyScene/X.jpg");
 	xTex->zDepth = -2.f;
@@ -326,7 +328,7 @@ void LobbyScene::OnMapLeftButton()
 
 	if (iter == -1)
 	{
-		GM->SetCurMapType(FOREST);
+		GM->SetCurMapType(GameMap(MAP_MAX - 1));
 		return;
 	}
 
@@ -339,7 +341,6 @@ void LobbyScene::OnMapRightButton()
 
 	if (GM->GetCurMapType() == MAP_MAX)
 		GM->SetCurMapType((GameMap)0);
-
 }
 
 void LobbyScene::OnModePVP()

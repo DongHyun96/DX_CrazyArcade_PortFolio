@@ -8,22 +8,25 @@ GameManager::GameManager()
 	{
 		{VILLAGE, L"VillageTileData"},
 		{FACTORY, L"FactoryTileData"},
-		{FOREST, L"ForestTileData"}
+		{FOREST, L"ForestTileData"},
+		{TEST_FIELD, L"VillageTileData"}
 	}; 
 
-	//VillageBlockSampleData
+	// VillageBlockData
 	blockBinFile =
 	{
 		{VILLAGE, L"VillageBlockData"},
 		{FACTORY, L"FactoryBlockData"},
-		{FOREST, L"ForestBlockData"}
+		{FOREST, L"ForestBlockData"},
+		{TEST_FIELD, L"VillageBlockSampleData"}
 	};
 
 	mapBGM =
 	{
 		{VILLAGE, "VillageBGM"},
 		{FACTORY, "FactoryBGM"},
-		{FOREST, "ForestBGM"}
+		{FOREST, "ForestBGM"},
+		{TEST_FIELD, "VillageBGM"}
 	};
 
 	gameFieldTransform = new Transform;

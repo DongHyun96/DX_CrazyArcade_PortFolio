@@ -27,6 +27,10 @@ public:
 
 	static vector<Vector2>& GetActiveBalloonPositions() { return activeBalloonPositions; }
 	
+	static vector<Util::Coord>& GetActiveBalloonCoords() { return activeBalloonCoords; }
+	
+	static bool IsActiveBalloonOnCoord(const Util::Coord& coord);
+
 	Util::Coord GetSpawnCoord() const { return spawnCoord; }
 
 	static void SetExplodeSoundPlayed(const bool& played) { explodeSoundPlayed = played; }
@@ -34,7 +38,7 @@ public:
 
 protected:
 
-	bool Spawn(const Vector2& spawnPos);
+	void Spawn(const Vector2& spawnPos);
 
 	virtual void HandleExplode();
 
@@ -42,6 +46,7 @@ protected:
 
 	Util::Coord spawnCoord{};
 
+	static vector<Util::Coord> activeBalloonCoords;
 	static vector<Vector2> activeBalloonPositions;
 
 	bool isActive{};

@@ -315,6 +315,12 @@
     <ClInclude Include="UI\Button\ToggleButton.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Character\Enemy.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AStar\AStar.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -537,6 +543,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="UI\Button\ToggleButton.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Character\Enemy.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AStar\AStar.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

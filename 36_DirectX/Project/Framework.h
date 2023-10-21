@@ -16,6 +16,8 @@
 #include <algorithm>
 #include <set>
 #include <deque>
+#include <queue>
+#include <stack>
 #include <time.h>
 #include <thread>
 #include <mutex>
@@ -189,8 +191,11 @@ typedef XMMATRIX Matrix;
 #include "Item/GameField/Dart.h"
 #include "Item/GameField/DartManager.h"
 
+#include "AStar/AStar.h"
+
 #include "Character/Character.h"
 #include "Character/Player.h"
+#include "Character/Enemy.h"
 
 #include "Character/CharacterAnims/CharacterAnimFactory.h"
 #include "Character/CharacterAnims/CharacterAnimState.h"

@@ -77,7 +77,7 @@ void TileEditor::InitTileMaps()
 {
 	switch (GM->GetCurMapType())
 	{
-	case VILLAGE:
+	case VILLAGE: case TEST_FIELD:
 		for (UINT i = 0; i < 7; i++)
 		{
 			TileInfo info{ L"InGame/Village/GroundTiles/Tile.png", 7, 1, i + 1, 1 };

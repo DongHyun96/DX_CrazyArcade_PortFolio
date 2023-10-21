@@ -34,7 +34,7 @@ IntroScene::IntroScene()
 		{WIN_CENTER.x, 914}
 	};
 
-	SOUND->Play("IntroBGM", 1.f);
+	//SOUND->Play("IntroBGM", 1.f);
 }
 
 IntroScene::~IntroScene()
