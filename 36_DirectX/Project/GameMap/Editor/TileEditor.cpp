@@ -221,6 +221,12 @@ void TileEditor::CreateTile(const TileInfo& info, UINT boardX, UINT boardY)
 
 void TileEditor::Save()
 {
+	// GameMap curMap{ TEST_FIELD };
+	
+	wstring ayy = GM->tileBinFile[GM->GetCurMapType()];
+
+	int a = 0;
+
 	BinaryWriter binWriter(GM->tileBinFile[GM->GetCurMapType()]);
 
 	for (UINT i = 0; i < MAP_ROW; i++)

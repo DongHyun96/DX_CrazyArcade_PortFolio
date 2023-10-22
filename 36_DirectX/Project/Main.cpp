@@ -31,6 +31,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: 여기에 코드를 입력합니다.
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+    //_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE); // Report leaks to a file
+    //_CrtSetReportFile(_CRT_WARN, _CRTDBG_FILE_STDOUT);
 
     // 전역 문자열을 초기화합니다.
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -45,9 +48,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PROJECT));
 
+
+
     MSG msg;
 
-    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 
     MainGame* mainGame = new MainGame;
 
@@ -77,6 +82,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     }
     
     delete mainGame;
+
+    _CrtDumpMemoryLeaks();
 
     return (int) msg.wParam;
 }

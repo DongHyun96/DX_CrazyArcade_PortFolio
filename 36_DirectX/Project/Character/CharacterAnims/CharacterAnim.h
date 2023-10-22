@@ -59,7 +59,6 @@ protected:
 
 	VertexShader*						vertexShader{};
 	PixelShader*						pixelShader{};
-
 	MatrixBuffer*						worldBuffer{};
 
 protected:

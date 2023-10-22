@@ -210,7 +210,6 @@
     <ClInclude Include="Utility\BinaryReader.h" />
     <ClInclude Include="Utility\BinaryWriter.h" />
     <ClInclude Include="System\Camera.h" />
-    <ClInclude Include="Scene\CollisionScene.h" />
     <ClInclude Include="Object\Collision\ColliderCircle.h" />
     <ClInclude Include="Object\Collision\ColliderRect.h" />
     <ClInclude Include="Object\Collision\Collider.h" />
@@ -309,7 +308,6 @@
     <ClCompile Include="Utility\BinaryReader.cpp" />
     <ClCompile Include="Utility\BinaryWriter.cpp" />
     <ClCompile Include="System\Camera.cpp" />
-    <ClCompile Include="Scene\CollisionScene.cpp" />
     <ClCompile Include="Object\Collision\ColliderCircle.cpp" />
     <ClCompile Include="Object\Collision\ColliderRect.cpp" />
     <ClCompile Include="Object\Collision\Collider.cpp" />

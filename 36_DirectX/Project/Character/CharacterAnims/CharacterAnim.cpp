@@ -41,9 +41,9 @@ CharacterAnim::~CharacterAnim()
 	turtleActions.clear();
 	bubbleActions.clear();
 
-	delete worldBuffer;
 	delete vertexShader;
 	delete pixelShader;
+	delete worldBuffer;
 }
 
 void CharacterAnim::Init()

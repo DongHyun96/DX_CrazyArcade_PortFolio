@@ -25,6 +25,9 @@
 
 #include <random>
 
+#define _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h>
 
 using namespace std;
 
@@ -209,7 +212,6 @@ typedef XMMATRIX Matrix;
 #include "Character/PlayerManager.h"
 
 #include "Scene/Scene.h"
-#include "Scene/CollisionScene.h"
 
 #include "Scene/IntroScene.h"
 #include "Scene/LobbyScene.h"

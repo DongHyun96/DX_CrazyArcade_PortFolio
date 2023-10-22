@@ -12,7 +12,6 @@ MainGame::MainGame()
 
 	SetUpImGui();
 
-	//scene = new CollisionScene;
 	//scene = new GameScene;
 
 	//rgb(4, 54, 74)
@@ -32,6 +31,8 @@ MainGame::MainGame()
 	// Late Init GM GameObjects
 	GM->CreateGameObjects();
 
+	AStar::GetInstance();
+
 	//rgb(249, 148, 23)
 
 }
@@ -50,8 +51,11 @@ MainGame::~MainGame()
 	Font::Delete();
 	SoundManager::Delete();
 
-	GameManager::Delete();
 	SceneManager::Delete();
+	GameManager::Delete();
+
+	AStar::Delete();
+
 
 	// Cleanup
 	ImGui_ImplDX11_Shutdown();

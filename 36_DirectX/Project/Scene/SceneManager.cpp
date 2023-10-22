@@ -150,6 +150,13 @@ void SceneManager::HandleGameExitPanel()
 	static map<bool, float> destMap{ {false, EXIT_PANEL_ORIGIN}, {true, WIN_CENTER.y} };
 	static bool destFlag = true;
 
+	if (GM->IsEditMode())
+	{
+		if (KEY_DOWN(VK_ESCAPE)) PostQuitMessage(0);
+
+		return;
+	}
+
 
 	if (KEY_DOWN(VK_ESCAPE)) isLerping = true;
 

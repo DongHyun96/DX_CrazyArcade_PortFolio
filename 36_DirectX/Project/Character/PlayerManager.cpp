@@ -85,7 +85,6 @@ void PlayerManager::Init()
 		p2->Init();
 
 		vector<Util::Coord> spawnPos = spawnPosMap[GM->GetCurMapType()];
-
 		random_shuffle(spawnPos.begin(), spawnPos.end());
 
 		p1->SetSpawnPos(spawnPos[0]);
@@ -103,22 +102,40 @@ void PlayerManager::Init()
 		p1->SetLabel("P1");
 		p1->Init();
 
-		vector<Util::Coord> spawnPos = spawnPosMap[GM->GetCurMapType()];
 
-		random_shuffle(spawnPos.begin(), spawnPos.end());
-
-		p1->SetSpawnPos(spawnPos[0]);
-
-		wholePlayers.clear();
-		wholePlayers.push_back(p1);
-
-		for (UINT i = 0; i < comEnemies.size(); i++)
+		if (GM->GetCurMapType() == TEST_FIELD)
 		{
-			comEnemies[i]->Init();
-			comEnemies[i]->SetLabel("Enemy" + i);
-			comEnemies[i]->SetSpawnPos(spawnPos[1 + i]);
-			wholePlayers.push_back(comEnemies[i]);
+			p1->SetSpawnPos({ 7, 12 });
+			//comEnemies[0]->SetSpawnPos({ 6, 0 });
+			comEnemies[0]->SetSpawnPos({ 7, 7 });
+
+			comEnemies[0]->SetLabel("Enemy");
+			wholePlayers.push_back(p1);
+
+			for (Character* com : comEnemies)
+				wholePlayers.push_back(com);
 		}
+		else
+		{
+			vector<Util::Coord> spawnPos = spawnPosMap[GM->GetCurMapType()];
+			random_shuffle(spawnPos.begin(), spawnPos.end());
+
+			p1->SetSpawnPos(spawnPos[0]);
+
+			wholePlayers.clear();
+			wholePlayers.push_back(p1);
+
+			for (UINT i = 0; i < comEnemies.size(); i++)
+			{
+				comEnemies[i]->Init();
+				comEnemies[i]->SetLabel("Enemy" + i);
+				comEnemies[i]->SetSpawnPos(spawnPos[1 + i]);
+				wholePlayers.push_back(comEnemies[i]);
+			}
+		}
+
+		
+		
 	}
 
 	deathTimerTriggered = false;

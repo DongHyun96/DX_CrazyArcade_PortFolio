@@ -23,6 +23,8 @@ StreamBlock::~StreamBlock()
 
 	if (endAnim) delete endAnim;
 
+	delete body;
+
 	delete vertexShader;
 	delete pixelShader;
 	delete worldBuffer;

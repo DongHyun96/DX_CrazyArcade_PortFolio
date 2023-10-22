@@ -1,19 +1,25 @@
 #pragma once
 
+#define INF 10000
+
 /*
 블록 맵 & Balloon과 연계를 해야 함
 */
 
 struct ASNode
 {
+	ASNode() {}
+	ASNode(const Util::Coord& coord)
+		:coord(coord) {}
 
-	ASNode* parent{};
+
 	Util::Coord coord{};
+	ASNode* parent{};
 
 	UINT g{}; // 현 발자국 점수
 	UINT h{}; // 휴리스틱 값
 
-	int f{}; // 합산 거리 점수
+	int f{INF}; // 합산 거리 점수
 };
 
 struct CompareNode
@@ -25,14 +31,29 @@ struct CompareNode
 };
 
 
-class AStar
+class AStar : public Singleton<AStar> // AStar 초기화 때문에 생성자 한 번 호출하고 외부에서는 static 메서드 바로 호출할 예정
 {
-public:
+
+	friend class Singleton;
+
+private:
 
 	AStar();
 	~AStar();
 
+public:
+
 	// path가 empty이면 경로가 없거나 이미 도달한 상태
 	static stack<Util::Coord> GetPath(const Util::Coord& start, const Util::Coord& dest, const bool& isC_SPACE);
+
+private:
+	
+	static bool IsAvailableCell(const Util::Coord& coord, const bool& isC_SPACE);
+
+	static void InitFields();
+
+private:
+
+	static ASNode* fieldNodes[MAP_ROW][MAP_COL];
 
 };

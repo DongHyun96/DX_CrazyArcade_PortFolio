@@ -12,6 +12,10 @@ private:
 	virtual void DeployBalloon() override;
 
 private:
+	
+	void UpdatePath(const Util::Coord& dest);
+
+private:
 	stack<Util::Coord> path{};
 
 };
