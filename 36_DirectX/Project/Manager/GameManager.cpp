@@ -75,9 +75,32 @@ GameManager::~GameManager()
 
 	delete streamManager;
 
-	delete itemManager;
+	if (itemManager)
+	{
+		delete itemManager;
+		itemManager = nullptr;
+	}
 
 	delete dartManager;
+
+	/*
+	GameScene* gameScene{};
+
+	GameUIManager* gameUIManager{};
+
+	PlayerManager* playerManager{};
+
+	// 타일매니저와 BlockManager는 늘상 바뀜 (GameScene에서 생성 해제 담당), BlockManager만 GameManager로 set해서 전역으로 뿌릴 것임
+	BlockManager* blockManager{}; 
+
+	BalloonManager* balloonManager{};
+
+	StreamManager* streamManager{};
+
+	ItemManager* itemManager{};
+
+	DartManager* dartManager{};
+	*/
 }
 
 void GameManager::Update()

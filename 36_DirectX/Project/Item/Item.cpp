@@ -24,6 +24,8 @@ Item::~Item()
 {
 	delete body;
 	delete texObj;
+
+	delete itemStrategy;
 }
 
 void Item::Update()

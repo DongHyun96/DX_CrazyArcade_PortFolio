@@ -145,8 +145,8 @@ Button::~Button()
 	{
 		if (p.second)
 		{
-			delete p.second;
 			Object* temp = p.second;
+			delete p.second;
 
 			for (auto& p2 : texMap)
 			{

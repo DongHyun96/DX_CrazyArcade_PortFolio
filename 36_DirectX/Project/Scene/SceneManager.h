@@ -44,7 +44,7 @@ private:
 	Object* mouse{};
 	Object* mouseClicked{};
 
-	Object* curMouse{};
+	Object* curMouse{}; // mouse or mouseClicked
 
 	Object* gameExitPanel{};
 	Button* gameExitButton{};
