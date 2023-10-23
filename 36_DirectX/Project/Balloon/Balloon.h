@@ -35,12 +35,19 @@ public:
 
 	static void SetExplodeSoundPlayed(const bool& played) { explodeSoundPlayed = played; }
 
+public:
+
+	static void ErasePreDangerZone(const Util::Coord& coord) { preDangerZone.erase(coord); }
+	static bool IsPreDangerZone(const Util::Coord& coord) { return (preDangerZone.find(coord) != preDangerZone.end()); }
+
 
 protected:
 
 	void Spawn(const Vector2& spawnPos);
 
 	virtual void HandleExplode();
+
+	static void AddPreDangerZone(const Util::Coord& spawnCoord, const UINT& streamLv);
 
 protected:
 
@@ -76,5 +83,11 @@ private:
 
 	float		explodeTime{};
 	const float EXPLODE_TIME_LIMIT{ 3.f };
+
+private:
+	
+	// 예비 stream 위치를 저장 -> Enemy의 path target을 찾을 때 사용
+	static set<Util::Coord> preDangerZone;
+
 
 };

@@ -68,6 +68,10 @@ void ConsumableItem::OnColliderPointEnter(ColliderHolder* owner)
 
 			leftCntTextPos = { 1815, 157 };
 			break;
+		case COMPUTER: // 아예 화면 밖에 띄워버림
+			body->translation = { -500, -500 };
+			leftCntTextPos = { -500, 500 };
+			break;
 		default:
 			break;
 		}

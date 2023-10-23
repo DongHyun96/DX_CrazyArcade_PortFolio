@@ -42,7 +42,8 @@ PlayerManager::PlayerManager()
 	};
 
 	// TODO: enemyCharacters 초기화
-	comEnemies.push_back(new Enemy(BAZZI));
+	for (UINT i = 0; i < ENEMY_CNT; i++)
+		comEnemies.push_back(new Enemy(BAZZI));
 }
 
 
@@ -102,40 +103,21 @@ void PlayerManager::Init()
 		p1->SetLabel("P1");
 		p1->Init();
 
+		vector<Util::Coord> spawnPos = spawnPosMap[GM->GetCurMapType()];
+		random_shuffle(spawnPos.begin(), spawnPos.end());
 
-		if (GM->GetCurMapType() == TEST_FIELD)
+		p1->SetSpawnPos(spawnPos[0]);
+
+		wholePlayers.clear();
+		wholePlayers.push_back(p1);
+
+		for (UINT i = 0; i < comEnemies.size(); i++)
 		{
-			p1->SetSpawnPos({ 7, 12 });
-			//comEnemies[0]->SetSpawnPos({ 6, 0 });
-			comEnemies[0]->SetSpawnPos({ 7, 7 });
-
-			comEnemies[0]->SetLabel("Enemy");
-			wholePlayers.push_back(p1);
-
-			for (Character* com : comEnemies)
-				wholePlayers.push_back(com);
+			comEnemies[i]->Init();
+			comEnemies[i]->SetLabel("Enemy" + i);
+			comEnemies[i]->SetSpawnPos(spawnPos[1 + i]);
+			wholePlayers.push_back(comEnemies[i]);
 		}
-		else
-		{
-			vector<Util::Coord> spawnPos = spawnPosMap[GM->GetCurMapType()];
-			random_shuffle(spawnPos.begin(), spawnPos.end());
-
-			p1->SetSpawnPos(spawnPos[0]);
-
-			wholePlayers.clear();
-			wholePlayers.push_back(p1);
-
-			for (UINT i = 0; i < comEnemies.size(); i++)
-			{
-				comEnemies[i]->Init();
-				comEnemies[i]->SetLabel("Enemy" + i);
-				comEnemies[i]->SetSpawnPos(spawnPos[1 + i]);
-				wholePlayers.push_back(comEnemies[i]);
-			}
-		}
-
-		
-		
 	}
 
 	deathTimerTriggered = false;
@@ -183,12 +165,12 @@ void PlayerManager::SetGameOver()
 
 void PlayerManager::HandlePlayerCollisions()
 {
-	for (Character* player : wholePlayers)
+	for (Character* player : wholePlayers) // 주체
 	{
 		switch (player->GetCharacterState()) 
 			case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: continue;
 
-		for (Character* target : wholePlayers)
+		for (Character* target : wholePlayers) // 얘가 효과 받는 애
 		{
 			if (player == target)
 				continue;
@@ -197,7 +179,9 @@ void PlayerManager::HandlePlayerCollisions()
 			
 			if (target->GetCharacterState() == C_CAPTURED)
 			{
-				if (player->GetCharacterState() == target->GetCharacterState())
+				if (!target->IsCapturedCollidableWithOthers()) continue;
+
+				if (player->GetPlayerType() == target->GetPlayerType())
 					target->SetCharacterState(C_RETURN_IDLE);
 				else
 					target->SetCharacterState(C_DEAD);
@@ -227,7 +211,7 @@ void PlayerManager::CheckGameOver()
 		{
 			deathTimer += Time::Delta();
 			
-			if (deathTimer >= 0.3f) // 한 플레이어가 죽은 후 0.4초가 넘어가면 승패를 결정지을 시간
+			if (deathTimer >= DRAW_CHECK_TIME) // 한 플레이어가 죽은 후 0.4초가 넘어가면 승패를 결정지을 시간
 			{
 				deathTimerTriggered = false;
 				deathTimer = 0.f;
@@ -253,7 +237,48 @@ void PlayerManager::CheckGameOver()
 		}
 
 		break;
-	case PVE:
+	case PVE: // 플레이어가 죽은 상황, 컴퓨터가 모두 죽은 상황
+	{
+
+		bool comAllDead = true;
+
+		for (Character* enemy : comEnemies)
+		{
+			if (enemy->GetCharacterState() != C_DEAD) comAllDead = false;
+		}
+		
+		if (comAllDead || p1->GetCharacterState() == C_DEAD)
+			deathTimerTriggered = true;
+
+		if (deathTimerTriggered)
+		{
+			deathTimer += Time::Delta();
+
+			if (deathTimer >= DRAW_CHECK_TIME)
+			{
+				deathTimerTriggered = false;
+				deathTimer = 0.f;
+
+				if (p1->GetCharacterState() == C_DEAD && comAllDead)
+				{
+					// Draw
+					GM->GetGameScene()->SetGameEnd(DRAW);
+				}
+				else if (p1->GetCharacterState() == C_DEAD)
+				{
+					// Com win
+					GM->GetGameScene()->SetGameEnd(ENEMY_WIN);
+				}
+				else if (comAllDead)
+				{
+					GM->GetGameScene()->SetGameEnd(P1_WIN);
+				}
+
+				gameOverChecked = true;
+			}
+
+		}
+	}
 		break;
 	default:
 		break;

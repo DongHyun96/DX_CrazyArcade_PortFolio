@@ -33,15 +33,19 @@ GameUIManager::GameUIManager()
 	{
 		{P1_WIN,	new Object(L"InGame/UI/player1win.png")},
 		{P2_WIN,	new Object(L"InGame/UI/player2win.png")},
-		{ENEMY_WIN, new Object({500, 300}, L"InGame/UI/Lose.png")},
+		{ENEMY_WIN, new Object(L"InGame/UI/Lose.png")},
 		{DRAW,		new Object(L"InGame/UI/draw.png")}
 	};
 
 	for (auto& p : gameOverPanel)
-	{
-		p.second->scale = { 2.f, 2.f };
 		p.second->zDepth = -5.f;
-	}
+
+
+	gameOverPanel[P1_WIN]->scale	= {2.f, 2.f};
+	gameOverPanel[P2_WIN]->scale	= {2.f, 2.f};
+	gameOverPanel[DRAW]->scale		= {2.f, 2.f};
+	gameOverPanel[ENEMY_WIN]->scale = {2.6f, 3.f};
+
 
 	
 	for (auto& p : gameOverPanel)
@@ -209,7 +213,6 @@ void GameUIManager::Debug()
 	//ImGui::End();
 
 	//ImGui::EndGroup();
-
 }
 
 void GameUIManager::Init()

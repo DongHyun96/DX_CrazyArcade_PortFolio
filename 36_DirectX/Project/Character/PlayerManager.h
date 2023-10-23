@@ -50,6 +50,7 @@ private:
 	Character* p2{};
 
 	vector<Character*> comEnemies{};
+	const UINT ENEMY_CNT{ 5 };
 
 private: // 미리 초기화한 데이터들
 	
@@ -64,5 +65,6 @@ private:
 	bool deathTimerTriggered = false;
 	float deathTimer{ 0.f }; // 한 플레이어가 죽은 뒤 측정해서 0.4초 이내로 상대팀원도 전멸하면 draw로 처리
 	bool gameOverChecked = false;
+	const float DRAW_CHECK_TIME = 0.3f;
 
 };

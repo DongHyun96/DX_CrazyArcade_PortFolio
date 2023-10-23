@@ -4,6 +4,8 @@
 vector<Vector2> Balloon::activeBalloonPositions{};
 vector<Util::Coord> Balloon::activeBalloonCoords{};
 
+set<Util::Coord> Balloon::preDangerZone{};
+
 bool Balloon::explodeSoundPlayed{};
 
 
@@ -37,7 +39,9 @@ Balloon::~Balloon()
 
 void Balloon::Init()
 {
+	activeBalloonCoords.clear();
 	activeBalloonPositions.clear();
+	preDangerZone.clear();
 
 	isActive = false;
 	visible = true;
@@ -96,7 +100,9 @@ bool Balloon::Spawn(const Util::Coord& spawnCoord, Character* owner) // public
 	this->spawnCoord = spawnCoord;
 	this->streamLv = owner->GetStreamLv();
 	this->owner = owner;
-	
+
+	AddPreDangerZone(spawnCoord, streamLv);
+
 	return true;
 }
 
@@ -105,6 +111,10 @@ void Balloon::Explode()
 	isActive = false;
 
 	owner->AddLeftBalloonCnt();
+
+	// 위험 반경을 Stream에 저장함 (For AStar algorithm), 이것은 실질적인 위험 반경 / Balloon의 preDangerZone도 여기서 삭제됨
+	Stream::AddStreamDanagerZone(spawnCoord, streamLv);
+
 
 	explodeTime = 0.f;
 
@@ -181,6 +191,36 @@ void Balloon::HandleExplode()
 	Explode();
 }
 
+void Balloon::AddPreDangerZone(const Util::Coord& spawnCoord, const UINT& streamLv)
+{
+	static vector<int> dx = { 0, 0, -1, 1 }; // U, D, L, R
+	static vector<int> dy = { 1, -1, 0, 0 };
+
+	preDangerZone.insert(spawnCoord);
+
+	for (UINT i = 0; i < 4; i++)
+	{
+		int x = spawnCoord.x;
+		int y = spawnCoord.y;
+
+		for (UINT lv = 1; lv <= streamLv; lv++)
+		{
+			x += dx[i];
+			y += dy[i];
+
+			if (x < 0 || x >= MAP_COL || y < 0 || y >= MAP_ROW) break;
+
+			Util::Coord coord = { (UINT)x, (UINT)y };
+
+			Block* targetBlock = GM->GetBlockManager()->GetCoordBlock(coord);
+
+			if (targetBlock) if (targetBlock->IsActive() && !targetBlock->IsHidable()) break;
+
+			preDangerZone.insert(coord);
+		}
+	}
+}
+
 void Balloon::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner)
 {
 	if (!isActive)
@@ -188,6 +228,6 @@ void Balloon::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* 
 
 	Character* c = dynamic_cast<Character*>(owner);
 
-	if (c) CollisionUtil::HandleCharacterCommonCollision(body, targetCollider);
+	if (c) CollisionUtil::HandleCharacterCommonCollision(body, targetCollider, c->GetSpeed());
 }
 

@@ -194,7 +194,7 @@ typedef XMMATRIX Matrix;
 #include "Item/GameField/Dart.h"
 #include "Item/GameField/DartManager.h"
 
-#include "AStar/AStar.h"
+#include "AStar/AStarPathFinder.h"
 
 #include "Character/Character.h"
 #include "Character/Player.h"

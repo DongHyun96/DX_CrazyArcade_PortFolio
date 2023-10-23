@@ -23,5 +23,4 @@ private:
 
 	StreamBlockManager* streamBlockManager{};
 
-
 };

@@ -322,13 +322,13 @@ void Block::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* ow
 		{
 			if (!breakable) // 안 부서지는 블록의 경우 캐릭터가 어느 상태이든 CommonCollision을 처리
 			{
-				CollisionUtil::HandleCharacterCommonCollision(rectBody, targetCollider);
+				CollisionUtil::HandleCharacterCommonCollision(rectBody, targetCollider, c->GetSpeed());
 				return;
 			}
 			
 			if (c->GetCharacterState() == C_SPACECRAFT) return;
 			
-			CollisionUtil::HandleCharacterCommonCollision(rectBody, targetCollider);
+			CollisionUtil::HandleCharacterCommonCollision(rectBody, targetCollider, c->GetSpeed());
 
 		}
 
@@ -436,11 +436,14 @@ void Block::HandleAddItem()
 	//item = new ImmediateItem((ItemName(Util::GetRandom(5, 7))));
 	//ItemManager::AddItem(item);
 
-	//item = new ConsumableItem(NEEDLE);
+	//item = new ConsumableItem(ItemName(Util::GetRandom(8, 10)));
 	//ItemManager::AddItem(item);
 
+	/*item = new ImmediateItem(I_TURTLE);
+	ItemManager::AddItem(item);*/
+	
+	
 	if (randGenerator() % 2 != 0) return;
-
 
 	// BUBBLE, ROLLER가 많이 스폰되어야 함
 	if (Util::GetRandom(0, 9) < 8) // 80% 확률로 Immediate Item 스폰
@@ -483,8 +486,6 @@ void Block::HandleAddItem()
 		ItemManager::AddItem(item);
 	}
 	
-
-
 }
 
 void Block::Debug()

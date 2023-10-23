@@ -1,7 +1,7 @@
 #include "Framework.h"
 #include "Stream.h"
 
-
+set<Util::Coord> Stream::streamDangerZone{};
 
 Stream::Stream(StreamBlockManager* streamBlockManager)
 	:streamBlockManager(streamBlockManager)
@@ -22,6 +22,8 @@ void Stream::Init()
 	blockSpawnTime = 0.f;
 	stopSpawning = true;
 	
+	streamDangerZone.clear();
+
 	activatedBlocks.clear();
 }
 
@@ -50,6 +52,40 @@ void Stream::Spawn(const Util::Coord& spawnCoord, const UINT& streamLv)
 
 	HandleChainExplosion();
 }
+
+void Stream::AddStreamDanagerZone(const Util::Coord& balloonCoord, const UINT& streamLv)
+{
+	static vector<int> dx = { 0, 0, -1, 1 }; // U, D, L, R
+	static vector<int> dy = { 1, -1, 0, 0 };
+	
+	streamDangerZone.insert(balloonCoord);
+
+	for (UINT i = 0; i < 4; i++)
+	{
+		int x = balloonCoord.x;
+		int y = balloonCoord.y;
+
+		for (UINT lv = 1; lv <= streamLv; lv++)
+		{
+			x += dx[i];
+			y += dy[i];
+
+			if (x < 0 || x >= MAP_COL || y < 0 || y >= MAP_ROW) break;
+
+			Util::Coord coord = { (UINT)x, (UINT)y };
+			
+			Block* targetBlock = GM->GetBlockManager()->GetCoordBlock(coord);
+
+			if (targetBlock) if (targetBlock->IsActive() && !targetBlock->IsHidable()) break;
+
+			streamDangerZone.insert(coord);
+			Balloon::ErasePreDangerZone(coord);
+		}
+	}
+
+
+}
+
 
 void Stream::InitReachedMap(const Util::Coord& spawnCoord, const UINT& streamLv)
 {

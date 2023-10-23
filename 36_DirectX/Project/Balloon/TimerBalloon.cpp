@@ -28,6 +28,8 @@ void TimerBalloon::Explode()
 
 	// owner->AddLeftBalloonCnt(); -> ÀÌ ÁÙ »èÁ¦µÊ
 
+	Stream::AddStreamDanagerZone(spawnCoord, streamLv);
+
 	for (auto it = activeBalloonPositions.begin(); it != activeBalloonPositions.end(); it++)
 	{
 		if (*it == body->translation)

@@ -73,6 +73,7 @@ void SoundManager::AddSound(string key, string path, bool stream)
 
 void SoundManager::Play(string key, float volume)
 {
+	if (mute) return;
 	if (sounds.count(key) == 0)
 		return;
 

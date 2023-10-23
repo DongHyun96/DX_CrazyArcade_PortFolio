@@ -31,7 +31,7 @@ MainGame::MainGame()
 	// Late Init GM GameObjects
 	GM->CreateGameObjects();
 
-	AStar::GetInstance();
+	AStarPathFinder::GetInstance();
 
 	//rgb(249, 148, 23)
 
@@ -54,7 +54,7 @@ MainGame::~MainGame()
 	SceneManager::Delete();
 	GameManager::Delete();
 
-	AStar::Delete();
+	AStarPathFinder::Delete();
 
 
 	// Cleanup

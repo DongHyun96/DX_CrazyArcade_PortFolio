@@ -315,7 +315,7 @@
     <ClInclude Include="Character\Enemy.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="AStar\AStar.h">
+    <ClInclude Include="AStar\AStarPathFinder.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
@@ -542,7 +542,7 @@
     <ClCompile Include="Character\Enemy.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="AStar\AStar.cpp">
+    <ClCompile Include="AStar\AStarPathFinder.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

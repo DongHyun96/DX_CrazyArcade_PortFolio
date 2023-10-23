@@ -95,6 +95,9 @@ void Character::Init()
 
 	flicker = 0.f;
 	flicked = false;
+
+	capturedTime = 0.f;
+	is_captured_collidable_with_others = false;
 }
 
 void Character::Update()
@@ -127,7 +130,15 @@ void Character::Update()
 
 	switch (mainState)
 	{ 
-	case C_IDLE: case C_OWL: case C_TURTLE: case C_CAPTURED:
+	case C_IDLE: case C_OWL: case C_TURTLE:
+		break;
+	case C_CAPTURED:
+
+		capturedTime += Time::Delta();
+
+		if (capturedTime >= CAPTURED_P_COLLIDE_START_TIME)
+			is_captured_collidable_with_others = true;
+
 		break;
 	case C_SPACECRAFT: // y Depth 고정시킴
 		body->zDepth = -1.f;
@@ -147,6 +158,7 @@ void Character::Update()
 
 		return;
 	case C_RETURN_IDLE: case C_DEAD: case C_WIN:
+		is_captured_collidable_with_others = false;
 		return;
 	default:
 		break;
@@ -183,14 +195,14 @@ void Character::Debug()
 {
 	assert(label != "");
 
-	if (ImGui::BeginMenu(label.c_str()))
+	/*if (ImGui::BeginMenu(label.c_str()))
 	{
 		ImGui::InputInt("MainState", (int*)&mainState);
 		ImGui::EndMenu();
-	}
+	}*/
 
 	body->Debug(label);
-	actionHandler->Debug("ActionHandler");
+	//actionHandler->Debug("ActionHandler");
 }
 
 void Character::SetCharacterState(const CharacterState& state)
@@ -218,6 +230,9 @@ void Character::SetCharacterState(const CharacterState& state)
 		curIdleSpeedLv = speedLv;
 		speedLv = SpeedLv::capturedSpeedLv;
 		SOUND->Play("Captured", 1.f);
+
+		if (NotifyCapturedEvent) NotifyCapturedEvent();
+
 		break;
 	case C_RETURN_IDLE: // 이 때 속도가 0
 		if (mainState == C_CAPTURED)

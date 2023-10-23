@@ -74,12 +74,18 @@ void Animation::Update()
 	{
 		++curPlayIndex %= actions.size();
 
+		if (curPlayIndex == clipIdx)
+			if (ClipEvent) ClipEvent();
+
 		if (curPlayIndex == 0)
 			playTime = 0.f;
 	}
 	else
 	{
 		curPlayIndex++;
+
+		if (curPlayIndex == clipIdx)
+			if (ClipEvent) ClipEvent();
 
 		if (curPlayIndex >= actions.size())
 		{
@@ -176,5 +182,11 @@ void Animation::SetIndex(vector<UINT> indices, bool isLoop)
 	{
 		actions.push_back(frames[indices[i]]);
 	}
+}
+
+void Animation::SetClipEvent(function<void()> ClipEvent, const UINT& targetIdx)
+{
+	this->ClipEvent = ClipEvent;
+	this->clipIdx = targetIdx;
 }
 

@@ -58,7 +58,7 @@ public:
 
 	virtual ~Character();
 
-	void Init();
+	virtual void Init();
 
 	virtual void Update();
 	virtual void Render();
@@ -90,6 +90,8 @@ public:
 
 	void SetGameOver();
 
+	bool IsCapturedCollidableWithOthers() const { return is_captured_collidable_with_others; }
+
 public: // Item Usage
 	
 	void SetConsumableItem(Item* consumable) { this->consumableItem = consumable; }
@@ -101,6 +103,10 @@ public: // Item Usage
 public:
 	
 	void AddTimerBalloon(TimerBalloon* timerBalloon) { this->timerBalloons.push_back(timerBalloon); }
+
+public:
+
+	float GetSpeed() const { return SPEED_BASE * speedLv; }
 	
 
 protected: 
@@ -117,7 +123,7 @@ private:
 
 
 public:
-	void Debug();
+	virtual void Debug();
 	void SetLabel(const string& label) { this->label = label; }
 
 
@@ -187,6 +193,18 @@ protected: // 스폰 컬러 관련
 	const Vector4 SPAWN_COLOR{ 0, 0, 0, 1 };
 	float flicker{};
 	bool flicked{};
+
+protected: // Captured 되었을 때 실질적으로 플레이어상호간 충돌처리 가능한 시간대를 계산(너무 빨리 처리해버리면 이상함)
+
+	const float CAPTURED_P_COLLIDE_START_TIME = 0.5f;
+	float capturedTime = 0.f;
+	bool is_captured_collidable_with_others{ false };
+
+protected:
+
+	function<void()> NotifyCapturedEvent{}; // Enemy가 사용
+
+
 
 };
 

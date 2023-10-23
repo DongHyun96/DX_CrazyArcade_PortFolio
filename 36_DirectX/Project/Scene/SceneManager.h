@@ -48,6 +48,10 @@ private:
 
 	Object* gameExitPanel{};
 	Button* gameExitButton{};
+
+
+private:
+	bool isCustomCursor = true;
 	
 
 };

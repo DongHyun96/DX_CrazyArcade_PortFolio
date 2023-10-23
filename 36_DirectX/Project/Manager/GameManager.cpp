@@ -154,6 +154,44 @@ Util::Coord GameManager::GetCollidedMapCellCoord(const Vector2& point)
 	return Util::Coord();
 }
 
+Util::Coord GameManager::GetApproximatedPlayerCoord(Character* character)
+{
+	Util::Coord exactCoord = GetCollidedMapCellCoord(character->GetBody()->GlobalPosition());
+
+	// 상하좌우 대각 2칸 반경(25칸) & 해당 coord에 물체가 없도록
+	vector<Util::Coord> candidates{};
+
+	for (int i = -2; i <= 2; i++)
+	{
+		int y = exactCoord.y + i;
+
+		if (y < 0 || y >= MAP_ROW) continue;
+
+		for (int j = -2; j <= 2; j++)
+		{
+			int x = exactCoord.x + j;
+
+			if (x < 0 || x >= MAP_COL) continue;
+
+			Util::Coord coord = { (UINT)x, (UINT)y };
+
+			Block* block = blockManager->GetCoordBlock(coord);
+
+			if (block) if (!block->IsHidable()) continue;
+			
+			if (Balloon::IsActiveBalloonOnCoord(coord)) continue;
+
+			candidates.push_back(coord);
+		}
+	}
+	
+	if (candidates.empty()) return exactCoord;
+
+	int randIdx = Util::GetRandom(0, (int)candidates.size() - 1);
+	return candidates[randIdx];
+}
+
+
 void GameManager::CreateGameObjects()
 {
 	playerManager	= new PlayerManager;

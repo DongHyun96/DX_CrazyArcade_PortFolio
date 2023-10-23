@@ -37,4 +37,8 @@ private:
 	System* system;
 
 	ChannelGroup* channelGroup;
+
+private:
+
+	bool mute{true};
 };

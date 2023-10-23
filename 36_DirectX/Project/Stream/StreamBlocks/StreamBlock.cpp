@@ -15,6 +15,7 @@ StreamBlock::StreamBlock()
 
 	body->SetPointEnterEvent(bind(&StreamBlock::OnColliderPointEnter, this, placeholders::_1));
 	body->SetRectEnterEvent(bind(&StreamBlock::OnColliderRectEnter, this, placeholders::_1, placeholders::_2));
+	body->SetColor(1, 0, 0);
 }
 
 StreamBlock::~StreamBlock()
@@ -69,6 +70,8 @@ StreamBlock* StreamBlock::Spawn(const Util::Coord& spawnCoord, const bool& isEnd
 	this->isEnd = isEnd;
 	isActive = true;
 
+	body->IsActive() = true;
+
 	body->EnteredPointOwners().clear();
 	body->EnteredBodies().clear();
 
@@ -81,6 +84,22 @@ StreamBlock* StreamBlock::Spawn(const Util::Coord& spawnCoord, const bool& isEnd
 	curAction->Play();
 
 	return this;
+}
+
+void StreamBlock::SetActive(const bool& isActive)
+{
+	this->isActive = isActive;
+
+	// 위험반경도 지워야 함 (For AStar)
+	if (!isActive)
+	{
+		Stream::EraseStreamDangerZone(spawnCoord);
+	}
+}
+
+void StreamBlock::OnAnimClipEvent()
+{
+	body->IsActive() = false;
 }
 
 void StreamBlock::OnColliderPointEnter(ColliderHolder* owner)

@@ -19,7 +19,8 @@ SceneManager::SceneManager()
 		};
 	}
 
-	ShowCursor(false);
+	if (isCustomCursor) ShowCursor(false);
+		
 
 	mouse = new Object(L"InGame/Mouse/Mouse.png");
 	mouseClicked = new Object(L"InGame/Mouse/MouseClicked.png");
@@ -94,7 +95,8 @@ void SceneManager::Render()
 	gameExitPanel->Render();
 	gameExitButton->Render();
 
-	curMouse->Render();
+	if (isCustomCursor) curMouse->Render();
+	
 
 }
 

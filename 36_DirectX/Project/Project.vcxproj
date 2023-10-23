@@ -155,7 +155,7 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AStar\AStar.h" />
+    <ClInclude Include="AStar\AStarPathFinder.h" />
     <ClInclude Include="Character\Enemy.h" />
     <ClInclude Include="UI\Button\ToggleButton.h" />
     <ClInclude Include="UI\Button\Button.h" />
@@ -258,7 +258,7 @@
     <ClInclude Include="__Others\targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AStar\AStar.cpp" />
+    <ClCompile Include="AStar\AStarPathFinder.cpp" />
     <ClCompile Include="Character\Enemy.cpp" />
     <ClCompile Include="UI\Button\ToggleButton.cpp" />
     <ClCompile Include="UI\Button\Button.cpp" />

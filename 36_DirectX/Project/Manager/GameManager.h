@@ -116,8 +116,9 @@ public:
 	/// <param name="point"> --> Use Global Position</param>
 	Vector2 GetCollidedMapCellPos(const Vector2& point);
 	Util::Coord GetCollidedMapCellCoord(const Vector2& point);
-
-
+	
+	// 정확히 떨어지는 플레이어 좌표가 아닌 주변 근사치를 구해주는 함수
+	Util::Coord GetApproximatedPlayerCoord(class Character* character);
 
 public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
 	

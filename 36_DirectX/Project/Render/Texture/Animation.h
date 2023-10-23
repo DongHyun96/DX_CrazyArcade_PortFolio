@@ -25,6 +25,7 @@ public:
 	void SetIndex(vector<UINT> indices, bool isLoop = true);
 
 	void SetEndEvent(function<void()> EndEvent) { this->EndEvent = EndEvent; }
+	void SetClipEvent(function<void()> ClipEvent, const UINT& targetIdx);
 
 	void SetLoop(const bool& loop) { this->isLoop = loop; }
 
@@ -44,5 +45,9 @@ private:
 	UINT curPlayIndex{};
 
 	function<void()> EndEvent = nullptr;
+	
+	function<void()> ClipEvent = nullptr; // 애니메이션 플레이 도중 실행되는 클립 이벤트
+	UINT clipIdx{};
+
 
 };

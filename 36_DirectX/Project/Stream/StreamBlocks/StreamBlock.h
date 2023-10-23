@@ -21,7 +21,9 @@ public:
 
 protected:
 
-	void SetActive(const bool& isActive) { this->isActive = isActive; }
+	void SetActive(const bool& isActive);
+
+	void OnAnimClipEvent();
 
 protected:
 
@@ -53,8 +55,11 @@ protected:
 
 	//const vector<UINT> ANIM_INDICES{ 3, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10 };
 	const vector<UINT> ANIM_INDICES{ 3, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 4, 5, 6, 7, 8, 9, 10 };
+	const UINT ANIM_CLIP_IDX{ 14 };
 	
 	const float ANIM_SPEED{ 0.04f };
+	//const float ANIM_SPEED{ 1.f };
+
 
 	
 };

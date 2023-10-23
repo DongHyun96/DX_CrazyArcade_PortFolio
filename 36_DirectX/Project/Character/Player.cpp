@@ -75,12 +75,6 @@ void Player::DeployBalloon()
 
 void Player::HandleUseConsumableItem()
 {
-	//
-	//if (playerType == P1 && GetAsyncKeyState(VK_RCONTROL))
-	//	UseConsumableItem();
-	//else if (playerType == P2 && KEY_DOWN(VK_LCONTROL))
-	//	UseConsumableItem();
-
 	if (KEY_DOWN(PM->P_ITEM_KEYCODE[playerType]))
 		UseConsumableItem();
 }
