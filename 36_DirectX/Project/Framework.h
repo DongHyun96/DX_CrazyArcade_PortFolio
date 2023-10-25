@@ -25,7 +25,7 @@
 
 #include <random>
 
-#include <io.h>
+//#include <io.h>
 
 #include <iostream>
 
@@ -51,15 +51,17 @@ using namespace DirectX;
 #include "DirectXTex.h"
 #include "DirectXTex.inl"
 
-//#ifdef _DEBUG
-//
-//#pragma comment(lib, "DirectXTex.lib")
-//
-//#else
-//
-//#pragma comment(lib, "ReleaseLib/DirectXTex.lib")
-//
-//#endif // _DEBUG
+/*
+#ifdef _DEBUG
+
+#pragma comment(lib, "DirectXTex.lib")
+
+#else
+
+#pragma comment(lib, "_Release/DirectXTex.lib")
+
+#endif // _DEBUG
+*/
 
 #pragma comment(lib, "DirectXTex.lib")
 
