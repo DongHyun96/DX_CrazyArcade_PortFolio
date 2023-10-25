@@ -25,9 +25,9 @@
 
 #include <random>
 
-#define _CRTDBG_MAP_ALLOC  
-#include <stdlib.h>  
-#include <crtdbg.h>
+#include <io.h>
+
+#include <iostream>
 
 using namespace std;
 
@@ -51,7 +51,18 @@ using namespace DirectX;
 #include "DirectXTex.h"
 #include "DirectXTex.inl"
 
+//#ifdef _DEBUG
+//
+//#pragma comment(lib, "DirectXTex.lib")
+//
+//#else
+//
+//#pragma comment(lib, "ReleaseLib/DirectXTex.lib")
+//
+//#endif // _DEBUG
+
 #pragma comment(lib, "DirectXTex.lib")
+
 
 #include <shlwapi.h>
 

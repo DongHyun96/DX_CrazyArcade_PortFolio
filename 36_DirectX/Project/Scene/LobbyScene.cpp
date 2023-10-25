@@ -288,6 +288,9 @@ void LobbyScene::Render()
 	case FACTORY:
 		FONT->RenderText(L"ÆÑÅä¸® 07", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
 		break;
+	case TEST_FIELD:
+		FONT->RenderText(L"TestField", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
+		break;
 	default:
 		break;
 	}

@@ -174,6 +174,12 @@ void Enemy::UpdateState()
 		if (path.empty())
 		{
 			safeZoneWaitTime += Time::Delta();
+			
+			if (Balloon::IsPreDangerZone(myCoord)) // 현재 자신의 위치가 곧 있으면 위험한 자리면 다른 자리로 이동
+			{
+				safeZoneWaitTime = 0.f;
+				targetState = NONE;
+			}
 
 			if (safeZoneWaitTime < SAFE_ZONE_WAIT_TIME) return; // safe_zone에서 3초간 대기한 뒤 다시금 길찾기
 
@@ -288,15 +294,20 @@ void Enemy::OnCaptured() // 처음 한번 호출하고 몇초 뒤 한번 더 호출해봄
 
 		if (path.empty()) continue;
 
-		// 경로가 존재하는 가장 가까운 플레이어 ->역으로 경로를 넣어줘야 함
+		// 경로가 존재하는 가장 가까운 플레이어 ->역으로 경로를 백트래킹
+		// 경로의 끝에 자기자신의 위치를 넣고 경로의 시작에는 상대의 현위치를 뺴야함
 		stack<Util::Coord> rescuerPath{};
 		
+		rescuerPath.push(myCoord);
+
 		while (!path.empty())
 		{
 			rescuerPath.push(path.top());
 			path.pop();
 		}
-		
+
+		rescuerPath.pop();
+
 		Enemy* peer = dynamic_cast<Enemy*>(target);
 		peer->SetPathToRescueMission(make_pair(rescuerPath, visited), this);
 

@@ -34,7 +34,7 @@ IntroScene::IntroScene()
 		{WIN_CENTER.x, 914}
 	};
 
-	//SOUND->Play("IntroBGM", 1.f);
+	SOUND->Play("IntroBGM", 1.f);
 }
 
 IntroScene::~IntroScene()
@@ -68,8 +68,8 @@ void IntroScene::Update()
 		{
 			if (timer > SPAWN_TICK * i)
 			{
-				characters[i]->translation = Vector2::Lerp(characters[i]->translation, destPos[i], 0.01f);
-				characters[i]->scale = Vector2::Lerp(characters[i]->scale, { 1.f, 1.f }, 0.01f);
+				characters[i]->translation = Vector2::Lerp(characters[i]->translation, destPos[i], 10.f * Time::Delta());
+				characters[i]->scale = Vector2::Lerp(characters[i]->scale, { 1.f, 1.f }, 10.f * Time::Delta());
 			}
 		}
 

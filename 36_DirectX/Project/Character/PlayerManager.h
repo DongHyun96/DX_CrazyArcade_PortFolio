@@ -49,8 +49,6 @@ private:
 	Character* p1{};
 	Character* p2{};
 
-	vector<Character*> comEnemies{};
-	const UINT ENEMY_CNT{ 5 };
 
 private: // 미리 초기화한 데이터들
 	
@@ -58,6 +56,8 @@ private: // 미리 초기화한 데이터들
 	map<CharacterType, Character*> p2Characters{};
 
 	// comEnemies는 무조건 배찌만 사용
+	vector<Character*> comEnemies{};
+	const UINT ENEMY_CNT{ 5 };
 
 
 private:

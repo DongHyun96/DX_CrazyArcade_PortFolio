@@ -22,7 +22,7 @@ Collider::~Collider()
 	delete pixelShader;	
 
 	delete worldBuffer;	
-	delete colorBuffer;	
+	delete colorBuffer;
 }
 
 void Collider::Render()

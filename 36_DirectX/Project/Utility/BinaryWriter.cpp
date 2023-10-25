@@ -15,6 +15,7 @@ BinaryWriter::BinaryWriter(wstring path)
 		FILE_ATTRIBUTE_NORMAL,
 		nullptr
 	);
+	
 }
 
 BinaryWriter::~BinaryWriter()

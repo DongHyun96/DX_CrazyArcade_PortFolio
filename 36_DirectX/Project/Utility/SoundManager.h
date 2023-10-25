@@ -40,5 +40,5 @@ private:
 
 private:
 
-	bool mute{true};
+	bool mute{false};
 };

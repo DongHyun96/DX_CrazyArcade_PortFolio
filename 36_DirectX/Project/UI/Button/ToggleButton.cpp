@@ -14,7 +14,6 @@ ToggleButton::ToggleButton(const string& toggleGroupKey, const Vector4& UDLR, co
 
 ToggleButton::~ToggleButton()
 {
-	// 부모단에서 모두 삭제처리
 }
 
 void ToggleButton::Update()

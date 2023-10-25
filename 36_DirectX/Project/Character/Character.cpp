@@ -119,7 +119,7 @@ void Character::Update()
 
 		if (abs(arrow->translation.y - arrowYDestMap[arrowYSwitched]) < 0.99f)
 			arrowYSwitched = !arrowYSwitched;
-		else arrow->translation.y = Util::Lerp(arrow->translation.y, arrowYDestMap[arrowYSwitched], 0.01f);
+		else arrow->translation.y = Util::Lerp(arrow->translation.y, arrowYDestMap[arrowYSwitched], 5.f * Time::Delta());
 
 		arrow->Update();
 	}

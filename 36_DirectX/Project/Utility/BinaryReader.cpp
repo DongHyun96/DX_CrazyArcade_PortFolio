@@ -18,6 +18,7 @@ BinaryReader::BinaryReader(wstring path)
 	);
 
 	assert(file);
+	
 }
 
 BinaryReader::~BinaryReader()

@@ -54,6 +54,7 @@ PlayerManager::~PlayerManager()
 	for (auto& p : p2Characters) delete p.second;
 	for (Character* c : comEnemies) delete c;
 
+	wholePlayers.clear();
 	p1Characters.clear();
 	p2Characters.clear();
 	comEnemies.clear();
@@ -175,7 +176,8 @@ void PlayerManager::HandlePlayerCollisions()
 			if (player == target)
 				continue;
 
-			if (!player->GetBody()->AABBCollision(target->GetBody())) continue;
+			//if (!player->GetBody()->AABBCollision(target->GetBody())) continue;
+			if (!target->GetBody()->AABBCollision(player->GetBody()->GlobalPosition())) continue;
 			
 			if (target->GetCharacterState() == C_CAPTURED)
 			{

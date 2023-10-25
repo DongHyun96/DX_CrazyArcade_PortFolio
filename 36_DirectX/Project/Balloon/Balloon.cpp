@@ -30,8 +30,8 @@ Balloon::~Balloon()
 {
 	delete body;
 	delete balloonAnim;
-	delete colorBuffer;
 
+	delete colorBuffer;
 	delete vertexShader;
 	delete pixelShader;
 	delete worldBuffer;
