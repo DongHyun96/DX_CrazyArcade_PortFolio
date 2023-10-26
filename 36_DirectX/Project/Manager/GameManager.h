@@ -56,14 +56,6 @@ private:
 	GameManager();
 	~GameManager();
 
-//public:
-//
-//	static GameManager* GetInstance()
-//	{
-//		static GameManager singleton;
-//		return &singleton;
-//	}
-
 public:
 
 	void CreateGameObjects(); // MainGame 생성자에서 call (GM 생성자에서 부르면 Singleton 생성시기 때문에 오류남)

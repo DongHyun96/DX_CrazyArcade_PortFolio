@@ -91,7 +91,9 @@ void Character::Init()
 	curIdleSpeedLv = speedLv;
 
 	leftBalloonCnt = balloonCntMin;
+	//leftBalloonCnt = 5;
 	streamLv = streamLvMin;
+	//streamLv = streamLvMax;
 
 	flicker = 0.f;
 	flicked = false;

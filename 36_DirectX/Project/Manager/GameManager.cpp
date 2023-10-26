@@ -3,23 +3,46 @@
 
 GameManager::GameManager()
 {
-
-	tileBinFile =
+	if (editMode)
 	{
-		{VILLAGE, L"VillageTileData"},
-		{FACTORY, L"FactoryTileData"},
-		{FOREST, L"ForestTileData"},
-		{TEST_FIELD, L"VillageTileData"}
-	}; 
+		// VillageTileSampleData
+		tileBinFile =
+		{
+			{VILLAGE, L"VillageTileSampleData"},
+			{FACTORY, L"FactoryTileSampleData"},
+			{FOREST, L"ForestTileSampleData"},
+			{TEST_FIELD, L"VillageTileSampleData"}
+			//VillageTileSampleData
+		};
 
-	// VillageBlockData
-	blockBinFile =
+		blockBinFile =
+		{
+			{VILLAGE, L"VillageBlockSampleData"},
+			{FACTORY, L"FactoryBlockSampleData"},
+			{FOREST, L"ForestBlockSampleData"},
+			{TEST_FIELD, L"VillageBlockSampleData"}
+			//VillageBlockSampleData
+		};
+	}
+	else
 	{
-		{VILLAGE, L"VillageBlockData"},
-		{FACTORY, L"FactoryBlockData"},
-		{FOREST, L"ForestBlockData"},
-		{TEST_FIELD, L"VillageBlockSampleData"}
-	};
+		tileBinFile =
+		{
+			{VILLAGE, L"VillageTileData"},
+			{FACTORY, L"FactoryTileData"},
+			{FOREST, L"ForestTileData"},
+			{TEST_FIELD, L"VillageTileSampleData"}
+		};
+
+		blockBinFile =
+		{
+			{VILLAGE, L"VillageBlockData"},
+			{FACTORY, L"FactoryBlockData"},
+			{FOREST, L"ForestBlockData"},
+			{TEST_FIELD, L"VillageBlockVoidData"}
+		};
+	}
+	
 
 	mapBGM =
 	{
