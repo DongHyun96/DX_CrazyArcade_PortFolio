@@ -12,7 +12,7 @@ enum ItemState
 	HIDE,		// 아직 block 뒤에 있을 때
 	SPAWNED,	// 게임 필드 위에 spawn된 상태
 	EARNED,		// 플레이어가 먹었을 떄 상태
-	RESPAWN		// 캐릭터가 죽었을 때 먹은 아이템이 반환될 때 사용
+	// 캐릭터가 죽었을 때 먹은 아이템이 반환될 때 사용 (원래는 RESPAWN이 있었음)
 };
 
 enum ItemName	// 전체 아이템 스폰률(블록 당 1/3)

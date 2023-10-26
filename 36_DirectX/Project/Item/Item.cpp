@@ -57,8 +57,6 @@ void Item::Update()
 	case EARNED:
 		EarnedUpdateHook();
 		break;
-	case RESPAWN:
-		break;
 	default:
 		break;
 	}
@@ -81,8 +79,6 @@ void Item::Render()
 		break;
 	case EARNED:
 		EarnedRenderHook(); // Hook Method  (자식에서 결정)
-		break;
-	case RESPAWN:
 		break;
 	default:
 		break;
@@ -141,8 +137,6 @@ void Item::SetItemState(const ItemState& itemState)
 		break;
 	case EARNED:
 		EarnedSetterHook(); // Hook Method (자식에서 결정)
-		break;
-	case RESPAWN:
 		break;
 	default:
 		break;
