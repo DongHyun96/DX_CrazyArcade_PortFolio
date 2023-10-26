@@ -113,13 +113,13 @@ protected:
 
 	virtual void HandleUseConsumableItem() = 0;
 	bool UseConsumableItem();
-	virtual void DeployBalloon() = 0;
 
 
 private:
 
 	void HandleBoundary();
 
+	virtual void DeployBalloon() = 0;
 
 
 public:

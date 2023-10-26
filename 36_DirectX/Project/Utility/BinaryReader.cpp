@@ -17,7 +17,8 @@ BinaryReader::BinaryReader(wstring path)
 		nullptr
 	);
 
-
+	assert(file);
+	
 }
 
 BinaryReader::~BinaryReader()
@@ -63,9 +64,9 @@ void BinaryReader::ReadAndCopyStr(string& target)
 	data[dataSize] = '\0';
 
 	target = data;
-
+	
 	delete[] data;
-	data = nullptr;
+
 }
 
 void BinaryReader::ReadAndCopyWstr(wstring& target)
@@ -81,8 +82,9 @@ void BinaryReader::ReadAndCopyWstr(wstring& target)
 	target = data;
 
 	delete[] data;
-	data = nullptr;
 }
+
+
 
 Vector2 BinaryReader::ReadVector2()
 {

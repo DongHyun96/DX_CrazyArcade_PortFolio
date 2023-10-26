@@ -100,9 +100,10 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>../;./;_Include</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>MinSpace</Optimization>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -145,9 +146,10 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Framework.h</PrecompiledHeaderFile>
       <AdditionalIncludeDirectories>../;./;_Include</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>MinSpace</Optimization>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -399,43 +401,12 @@
     <None Include="_Library\fmodL.dll" />
     <None Include="_Library\IMGui.idb" />
     <None Include="_Library\IMGui.pdb" />
-    <None Include="_Library\_Release\DirectXTex.lib.recipe" />
-    <None Include="_Library\_Release\DirectXTex.pch" />
-    <None Include="_Library\_Release\DirectXTex.pdb" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="_Library\DirectXTex.lib" />
     <Library Include="_Library\fmodL_vc.lib" />
     <Library Include="_Library\fmod_vc.lib" />
     <Library Include="_Library\IMGui.lib" />
-    <Library Include="_Library\_Release\DirectXTex.lib" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="_Library\_Release\DirectXTex_Desktop_2022_Win10.log" />
-    <Text Include="_Library\_Release\DirectXTex_Desktop_2022_Win10.vcxproj.FileListAbsolute.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="_Library\_Release\BC.obj" />
-    <Object Include="_Library\_Release\BC4BC5.obj" />
-    <Object Include="_Library\_Release\BC6HBC7.obj" />
-    <Object Include="_Library\_Release\BCDirectCompute.obj" />
-    <Object Include="_Library\_Release\DirectXTexCompress.obj" />
-    <Object Include="_Library\_Release\DirectXTexCompressGPU.obj" />
-    <Object Include="_Library\_Release\DirectXTexConvert.obj" />
-    <Object Include="_Library\_Release\DirectXTexD3D11.obj" />
-    <Object Include="_Library\_Release\DirectXTexD3D12.obj" />
-    <Object Include="_Library\_Release\DirectXTexDDS.obj" />
-    <Object Include="_Library\_Release\DirectXTexFlipRotate.obj" />
-    <Object Include="_Library\_Release\DirectXTexHDR.obj" />
-    <Object Include="_Library\_Release\DirectXTexImage.obj" />
-    <Object Include="_Library\_Release\DirectXTexMipMaps.obj" />
-    <Object Include="_Library\_Release\DirectXTexMisc.obj" />
-    <Object Include="_Library\_Release\DirectXTexNormalMaps.obj" />
-    <Object Include="_Library\_Release\DirectXTexPMAlpha.obj" />
-    <Object Include="_Library\_Release\DirectXTexResize.obj" />
-    <Object Include="_Library\_Release\DirectXTexTGA.obj" />
-    <Object Include="_Library\_Release\DirectXTexUtil.obj" />
-    <Object Include="_Library\_Release\DirectXTexWIC.obj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

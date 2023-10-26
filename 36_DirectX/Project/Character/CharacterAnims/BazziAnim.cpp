@@ -118,6 +118,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 
 	// 애니메이션 바닥면 parent의 body에 맞추기
 
+
 }
 
 BazziAnim::~BazziAnim()

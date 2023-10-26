@@ -149,6 +149,7 @@ void TileEditor::SelectTileMap()
 	UINT idx{};
 	for (auto& tMapC : tileMapColliders)
 	{
+		if (tMapC->OBBCollision(mousePos))
 		{
 			if (KEY_DOWN(VK_LBUTTON))
 			{
