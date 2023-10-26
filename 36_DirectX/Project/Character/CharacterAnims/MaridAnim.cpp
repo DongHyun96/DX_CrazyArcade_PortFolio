@@ -26,7 +26,7 @@ MaridAnim::MaridAnim(ColliderRect* parent)
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_DOWN] = new Animation(frames);
+	idleActions[A_DOWN] = new Animation(frames);
 	frames.clear();
 
 	for (UINT i = 0; i < 5; i++)
@@ -35,7 +35,7 @@ MaridAnim::MaridAnim(ColliderRect* parent)
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_UP] = new Animation(frames);
+	idleActions[A_UP] = new Animation(frames);
 	frames.clear();
 
 	for (UINT i = 0; i < 5; i++)
@@ -44,7 +44,7 @@ MaridAnim::MaridAnim(ColliderRect* parent)
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_LEFT] = new Animation(frames);
+	idleActions[A_LEFT] = new Animation(frames);
 	frames.clear();
 
 	for (UINT i = 0; i < 5; i++)
@@ -53,7 +53,7 @@ MaridAnim::MaridAnim(ColliderRect* parent)
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_RIGHT] = new Animation(frames);
+	idleActions[A_RIGHT] = new Animation(frames);
 	frames.clear();
 
 	Vector2 bubbleSize = { CELL_WORLD_SIZE.x + 35, CELL_WORLD_SIZE.y + 35 };
@@ -97,7 +97,7 @@ MaridAnim::MaridAnim(ColliderRect* parent)
 		vector<Frame*> frames{};
 		wstring path = L"InGame/Characters/Marid/Space" + to_wstring(i) + L".png";
 		frames.push_back(new Frame(spaceSize, path));
-		spaceActions[(SpaceAnimState)i] = new Animation(frames);
+		spaceActions[(CharacterAnimDir)i] = new Animation(frames);
 		frames.clear();
 	}
 
@@ -109,7 +109,7 @@ MaridAnim::MaridAnim(ColliderRect* parent)
 			wstring path = L"InGame/Characters/Marid/Owl" + to_wstring(i) + to_wstring(j) + L".png";
 			frames.push_back(new Frame(spaceSize, path));
 		}
-		owlActions[(OwlAnimState)i] = new Animation(frames);
+		owlActions[(CharacterAnimDir)i] = new Animation(frames);
 		frames.clear();
 	}
 
@@ -118,11 +118,11 @@ MaridAnim::MaridAnim(ColliderRect* parent)
 		vector<Frame*> frames{};
 		wstring path = L"InGame/Characters/Marid/Turtle" + to_wstring(i) + L".png";
 		frames.push_back(new Frame(spaceSize, path));
-		turtleActions[(TurtleAnimState)i] = new Animation(frames);
+		turtleActions[(CharacterAnimDir)i] = new Animation(frames);
 		frames.clear();
 	}
 
-	curAction = idleActions[A_IDLE_DOWN];
+	curAction = idleActions[A_DOWN];
 }
 
 MaridAnim::~MaridAnim()

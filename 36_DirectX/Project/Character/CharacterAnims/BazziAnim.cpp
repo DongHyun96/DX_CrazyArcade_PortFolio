@@ -40,7 +40,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_DOWN] = new Animation(frames, 0.1f);
+	idleActions[A_DOWN] = new Animation(frames, 0.1f);
 	frames.clear();
 
 	for (UINT i = 0; i < 5; i++)
@@ -49,7 +49,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_UP] = new Animation(frames, 0.1f);
+	idleActions[A_UP] = new Animation(frames, 0.1f);
 	frames.clear();
 
 	for (UINT i = 0; i < 5; i++)
@@ -58,7 +58,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_LEFT] = new Animation(frames, 0.1f);
+	idleActions[A_LEFT] = new Animation(frames, 0.1f);
 	frames.clear();
 
 	for (UINT i = 0; i < 5; i++)
@@ -67,7 +67,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 		frames.push_back(new Frame(idleSize, path));
 	}
 
-	idleActions[A_IDLE_RIGHT] = new Animation(frames, 0.1f);
+	idleActions[A_RIGHT] = new Animation(frames, 0.1f);
 	frames.clear();
 
 	Vector2 bubbleSize = { CELL_WORLD_SIZE.x + 50, CELL_WORLD_SIZE.y + 50 };
@@ -89,7 +89,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 		vector<Frame*> frames{};
 		wstring path = L"InGame/Characters/Bazzi/BazziSpace" + to_wstring(i) + L".png";
 		frames.push_back(new Frame(spaceSize, path));
-		spaceActions[(SpaceAnimState)i] = new Animation(frames);
+		spaceActions[(CharacterAnimDir)i] = new Animation(frames);
 		frames.clear();
 	}
 
@@ -101,7 +101,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 			wstring path = L"InGame/Characters/Bazzi/BazziOwl" + to_wstring(i) + to_wstring(j) + L".png";
 			frames.push_back(new Frame(spaceSize, path));
 		}
-		owlActions[(OwlAnimState)i] = new Animation(frames);
+		owlActions[(CharacterAnimDir)i] = new Animation(frames);
 		frames.clear();
 	}
 
@@ -110,14 +110,13 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 		vector<Frame*> frames{};
 		wstring path = L"InGame/Characters/Bazzi/BazziTurtle" + to_wstring(i) + L".png";
 		frames.push_back(new Frame(spaceSize, path));
-		turtleActions[(TurtleAnimState)i] = new Animation(frames);
+		turtleActions[(CharacterAnimDir)i] = new Animation(frames);
 		frames.clear();
 	}
 
-	curAction = idleActions[A_IDLE_DOWN];
+	curAction = idleActions[A_DOWN];
 
 	// 애니메이션 바닥면 parent의 body에 맞추기
-
 
 }
 

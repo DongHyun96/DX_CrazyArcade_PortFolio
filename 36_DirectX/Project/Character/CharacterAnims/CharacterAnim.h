@@ -43,10 +43,10 @@ protected:
 
 	Animation*							winAction{};
 
-	map<IdleAnimState, Animation*>		idleActions{};
-	map<SpaceAnimState, Animation*>		spaceActions{};
-	map<OwlAnimState, Animation*>		owlActions{};
-	map<TurtleAnimState, Animation*>	turtleActions{};
+	map<CharacterAnimDir, Animation*>	idleActions{};
+	map<CharacterAnimDir, Animation*>	spaceActions{};
+	map<CharacterAnimDir, Animation*>	owlActions{};
+	map<CharacterAnimDir, Animation*>	turtleActions{};
 	map<BubbleAnimState, Animation*>	bubbleActions{};
 	
 		

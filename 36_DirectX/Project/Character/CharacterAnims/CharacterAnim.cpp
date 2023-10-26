@@ -133,7 +133,7 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 {
 	if (cState == C_SPAWN)
 	{
-		curAction = idleActions[A_IDLE_DOWN];
+		curAction = idleActions[A_DOWN];
 		curAction->Stop(0);
 		return;
 	}
@@ -150,12 +150,12 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		
 		if (frameIdx == -1)
 		{
-			if (ownerPrevState != C_IDLE) curAction = idleActions[A_IDLE_DOWN];
+			if (ownerPrevState != C_IDLE) curAction = idleActions[A_DOWN];
 			curAction->Stop(0);
 		}
 		else
 		{
-			curAction = idleActions[(IdleAnimState)frameIdx];
+			curAction = idleActions[(CharacterAnimDir)frameIdx];
 			curAction->Play();
 		}
 	}
@@ -169,11 +169,11 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 
 		if (frameIdx == -1)
 		{
-			if (ownerPrevState != C_SPACECRAFT) curAction = spaceActions[(A_SPACE_DOWN)];
+			if (ownerPrevState != C_SPACECRAFT) curAction = spaceActions[(A_DOWN)];
 		}
 		else
 		{
-			curAction = spaceActions[(SpaceAnimState)frameIdx];
+			curAction = spaceActions[(CharacterAnimDir)frameIdx];
 			curAction->Play();
 		}
 	}
@@ -186,12 +186,12 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 
 		if (frameIdx == -1)
 		{
-			if (ownerPrevState != C_OWL) curAction = owlActions[(A_OWL_DOWN)];
+			if (ownerPrevState != C_OWL) curAction = owlActions[(A_DOWN)];
 			curAction->Stop(0);
 		}
 		else
 		{
-			curAction = owlActions[(OwlAnimState)frameIdx];
+			curAction = owlActions[(CharacterAnimDir)frameIdx];
 			curAction->Play();
 		}
 	}
@@ -205,13 +205,13 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 
 		if (frameIdx == -1)
 		{
-			if (ownerPrevState != C_TURTLE) curAction = turtleActions[(A_TURTLE_DOWN)];
+			if (ownerPrevState != C_TURTLE) curAction = turtleActions[(A_DOWN)];
 			curAction->Stop(0);
 
 		}
 		else
 		{
-			curAction = turtleActions[(TurtleAnimState)frameIdx];
+			curAction = turtleActions[(CharacterAnimDir)frameIdx];
 			curAction->Play();
 		}
 	}
@@ -237,7 +237,7 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		else //ownerPrevState was C_RIDABLE_S
 		{
 			ridableReturningToIdle = true;
-			curAction = idleActions[A_IDLE_DOWN];
+			curAction = idleActions[A_DOWN];
 			curAction->Stop(0);
 			return;
 		}

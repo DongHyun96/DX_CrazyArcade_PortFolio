@@ -1,38 +1,11 @@
 #pragma once
 
-enum IdleAnimState
+enum CharacterAnimDir
 {
-	A_IDLE_LEFT,
-	A_IDLE_RIGHT,
-	A_IDLE_UP,
-	A_IDLE_DOWN
-};
-
-enum SpaceAnimState
-{
-	A_SPACE_LEFT,
-	A_SPACE_RIGHT,
-	A_SPACE_UP,
-	A_SPACE_DOWN,
-	A_SPACE_DESTROYED
-};
-
-enum OwlAnimState
-{
-	A_OWL_LEFT,
-	A_OWL_RIGHT,
-	A_OWL_UP,
-	A_OWL_DOWN,
-	A_OWL_DESTROYED
-};
-
-enum TurtleAnimState
-{
-	A_TURTLE_LEFT,
-	A_TURTLE_RIGHT,
-	A_TURTLE_UP,
-	A_TURTLE_DOWN,
-	A_TURTLE_DESTROYED
+	A_LEFT,
+	A_RIGHT,
+	A_UP,
+	A_DOWN
 };
 
 enum BubbleAnimState

@@ -52,16 +52,7 @@ using namespace DirectX;
 #include "DirectXTex.inl"
 
 
-#ifdef _DEBUG
-
 #pragma comment(lib, "DirectXTex.lib")
-
-#else
-
-#pragma comment(lib, "_Release/DirectXTex.lib")
-
-#endif // _DEBUG
-
 
 
 #include <shlwapi.h>
