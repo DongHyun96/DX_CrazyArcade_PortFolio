@@ -45,7 +45,9 @@ struct BlockInfo
 	void ReadAndCopy(BinaryReader& binReader)
 	{
 		initialized			= binReader.ReadInt();
-		file				= binReader.ReadWString();
+
+		binReader.ReadAndCopyWstr(file);
+
 		boardXY				= binReader.ReadCoord();
 		frameXY				= binReader.ReadCoord();
 		targetXY			= binReader.ReadCoord();

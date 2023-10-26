@@ -3,14 +3,13 @@
 
 GameManager::GameManager()
 {
-
 	tileBinFile =
 	{
 		{VILLAGE, L"VillageTileData"},
 		{FACTORY, L"FactoryTileData"},
 		{FOREST, L"ForestTileData"},
 		{TEST_FIELD, L"VillageTileData"}
-	}; 
+	};
 
 	// VillageBlockData
 	blockBinFile =

@@ -17,8 +17,7 @@ BinaryReader::BinaryReader(wstring path)
 		nullptr
 	);
 
-	assert(file);
-	
+
 }
 
 BinaryReader::~BinaryReader()
@@ -53,7 +52,7 @@ float BinaryReader::Readfloat()
 	return data;
 }
 
-string BinaryReader::ReadString()
+void BinaryReader::ReadAndCopyStr(string& target)
 {
 	UINT dataSize = ReadUINT();
 
@@ -63,10 +62,13 @@ string BinaryReader::ReadString()
 
 	data[dataSize] = '\0';
 
-	return data;
+	target = data;
+
+	delete[] data;
+	data = nullptr;
 }
 
-wstring BinaryReader::ReadWString()
+void BinaryReader::ReadAndCopyWstr(wstring& target)
 {
 	UINT dataSize = ReadUINT();
 
@@ -76,7 +78,10 @@ wstring BinaryReader::ReadWString()
 
 	data[dataSize] = '\0';
 
-	return data;
+	target = data;
+
+	delete[] data;
+	data = nullptr;
 }
 
 Vector2 BinaryReader::ReadVector2()

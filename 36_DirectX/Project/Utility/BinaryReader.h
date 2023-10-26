@@ -8,8 +8,8 @@ public:
 	int		ReadInt();
 	UINT	ReadUINT();
 	float	Readfloat();
-	string	ReadString();
-	wstring ReadWString();
+	void	ReadAndCopyStr(string& target);
+	void	ReadAndCopyWstr(wstring& target);
 	Vector2 ReadVector2();
 	Vector3 ReadVector3();
 	Vector4 ReadVector4();

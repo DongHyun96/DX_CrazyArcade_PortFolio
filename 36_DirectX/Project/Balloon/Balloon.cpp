@@ -43,6 +43,8 @@ void Balloon::Init()
 	activeBalloonPositions.clear();
 	preDangerZone.clear();
 
+	body->translation = { 0,0 };
+
 	isActive = false;
 	visible = true;
 

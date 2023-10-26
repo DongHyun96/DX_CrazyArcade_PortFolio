@@ -22,7 +22,8 @@ struct TileInfo
 
 	void ReadAndCopy(BinaryReader& binReader)
 	{
-		file = binReader.ReadWString();
+		binReader.ReadAndCopyWstr(file);
+
 		frameX = binReader.ReadUINT();
 		frameY = binReader.ReadUINT();
 		targetX = binReader.ReadUINT();

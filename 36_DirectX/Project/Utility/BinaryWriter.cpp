@@ -43,7 +43,7 @@ void BinaryWriter::WriteData(string data)
 	UINT dataSize = data.size();
 
 	WriteData(dataSize); // 문자열 크기를 먼저 기록하고 그 크기만큼 문자열을 기록
-
+	
 	WriteFile(file, data.data(), sizeof(char) * dataSize, &size, nullptr);
 }
 
