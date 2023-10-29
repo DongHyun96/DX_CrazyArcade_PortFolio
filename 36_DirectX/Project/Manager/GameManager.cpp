@@ -39,7 +39,7 @@ GameManager::GameManager()
 			{VILLAGE, L"VillageBlockData"},
 			{FACTORY, L"FactoryBlockData"},
 			{FOREST, L"ForestBlockData"},
-			{TEST_FIELD, L"VillageBlockVoidData"}
+			{TEST_FIELD, L"VillageBlockSampleData"}
 		};
 	}
 	

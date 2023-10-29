@@ -13,6 +13,7 @@ CharacterAnim::CharacterAnim(ColliderRect* parent)
 	this->SetParent(parent);
 
 	curFaceDir = DIR_DOWN;
+
 }
 
 CharacterAnim::~CharacterAnim()

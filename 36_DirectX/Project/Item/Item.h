@@ -9,7 +9,7 @@ TODO - 아이템 사용 전략 패턴 만들기
 
 enum ItemState
 {
-	HIDE,		// 아직 block 뒤에 있을 때
+	HIDDEN,		// 아직 block 뒤에 있을 때
 	SPAWNED,	// 게임 필드 위에 spawn된 상태
 	EARNED,		// 플레이어가 먹었을 떄 상태
 	// 캐릭터가 죽었을 때 먹은 아이템이 반환될 때 사용 (원래는 RESPAWN이 있었음)
@@ -90,7 +90,7 @@ protected:
 
 private:
 
-	ItemState itemState{ HIDE }; // c# 프로퍼티처럼 setter만 자식 클래스에서 사용하도록 할 것임
+	ItemState itemState{ HIDDEN }; // c# 프로퍼티처럼 setter만 자식 클래스에서 사용하도록 할 것임
 
 	float spawned_timeChecker{};
 	float spawned_ySpeed{ 25.f };

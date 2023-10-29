@@ -35,7 +35,7 @@ void Item::Update()
 
 	switch (itemState)
 	{
-	case HIDE:
+	case HIDDEN:
 		break;
 	case SPAWNED:
 	{
@@ -73,7 +73,7 @@ void Item::Render()
 
 	switch (itemState)
 	{
-	case HIDE:
+	case HIDDEN:
 		break;
 	case SPAWNED:
 		break;

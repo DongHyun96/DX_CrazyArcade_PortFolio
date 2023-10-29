@@ -48,7 +48,7 @@ IntroScene::~IntroScene()
 
 void IntroScene::Update()
 {
-	if (KEY_DOWN(VK_LBUTTON))
+	if (KEY_DOWN(VK_LBUTTON) && GetForegroundWindow() == hWnd)
 	{
 		clicked = true;
 	}
