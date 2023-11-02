@@ -233,7 +233,7 @@ void Character::SetCharacterState(const CharacterState& state)
 		speedLv = SpeedLv::capturedSpeedLv;
 		SOUND->Play("Captured", 1.f);
 
-		if (NotifyCapturedEvent) NotifyCapturedEvent();
+		//if (NotifyCapturedEvent) NotifyCapturedEvent();
 
 		break;
 	case C_RETURN_IDLE: // 이 때 속도가 0

@@ -3,8 +3,7 @@
 
 set<Util::Coord> Stream::streamDangerZone{};
 
-Stream::Stream(StreamBlockManager* streamBlockManager)
-	:streamBlockManager(streamBlockManager)
+Stream::Stream()
 {
 }
 
@@ -46,7 +45,7 @@ void Stream::Spawn(const Util::Coord& spawnCoord, const UINT& streamLv)
 	activatedBlocks.clear();
 
 	// Center 먼저 스폰 시킴
-	StreamBlock* block = streamBlockManager->Spawn(DIR_NONE, spawnCoord);
+	StreamBlock* block = StreamManager::GetStreamBlockManager()->Spawn(DIR_NONE, spawnCoord);
 
 	activatedBlocks.push_back(block);
 
@@ -168,7 +167,7 @@ void Stream::HandleSpawning()
 
 		bool isEnd = reachedCoordMap[dir].empty();
 
-		StreamBlock* spawnedBlock = streamBlockManager->Spawn(dir, spawnCoord, isEnd);
+		StreamBlock* spawnedBlock = StreamManager::GetStreamBlockManager()->Spawn(dir, spawnCoord, isEnd);
 		activatedBlocks.push_back(spawnedBlock);
 	}
 

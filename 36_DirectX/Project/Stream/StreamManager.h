@@ -12,6 +12,8 @@ public:
 
 	void Init();
 
+	static StreamBlockManager* GetStreamBlockManager() { return streamBlockManager; }
+
 private:
 
 
@@ -21,6 +23,6 @@ private:
 
 	vector<Stream*> streams{};
 
-	StreamBlockManager* streamBlockManager{};
+	static StreamBlockManager* streamBlockManager;
 
 };

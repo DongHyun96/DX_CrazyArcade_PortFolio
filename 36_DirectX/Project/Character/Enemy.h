@@ -36,7 +36,7 @@ private:
 
 	void DeployBalloonManually();
 
-	void OnCaptured(); // 자신이 captured 되었을 때의 event
+	void RequestRescue(); // 자신이 captured 되었을 때의 event
 
 private:
 	
@@ -78,8 +78,12 @@ private: // RESCUE 관련 (내가 구조할 때)
 
 private: // RESCUE 관련 (내가 구조 당할 때 사용)
 
+	bool callRescueOnce{ false };
 	bool callRescueTwice{ false };
-	const float CALL_RESCUE_TWICE_TIME = 2.f;
+
+	const float RESCUE_CALL_TIME_ONCE = 0.5f;
+	const float RESCUE_CALL_TIME_TWICE = 2.f;
+
 	float callRescueTime = 0.f;
 
 

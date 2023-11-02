@@ -6,7 +6,7 @@
 Enemy::Enemy(const CharacterType& cType)
 	:Character(cType, COMPUTER)
 {
-	NotifyCapturedEvent = bind(&Enemy::OnCaptured, this);
+	//NotifyCapturedEvent = bind(&Enemy::OnCaptured, this);
 }
 
 Enemy::~Enemy()
@@ -27,23 +27,30 @@ void Enemy::Move()
 {
 	if (mainState == C_CAPTURED)
 	{
-		// OnCaptured는 콜백으로 captured된 상태로 전환시 바로 호출됨
-		// 2초 뒤 한번 더 호출해주어 한번 더 도움 요청함
+		// 0.5초에 한 번 2초 뒤 한번 더 호출해주어 한번 더 도움 요청함
 		if (callRescueTwice) return;
 
 		callRescueTime += Time::Delta();
 
-		if (callRescueTime < CALL_RESCUE_TWICE_TIME) return;
+		if (!callRescueOnce && callRescueTime >= RESCUE_CALL_TIME_ONCE)
+		{
+			RequestRescue();
+			callRescueOnce = true;
+			return;
+		}
+
+		if (callRescueTime < RESCUE_CALL_TIME_TWICE) return;
 
 		callRescueTwice = true;
 		callRescueTime = 0.f;
 
-		OnCaptured();
+		RequestRescue();
 
 		return;
 	}
 	else
 	{
+		callRescueOnce = false;
 		callRescueTwice = false;
 		callRescueTime = 0.f;
 	}
@@ -112,6 +119,7 @@ void Enemy::Init()
 
 	rescueTarget = nullptr;
 
+	callRescueOnce = false;
 	callRescueTwice = false;
 	callRescueTime = 0.f;
 }
@@ -266,7 +274,7 @@ void Enemy::DeployBalloonManually()
 	}
 }
 
-void Enemy::OnCaptured() // 처음 한번 호출하고 몇초 뒤 한번 더 호출해봄
+void Enemy::RequestRescue() // 처음 한번 호출하고 몇초 뒤 한번 더 호출해봄
 {
 	set<pair<UINT, Character*>> sortedByDist{};
 

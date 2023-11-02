@@ -202,7 +202,7 @@ protected: // Captured 되었을 때 실질적으로 플레이어상호간 충돌처리 가능한 시간�
 
 protected:
 
-	function<void()> NotifyCapturedEvent{}; // Enemy가 사용
+	//function<void()> NotifyCapturedEvent{}; // Enemy가 사용
 
 
 

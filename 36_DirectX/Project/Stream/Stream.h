@@ -2,7 +2,7 @@
 class Stream
 {
 public:
-	Stream(StreamBlockManager* streamBlockManager);
+	Stream();
 	~Stream();
 
 	void Init();
@@ -31,8 +31,6 @@ private:
 private:
 
 	bool isActive{};
-
-	StreamBlockManager* streamBlockManager; // StreamManager¿¡¼­ ¹Þ¾Æ¿È
 
 	map<Direction, deque<Util::Coord>> reachedCoordMap{};
 
