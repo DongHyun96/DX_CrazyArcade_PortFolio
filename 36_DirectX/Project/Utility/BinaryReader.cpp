@@ -16,9 +16,6 @@ BinaryReader::BinaryReader(wstring path)
 		FILE_ATTRIBUTE_NORMAL,
 		nullptr
 	);
-
-	assert(file);
-	
 }
 
 BinaryReader::~BinaryReader()
@@ -30,7 +27,8 @@ int BinaryReader::ReadInt()
 {
 	int data{};
 
-	assert(ReadFile(file, &data, sizeof(int), &size, nullptr));
+	if (!ReadFile(file, &data, sizeof(int), &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 
 	return data;
 }
@@ -39,7 +37,8 @@ UINT BinaryReader::ReadUINT()
 {
 	UINT data{};
 
-	assert(ReadFile(file, &data, sizeof(UINT), &size, nullptr));
+	if(!ReadFile(file, &data, sizeof(UINT), &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
 
 	return data;
 }
@@ -48,7 +47,9 @@ float BinaryReader::Readfloat()
 {
 	float data{};
 
-	assert(ReadFile(file, &data, sizeof(float), &size, nullptr));
+	if(!ReadFile(file, &data, sizeof(float), &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
+
 
 	return data;
 }
@@ -59,7 +60,9 @@ void BinaryReader::ReadAndCopyStr(string& target)
 
 	char* data = new char[dataSize + 1];
 
-	assert(ReadFile(file, data, sizeof(char) * dataSize, &size, nullptr));
+	if(!ReadFile(file, data, sizeof(char) * dataSize, &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
+
 
 	data[dataSize] = '\0';
 
@@ -75,7 +78,9 @@ void BinaryReader::ReadAndCopyWstr(wstring& target)
 
 	WCHAR* data = new WCHAR[dataSize + 1];
 
-	assert(ReadFile(file, data, sizeof(WCHAR) * dataSize, &size, nullptr));
+	if(!ReadFile(file, data, sizeof(WCHAR) * dataSize, &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
+
 
 	data[dataSize] = '\0';
 
@@ -131,7 +136,9 @@ Util::Coord BinaryReader::ReadCoord()
 
 void BinaryReader::ReadData(OUT void** data, UINT dataSize)
 {
-	assert(ReadFile(file, *data, dataSize, &size, nullptr));
+	if(!ReadFile(file, *data, dataSize, &size, nullptr))
+		RaiseException(1, 0, 0, nullptr);
+
 }
 
 bool BinaryReader::Succeeded()
