@@ -392,7 +392,7 @@ Util::Coord Enemy::GetIdealDeployCoord(const vector<Util::Coord>& deployables)
 			int nx = coord.x + dx[i];
 			int ny = coord.y + dy[i];
 
-			if (nx < 0 || nx > MAP_COL || ny < 0 || ny > MAP_ROW) continue;
+			if (nx < 0 || nx >= MAP_COL || ny < 0 || ny >= MAP_ROW) continue;
 
 			Util::Coord nCoord = { (UINT)nx, (UINT)ny };
 
