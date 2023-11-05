@@ -8,6 +8,8 @@ public:
 	virtual void Update() override;
 	virtual void Render() override;
 
+	void InitPlayerCharacters(); // Random 선택 확인하여 Random이 선택되어있었다면 캐릭터를 Random으로 다시 맞춰놓음
+
 private:
 	void HandleInfoHover();
 

@@ -112,6 +112,10 @@ void SceneManager::SetCurScene(const SceneName& sceneName)
 			delete scenes[GAME_SCENE];
 			scenes[GAME_SCENE] = nullptr;
 
+			LobbyScene* ls = dynamic_cast<LobbyScene*>(scenes[LOBBY_SCENE]);
+
+			if (ls) ls->InitPlayerCharacters(); // 랜덤 선택되어 있었다면 플레이어를 다시 랜덤으로 바꿈
+
 		}
 	}
 	

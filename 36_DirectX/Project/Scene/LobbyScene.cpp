@@ -301,6 +301,15 @@ void LobbyScene::Render()
 
 }
 
+void LobbyScene::InitPlayerCharacters()
+{
+	if (characterSelectButtons[RANDOM][P1]->IsDown())
+		GM->P_SelectedCharacterMap()[P1] = RANDOM;
+
+	if (characterSelectButtons[RANDOM][P2]->IsDown())
+		GM->P_SelectedCharacterMap()[P2] = RANDOM;
+}
+
 void LobbyScene::HandleInfoHover()
 {
 	for (UINT i = 0; i < CHARACTER_MAX; i++)
