@@ -15,6 +15,8 @@ public:
 
 	void SetCSelectEvent(C_SELECT_FUNC_P Event) { this->CharacterSelectEvent = Event; }
 
+	bool IsDown() const { return state == DOWN; }
+
 private:
 
 	// key & each toggle groups
