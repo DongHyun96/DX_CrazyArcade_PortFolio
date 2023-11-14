@@ -27,7 +27,7 @@ enum GameMap
 	VILLAGE,
 	FACTORY,
 	FOREST,
-	TEST_FIELD,
+	//TEST_FIELD,
 	MAP_MAX
 };
 
@@ -124,7 +124,7 @@ public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
 private:
 
 	GameMode gameMode{PVP};
-	GameMap curMap{ TEST_FIELD };
+	GameMap curMap{ VILLAGE };
 	
 	map<PlayerType, CharacterType> pSelectedCharacterMap{};
 

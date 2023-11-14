@@ -11,7 +11,7 @@ GameManager::GameManager()
 			{VILLAGE, L"VillageTileSampleData"},
 			{FACTORY, L"FactoryTileSampleData"},
 			{FOREST, L"ForestTileSampleData"},
-			{TEST_FIELD, L"VillageTileSampleData"}
+			//{TEST_FIELD, L"VillageTileSampleData"}
 			//VillageTileSampleData
 		};
 
@@ -20,7 +20,7 @@ GameManager::GameManager()
 			{VILLAGE, L"VillageBlockSampleData"},
 			{FACTORY, L"FactoryBlockSampleData"},
 			{FOREST, L"ForestBlockSampleData"},
-			{TEST_FIELD, L"VillageBlockSampleData"}
+			//{TEST_FIELD, L"VillageBlockSampleData"}
 			//VillageBlockSampleData
 		};
 	}
@@ -31,7 +31,7 @@ GameManager::GameManager()
 			{VILLAGE, L"VillageTileData"},
 			{FACTORY, L"FactoryTileData"},
 			{FOREST, L"ForestTileData"},
-			{TEST_FIELD, L"VillageTileSampleData"}
+			//{TEST_FIELD, L"VillageTileSampleData"}
 		};
 
 		blockBinFile =
@@ -39,7 +39,7 @@ GameManager::GameManager()
 			{VILLAGE, L"VillageBlockData"},
 			{FACTORY, L"FactoryBlockData"},
 			{FOREST, L"ForestBlockData"},
-			{TEST_FIELD, L"VillageBlockSampleData"}
+			//{TEST_FIELD, L"VillageBlockSampleData"}
 		};
 	}
 	
@@ -49,7 +49,7 @@ GameManager::GameManager()
 		{VILLAGE, "VillageBGM"},
 		{FACTORY, "FactoryBGM"},
 		{FOREST, "ForestBGM"},
-		{TEST_FIELD, "VillageBGM"}
+		//{TEST_FIELD, "VillageBGM"}
 	};
 
 	gameFieldTransform = new Transform;

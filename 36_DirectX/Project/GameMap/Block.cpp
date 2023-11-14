@@ -158,7 +158,7 @@ void Block::ApplyDamage()
 		destroyed = true;
 		destroyedAnim->Play(false);
 		
-		if (hidable) // 숨겨져 있는 물체들 visible모두 켜주고 해제
+		if (hidable) // 숨겨져 있는 물체들 visible모두 켜주고 블록은 부숨
 		{
 			for (ColliderHolder* owner : rectBody->EnteredPointOwners())
 			{
@@ -174,7 +174,8 @@ void Block::ApplyDamage()
 
 				if (b)
 				{
-					b->SetVisible(true);
+					b->SetActive(true);
+					b->ApplyDamage();
 					continue;
 				}
 			}
@@ -394,6 +395,21 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* own
 			appliedTime = 0.f;
 			return;
 		}
+		
+		for (Character* character : GM->GetPlayerManager()->GetWholePlayers())
+		{
+			if (character->GetCharacterState() == C_SPAWN 
+			 || character->GetCharacterState() == C_SPACECRAFT 
+			 || character->GetCharacterState() == C_DEAD)
+				continue;
+
+			if (GM->GetCollidedMapCellCoord(character->GetBody()->GlobalPosition()) == destCoord)
+			{
+				appliedTime = 0.f;
+				return;
+			}
+		}
+
 
 		appliedTime += Time::Delta();
 		
@@ -431,16 +447,6 @@ bool Block::IsPushing(const Direction& cDirection, const Direction& collidedFace
 void Block::HandleAddItem()
 {
 	if (hidable || !breakable) return;
-
-	//item = (randGenerator() % 2 == 0) ? new ImmediateItem(I_TURTLE) : new ImmediateItem(I_OWL);
-	//item = new ImmediateItem((ItemName(Util::GetRandom(5, 7))));
-	//ItemManager::AddItem(item);
-
-	//item = new ConsumableItem(ItemName(Util::GetRandom(8, 10)));
-	//ItemManager::AddItem(item);
-
-	/*item = new ImmediateItem(I_TURTLE);
-	ItemManager::AddItem(item);*/
 	
 	
 	if (randGenerator() % 2 != 0) return;

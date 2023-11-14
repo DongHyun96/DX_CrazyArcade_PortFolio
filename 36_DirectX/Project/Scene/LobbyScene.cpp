@@ -133,8 +133,8 @@ LobbyScene::LobbyScene()
 	mapThumbnails[FACTORY]->zDepth = -1.f;
 	mapThumbnails[FOREST]	= new Object({ 420, 175, 1170, 1531 }, L"InGame/UI/LobbyScene/MapThumbNail/Forest.png");
 	mapThumbnails[FOREST]->zDepth = -1.f;
-	mapThumbnails[TEST_FIELD] = new Object({ 420, 175, 1170, 1531 }, L"InGame/UI/LobbyScene/MapThumbNail/Testing.png");
-	mapThumbnails[TEST_FIELD]->zDepth = -1.f;
+	/*mapThumbnails[TEST_FIELD] = new Object({ 420, 175, 1170, 1531 }, L"InGame/UI/LobbyScene/MapThumbNail/Testing.png");
+	mapThumbnails[TEST_FIELD]->zDepth = -1.f;*/
 
 	xTex = new Object({ 897, 722, 324, 548 }, L"InGame/UI/LobbyScene/X.jpg");
 	xTex->zDepth = -2.f;
@@ -288,9 +288,9 @@ void LobbyScene::Render()
 	case FACTORY:
 		FONT->RenderText(L"ÆÑÅä¸® 07", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
 		break;
-	case TEST_FIELD:
+	/*case TEST_FIELD:
 		FONT->RenderText(L"TestField", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
-		break;
+		break;*/
 	default:
 		break;
 	}

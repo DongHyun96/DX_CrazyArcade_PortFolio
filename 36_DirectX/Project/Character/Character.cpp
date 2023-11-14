@@ -100,6 +100,8 @@ void Character::Init()
 
 	capturedTime = 0.f;
 	is_captured_collidable_with_others = false;
+
+	actionHandler->SetReturnIdleEndEvent(bind(&Character::OnEndReturnToIdle, this));
 }
 
 void Character::Update()

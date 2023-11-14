@@ -77,8 +77,8 @@ void MainGame::Update()
 
 	SM->Update();
 
-	if (KEY_DOWN(VK_TAB))
-		ToggleHideUI();
+	//if (KEY_DOWN(VK_TAB))
+	//	ToggleHideUI();
 }
 
 void MainGame::Render()

@@ -84,7 +84,7 @@ void BlockEditor::InitBlockMaps()
 
 	switch (GM->GetCurMapType())
 	{
-	case VILLAGE: case TEST_FIELD:
+	case VILLAGE: /*case TEST_FIELD:*/
 	{
 		Block* block{};
 		Collider* collider{};
