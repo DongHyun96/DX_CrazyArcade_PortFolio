@@ -30,7 +30,7 @@ void Device::Initialize()
 
     // 색상을 언리얼처럼 0부터 1까지의 값을 씀 (unsigned normalized) / signed normalized -> -1 ~ 1
     swapChainDesc.BufferDesc.Format                     = DXGI_FORMAT_R8G8B8A8_UNORM;
-    swapChainDesc.BufferDesc.RefreshRate.Numerator      = 60; // RefreshRate 재생빈도 (주사율)
+    swapChainDesc.BufferDesc.RefreshRate.Numerator      = 240; // RefreshRate 재생빈도 (주사율)
     swapChainDesc.BufferDesc.RefreshRate.Denominator    = 1;
 
     swapChainDesc.SampleDesc.Count                      = 1; // sampleDesc -> 샘플링과 관련한 descriptor
