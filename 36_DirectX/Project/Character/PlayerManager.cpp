@@ -162,7 +162,7 @@ void PlayerManager::SetKeyCode(const GameMode& gameMode)
 void PlayerManager::SetGameOver()
 {
 	for (Character* player : wholePlayers)
-		player->SetGameOver();
+		player->HandleGameOver();
 }
 
 void PlayerManager::HandlePlayerCollisions()

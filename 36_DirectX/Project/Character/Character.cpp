@@ -31,7 +31,7 @@ Character::Character(const CharacterType& cType, const PlayerType& playerType)
 	actionHandler->SetCapturedEndEvent(bind(&Character::OnCapturedEnd, this));
 	actionHandler->SetDeadEndEvent(bind(&Character::OnDeadEnd, this));
 
-	colorBuffer = new ColorBuffer();
+	spawnColorBuffer = new ColorBuffer();
 
 	arrow = (playerType == P1) ? new Object(L"InGame/Characters/PlayerArrow/1p.png") :
 			(playerType == P2) ? new Object(L"InGame/Characters/PlayerArrow/2p.png") : nullptr;
@@ -63,7 +63,7 @@ Character::~Character()
 	delete body;
 	delete pushCollider;
 
-	delete colorBuffer;
+	delete spawnColorBuffer;
 
 	delete shadow;
 
@@ -75,7 +75,7 @@ void Character::Init()
 {
 	visible = true;
 
-	colorBuffer->SetData({ 1,1,1,1 });
+	spawnColorBuffer->SetData({ 1,1,1,1 });
 
 	velocity *= 0.f;
 
@@ -153,8 +153,8 @@ void Character::Update()
 
 		if (flicker >= 0.05f)
 		{
-			if (flicked) colorBuffer->SetData({ 1,1,1,1 });
-			else colorBuffer->SetData(SPAWN_COLOR);
+			if (flicked) spawnColorBuffer->SetData({ 1,1,1,1 });
+			else spawnColorBuffer->SetData(SPAWN_COLOR);
 			
 			flicked = !flicked;
 			flicker -= 0.05f;
@@ -182,7 +182,7 @@ void Character::Render()
 
 	if (arrow) arrow->Render();
 
-	colorBuffer->PSSetBuffer(0);
+	spawnColorBuffer->PSSetBuffer(0);
 
 	actionHandler->Render(); // 여기에서 shader 세팅
 
@@ -197,7 +197,7 @@ void Character::Render()
 
 void Character::Debug()
 {
-	assert(label != "");
+	assert(debugLabel != "");
 
 	/*if (ImGui::BeginMenu(label.c_str()))
 	{
@@ -205,7 +205,7 @@ void Character::Debug()
 		ImGui::EndMenu();
 	}*/
 
-	body->Debug(label);
+	body->Debug(debugLabel);
 	//actionHandler->Debug("ActionHandler");
 }
 
@@ -216,23 +216,23 @@ void Character::SetCharacterState(const CharacterState& state)
 	{
 	case C_IDLE:
 		speedLv = curIdleSpeedLv;
-		colorBuffer->SetData({ 1,1,1,1 });
+		spawnColorBuffer->SetData({ 1,1,1,1 });
 		break;
 	case C_SPACECRAFT:
 		curIdleSpeedLv = speedLv;
-		speedLv = SpeedLv::spaceSpeedLv;
+		speedLv = CommonSpeedLv::SPACE_SPEED_LV;
 		break;
 	case C_OWL:
 		curIdleSpeedLv = speedLv;
-		speedLv = SpeedLv::owlSpeedLv;
+		speedLv = CommonSpeedLv::OWL_SPEED_LV;
 		break;
 	case C_TURTLE:
 		curIdleSpeedLv = speedLv;
-		speedLv = SpeedLv::turtleSpeedLv;
+		speedLv = CommonSpeedLv::TURTLE_SPEED_LV;
 		break;
 	case C_CAPTURED:
 		curIdleSpeedLv = speedLv;
-		speedLv = SpeedLv::capturedSpeedLv;
+		speedLv = CommonSpeedLv::CAPTURED_SPEED_LV;
 		SOUND->Play("Captured", 1.f);
 
 		//if (NotifyCapturedEvent) NotifyCapturedEvent();
@@ -270,7 +270,7 @@ Direction Character::GetCurFaceDir() const
 	return actionHandler->GetCurFaceDir();
 }
 
-void Character::SetGameOver()
+void Character::HandleGameOver()
 {
 	if (mainState == C_DEAD) return;
 
