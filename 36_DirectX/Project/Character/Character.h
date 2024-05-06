@@ -178,7 +178,8 @@ protected:
 	/* 실질적인 캐릭터 애니메이션 스프라이트 출력 담당 */
 	CharacterAnim* actionHandler{};
 
-protected:	/* 소모품 아이템(바늘, 다트 등) */
+protected:	
+	/* 소모품 아이템(바늘, 다트 등) */
 	Item* consumableItem{};
 
 protected:
@@ -221,7 +222,8 @@ protected:
 	float		capturedTime = 0.f;
 	bool		is_captured_collidable_with_others{};
 
-protected: /* Debug label */
+protected: 
+	/* Debug label */
 	string	debugLabel{};
 
 };
