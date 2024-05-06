@@ -21,8 +21,8 @@ PlayerManager::PlayerManager()
 		{DIR_DOWN,	VK_DOWN}
 	};
 
-	P_BALLOON_KEYCODE[P2] = VK_RSHIFT;
-	P_ITEM_KEYCODE[P2] = VK_HANJA;
+	P_BALLOON_KEYCODE[P2]	= VK_RSHIFT;
+	P_ITEM_KEYCODE[P2]		= VK_HANJA;
 
 	// Setting up characters
 
@@ -155,7 +155,7 @@ void PlayerManager::SetKeyCode(const GameMode& gameMode)
 	};
 
 	P_BALLOON_KEYCODE[P1] = gameMode == PVP ? VK_LSHIFT : VK_SPACE;
-	P_ITEM_KEYCODE[P1] = VK_LCONTROL;
+	P_ITEM_KEYCODE[P1]	  = VK_LCONTROL;
 }
 
 

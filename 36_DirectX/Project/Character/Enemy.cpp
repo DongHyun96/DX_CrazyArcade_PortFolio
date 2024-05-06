@@ -13,13 +13,13 @@ Enemy::~Enemy()
 {
 }
 
-void Enemy::SetPathToRescueMission(const pair<stack<Util::Coord>, set<Util::Coord>>& path_visited, Character* rescueTarget)
+void Enemy::SetPathToRescueMission(const pair<stack<Util::Coord>, set<Util::Coord>>& rescue_path_visited_pair, Character* rescueTarget)
 {
-	targetState = RESCUE_PEER;
+	targetState			= RESCUE_PEER;
 
-	this->path = path_visited.first;
-	this->visited = path_visited.second;
-	this->rescueTarget = rescueTarget;
+	this->path			= rescue_path_visited_pair.first;
+	this->visited		= rescue_path_visited_pair.second;
+	this->rescueTarget	= rescueTarget;
 }
 
 
@@ -28,21 +28,21 @@ void Enemy::Move()
 	if (mainState == C_CAPTURED)
 	{
 		// 0.5초에 한 번 2초 뒤 한번 더 호출해주어 한번 더 도움 요청함
-		if (callRescueTwice) return;
+		if (requestResqueTwice) return;
 
-		callRescueTime += Time::Delta();
+		capturedTime += Time::Delta();
 
-		if (!callRescueOnce && callRescueTime >= RESCUE_CALL_TIME_ONCE)
+		if (!requestResqueOnce && capturedTime >= RESCUE_CALL_TIME_ONCE)
 		{
 			RequestRescue();
-			callRescueOnce = true;
+			requestResqueOnce = true;
 			return;
 		}
 
-		if (callRescueTime < RESCUE_CALL_TIME_TWICE) return;
+		if (capturedTime < RESCUE_CALL_TIME_TWICE) return;
 
-		callRescueTwice = true;
-		callRescueTime = 0.f;
+		requestResqueTwice = true;
+		capturedTime = 0.f;
 
 		RequestRescue();
 
@@ -50,9 +50,9 @@ void Enemy::Move()
 	}
 	else
 	{
-		callRescueOnce = false;
-		callRescueTwice = false;
-		callRescueTime = 0.f;
+		requestResqueOnce = false;
+		requestResqueTwice = false;
+		capturedTime = 0.f;
 	}
 
 	myCoord = GM->GetCollidedMapCellCoord(body->GlobalPosition());
@@ -83,7 +83,7 @@ void Enemy::Move()
 
 		blockedTime += Time::Delta();
 
-		if (blockedTime >= BLOCKED_TIME) // Path가 아직 남아있고 한자리에 계속 머물 때 어디에 막혔을것이라 판단 -> 다시 None으로 돌아가서 재판단
+		if (blockedTime >= BLOCKED_TIME_LIMIT) // Path가 아직 남아있고 한자리에 계속 머물 때 어디에 막혔을것이라 판단 -> 다시 None으로 돌아가서 재판단
 		{
 			path = {};
 			visited.clear();
@@ -119,9 +119,9 @@ void Enemy::Init()
 
 	rescueTarget = nullptr;
 
-	callRescueOnce = false;
-	callRescueTwice = false;
-	callRescueTime = 0.f;
+	requestResqueOnce = false;
+	requestResqueTwice = false;
+	capturedTime = 0.f;
 }
 
 void Enemy::UpdatePath(const Util::Coord& dest)
@@ -165,7 +165,7 @@ void Enemy::UpdateState()
 			{
 				// 아직 섬 -> 바로 가장 가까운 safezone으로 이동
 				bool safeCoordExist{};
-				Util::Coord safeCoord = GetSafeCoords(visited, safeCoordExist);
+				Util::Coord safeCoord = GetSafeCoord(visited, safeCoordExist);
 
 				if (!safeCoordExist)
 				{
@@ -274,8 +274,9 @@ void Enemy::DeployBalloonManually()
 	}
 }
 
-void Enemy::RequestRescue() // 처음 한번 호출하고 몇초 뒤 한번 더 호출해봄
+void Enemy::RequestRescue() // 처음 한번 호출하고 몇초 뒤 한번 더 호출해봄 (총 두번)
 {
+	/* 동료들을 거리순으로 정렬 */
 	set<pair<UINT, Character*>> sortedByDist{};
 
 	for (Character* target : GM->GetPlayerManager()->GetComEnemies())
@@ -286,26 +287,28 @@ void Enemy::RequestRescue() // 처음 한번 호출하고 몇초 뒤 한번 더 호출해봄
 		sortedByDist.insert(make_pair(dist, target));
 	}
 
-	for (const auto& p : sortedByDist)
+	for (const auto& p : sortedByDist) // 가장 가까운 거리에 존재하는 동료 순
 	{
 		Character* target = p.second;
 
-		//도와줄 수 없는 상황이면 넘어감
+		// 현재 동료가 도와줄 수 없는 상황이면 넘어감
 		if (target->GetCharacterState() == C_CAPTURED || target->GetCharacterState() == C_DEAD)
 			continue;
 
-		// 경로가 존재하는지 체크
-
+		// 현재 동료까지의 경로가 존재하는지 체크, targetCoord -> 현재 동료의 위치
 		Util::Coord targetCoord = GM->GetCollidedMapCellCoord(target->GetBody()->GlobalPosition());
 
+		// Captured당한 나 자신으로부터 동료까지의 경로가 존재하는지 체크함 (내 path를 Update해봄)
 		UpdatePath(targetCoord);
 
+		// 해당하는 경로가 없다면 다음 동료로 다시 시도
 		if (path.empty()) continue;
 
-		// 경로가 존재하는 가장 가까운 플레이어 ->역으로 경로를 백트래킹
-		// 경로의 끝에 자기자신의 위치를 넣고 경로의 시작에는 상대의 현위치를 뺴야함
-		stack<Util::Coord> rescuerPath{};
+		// for loop의 현재 동료가 경로가 존재하는 가장 가까운 동료 -> 내가 찾은 경로를 백트래킹하여 구조를 요청할 동료의 path에 넣어줌
+		stack<Util::Coord> rescuerPath{}; // 구조자 경로
 		
+		// 내가 찾은 경로를 역으로 넣어주되, 구조자 경로의 끝에는 나의 좌표를 넣어주고, 경로의 시작(rescuer자기자신의 현위치) 부분은 하나 빼줘야 함
+
 		rescuerPath.push(myCoord);
 
 		while (!path.empty())
@@ -316,9 +319,11 @@ void Enemy::RequestRescue() // 처음 한번 호출하고 몇초 뒤 한번 더 호출해봄
 
 		rescuerPath.pop();
 
+		// 동료의 targetState를 RESCUE_PEER로 바꾸고 path도 나 자신을 구하러 오는 path로 수정
 		Enemy* peer = dynamic_cast<Enemy*>(target);
 		peer->SetPathToRescueMission(make_pair(rescuerPath, visited), this);
 
+		// 구조요청 후 나 자신의 path, visited, targetState 초기화
 		visited.clear();
 		path = {};
 		targetState = NONE;
@@ -416,7 +421,7 @@ Util::Coord Enemy::GetIdealDeployCoord(const vector<Util::Coord>& deployables)
 	return deployables[randIdx];
 }
 
-Util::Coord Enemy::GetSafeCoords(const set<Util::Coord>& visited, OUT bool& safeCoordExist)
+Util::Coord Enemy::GetSafeCoord(const set<Util::Coord>& visited, OUT bool& safeCoordExist)
 {
 	vector<Util::Coord> safeZones{};
 

@@ -29,21 +29,22 @@ private:
 	
 	void CheckGameOver();
 
-public: // Players' keyCode
+public: /* 플레이어Type에 따른 input mapping KeyCodes */
 
-	map<PlayerType, map<Direction, byte>> P_DIR_KEYCODE{};
-	map<PlayerType, byte> P_BALLOON_KEYCODE{};
-	map<PlayerType, byte> P_ITEM_KEYCODE{};
+	map<PlayerType, map<Direction, byte>> P_DIR_KEYCODE{};		// 방향키 키코드 mapping
+	map<PlayerType, byte>				  P_BALLOON_KEYCODE{};	// 물풍선 놓기 키코드 mapping
+	map<PlayerType, byte>				  P_ITEM_KEYCODE{};		// 아이템 사용 키코드 mapping
 
 public:
-
+	/* 각 맵의 캐릭터 스폰 가능 위치 map */
 	map<GameMap, vector<Util::Coord>> spawnPosMap{};
 
 
-private:
+private: /* 게임 플레이에 사용할 Player와 Enemy */
 
 	// 캐릭터가 누구인지는 Character가 들고있는 PlayerType으로 구분가능함
 
+	/* 전제 플레이어 집합군 (PVP일 때 P1, P2 | PVE일 때 P1, comEnemies로 구성) */
 	vector<Character*> wholePlayers{};
 
 	Character* p1{};
@@ -62,9 +63,9 @@ private: // 미리 초기화한 데이터들
 
 private:
 	
-	bool deathTimerTriggered = false;
-	float deathTimer{ 0.f }; // 한 플레이어가 죽은 뒤 측정해서 0.4초 이내로 상대팀원도 전멸하면 draw로 처리
-	bool gameOverChecked = false;
-	const float DRAW_CHECK_TIME = 0.3f;
+	bool		deathTimerTriggered = false;
+	float		deathTimer{};					// 한 플레이어가 죽은 뒤 측정해서 0.4초 이내로 상대팀원도 전멸하면 draw로 처리
+	bool		gameOverChecked		= false;
+	const float DRAW_CHECK_TIME		= 0.3f;
 
 };

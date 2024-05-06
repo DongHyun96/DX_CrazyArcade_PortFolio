@@ -44,7 +44,7 @@ private:
 public:
 
 
-	/// <returns> path, 검사한 visited </returns>
+	/// <returns> path, 검사한 visited coords </returns>
 	static pair<stack<Util::Coord>, set<Util::Coord>> GetPath(const Util::Coord& start, const Util::Coord& dest, const bool& isC_SPACE);
 
 private:

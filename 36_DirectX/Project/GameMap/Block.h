@@ -107,7 +107,7 @@ public:
 	void SetBoardPos(const Util::Coord& coord) { this->boardPos = coord; }
 	Util::Coord GetBoardPos() const { return boardPos; }
 
-	bool IsActive() { return isActive; }
+	bool IsActive() const { return isActive; }
 	void SetActive(const bool& active) { this->isActive = active; }
 
 	bool IsMovable() const { return movable; }

@@ -2,9 +2,9 @@
 
 class CharacterAnim;
 
-#define SPEED_BASE 70.f
+#define SPEED_BASE 70.f // 캐릭터 speed lv에 곱할 기본 base 배수
 
-
+/* 캐릭터 종류 */
 enum CharacterType
 {
 	BAZZI,
@@ -15,9 +15,7 @@ enum CharacterType
 	CHARACTER_MAX
 };
 
-/// <summary>
-/// 캐릭터의 MainState
-/// </summary>
+/* 캐릭터의 MainState */
 enum CharacterState
 {
 	C_SPAWN,
@@ -37,6 +35,7 @@ enum CharacterState
 	C_WIN
 };
 
+/* 캐릭터의 PlayerType - P1, P2, Computer인지 구분하기 위함 */
 enum PlayerType
 {
 	P1,
@@ -46,9 +45,7 @@ enum PlayerType
 };
 
 
-/// <summary>
-/// 탈 것과 captured 되었을 때의 speed는 모든 캐릭터가 동일
-/// </summary>
+/* 탈 것과 captured 되었을 때(모든 캐릭터의 속도가 동일)의 Common Speed level */
 static struct CommonSpeedLv
 {
 	static const UINT CAPTURED_SPEED_LV		= 1;
@@ -70,39 +67,38 @@ public:
 
 private: 
 	/*
-	* Basic move method
-	* 자식 단계에서 Player는 input에 따라, Enemy는 EnemyAI에 따라 구현
+	Basic move pure-virtual method
+	자식 단계에서 Player는 input에 따라, Enemy는 EnemyAI에 따라 구현
 	*/
 	virtual void Move() = 0;
 
 public: /* Getters, Setters, Adders */
 
-	/* Colliders */
-	ColliderRect* GetBody()         const { return body; }
-	ColliderRect* GetPushCollider() const { return pushCollider; }
+	ColliderRect*	GetBody() const { return body; }
+	ColliderRect*	GetPushCollider() const { return pushCollider; }
 
-	void SetVisible(const bool& visible) { this->visible = visible; }
+	void			SetVisible(const bool& visible) { this->visible = visible; }
 
-	PlayerType GetPlayerType() const { return playerType; }
+	PlayerType		GetPlayerType() const { return playerType; }
 
 	void			SetCharacterState(const CharacterState& state);
 	CharacterState	GetCharacterState() const { return mainState; }
 
-	void SetSpawnPos(const Util::Coord& spawnPos) { Util::SetTransformToGameBoard(body, spawnPos); }
+	void			SetSpawnPos(const Util::Coord& spawnPos) { Util::SetTransformToGameBoard(body, spawnPos); }
 
-	Vector2 GetVelocity() const { return velocity; }
-	float   GetSpeed()    const { return SPEED_BASE * speedLv; }
+	Vector2			GetVelocity() const { return velocity; }
+	float			GetSpeed() const { return SPEED_BASE * speedLv; }
 
-	UINT GetStreamLv() const { return streamLv; }
+	UINT			GetStreamLv() const { return streamLv; }
 
-	bool AddLeftBalloonCnt(const UINT& addAmount = 1); // Balloon 회수 & 물풍선 아이템 획득 시 사용
+	bool			AddLeftBalloonCnt(const UINT& addAmount = 1); // Balloon 회수 & 물풍선 아이템 획득 시 사용
 
-	Direction GetCurFaceDir() const;
+	Direction		GetCurFaceDir() const;
 
-	bool IsCapturedCollidableWithOthers() const { return is_captured_collidable_with_others; }
+	bool			IsCapturedCollidableWithOthers() const { return is_captured_collidable_with_others; }
 	
-	void  SetConsumableItem(Item* consumable) { this->consumableItem = consumable; }
-	Item* GetConsumableItem() const           { return consumableItem; }
+	void			SetConsumableItem(Item* consumable) { this->consumableItem = consumable; }
+	Item*			GetConsumableItem() const { return consumableItem; }
 
 
 public: /* 스탯 강화 methods */
@@ -120,8 +116,8 @@ public:
 
 protected: /* 소모 아이템 사용 관련 */
 
-	virtual void HandleUseConsumableItem() = 0;
-	bool UseConsumableItem();
+	virtual void	HandleUseConsumableItem() = 0;
+	bool			UseConsumableItem();
 
 private:
 	/* Map boundary 충돌처리 */
@@ -132,8 +128,8 @@ private:
 	virtual void DeployBalloon() = 0;
 
 public: /* Debugging 관련 */
-	virtual void Debug();
-	void SetLabel(const string& label) { this->debugLabel = label; }
+	virtual void	Debug();
+	void			SetLabel(const string& label) { this->debugLabel = label; }
 
 protected: 
 	/* Initialize stats */
@@ -146,12 +142,17 @@ protected: /* Event handling methods */
 	void OnCapturedEnd()				{ SetCharacterState(C_DEAD); }
 	void OnDeadEnd()					{ visible = false; }
 
+private: /* Update methods */
 
-/*********************************
-*       Member variables
-**********************************/
-protected: /* Visibility */
+	void UpdatePlayerArrow();
+	void UpdateBasedOnMainCharacterState(OUT bool& continueCharacterUpdate);
 
+
+/***************************************************************************************************
+*                                          Member variables                                        *
+****************************************************************************************************/
+protected: 
+	/* Visibility */
 	bool visible{ true };
 
 protected: /* PlayerType, MainState */
@@ -169,13 +170,15 @@ protected: /* 캐릭터 그림자 및 화살표 */
 	map<bool, float>	arrowYDestMap{};
 	bool				arrowYSwitched{};
 
-protected: /* Character velocity */
+protected: 
+	/* Character velocity */
 	Vector2 velocity{};
 
+protected: 
 	/* 실질적인 캐릭터 애니메이션 스프라이트 출력 담당 */
 	CharacterAnim* actionHandler{};
 
-	/* 소모품 아이템(바늘, 다트 등) */
+protected:	/* 소모품 아이템(바늘, 다트 등) */
 	Item* consumableItem{};
 
 protected:
@@ -199,7 +202,7 @@ protected: /* 스탯 관련 (속도, 물풍선 갯수, 물줄기 스탯) */
 
 	UINT streamLvMin{};
 	UINT streamLvMax{};
-	UINT streamLv{}; // CurrentStreamLv
+	UINT streamLv{};		
 
 protected: /* 스폰 컬러 관련 */
 

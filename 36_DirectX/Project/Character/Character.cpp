@@ -6,9 +6,6 @@ Character::Character(const CharacterType& cType, const PlayerType& playerType)
 {
 	this->playerType = playerType;
 
-	/*Vector2 characterBodySize = { CELL_WORLD_SIZE.x - 30.f, CELL_WORLD_SIZE.y - 30.f };
-	Vector2 pushColSize = { CELL_WORLD_SIZE.x - 15.f, CELL_WORLD_SIZE.y - 15.f };*/
-
 	Vector2 characterBodySize = { CELL_WORLD_SIZE.x - 1.f, CELL_WORLD_SIZE.y - 1.f };
 	Vector2 pushColSize = { CELL_WORLD_SIZE.x + 10.f, CELL_WORLD_SIZE.y + 10.f };
 
@@ -113,60 +110,15 @@ void Character::Update()
 
 	shadow->Update();
 	
-	if (arrow)
-	{
-		arrowYDestMap =
-		{
-			{false, actionHandler->GetCurActionSize().y * 1.5f},
-			{true, actionHandler->GetCurActionSize().y * 1.2f}
-		};
-
-		if (abs(arrow->translation.y - arrowYDestMap[arrowYSwitched]) < 0.99f)
-			arrowYSwitched = !arrowYSwitched;
-		else arrow->translation.y = Util::Lerp(arrow->translation.y, arrowYDestMap[arrowYSwitched], 5.f * Time::Delta());
-
-		arrow->Update();
-	}
-	
+	UpdatePlayerArrow();
 
 	actionHandler->Update();
 	actionHandler->UpdateAction(mainState, velocity);
 
-	switch (mainState)
-	{ 
-	case C_IDLE: case C_OWL: case C_TURTLE:
-		break;
-	case C_CAPTURED:
+	static bool continueUpdate{};
+	UpdateBasedOnMainCharacterState(continueUpdate);
 
-		capturedTime += Time::Delta();
-
-		if (capturedTime >= CAPTURED_P_COLLIDE_START_TIME)
-			is_captured_collidable_with_others = true;
-
-		break;
-	case C_SPACECRAFT: // y Depth °íÁ¤½ÃÅ´
-		body->zDepth = -1.f;
-		break;
-	case C_SPAWN:
-
-		flicker += Time::Delta();
-
-		if (flicker >= 0.05f)
-		{
-			if (flicked) spawnColorBuffer->SetData({ 1,1,1,1 });
-			else spawnColorBuffer->SetData(SPAWN_COLOR);
-			
-			flicked = !flicked;
-			flicker -= 0.05f;
-		}
-
-		return;
-	case C_RETURN_IDLE: case C_DEAD: case C_WIN:
-		is_captured_collidable_with_others = false;
-		return;
-	default:
-		break;
-	}
+	if (!continueUpdate) return;
 
 	Move();
 	DeployBalloon();
@@ -177,8 +129,7 @@ void Character::Update()
 
 void Character::Render()
 {
-	if (!visible)
-		return;
+	if (!visible) return;
 
 	if (arrow) arrow->Render();
 
@@ -384,4 +335,66 @@ void Character::InitStat(const CharacterType& cType)
 	leftBalloonCnt = balloonCntMin;
 	streamLv = streamLvMin;
 
+}
+
+void Character::UpdatePlayerArrow()
+{
+	if (!arrow) return;
+
+	arrowYDestMap =
+	{
+		{false, actionHandler->GetCurActionSize().y * 1.5f},
+		{true, actionHandler->GetCurActionSize().y * 1.2f}
+	};
+
+	if (abs(arrow->translation.y - arrowYDestMap[arrowYSwitched]) < 0.99f)
+		arrowYSwitched = !arrowYSwitched;
+	else arrow->translation.y = Util::Lerp(arrow->translation.y, arrowYDestMap[arrowYSwitched], 5.f * Time::Delta());
+
+	arrow->Update();
+}
+
+void Character::UpdateBasedOnMainCharacterState(OUT bool& continueCharacterUpdate)
+{
+	continueCharacterUpdate = true;
+
+	switch (mainState)
+	{
+	case C_IDLE: case C_OWL: case C_TURTLE:
+		break;
+	case C_CAPTURED:
+
+		capturedTime += Time::Delta();
+
+		if (capturedTime >= CAPTURED_P_COLLIDE_START_TIME)
+			is_captured_collidable_with_others = true;
+
+		break;
+	case C_SPACECRAFT: // y Depth °íÁ¤½ÃÅ´
+
+		body->zDepth = -1.f;
+		break;
+	case C_SPAWN:
+
+		flicker += Time::Delta();
+
+		if (flicker >= 0.05f)
+		{
+			if (flicked) spawnColorBuffer->SetData({ 1,1,1,1 });
+			else spawnColorBuffer->SetData(SPAWN_COLOR);
+
+			flicked = !flicked;
+			flicker -= 0.05f;
+		}
+
+		continueCharacterUpdate = false;
+		break;
+	case C_RETURN_IDLE: case C_DEAD: case C_WIN:
+
+		is_captured_collidable_with_others = false;
+		continueCharacterUpdate = false;
+		break;
+	default:
+		break;
+	}
 }
