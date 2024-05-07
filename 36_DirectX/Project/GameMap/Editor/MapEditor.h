@@ -45,7 +45,7 @@ private:
 private: // ImGui를 통한 기능들
 	
 	const string label{"MapEditor"};
-	EditMode mode = BLOCK_MODE;
+	EditMode	 mode = BLOCK_MODE;
 	
 	bool renderColliderFlag = true;
 
