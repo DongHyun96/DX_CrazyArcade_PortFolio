@@ -9,7 +9,7 @@ Block::Block(const BlockInfo& info)
 Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Coord targetXY, Vector2 texWorldSize, BlockProperty bProp)
 	:breakable(bProp.breakable), movable(bProp.movable), hidable(bProp.hidable)
 {
-	texWorldSize.y += Y_OFFSET; // offset 조정
+	texWorldSize.y += BLOCK_Y_OFFSET; // offset 조정
 
 	rectBody	= new ColliderRect(CELL_WORLD_SIZE);
 	texObj		= new Object(texWorldSize, texFile, frameXY.x, frameXY.y, targetXY.x, targetXY.y);
@@ -62,8 +62,8 @@ void Block::Update()
 
 	rectBody->UpdateZDepthToY();
 
-	Move();
-	HandleBushInteract();
+	HandleMove();
+	HandleBushInteraction();
 
 	rectBody->Update();
 	texObj->Update();
@@ -92,8 +92,7 @@ void Block::Render()
 
 void Block::PlayBushInteraction()
 {
-	if (currentlyBushing)
-		return;
+	if (currentlyBushing) return;
 
 	SOUND->Play("BushSound", 1.f);
 
@@ -189,7 +188,7 @@ void Block::ApplyDamage()
 	}
 }
 
-void Block::Move()
+void Block::HandleMove()
 {
 	if (!currentlyMoving || !movable)
 		return;
@@ -210,21 +209,21 @@ void Block::Move()
 	rectBody->translation += direction.GetNormal() * speed * Time::Delta();
 }
 
-void Block::HandleBushInteract()
+void Block::HandleBushInteraction()
 {
 	if (!hidable || !currentlyBushing)
 		return;
 
-	interactTime += Time::Delta();
+	bushInteractedTime += Time::Delta();
 
 	// 1초를 0.25로 쪼개어 interaction을 줄 예정, texObj만 local translation x값을 조정하여 양옆으로 왔다갔다만 할 예정
-	if		(interactTime < 0.1f)	texObj->translation.x =  5.f;
-	else if (interactTime < 0.2f)	texObj->translation.x = -5.f;
-	else if (interactTime < 0.3f)	texObj->translation.x =  5.f;
-	else if (interactTime < 0.4f)	texObj->translation.x = -5.f;
+	if		(bushInteractedTime < 0.1f)	texObj->translation.x =  5.f;
+	else if (bushInteractedTime < 0.2f)	texObj->translation.x = -5.f;
+	else if (bushInteractedTime < 0.3f)	texObj->translation.x =  5.f;
+	else if (bushInteractedTime < 0.4f)	texObj->translation.x = -5.f;
 	else
 	{
-		interactTime = 0.f;
+		bushInteractedTime = 0.f;
 		texObj->translation.x = 0.f;
 
 		currentlyBushing = false;
@@ -346,7 +345,7 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* own
 	{
 		if (currentlyMoving)
 		{
-			appliedTime = 0.f;
+			pushForceAppliedTime = 0.f;
 			return;
 		}
 
@@ -380,19 +379,19 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* own
 		}
 
 		
-		// 충돌하고 있는 면의 방향과 캐릭터의 현 velocity가 맞물려야 시간을 더함
-		// TODO : 플레이어도 destination에 없어야 함
-		// + 움직이고자 하는 방면에 물체가 없어야 함 + 맵 범위 판정
+		// 충돌하고 있는 면의 방향과 캐릭터의 현 velocity가 맞물려야 pushForceAppliedTime 시간을 더함
+		// 미는 시간을 충족하면 (pushForceAppliedTime >= PUSH_APPLIED_TIME_LIMIT) 실제로 블록을 밈
+		// 움직이고자 하는 방면에 물체가 없어야 함 + 맵 범위 판정
 
 		if (!IsPushing(cDir, collidedFace))
 		{
-			appliedTime = 0.f;
+			pushForceAppliedTime = 0.f;
 			return;
 		}
 
 		if (!BlockManager::IsValidDestCoord(destCoord))
 		{
-			appliedTime = 0.f;
+			pushForceAppliedTime = 0.f;
 			return;
 		}
 		
@@ -405,19 +404,19 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* own
 
 			if (GM->GetCollidedMapCellCoord(character->GetBody()->GlobalPosition()) == destCoord)
 			{
-				appliedTime = 0.f;
+				pushForceAppliedTime = 0.f;
 				return;
 			}
 		}
 
 
-		appliedTime += Time::Delta();
+		pushForceAppliedTime += Time::Delta();
 		
 		// 밀기 만족
-		if (appliedTime >= APPLIED_TIME_LIMIT)
+		if (pushForceAppliedTime >= PUSH_APPLIED_TIME_LIMIT)
 		{
 			Move(destCoord);
-			appliedTime = 0.f;
+			pushForceAppliedTime = 0.f;
 		}
 	}
 }

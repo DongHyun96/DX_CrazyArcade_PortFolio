@@ -26,7 +26,7 @@ PlayerManager::PlayerManager()
 
 	// Setting up characters
 
-	p1Characters =
+	p1CharacterData =
 	{
 		{BAZZI, new Player(BAZZI, P1)},
 		{DAO,	new Player(DAO, P1)},
@@ -34,7 +34,7 @@ PlayerManager::PlayerManager()
 		{MARID, new Player(MARID, P1)}
 	};
 
-	p2Characters =
+	p2CharacterData =
 	{
 		{BAZZI, new Player(BAZZI, P2)},
 		{DAO,	new Player(DAO, P2)},
@@ -42,7 +42,6 @@ PlayerManager::PlayerManager()
 		{MARID, new Player(MARID, P2)}
 	};
 
-	// TODO: enemyCharacters 초기화
 	for (UINT i = 0; i < ENEMY_CNT; i++)
 		comEnemies.push_back(new Enemy(BAZZI));
 }
@@ -51,13 +50,13 @@ PlayerManager::PlayerManager()
 PlayerManager::~PlayerManager()
 {
 
-	for (auto& p : p1Characters) delete p.second;
-	for (auto& p : p2Characters) delete p.second;
+	for (auto& p : p1CharacterData) delete p.second;
+	for (auto& p : p2CharacterData) delete p.second;
 	for (Character* c : comEnemies) delete c;
 
 	wholePlayers.clear();
-	p1Characters.clear();
-	p2Characters.clear();
+	p1CharacterData.clear();
+	p2CharacterData.clear();
 	comEnemies.clear();
 }
 
@@ -79,11 +78,11 @@ void PlayerManager::Init()
 
 	if (gameMode == PVP) // TODO p1과 p2 게임캐릭터 타입 가져오기
 	{
-		p1 = p1Characters[GM->P_SelectedCharacterMap()[P1]];
+		p1 = p1CharacterData[GM->P_SelectedCharacterMap()[P1]];
 		p1->SetLabel("P1");
 		p1->Init();
 
-		p2 = p2Characters[GM->P_SelectedCharacterMap()[P2]];
+		p2 = p2CharacterData[GM->P_SelectedCharacterMap()[P2]];
 		p2->SetLabel("P2");
 		p2->Init();
 
@@ -101,7 +100,7 @@ void PlayerManager::Init()
 	}
 	else // PVE mode
 	{
-		p1 = p1Characters[GM->P_SelectedCharacterMap()[P1]];
+		p1 = p1CharacterData[GM->P_SelectedCharacterMap()[P1]];
 		p1->SetLabel("P1");
 		p1->Init();
 
@@ -135,7 +134,7 @@ void PlayerManager::Update()
 
 	HandlePlayerCollisions();
 
-	CheckGameOver();
+	CheckAndHandleGameOver();
 }
 
 void PlayerManager::Render()
@@ -159,7 +158,7 @@ void PlayerManager::SetKeyCode(const GameMode& gameMode)
 }
 
 
-void PlayerManager::SetGameOver()
+void PlayerManager::HandlePlayersGameOver()
 {
 	for (Character* player : wholePlayers)
 		player->HandleGameOver();
@@ -193,7 +192,7 @@ void PlayerManager::HandlePlayerCollisions()
 	}
 }
 
-void PlayerManager::CheckGameOver()
+void PlayerManager::CheckAndHandleGameOver()
 {
 	if (gameOverChecked) return;
 
@@ -214,31 +213,21 @@ void PlayerManager::CheckGameOver()
 		{
 			deathTimer += Time::Delta();
 			
-			if (deathTimer >= DRAW_CHECK_TIME) // 한 플레이어가 죽은 후 0.4초가 넘어가면 승패를 결정지을 시간
+			if (deathTimer >= DRAW_CHECK_TIME) // 한 플레이어가 죽은 후 DEATH_CEHCK_TIME을 넘어가면 승패를 결정지을 시간
 			{
 				deathTimerTriggered = false;
 				deathTimer = 0.f;
 
-				if (p1->GetCharacterState() == C_DEAD && p2->GetCharacterState() == C_DEAD)
-				{
-					// draw
+				if (p1->GetCharacterState() == C_DEAD && p2->GetCharacterState() == C_DEAD) // draw
 					GM->GetGameScene()->SetGameEnd(DRAW);
-				}
-				else if (p1->GetCharacterState() == C_DEAD)
-				{
-					// p2 win
+				else if (p1->GetCharacterState() == C_DEAD)									// p2 win
 					GM->GetGameScene()->SetGameEnd(P2_WIN);
-				}
-				else if (p2->GetCharacterState() == C_DEAD)
-				{
-					// p1 win
+				else if (p2->GetCharacterState() == C_DEAD)									// p1 win
 					GM->GetGameScene()->SetGameEnd(P1_WIN);
-				}
 
 				gameOverChecked = true;
 			}
 		}
-
 		break;
 	case PVE: // 플레이어가 죽은 상황, 컴퓨터가 모두 죽은 상황
 	{
@@ -262,24 +251,15 @@ void PlayerManager::CheckGameOver()
 				deathTimerTriggered = false;
 				deathTimer = 0.f;
 
-				if (p1->GetCharacterState() == C_DEAD && comAllDead)
-				{
-					// Draw
+				if (p1->GetCharacterState() == C_DEAD && comAllDead)	// Draw
 					GM->GetGameScene()->SetGameEnd(DRAW);
-				}
-				else if (p1->GetCharacterState() == C_DEAD)
-				{
-					// Com win
+				else if (p1->GetCharacterState() == C_DEAD)				// Com win
 					GM->GetGameScene()->SetGameEnd(ENEMY_WIN);
-				}
-				else if (comAllDead)
-				{
+				else if (comAllDead)									// Player Win
 					GM->GetGameScene()->SetGameEnd(P1_WIN);
-				}
 
 				gameOverChecked = true;
 			}
-
 		}
 	}
 		break;

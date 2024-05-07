@@ -100,7 +100,7 @@ void GameScene::SetGameEnd(const GameOverResult& result)
 
 	uiManager->StartRenderGameOver(result);
 
-	playerManager->SetGameOver();
+	playerManager->HandlePlayersGameOver();
 
 
 	if (result == P1_WIN || result == P2_WIN)

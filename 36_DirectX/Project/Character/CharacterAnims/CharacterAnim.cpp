@@ -2,15 +2,15 @@
 #include "CharacterAnim.h"
 
 
-CharacterAnim::CharacterAnim(ColliderRect* parent)
-	:parent(parent)
+CharacterAnim::CharacterAnim(ColliderRect* parentBody)
+	:parentBody(parentBody)
 {
 	vertexShader = new VertexShader(L"VertexTexture");
 	pixelShader = new PixelShader(L"PixelTexture");
 
 	worldBuffer = new MatrixBuffer();
 
-	this->SetParent(parent);
+	this->SetParent(parentBody);
 
 	curFaceDir = DIR_DOWN;
 
@@ -57,7 +57,7 @@ void CharacterAnim::Init()
 	captured_yUpdateTime = 0.f;
 	captured_ySpeed = 10.f;
 
-	ridableReturningToIdle = false;
+	isRidableReturningToIdle = false;
 
 	jump_UpdateTime = 0.f;
 	jump_ySpeed = 150.f;
@@ -84,7 +84,7 @@ void CharacterAnim::Update()
 		captured_ySpeed = 10.f;
 	}
 
-	if (ridableReturningToIdle)
+	if (isRidableReturningToIdle)
 	{
 		// 처음에는 점프했다가 도로 제자리로 와야 함
 		jump_UpdateTime += Time::Delta();
@@ -98,12 +98,12 @@ void CharacterAnim::Update()
 
 		translation.y += jump_ySpeed * Time::Delta();
 
-		if (translation.y < (curAction->Size().y - parent->LocalSize().y) / 2) // 점프 동작 끝 (착지함)
+		if (translation.y < (curAction->Size().y - parentBody->LocalSize().y) / 2) // 점프 동작 끝 (착지함)
 		{
 			jump_UpdateTime = 0.f;
 			jump_ySpeed = 150.f;
 
-			ridableReturningToIdle = false;
+			isRidableReturningToIdle = false;
 
 			ReturnIdleEndEvent();
 		}
@@ -113,7 +113,7 @@ void CharacterAnim::Update()
 	
 
 	// floor을 parent floor에 맞추는 작업
-	translation.y = (curAction->Size().y - parent->LocalSize().y) / 2;
+	translation.y = (curAction->Size().y - parentBody->LocalSize().y) / 2;
 }
 
 void CharacterAnim::Render()
@@ -143,79 +143,13 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 
 	switch (cState)
 	{
-	case C_IDLE:
-	{
-		int frameIdx = GetDirRelativeFrameIdx(velocity);
-
-		SetCurFaceDir(velocity);
-		
-		if (frameIdx == -1)
-		{
-			if (ownerPrevState != C_IDLE) curAction = idleActions[A_DOWN];
-			curAction->Stop(0);
-		}
-		else
-		{
-			curAction = idleActions[(CharacterAnimDir)frameIdx];
-			curAction->Play();
-		}
-	}
+	case C_IDLE:		UpdateDirectionActions(cState, velocity, idleActions);
 		break;
-	case C_SPACECRAFT:  
-	{
-
-		int frameIdx = GetDirRelativeFrameIdx(velocity);
-
-		SetCurFaceDir(velocity);
-
-		if (frameIdx == -1)
-		{
-			if (ownerPrevState != C_SPACECRAFT) curAction = spaceActions[(A_DOWN)];
-		}
-		else
-		{
-			curAction = spaceActions[(CharacterAnimDir)frameIdx];
-			curAction->Play();
-		}
-	}
+	case C_SPACECRAFT:	UpdateDirectionActions(cState, velocity, spaceActions);
 		break;
-	case C_OWL:
-	{
-		int frameIdx = GetDirRelativeFrameIdx(velocity);
-
-		SetCurFaceDir(velocity);
-
-		if (frameIdx == -1)
-		{
-			if (ownerPrevState != C_OWL) curAction = owlActions[(A_DOWN)];
-			curAction->Stop(0);
-		}
-		else
-		{
-			curAction = owlActions[(CharacterAnimDir)frameIdx];
-			curAction->Play();
-		}
-	}
+	case C_OWL:			UpdateDirectionActions(cState, velocity, owlActions);
 		break;
-	case C_TURTLE:
-	{
-
-		int frameIdx = GetDirRelativeFrameIdx(velocity);
-
-		SetCurFaceDir(velocity);
-
-		if (frameIdx == -1)
-		{
-			if (ownerPrevState != C_TURTLE) curAction = turtleActions[(A_DOWN)];
-			curAction->Stop(0);
-
-		}
-		else
-		{
-			curAction = turtleActions[(CharacterAnimDir)frameIdx];
-			curAction->Play();
-		}
-	}
+	case C_TURTLE:		UpdateDirectionActions(cState, velocity, turtleActions);
 		break;
 	case C_CAPTURED:
 
@@ -237,29 +171,45 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		}
 		else //ownerPrevState was C_RIDABLE_S
 		{
-			ridableReturningToIdle = true;
+			isRidableReturningToIdle = true;
 			curAction = idleActions[A_DOWN];
 			curAction->Stop(0);
 			return;
 		}
 
 		break;
-	case C_DEAD:
-
-		curAction = bubbleActions[A_BUBBLE_DEAD];
+	case C_DEAD: case C_WIN:
+		curAction = (cState == C_DEAD) ? bubbleActions[A_BUBBLE_DEAD] : winAction;
 		curAction->Play();
-
-		break;
-	case C_WIN:
-		curAction = winAction;
-		curAction->Play();
-		break;
 	default:
 		break;
 	}
 
 	ownerPrevState = cState;
 	ownerPrevVelocity = velocity;
+}
+
+void CharacterAnim::UpdateDirectionActions(const CharacterState& cState, const Vector2& velocity, map<CharacterAnimDir, Animation*>& dirActions)
+{
+	switch (cState)
+	{
+	case C_SPAWN: case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: case C_WIN: return;
+	}
+
+	int animDirection = GetCurFaceDirByVelocity(velocity);
+	
+	SetCurFaceDir(velocity);
+
+	if (animDirection == -1)
+	{
+		if (ownerPrevState != cState) curAction = dirActions[A_DOWN];
+		curAction->Stop(0);
+	}
+	else
+	{
+		curAction = dirActions[(CharacterAnimDir)animDirection];
+		curAction->Play();
+	}
 }
 
 void CharacterAnim::Debug(const string& label)
@@ -276,7 +226,7 @@ void CharacterAnim::SetReturnIdleEndEvent(function<void()> E)
 
 
 /// <returns> 속도가 0이면 -1 return </returns>
-int CharacterAnim::GetDirRelativeFrameIdx(const Vector2& velocity)
+int CharacterAnim::GetCurFaceDirByVelocity(const Vector2& velocity)
 {
 	if (velocity.Length() == 0.f)	return -1;
 	else if (velocity.x < 0.f)		return 0; // LEFT

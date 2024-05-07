@@ -18,17 +18,17 @@ enum CharacterType
 /* 캐릭터의 MainState */
 enum CharacterState
 {
-	C_SPAWN,
+	C_SPAWN,		// 스폰 상태
 
-	C_IDLE,
+	C_IDLE,			// 기본 Idle 상태
 
-	C_SPACECRAFT,
-	C_OWL,
-	C_TURTLE,
+	C_SPACECRAFT,	// 우주선 상태
+	C_OWL,			// 부엉이 상태
+	C_TURTLE,		// 거북이 상태
 
-	C_CAPTURED,
+	C_CAPTURED,		// 물풍선에 갇힌 상태
 
-	C_RETURN_IDLE,
+	C_RETURN_IDLE,	// 물풍선 상태 또는 탈 것에서 내려서 Idle로 돌아가고 있는 상태
 
 	C_DEAD,
 

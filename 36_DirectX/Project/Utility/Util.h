@@ -2,6 +2,7 @@
 
 extern function<int()> randGenerator;
 
+/* 4 way movement basic directions */
 enum Direction
 {
 	DIR_UP,
@@ -145,7 +146,6 @@ namespace Util
 		//return start + (end - start) * factor;
 	}
 	
-	// TODO : Init float& parameters
 	static void PlayFloatingEffect(float& targetSrc, float& timeChecker, float& effectSpeed, const float& UPDATE_TICK)
 	{
 		timeChecker += Time::Delta();
