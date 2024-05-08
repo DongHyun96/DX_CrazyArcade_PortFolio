@@ -45,7 +45,7 @@ void Item::Update()
 		{
 			body->scale = { 1, 1 };
 
-			Util::PlayFloatingEffect(texObj->translation.y, spawned_timeChecker, spawned_ySpeed, SPAWNED_Y_UPDATE_TICK);
+			Util::PlayFloatingEffect(texObj->translation.y, floatingTime, floatingYSpeed, FLOATING_Y_UPDATE_TICK);
 			
 			break;
 		}
@@ -107,6 +107,7 @@ void Item::Spawn(const Vector2& spawnPos)
 
 void Item::Respawn(const Vector2& src, const Vector2& dst)
 {
+	throw std::logic_error("From Item::Resapawn - Not implemented.");
 }
 
 void Item::SetItemState(const ItemState& itemState)
@@ -118,8 +119,8 @@ void Item::SetItemState(const ItemState& itemState)
 
 		texObj->translation = { 0, 0 };
 
-		spawned_timeChecker = 0.f;
-		spawned_ySpeed = 50.f;
+		floatingTime = 0.f;
+		floatingYSpeed = 50.f;
 	}
 
 	// prevItemState

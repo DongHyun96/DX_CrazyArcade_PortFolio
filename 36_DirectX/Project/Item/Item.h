@@ -39,26 +39,41 @@ public:
 	Item(const ItemName& itemName);
 	virtual ~Item();
 
-	// TODO : 상황에 맞게끔 자식 클래스에서 Update Render 추가 처리할 것임
 	void Update(); 
-	void Render(); // EARNED의 경우 자식클래스에서 다르게 처리 -> Hook Method
+	void Render(); 
 
+	/// <summary>
+	/// 아이템 효과 사용하기
+	/// </summary>
+	/// <param name="itemUser"> : 아이템을 사용하는 캐릭터 </param>
+	/// <returns> : 아이템 효과가 발동되었다면 return true </returns>
 	virtual bool UseItem(Character* itemUser);
 
-public:
+public: /* Getters and setters */
 
-	ColliderRect*	GetBody()		const { return body; }
-	ItemState		GetItemState()	const { return itemState; }
+	ColliderRect*	GetBody() const { return body; }
+	ItemState		GetItemState() const { return itemState; }
 
-	bool			GetIsActive()	const { return isActive; }
+	bool			GetIsActive() const { return isActive; }
 
 	void			SetActive(const bool& isActive) { this->isActive = isActive; }
+
+	static void		SetSpawnSoundPlayed(const bool& played) { spawnSoundPlayed = played; }
+
+public:
 	
+	/// <summary>
+	/// 스폰 시키기
+	/// </summary>
+	/// <param name="spawnPos"> : Spawn position </param>
 	void Spawn(const Vector2& spawnPos);
+
+	/// <summary>
+	/// 특정 캐릭터가 죽었을 때, 해당 캐릭터가 획득했던 아이템 리스폰 시키기 | Not implemented
+	/// </summary>
+	/// <param name="src"> : 리스폰 시작점(캐릭터가 죽은 위치)</param>
+	/// <param name="dst"> : 리스폰 끝점 </param>
 	void Respawn(const Vector2& src, const Vector2& dst);
-
-	static void SetSpawnSoundPlayed(const bool& played) { spawnSoundPlayed = played; }
-
 
 protected:
 	
@@ -78,23 +93,33 @@ private:
 
 protected:
 
-	ItemName		itemName{};
+	ItemName itemName{};
 
-	ColliderRect*	body{};
-	Object*			texObj{}; // Body의 transform을 따라감
+protected:
 
-	ItemStrategy* itemStrategy{};
-	
-	bool isActive{};
+	ColliderRect*	body{};			// Body collider
+	Object*			texObj{};		// Body의 transform을 따라감
+
+	bool			isActive{};
+
+private:
+
+	ItemStrategy* itemStrategy{};	// This item's strategy
 
 private:
 
-	ItemState itemState{ HIDDEN }; // c# 프로퍼티처럼 setter만 자식 클래스에서 사용하도록 할 것임
+	ItemState itemState = HIDDEN;
 
-	float spawned_timeChecker{};
-	float spawned_ySpeed{ 25.f };
-	const float SPAWNED_Y_UPDATE_TICK = 1.f;
+private: /* 스폰된 아이템 floating effect 관련 */
+
+	float		floatingTime{};
+	float		floatingYSpeed			= 25.f;
+	const float FLOATING_Y_UPDATE_TICK	= 1.f;
 
 private:
+	/*
+	Update 한 tick에 동시에 아이템을 먹었을 때, 아이템 획득 사운드 이펙트의 볼륨이 너무 큼
+	아이템 획득 sfx는 Update tick 내에서 한 번만 처리를 할 예정
+	*/
 	static bool spawnSoundPlayed;
 };
