@@ -4,3 +4,8 @@ Character
 GameMap
 Balloon
 Item
+Manager
+Object/Collision (Object)
+
+Scene할 차례
+

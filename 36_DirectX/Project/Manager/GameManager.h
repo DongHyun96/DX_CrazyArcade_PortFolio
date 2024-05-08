@@ -101,73 +101,83 @@ public: /* Getters and setters */
 
 	map<PlayerType, CharacterType>&		P_SelectedCharacterMap() { return pSelectedCharacterMap; }
 
+	bool								IsEditMode() const { return editMode; }
+
+	float								GetMapL() const { return mapL; }
+	float								GetMapR() const { return mapR; }
+	float								GetMapT() const { return mapT; }
+	float								GetMapB() const { return mapB; }
+
+	GameMap								GetCurMapType() const { return curMap; }
+	void								SetCurMapType(const GameMap& type) { this->curMap = type; }
+
 public:
-
-	bool IsEditMode() const { return editMode; }
-
-	float GetMapL() const { return mapL; }
-	float GetMapR() const { return mapR; }
-	float GetMapT() const { return mapT; }
-	float GetMapB() const { return mapB; }
 
 	/// <param name="point"> : Use Global Position</param>
 	Vector2 GetCollidedMapCellPos(const Vector2& point);
 
+	/// <param name="point"> : Use Global Position</param>
 	Util::Coord GetCollidedMapCellCoord(const Vector2& point);
 	
-	// 정확히 떨어지는 플레이어 좌표가 아닌 주변 근사치를 구해주는 함수
-	Util::Coord GetApproximatedPlayerCoord(class Character* character);
 
-public: // SelectedMap 관련 (start 위치정보 / 로드할 타일, 블록 bin 파일
-	
-	map<GameMap, wstring> tileBinFile{};
-	map<GameMap, wstring> blockBinFile{};
-	map<GameMap, string> mapBGM{};
+public: /* 각 GameMap에 따른 binary data들 & BGM들 정보 */
 
-	GameMap GetCurMapType() const { return curMap; }
-	void SetCurMapType(const GameMap& type) { this->curMap = type; }
+	map<GameMap, wstring>	tileBinFile{};
+	map<GameMap, wstring>	blockBinFile{};
+	map<GameMap, string>	mapBGM{};
+
+private: /* 현재 고른 GameMode, Edit mode, Game Map, Character, GameStatus 관련 */
+
+	GameMode						gameMode{};					// CurGameMode
+	GameMap							curMap{};					// Cur selected gameMap
+	map<PlayerType, CharacterType>	pSelectedCharacterMap{};	// P1, P2가 현재 고른 CharacterType
+	bool							editMode{};					// If it is edit mode
+	GameStatus						gameStatus{};				// CurScene이 GameScene일 경우 사용할 현재 게임 진행 상황
+
+private: /* Board 및 GameField 관련 */
+
+	/* 
+	실질적인 Game Map Field는 전체 Window size로 잡히지 않고 Game UI Panel 안에 더 작은 크기로 잡힘
+	Game에서 사용할 Game Object들 자체의 Transform은 Window size에 맞게끔 전체 크기로 배치한 뒤, 최상위 Parent Transform을
+	해당 변수로 잡을 것임 -> Game field에 GameObject 배치하기가 더 용이
+	*/
+	Transform*		gameFieldTransform{};
+
+	float			mapL{};	// Map Left boundary limit
+	float			mapR{};	// Map Right boundary limit
+	float			mapT{};	// Map Top boundary limit
+	float			mapB{};	// Map Bottom boundary limit
+
+	/*
+	Game Map에 배치된 각 cell들의 colliders
+	Game Object들의 cell coordinate를 파악하기 위한 용도로 사용
+	*/
+	ColliderRect*	mapCellColliders[MAP_ROW][MAP_COL]{};
 
 private:
-
-	GameMode gameMode{PVP};
-	GameMap curMap{ VILLAGE };
-	
-	map<PlayerType, CharacterType> pSelectedCharacterMap{};
-
-
-
-private: // Board 및 GameField 관련
-
-	Transform* gameFieldTransform{};
-	
-	bool editMode = false;
-
-	float mapL{};
-	float mapR{};
-	float mapT{};
-	float mapB{};
-
-	ColliderRect* mapCells[MAP_ROW][MAP_COL]{};
-
-private: // 게임 오브젝트 관련 / 실질적인 Update Render는 GameScene에서 담당
-
+	/* 현재 플레이 중인 GameScene -> GameScene으로 scene 전환이 이루어질 때 할당할 예정 */
 	GameScene* gameScene{};
 
-	GameUIManager* gameUIManager{};
+private: /* InGame 오브젝트 관련, 실질적인 Update, Render는 GameScene에서 담당 */
 
-	PlayerManager* playerManager{};
+	GameUIManager*		gameUIManager{};	// GameSceneUIManager
 
-	// 타일매니저와 BlockManager는 늘상 바뀜 (GameScene에서 생성 해제 담당), BlockManager만 GameManager로 set해서 전역으로 뿌릴 것임
-	BlockManager* blockManager{}; 
+	PlayerManager*		playerManager{};
 
-	BalloonManager* balloonManager{};
+	/*
+	TileManager와 BlockManager는 늘상 바뀜 (GameScene에서 생성 해제 담당)
+	BlockManager만 GameManager로 set해서 전역적으로 뿌릴 것임
+	*/
+	BlockManager*		blockManager{}; 
 
-	StreamManager* streamManager{};
+	BalloonManager*		balloonManager{};
 
-	ItemManager* itemManager{};
+	StreamManager*		streamManager{};
 
-	DartManager* dartManager{};
+	ItemManager*		itemManager{};
 
-	GameStatus gameStatus{ START };
+	DartManager*		dartManager{};
+
+	
 
 };

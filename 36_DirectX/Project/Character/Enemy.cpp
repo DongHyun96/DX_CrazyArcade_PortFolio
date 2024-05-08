@@ -207,7 +207,7 @@ void Enemy::UpdateState()
 	case Enemy::NONE: // None일 때에는 바로 상태 변환 시도
 	{
 		// 플레이어의 approximate 위치로 path Update 시도
-		Util::Coord approximate_player_coord = GM->GetApproximatedPlayerCoord(PM->GetP1());
+		Util::Coord approximate_player_coord = PM->GetApproximatedPlayerCoord(PM->GetP1());
 		UpdatePath(approximate_player_coord);
 
 		if (path.empty()) // 플레이어까지의 도달경로가 없을 때

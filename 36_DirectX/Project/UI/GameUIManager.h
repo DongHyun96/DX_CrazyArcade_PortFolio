@@ -44,7 +44,6 @@ private:
 	Object* mainUI{};
 	Object* itemUI{};
 
-
 private:
 
 	bool hasGameStarted{};

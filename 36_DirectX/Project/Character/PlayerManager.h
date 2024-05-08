@@ -24,6 +24,7 @@ public: /* Getters */
 	Character*			GetP2() const { return p2; }
 	vector<Character*>& GetComEnemies() { return comEnemies; }
 
+	Util::Coord			GetApproximatedPlayerCoord(Character* character); // 정확히 떨어지는 플레이어 좌표가 아닌 주변 근사치를 구해주는 함수
 public:
 
 	/* GameOver시 Player들의 GameOver처리 */
