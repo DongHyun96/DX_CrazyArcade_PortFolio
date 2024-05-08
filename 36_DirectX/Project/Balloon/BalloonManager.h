@@ -1,6 +1,6 @@
 #pragma once
 
-
+/* CONCRETE CLASS */
 class BalloonManager
 {
 public:

@@ -76,20 +76,43 @@ public:
 	void Respawn(const Vector2& src, const Vector2& dst);
 
 protected:
-	
-	// State 바뀔때의 시작점으로 동작
-	void SetItemState(const ItemState& itemState); // EARNED의 경우 자식클래스에서 서로 다르게 처리 -> Hook Method
+
+	/// <summary>
+	/// State 바뀔때의 시작점으로 동작 | EARNED로 setting되는 경우 자식클래스에서 서로 다르게 처리하는 Hook Method를 걸어둠
+	/// </summary>
+	/// <param name="itemState"> : Next itemState </param>
+	void SetItemState(const ItemState& itemState); 
 
 protected:
 
-	virtual void OnColliderPointEnter(ColliderHolder* owner) = 0; // 캐릭터와 충돌했을 때 이용
+	/// <summary>
+	/// 캐릭터와 충돌했을 때 이용
+	/// </summary>
+	/// <param name="owner"> : Point(position) owner </param>
+	virtual void OnColliderPointEnter(ColliderHolder* owner) = 0;
 
-	virtual void EarnedUpdateHook() = 0;
+protected:
+
+	/* 
+	Render()함수 내의 itemState가 EARNED 상태일 때의 Template hook method
+	itemState가 EARNED 상태일 때 Immediate item과 Consumable item의 RenderHook 부분의 구현부가 다름
+	*/
 	virtual void EarnedRenderHook() = 0;
+
+	/*
+	SetItemState 함수 내의 Template hook method
+	Setter로 setting시 EARNED state로 setting할 때 처리부분이 자식에 따라 다름
+	*/
 	virtual void EarnedSetterHook() = 0;
 
 private:
-	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner); // 물줄기 등과 충돌했을 때 이용
+
+	/// <summary>
+	/// Collision call back function, 물줄기 등과 충돌했을 때 이동
+	/// </summary>
+	/// <param name="targetCollider"> : Entered collider </param>
+	/// <param name="owner"> : Entered collider owner </param>
+	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner);
 
 protected:
 

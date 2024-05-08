@@ -55,11 +55,11 @@ void Item::Update()
 	}
 		break;
 	case EARNED:
-		EarnedUpdateHook();
 		break;
 	default:
 		break;
 	}
+
 	body->UpdateZDepthToY();
 	body->Update();
 	texObj->Update();
@@ -73,12 +73,8 @@ void Item::Render()
 
 	switch (itemState)
 	{
-	case HIDDEN:
-		break;
-	case SPAWNED:
-		break;
-	case EARNED:
-		EarnedRenderHook(); // Hook Method  (자식에서 결정)
+	case HIDDEN: case SPAWNED:	break;
+	case EARNED:				EarnedRenderHook(); // Hook Method  (자식에서 결정)
 		break;
 	default:
 		break;

@@ -31,6 +31,7 @@ enum GameMap
 	MAP_MAX
 };
 
+/* 현재 Scene이 GameScene일 때의 Game status */
 enum GameStatus
 {
 	START,
@@ -47,6 +48,7 @@ enum PlayerType;
 namespace Util { struct Coord; }
 
 
+/* CONCRETE CLASS | SINGLETON */
 class GameManager : public Singleton<GameManager>
 {
 	friend class Singleton;
@@ -58,43 +60,46 @@ private:
 
 public:
 
-	void CreateGameObjects(); // MainGame 생성자에서 call (GM 생성자에서 부르면 Singleton 생성시기 때문에 오류남)
+	void Update();
 
-	// GameScene 끝난 이후 (또는 시작 전) 한 번 처리
+public:
+
+	/* MainGame 생성자에서 call (GM 생성자에서 부르면 Singleton 생성시기 때문에 오류남) */
+	void CreateGameObjects();
+
+	/* GameScene 끝난 시점(GameOver이후)이나 GameScene 시작 전 한 번 처리 */ 
 	void InitGame();
 
 
-public:
+public: /* Getters and setters */
+
+	void								SetGameMode(const GameMode& gameMode) { this->gameMode = gameMode; }
+	GameMode							GetGameMode() const { return gameMode; }
 	
-	void Update();
+	void								SetGameScene(GameScene* gameScene) { this->gameScene = gameScene; }
+	GameScene*							GetGameScene() const { return gameScene; }
 
-	void SetGameMode(const GameMode& gameMode) { this->gameMode = gameMode; }
-	GameMode GetGameMode() const { return gameMode; }
+	PlayerManager*						GetPlayerManager() const { return playerManager; }
 	
-	void SetGameScene(GameScene* gameScene) { this->gameScene = gameScene; }
-	GameScene* GetGameScene() const { return gameScene; }
+	BalloonManager*						GetBalloonManager() const { return balloonManager; }
 
-	PlayerManager* GetPlayerManager() const { return playerManager; }
-	
-	BalloonManager* GetBalloonManager() const { return balloonManager; }
+	void								SetBlockManager(BlockManager* blockManager) { this->blockManager = blockManager; }
+	BlockManager*						GetBlockManager() const { return blockManager; }
 
-	void SetBlockManager(BlockManager* blockManager) { this->blockManager = blockManager; }
-	BlockManager* GetBlockManager() const { return blockManager; }
+	StreamManager*						GetStreamManager() const { return streamManager; }
 
-	StreamManager* GetStreamManager() const { return streamManager; }
+	ItemManager*						GetItemManager() const { return itemManager; }
 
-	ItemManager* GetItemManager() const { return itemManager; }
+	DartManager*						GetDartManager() const { return dartManager; }
 
-	DartManager* GetDartManager() const { return dartManager; }
+	GameUIManager*						GetGameUIManager() const { return gameUIManager; }
 
-	GameUIManager* GetGameUIManager() const { return gameUIManager; }
+	GameStatus							GetGameStatus() const { return gameStatus; }
+	void								SetGameStatus(const GameStatus& gameStatus) { this->gameStatus = gameStatus; }
 
-	GameStatus GetGameStatus() const { return gameStatus; }
-	void SetGameStatus(const GameStatus& gameStatus) { this->gameStatus = gameStatus; }
+	Transform*							GetGameFieldTransform() const { return gameFieldTransform; }
 
-	Transform* GetGameFieldTransform() const { return gameFieldTransform; }
-
-	map<PlayerType, CharacterType>& P_SelectedCharacterMap() { return pSelectedCharacterMap; }
+	map<PlayerType, CharacterType>&		P_SelectedCharacterMap() { return pSelectedCharacterMap; }
 
 public:
 
@@ -105,8 +110,9 @@ public:
 	float GetMapT() const { return mapT; }
 	float GetMapB() const { return mapB; }
 
-	/// <param name="point"> --> Use Global Position</param>
+	/// <param name="point"> : Use Global Position</param>
 	Vector2 GetCollidedMapCellPos(const Vector2& point);
+
 	Util::Coord GetCollidedMapCellCoord(const Vector2& point);
 	
 	// 정확히 떨어지는 플레이어 좌표가 아닌 주변 근사치를 구해주는 함수

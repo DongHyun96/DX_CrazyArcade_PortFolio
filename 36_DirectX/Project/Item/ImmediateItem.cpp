@@ -39,7 +39,6 @@ void ImmediateItem::OnColliderPointEnter(ColliderHolder* owner)
 	}
 }
 
-void ImmediateItem::EarnedUpdateHook() {}
 void ImmediateItem::EarnedRenderHook() {}
 
 void ImmediateItem::EarnedSetterHook()

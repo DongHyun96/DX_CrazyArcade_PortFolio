@@ -79,11 +79,6 @@ void ConsumableItem::OnColliderPointEnter(ColliderHolder* owner)
 	}
 }
 
-void ConsumableItem::EarnedUpdateHook()
-{
-	// body와 texture는 부모 클래스에서 렌더링 되고(위치가 잡힌채로), 남은 아이템 수 폰트를 띄워야 함
-}
-
 void ConsumableItem::EarnedRenderHook()
 {
 	// body와 texture는 부모 클래스에서 렌더링 되고(위치가 잡힌채로), 남은 아이템 수 폰트를 띄워야 함
