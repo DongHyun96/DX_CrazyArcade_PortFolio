@@ -1,4 +1,5 @@
 #pragma once
+/* CONCRETE CLASS */
 class MaridAnim : public CharacterAnim
 {
 public:

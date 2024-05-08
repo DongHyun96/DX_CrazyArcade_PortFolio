@@ -1,5 +1,5 @@
 #pragma once
-
+/* CONCRETE CLASS */
 class TileManager
 {
 public:
@@ -12,7 +12,7 @@ public:
 private:
 
 	/// <summary>
-	/// 새로운 TileManager 생성 시, 맵에 맞는 Tile을 Load하면서 Tile을 생성할 때 사용
+	/// 새로운 TileManager 생성 시, GameManager의 curMapType에 따른 미리 저장된 Tile들을 Load하면서 Tile을 생성할 때 사용
 	/// </summary>
 	/// <param name="info"> : 해당 자리 Tile info </param>
 	/// <param name="boardX"> : 생성할 자리의 cell pos X </param>

@@ -4,7 +4,7 @@
 
 Dart::Dart()
 {
-	body	= new ColliderRect(CELL_WORLD_SIZE);
+	body = new ColliderRect(CELL_WORLD_SIZE);
 	body->scale = { 0.4f, 0.3f };
 
 	for (UINT i = 0; i < 4; i++)

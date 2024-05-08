@@ -54,6 +54,7 @@ static struct CommonSpeedLv
 	static const UINT TURTLE_SPEED_LV		= 2;
 };
 
+/* Abstract class */
 class Character : public ColliderHolder
 {
 public:

@@ -1,27 +1,32 @@
 #pragma once
 
-class ItemStrategy // Interface
+/* INTERFACE */
+class ItemStrategy
 {
 public:
 	ItemStrategy();
 	virtual ~ItemStrategy() = default;
 
+	/// <summary>
+	/// Strategy pattern's pure-virtual method
+	/// </summary>
+	/// <param name="itemUser"> : 아이템을 사용한 character </param>
+	/// <returns> : 아이템 사용이 정상적으로 이루어졌다면 return true </returns>
 	virtual bool UseStrategy(class Character* itemUser) = 0;
 	
 };
 
+/* CONCRETE CLASS */
 class RollerStrategy : public ItemStrategy
 {
 public:
 	RollerStrategy();
 	~RollerStrategy();
 
-	// ItemStrategy을(를) 통해 상속됨
 	virtual bool UseStrategy(Character* itemUser) override;
-
 };
 
-
+/* CONCRETE CLASS */
 class RedDevilStrategy :public ItemStrategy
 {
 public:
@@ -32,6 +37,7 @@ public:
 
 };
 
+/* CONCRETE CLASS */
 class FluidStrategy : public ItemStrategy
 {
 public:
@@ -41,6 +47,7 @@ public:
 	virtual bool UseStrategy(Character* itemUser) override;
 };
 
+/* CONCRETE CLASS */
 class FluidUltraStrategy : public ItemStrategy
 {
 public:
@@ -51,6 +58,7 @@ public:
 
 };
 
+/* CONCRETE CLASS */
 class BubbleStrategy : public ItemStrategy
 {
 public:
@@ -60,6 +68,7 @@ public:
 	virtual bool UseStrategy(Character* itemUser) override;
 };
 
+/* CONCRETE CLASS */
 class SpaceStrategy : public ItemStrategy
 {
 public:
@@ -70,6 +79,7 @@ public:
 
 };
 
+/* CONCRETE CLASS */
 class OwlStrategy : public ItemStrategy
 {
 public:
@@ -80,6 +90,7 @@ public:
 
 };
 
+/* CONCRETE CLASS */
 class TurtleStrategy : public ItemStrategy
 {
 public:
@@ -90,7 +101,7 @@ public:
 
 };
 
-
+/* CONCRETE CLASS */
 class NeedleStrategy : public ItemStrategy
 {
 public:
@@ -101,6 +112,7 @@ public:
 
 };
 
+/* CONCRETE CLASS */
 class DartStrategy : public ItemStrategy
 {
 public:
@@ -111,6 +123,7 @@ public:
 
 };
 
+/* CONCRETE CLASS */
 class TimerBalloonStrategy : public ItemStrategy
 {
 public:

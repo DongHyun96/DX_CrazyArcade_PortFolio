@@ -54,7 +54,7 @@ void Balloon::Init()
 
 	explodeSoundPlayed = false;
 
-	explodeTime = 0.f;
+	explosionTimer = 0.f;
 }
 
 void Balloon::Update()
@@ -118,7 +118,7 @@ void Balloon::Explode()
 	Stream::AddStreamDanagerZone(spawnCoord, streamLv);
 
 
-	explodeTime = 0.f;
+	explosionTimer = 0.f;
 
 	for (auto it = activeBalloonPositions.begin(); it != activeBalloonPositions.end(); it++)
 	{
@@ -171,7 +171,7 @@ void Balloon::Spawn(const Vector2& spawnPos) // private
 	
 	visible = true;
 	isActive = true;
-	explodeTime = 0.f;
+	explosionTimer = 0.f;
 
 	for (Character* p : PM->GetWholePlayers())
 	{
@@ -183,12 +183,12 @@ void Balloon::Spawn(const Vector2& spawnPos) // private
 
 void Balloon::HandleExplode()
 {
-	explodeTime += Time::Delta();
+	explosionTimer += Time::Delta();
 
-	if (explodeTime < EXPLODE_TIME_LIMIT)
+	if (explosionTimer < EXPLODE_TIME_LIMIT)
 		return;
 
-	explodeTime = 0.f;
+	explosionTimer = 0.f;
 
 	Explode();
 }
@@ -225,8 +225,8 @@ void Balloon::AddPreDangerZone(const Util::Coord& spawnCoord, const UINT& stream
 
 void Balloon::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner)
 {
-	if (!isActive)
-		return;
+	if (!isActive) return;
+		
 
 	Character* c = dynamic_cast<Character*>(owner);
 

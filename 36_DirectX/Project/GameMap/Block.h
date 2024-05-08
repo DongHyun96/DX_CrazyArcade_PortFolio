@@ -83,7 +83,9 @@ struct BlockInfo
 	Vector2			texWorldSize{ CELL_WORLD_SIZE };	// World에 배치될 size 지정
 };
 
-/* Block class */
+/*
+CONCRETE CLASS
+*/
 class Block : public ColliderHolder
 {
 public:

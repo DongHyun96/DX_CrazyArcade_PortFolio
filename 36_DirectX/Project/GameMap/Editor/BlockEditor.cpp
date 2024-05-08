@@ -5,7 +5,7 @@
 BlockEditor::BlockEditor(MapEditor* mapEditor)
 	:mapEditor(mapEditor)
 {
-	InitBlockMaps();
+	InitBlockButtons();
 
 	Load();
 }
@@ -56,7 +56,7 @@ void BlockEditor::Render()
 		for (auto& c : blockMapColliders)	c->Render();
 }
 
-void BlockEditor::InitBlockMaps()
+void BlockEditor::InitBlockButtons()
 {
 	/*for (UINT i = 0; i < 7; i++)
 	{
@@ -348,7 +348,7 @@ void BlockEditor::SetBlockToWorld()
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			if (mapEditor->cells[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
+			if (mapEditor->cellColliders[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
 			{
 				if (KEY_DOWN(VK_LBUTTON))
 				{

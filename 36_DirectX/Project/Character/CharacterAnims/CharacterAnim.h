@@ -1,9 +1,10 @@
 #pragma once
 
-/// <summary>
-/// Owned by Character class
-/// Character의 실질적인 Animation 출력물 담당
-/// </summary>
+/*
+CONCRETE CLASS
+Owned by Character class
+Character의 실질적인 Animation 출력물 담당
+*/
 class CharacterAnim : public Transform
 {
 protected:

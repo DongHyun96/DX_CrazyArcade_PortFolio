@@ -1,21 +1,20 @@
 #pragma once
 
-/*
-TODO - 아이템 사용 전략 패턴 만들기
-*/
 
-// ImmediateItem (power-ups, Ridable)
+// ImmediateItem  (power-ups, Ridable)
 // ConsumableItem (니들, 점프팩, 타이머 폭탄, 다트 등)
 
+/* 아이템의 상태 */
 enum ItemState
 {
 	HIDDEN,		// 아직 block 뒤에 있을 때
 	SPAWNED,	// 게임 필드 위에 spawn된 상태
 	EARNED,		// 플레이어가 먹었을 떄 상태
-	// 캐릭터가 죽었을 때 먹은 아이템이 반환될 때 사용 (원래는 RESPAWN이 있었음)
+	// 캐릭터가 죽었을 때 먹은 아이템이 게임맵에 반환될 때 사용 (원래는 RESPAWN이 있었음)
 };
 
-enum ItemName	// 전체 아이템 스폰률(블록 당 1/3)
+/* All item types(or names) */
+enum ItemName	
 {
 	ROLLER,		
 	BUBBLE,
@@ -33,7 +32,7 @@ enum ItemName	// 전체 아이템 스폰률(블록 당 1/3)
 };
 
 
-// Abstract
+/* ABSTRACT CLASS */
 class Item : public ColliderHolder
 {
 public:

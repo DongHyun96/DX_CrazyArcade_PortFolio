@@ -1,4 +1,8 @@
 #pragma once
+
+/*
+CONCRETE CLASS
+*/
 class TimerBalloon : public Balloon
 {
 public:

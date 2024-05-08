@@ -5,7 +5,7 @@
 TileEditor::TileEditor(MapEditor* mapEditor)
 	:mapEditor(mapEditor)
 {
-	InitTileMaps();
+	InitTileButtons();
 
 	Load();
 }
@@ -36,7 +36,7 @@ void TileEditor::Update()
 		return;
 
 	SelectTileMap();
-	SetTileToWorld();
+	HandleSetTileToWorld();
 }
 
 void TileEditor::Render()
@@ -73,7 +73,7 @@ void TileEditor::UpdateObjects()
 }
 
 
-void TileEditor::InitTileMaps()
+void TileEditor::InitTileButtons()
 {
 	switch (GM->GetCurMapType())
 	{
@@ -162,13 +162,13 @@ void TileEditor::SelectTileMap()
 	}
 }
 
-void TileEditor::SetTileToWorld()
+void TileEditor::HandleSetTileToWorld()
 {
 	for (UINT i = 0; i < MAP_ROW; i++)
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			if (mapEditor->cells[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
+			if (mapEditor->cellColliders[i][j]->OBBCollision(mousePos)) // i, j 위치와 info가 필요
 			{
 				if (KEY_DOWN(VK_LBUTTON))
 				{
@@ -221,12 +221,6 @@ void TileEditor::CreateTile(const TileInfo& info, UINT boardX, UINT boardY)
 
 void TileEditor::Save()
 {
-	// GameMap curMap{ TEST_FIELD };
-	
-	wstring ayy = GM->tileBinFile[GM->GetCurMapType()];
-
-	int a = 0;
-
 	BinaryWriter binWriter(GM->tileBinFile[GM->GetCurMapType()]);
 
 	for (UINT i = 0; i < MAP_ROW; i++)

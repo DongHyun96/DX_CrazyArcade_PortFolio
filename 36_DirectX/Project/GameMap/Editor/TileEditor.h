@@ -53,6 +53,7 @@ struct TileInfo
 
 
 /* 
+CONCRETE CLASS
 Owned by MapEditor
 GameManager에서 editMode가 활성화 되어 있고, MapEditor의 mode가 TileEditorMode일 때 사용
 */
@@ -67,33 +68,57 @@ public:
 	void Render();
 
 private:
-
-	void InitTileMaps();
-
+	/* Update all objects */
 	void UpdateObjects();
 
-	void SelectTileMap();
-	void SetTileToWorld();
+private:
+	/* 타일 메뉴버튼 initialization */
+	void InitTileButtons();
 
-	void CreateTile(UINT boardX, UINT boardY);						 // editor에서 edit할 때의 용도
+private:
+	/* 타일 메뉴버튼을 통해 현재 타일 선택하기 */
+	void SelectTileMap();
+
+	/* 현재 타일 world에 배치 */
+	void HandleSetTileToWorld();
+
+private:
+
+	/// <summary>
+	/// Editor에서 현재 선택된 타일을 world에 배치할 때 사용
+	/// </summary>
+	/// <param name="boardX"> : 배치될 cell pos X값 </param>
+	/// <param name="boardY"> : 배치될 cell pos Y값 </param>
+	void CreateTile(UINT boardX, UINT boardY);
+
+	/// <summary>
+	/// EditMode 시작 시, GameManager의 curMapType에 따른 미리 저장된 Tile들을 Load할 때 사용
+	/// </summary>
+	/// <param name="info"> : 만들 타일의 정보 </param>
+	/// <param name="boardX"> : 배치될 cell pos X값 </param>
+	/// <param name="boardY"> : 배치될 cell pos Y값 </param>
 	void CreateTile(const TileInfo& info, UINT boardX, UINT boardY); // 시작 시 Load할 때 create하는 용도
 
 private:
 
+	/* Save current cellTiles infos */
 	void Save();
+
+	/* Load current gameMap cell Tiles infos */
 	void Load();
 
 private:
-
+	/* Owner of this class */
 	MapEditor* mapEditor{};
+
+private: /* 월드 타일 관련 */
 	
-	// 월드 타일 관련
-	Object*		cellTiles[MAP_ROW][MAP_COL]{};
-	TileInfo	infos[MAP_ROW][MAP_COL]{};
+	Object*		cellTiles[MAP_ROW][MAP_COL]{};	// World에 배치된 타일 객체들
+	TileInfo	infos[MAP_ROW][MAP_COL]{};		// 현재 world의 각 cell에 배치된 타일들의 infos
 	
-	// 타일맵 메뉴 관련
-	vector<pair<Object*, TileInfo>> tileMaps;
-	vector<Collider*>				tileMapColliders{};
-	UINT							selectedTIdx{};
+private: /* 타일맵메뉴 버튼 관련 */
+	vector<pair<Object*, TileInfo>> tileMaps;			// vector< <타일맵버튼 rendering할 객체, 해당하는 TileInfo> >
+	vector<Collider*>				tileMapColliders{};	// 타일맵버튼 Collider (마우스와 Collision 처리)
+	UINT							selectedTIdx{};		// 현재 선택된 타일맵버튼 index
 
 };

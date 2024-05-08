@@ -1,6 +1,9 @@
 #pragma once
 
-/* User input에 의해 control될 캐릭터 */
+/*
+CONCRETE CLASS
+User input에 의해 control될 캐릭터
+*/
 class Player : public Character
 {
 public:

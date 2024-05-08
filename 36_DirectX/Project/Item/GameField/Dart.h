@@ -1,7 +1,9 @@
 #pragma once
 
-// 충돌처리해야 할 물체 : 물풍선 / hidable이 아닌 블록들 / 경계선
-
+/* 
+CONCRETE CLASS
+Owned by DartManager 
+*/
 class Dart : public ColliderHolder
 {
 public:
@@ -17,31 +19,46 @@ public:
 
 public:
 
+	/// <summary>
+	/// Spawn dart
+	/// </summary>
+	/// <param name="spawnPos"> : 스폰 시작 위치 </param>
+	/// <param name="fireDirection"> : 발사 방향 </param>
 	void Spawn(const Vector2& spawnPos, const Direction& fireDirection);
 
-	ColliderRect* GetBody() const { return body; }
+public: /* Getters and setters */
+	ColliderRect*	GetBody() const { return body; }
 
-	bool GetIsActive() const { return isActive; }
-	void SetActive(const bool& active) { this->isActive = active; }
+	bool			GetIsActive() const { return isActive; }
+	void			SetActive(const bool& active) { this->isActive = active; }
 
 private:
 
+	/* Game map 범위 밖으로 나간 dart 처리 */
 	void HandleBoundary();
 
+	/// <summary>
+	/// Collision call back function
+	/// </summary>
+	/// <param name="targetCollider"> : Entered collider </param>
+	/// <param name="owner"> : Owner of the entered collider </param>
 	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner);
 
 private:
 
 	bool isActive{};
 
-	map<Direction, Object*> dirTexMap{};
+private:
+	/* Body collider */
+	ColliderRect* body{};
 
-	Object* curTexObj{};
+private:
 
-	ColliderRect*	body{};
+	map<Direction, Object*> dirTexMap{}; // Dart 방향에 따른 Texture map
+	Object*					curTexObj{}; // 방향이 지정된 현재 Texture object
 	
-	Vector2 direction{};
+private:
 
-	const float SPEED = 2500.f;
-
+	Vector2		direction{};
+	const float	SPEED = 2500.f;
 };

@@ -4,7 +4,7 @@
 
 MapEditor::MapEditor()
 {
-	InitCells();
+	InitCellColliders();
 
 	tileEditor = new TileEditor(this);
 	blockEditor = new BlockEditor(this);
@@ -17,7 +17,7 @@ MapEditor::~MapEditor()
 	for (UINT i = 0; i < MAP_ROW; i++)
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
-			delete cells[i][j];
+			delete cellColliders[i][j];
 	}
 
 	delete tileEditor;
@@ -31,7 +31,7 @@ void MapEditor::Update()
 	for (UINT i = 0; i < MAP_ROW; i++)
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
-			cells[i][j]->Update();
+			cellColliders[i][j]->Update();
 	}
 
 	tileEditor->Update();
@@ -46,7 +46,7 @@ void MapEditor::Render()
 		for (UINT i = 0; i < MAP_ROW; i++)
 		{
 			for (UINT j = 0; j < MAP_COL; j++)
-				cells[i][j]->Render();
+				cellColliders[i][j]->Render();
 		}
 	}
 
@@ -57,14 +57,14 @@ void MapEditor::Render()
 	Debug();
 }
 
-void MapEditor::InitCells()
+void MapEditor::InitCellColliders()
 {
 	for (UINT i = 0; i < MAP_ROW; i++)
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			cells[i][j] = new ColliderRect(CELL_WORLD_SIZE);
-			Util::SetTransformToGameBoard(cells[i][j], j, i);
+			cellColliders[i][j] = new ColliderRect(CELL_WORLD_SIZE);
+			Util::SetTransformToGameBoard(cellColliders[i][j], j, i);
 		}
 	}
 }

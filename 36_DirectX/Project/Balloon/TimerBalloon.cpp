@@ -26,7 +26,7 @@ void TimerBalloon::Explode()
 {
 	isActive = false;
 
-	// owner->AddLeftBalloonCnt(); -> 이 줄 삭제됨
+	// owner->AddLeftBalloonCnt(); -> 일반 balloon과 달리 Owner의 leftBalloonCnt 개수를 늘릴 필요 x
 
 	Stream::AddStreamDanagerZone(spawnCoord, streamLv);
 

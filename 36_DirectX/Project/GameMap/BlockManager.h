@@ -1,5 +1,6 @@
 #pragma once
 
+/* CONCRETE CLASS */
 class BlockManager
 {
 public:

@@ -1,5 +1,8 @@
 #pragma once
-/* 자체 decision-making process에 의해 control될 enemy 캐릭터 */
+/* 
+CONCRETE CLASS
+자체 decision-making process에 의해 control될 enemy 캐릭터
+*/
 class Enemy : public Character
 {
 
