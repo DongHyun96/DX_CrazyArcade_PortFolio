@@ -1,5 +1,6 @@
 #pragma once
 
+/* INTERFACE */
 class Scene
 {
 public:

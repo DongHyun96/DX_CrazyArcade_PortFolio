@@ -10,8 +10,8 @@ GameScene::GameScene()
 	blockManager = new BlockManager;
 	GM->SetBlockManager(blockManager);
 
-	exitButton = new Button({ 68, 16, 1558, 1890 }, L"InGame/UI/ExitToLobby.png", 1, 2, 2);
-	exitButton->SetEvent(bind(&GameScene::ExitToLobby, this));
+	exitToLobbyButton = new Button({ 68, 16, 1558, 1890 }, L"InGame/UI/ExitToLobby.png", 1, 2, 2);
+	exitToLobbyButton->SetEvent(bind(&GameScene::ExitToLobby, this));
 
 	//gameStartButton = new Button({ 139, 37, 1228, 1690 }, L"InGame/UI/LobbyScene/gameStartButton.png", 2, 1, 2);
 	//gameStartButton->SetEvent(bind(&LobbyScene::OnGameStart, this));
@@ -43,7 +43,7 @@ GameScene::~GameScene()
 
 	delete blockManager;
 
-	delete exitButton;
+	delete exitToLobbyButton;
 }
 
 void GameScene::Update()
@@ -64,7 +64,7 @@ void GameScene::Update()
 
 	UpdateTimer();
 
-	exitButton->Update();
+	exitToLobbyButton->Update();
 
 	CheckTimerAfterGameOver();
 }
@@ -87,9 +87,9 @@ void GameScene::Render()
 
 	dartManager->Render();
 
-	exitButton->Render();
+	exitToLobbyButton->Render();
 
-	uiManager->RenderTimer(gameTimer);
+	uiManager->RenderTimer(gamePlayTimer);
 	//p1->Debug();
 	//p2->Debug();
 }
@@ -129,11 +129,11 @@ void GameScene::UpdateTimer()
 {
 	if (GM->GetGameStatus() != PLAY) return;
 
-	gameTimer -= Time::Delta();
+	gamePlayTimer -= Time::Delta();
 
-	if (gameTimer <= 0.f)
+	if (gamePlayTimer <= 0.f)
 	{
-		gameTimer = 0.f;
+		gamePlayTimer = 0.f;
 		SetGameEnd(DRAW);
 	}
 }
