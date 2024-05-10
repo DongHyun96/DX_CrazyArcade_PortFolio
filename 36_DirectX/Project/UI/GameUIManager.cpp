@@ -102,20 +102,20 @@ void GameUIManager::UpdateStartLogo()
 {
 	if (hasGameStarted)
 	{
-		logoTime += Time::Delta();
+		startLogoTime += Time::Delta();
 
 		for (UINT i = 0; i < 6; i++)
 		{
 			startLogo[i]->Update();
 
-			if (logoTime >= LOGO_TIME_TICK * (i + 1))
-				startLogo[i]->translation.y += LOGO_SPEED * Time::Delta();
+			if (startLogoTime >= START_LOGO_TIME_TICK * (i + 1))
+				startLogo[i]->translation.y += START_LOGO_SPEED * Time::Delta();
 		}
 
 		if (startLogo.back()->GlobalPosition().y > WIN_HEIGHT + 200.f)
 		{
 			hasGameStarted = false;
-			if (LogoFinEvent) LogoFinEvent();
+			if (StartLogoFinEvent) StartLogoFinEvent();
 		}
 
 	}
@@ -179,14 +179,14 @@ void GameUIManager::SetStartLogoFinEvent(function<void()> LogoEndEvent)
 {
 	SOUND->Play("GameStart", 0.5f);
 
-	this->LogoFinEvent = LogoEndEvent;
+	this->StartLogoFinEvent = LogoEndEvent;
 
 	hasGameStarted = true;
 
 	for (Object* letter : startLogo)
 		letter->translation.y = 0.f;
 
-	logoTime = 0.f;
+	startLogoTime = 0.f;
 
 }
 
@@ -219,9 +219,9 @@ void GameUIManager::Init()
 {
 	hasGameStarted = false;
 
-	logoTime = 0.f;
+	startLogoTime = 0.f;
 
-	LogoFinEvent = nullptr;
+	StartLogoFinEvent = nullptr;
 
 	gameOver = false;
 

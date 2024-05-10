@@ -175,5 +175,3 @@ void StreamBlockManager::HandleItemCollision(StreamBlock* streamBlock)
 	}
 
 }
-
-

@@ -3,7 +3,15 @@
 
 map<string, vector<ToggleButton*>> ToggleButton::toggleGroups{};
 
-ToggleButton::ToggleButton(const string& toggleGroupKey, const Vector4& UDLR, const wstring& downFile, const byte& customKey, const wstring& upFile, const wstring& hoverFile)
+ToggleButton::ToggleButton
+(
+	const string&  toggleGroupKey,
+	const Vector4& UDLR,
+	const wstring& downFile,
+	const byte&    customKey,
+	const wstring& upFile,
+	const wstring& hoverFile
+)
 	:Button(UDLR, downFile, upFile, hoverFile), myToggleKey(toggleGroupKey), customKey(customKey)
 {
 	if (toggleGroups.find(toggleGroupKey) == toggleGroups.end()) // 신규 생성 (첫 버튼을 눌린 상태로 둘 것임)

@@ -28,21 +28,34 @@ public:
 
 	bool IsActive() const { return isActive; }
 
-public:
+public: /* StreamDanagerZone 관련 (Enemy와 PathFinding에서 필요) */
 
-	static void AddStreamDanagerZone(const Util::Coord& balloonCoord, const UINT& streamLv);// Balloon 스폰 시 insert
+	/// <summary>
+	/// Balloon이 터질 때, 터진 balloon의 좌표와 streamLv를 받아 물줄기 위험 지역 추가
+	/// </summary>
+	/// <param name="balloonCoord"> : 터진 balloon의 좌표 </param>
+	/// <param name="streamLv"> : Stream level </param>
+	static void AddStreamDanagerZone(const Util::Coord& balloonCoord, const UINT& streamLv);
+	
 	static void EraseStreamDangerZone(const Util::Coord& coord) { streamDangerZone.erase(coord); }
+
 	static bool IsStreamDangerZone(const Util::Coord& coord) { return (streamDangerZone.find(coord) != streamDangerZone.end()); }
 
 private:
-
+	/// <summary>
+	/// 첫 spawn시 어느지점까지 도달하는지 reachedCoordMap 초기화
+	/// </summary>
+	/// <param name="spawnCoord"> : Spawn 위치(가운데 StreamBlock위치) </param>
+	/// <param name="streamLv"> : Stream level </param>
 	void InitReachedMap(const Util::Coord& spawnCoord, const UINT& streamLv);
 
+	/* 물줄기 도달 지점 범위 내에 balloon이 있는지 조사해서 있다면 해당 balloon들 모두 연쇄 폭발 시킴 */
 	void HandleChainExplosion();
 
+	/* 시간차를 두고 각 방향의 StreamBlock들을 spawn시킴 */
 	void HandleSpawning();
 
-	// 모두 다 꺼지면 자신의 active도 끔
+	/* this가 스폰시킨 StreamBlock이 모두 다 꺼지면 자신의 active도 끔 */
 	void HandleSelfActive();
 
 /***************************************************************************************************

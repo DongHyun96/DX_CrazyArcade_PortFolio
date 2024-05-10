@@ -39,7 +39,7 @@ void Device::Initialize()
     swapChainDesc.BufferUsage                           = DXGI_USAGE_RENDER_TARGET_OUTPUT; // 버퍼의 용도
     swapChainDesc.BufferCount                           = 1; //BackBuffer의 개수
     swapChainDesc.OutputWindow                          = hWnd;
-    swapChainDesc.Windowed                              = true; // 창모드를 쓸 것인지
+    swapChainDesc.Windowed                              = false; // 창모드를 쓸 것인지
 
     D3D11CreateDeviceAndSwapChain
     (
