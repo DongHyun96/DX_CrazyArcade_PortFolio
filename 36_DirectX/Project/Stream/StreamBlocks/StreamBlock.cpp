@@ -69,7 +69,7 @@ StreamBlock* StreamBlock::Spawn(const Util::Coord& spawnCoord, const bool& isEnd
 {
 	this->isEnd = isEnd;
 	isActive = true;
-
+	
 	body->IsActive() = true;
 
 	body->EnteredPointOwners().clear();
@@ -97,7 +97,7 @@ void StreamBlock::SetActive(const bool& isActive)
 	}
 }
 
-void StreamBlock::OnAnimClipEvent()
+void StreamBlock::DisableBodyCollider()
 {
 	body->IsActive() = false;
 }

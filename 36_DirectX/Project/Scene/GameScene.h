@@ -1,7 +1,10 @@
 #pragma once
 
 
-/* CONCRETE CLASS */
+/*
+CONCRETE CLASS
+In-game scene class
+*/
 class GameScene : public Scene
 {
 public:
@@ -13,23 +16,32 @@ public:
 
 public:
 
+	/* GameOverResult에 따른 GameScene내에서의 GameOver처리 */
 	void SetGameEnd(const GameOverResult& result);
 
 private:
 
+	/* Game start logo animation이 끝난 뒤, 플레이어 SPAWN상태 끝내고 실질적으로 play가능하게 game start*/
 	void StartGameFromSpawn();
+
+private:
+	/* 게임 타이머 업데이트 */
 	void UpdateTimer();
-
-	void CheckTimerAfterGameOver(); // 로비로 복귀하는 시간 체크
-	void ExitToLobby();
-
 
 private:
 
-	// 나머지는 Archieve에 저장해놓고 돌아가면서 사용(게임이 끝난 뒤 LobbyScene에 돌아갈 때 초기화해 둠)
+	/* 로비로 복귀하는 시간 체크 */
+	void CheckTimerAfterGameOver();
 
-	TileManager*	tileManager{};  // 얘네만 다를 예정
+	void ExitToLobby();
+
+
+private: /* GameScene으로 전환(GameScene 생성) 시 현재 게임맵에 해당하는 새로운 tileManager와 blockManager 생성 */
+
+	TileManager*	tileManager{};
 	BlockManager*	blockManager{};
+
+private: /* GameManager에 미리 저장해둔 manager들 */
 
 	GameUIManager*	uiManager{};
 

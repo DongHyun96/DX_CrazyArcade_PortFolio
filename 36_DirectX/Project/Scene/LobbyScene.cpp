@@ -271,8 +271,8 @@ void LobbyScene::Render()
 	if (!xTexHide)
 		xTex->Render();
 
-	if (curShowInfo != RANDOM)
-		characterHoverObjects[curShowInfo]->Render();
+	if (curCharacterShowInfoType != RANDOM)
+		characterHoverObjects[curCharacterShowInfoType]->Render();
 
 	characterP1Thumbnail[GM->P_SelectedCharacterMap()[P1]]->Render();
 	characterP2Thumbnail[GM->P_SelectedCharacterMap()[P2]]->Render();
@@ -318,20 +318,20 @@ void LobbyScene::HandleInfoHover()
 
 		if (characterSelectButtons[type][P1]->GetBody()->AABBCollision(mousePos))
 		{
-			curShowInfo = type;
+			curCharacterShowInfoType = type;
 
-			if (curShowInfo == RANDOM) return;
+			if (curCharacterShowInfoType == RANDOM) return;
 
-			if (curShowInfo == DAO || curShowInfo == MARID)
-				characterHoverObjects[curShowInfo]->translation = { mousePos.x - 300.f, mousePos.y };
+			if (curCharacterShowInfoType == DAO || curCharacterShowInfoType == MARID)
+				characterHoverObjects[curCharacterShowInfoType]->translation = { mousePos.x - 300.f, mousePos.y };
 			else
-				characterHoverObjects[curShowInfo]->translation = { mousePos.x + 300.f, mousePos.y };
+				characterHoverObjects[curCharacterShowInfoType]->translation = { mousePos.x + 300.f, mousePos.y };
 
 			return;
 		}
 	}
 
-	curShowInfo = RANDOM;
+	curCharacterShowInfoType = RANDOM;
 }
 
 void LobbyScene::OnMapLeftButton()

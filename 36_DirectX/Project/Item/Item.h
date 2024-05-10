@@ -114,6 +114,10 @@ private:
 	/// <param name="owner"> : Entered collider owner </param>
 	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner);
 
+/***************************************************************************************************
+*                                          Member variables                                        *
+****************************************************************************************************/
+
 protected:
 
 	ItemName itemName{};

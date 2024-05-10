@@ -22,14 +22,14 @@ SceneManager::SceneManager()
 	if (isCustomCursor) ShowCursor(false);
 		
 
-	mouse = new Object(L"InGame/Mouse/Mouse.png");
-	mouseClicked = new Object(L"InGame/Mouse/MouseClicked.png");
+	idleMouseTexture = new Object(L"InGame/Mouse/Mouse.png");
+	mouseClickedTexture = new Object(L"InGame/Mouse/MouseClicked.png");
 
-	mouse->zDepth = -9.f;
-	mouseClicked->zDepth = -9.f;
-	mouse->scale = { 1.5f, 1.5f };
-	mouseClicked->scale = { 1.5f, 1.5f };
-	curMouse = mouse;
+	idleMouseTexture->zDepth = -9.f;
+	mouseClickedTexture->zDepth = -9.f;
+	idleMouseTexture->scale = { 1.5f, 1.5f };
+	mouseClickedTexture->scale = { 1.5f, 1.5f };
+	curMouseTexture = idleMouseTexture;
 
 	gameExitPanel = new Object(L"InGame/UI/Panel.png");
 	gameExitPanel->translation = {WIN_CENTER.x, WIN_HEIGHT + 300.f};
@@ -54,8 +54,8 @@ SceneManager::~SceneManager()
 
 	scenes.clear();
 
-	delete mouse;
-	delete mouseClicked;
+	delete idleMouseTexture;
+	delete mouseClickedTexture;
 
 	delete gameExitPanel;
 
@@ -69,19 +69,19 @@ void SceneManager::Update()
 	else
 		scenes[curScene]->Update();
 
-	mouse->Update();
-	mouseClicked->Update();
+	idleMouseTexture->Update();
+	mouseClickedTexture->Update();
 
 	gameExitPanel->Update();
 	gameExitButton->Update();
 	HandleGameExitPanel();
 
 	if (KEY_PRESS(VK_LBUTTON) || KEY_PRESS(VK_RBUTTON))
-		curMouse = mouseClicked;
+		curMouseTexture = mouseClickedTexture;
 	else
-		curMouse = mouse;
+		curMouseTexture = idleMouseTexture;
 
-	curMouse->translation = { mousePos.x + 20.f, mousePos.y - 25.f };
+	curMouseTexture->translation = { mousePos.x + 20.f, mousePos.y - 25.f };
 }
 
 void SceneManager::Render()
@@ -95,7 +95,7 @@ void SceneManager::Render()
 	gameExitPanel->Render();
 	gameExitButton->Render();
 
-	if (isCustomCursor) curMouse->Render();
+	if (isCustomCursor) curMouseTexture->Render();
 	
 
 }

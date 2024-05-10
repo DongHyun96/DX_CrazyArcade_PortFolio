@@ -120,6 +120,10 @@ public:
 	Util::Coord GetCollidedMapCellCoord(const Vector2& point);
 	
 
+/***************************************************************************************************
+*                                          Member variables                                        *
+****************************************************************************************************/
+
 public: /* 각 GameMap에 따른 binary data들 & BGM들 정보 */
 
 	map<GameMap, wstring>	tileBinFile{};

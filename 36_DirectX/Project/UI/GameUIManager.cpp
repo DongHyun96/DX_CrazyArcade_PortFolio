@@ -175,7 +175,7 @@ void GameUIManager::StartRenderGameOver(const GameOverResult& result)
 	this->gameOverResult = result;
 }
 
-void GameUIManager::SetLogoFinEvent(function<void()> LogoEndEvent)
+void GameUIManager::SetStartLogoFinEvent(function<void()> LogoEndEvent)
 {
 	SOUND->Play("GameStart", 0.5f);
 

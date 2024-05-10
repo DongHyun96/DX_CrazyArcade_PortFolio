@@ -70,6 +70,10 @@ public:
 	/// <param name="UDLR"> : Each up, down, left, right values </param>
 	void SetColliderRect(const Vector4& UDLR);
 
+/***************************************************************************************************
+*                                          Member variables                                        *
+****************************************************************************************************/
+
 private:
 
 	Vector2 size; // Local size

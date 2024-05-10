@@ -23,7 +23,7 @@ public:
 
 public:
 
-	void SetLogoFinEvent(function<void()> LogoEndEvent); // Whole GameStart Trigger
+	void SetStartLogoFinEvent(function<void()> LogoEndEvent); // Whole GameStart Trigger
 
 	void RenderTimer(const float& gameTimer);
 	
@@ -59,7 +59,7 @@ private:
 
 	map<GameOverResult, Object*> gameOverPanel{};
 	
-	bool gameOver{ };
+	bool gameOver{};
 	GameOverResult gameOverResult{};
 
 	const Vector4 FLICKER_COLOR{ 0, 0, 0, 1 };

@@ -1,4 +1,8 @@
 #pragma once
+/* 
+CONCRETE CLASS 
+게임 맵에 실질적으로 spawn되는 물줄기 block
+*/
 class StreamBlock
 {
 public:
@@ -9,26 +13,50 @@ public:
 
 	virtual void Update();
 	virtual void Render();
+
+public:
 	
+	/// <summary>
+	/// 물줄기 block 스폰시키기
+	/// </summary>
+	/// <param name="spawnCoord"> : 스폰 위치 </param>
+	/// <param name="isEnd"> : 맨 끝 물줄기인지 </param>
+	/// <returns> : 스폰된 자기자신 return </returns>
 	StreamBlock* Spawn(const Util::Coord& spawnCoord, const bool& isEnd = false);
 
-	bool IsActive() const { return isActive; }
+public: /* Getters */
 
-	ColliderRect* GetBody() const { return body; }
+	bool			IsActive() const { return isActive; }
 
-	Util::Coord GetSpawnCoord() const { return spawnCoord; }
+	ColliderRect*	GetBody() const { return body; }
+
+	Util::Coord		GetSpawnCoord() const { return spawnCoord; }
 
 
 protected:
 
+	/*
+	물줄기의 경우 자신의 물줄기 animation이 끝난 뒤 자신의 active를 끔
+	물줄기 animation End event로 (param false) 걸어둘 함수
+	*/
 	void SetActive(const bool& isActive);
 
-	void OnAnimClipEvent();
+protected:
+
+	/* 
+	물줄기 block animation이 모두 끝나기 전에 body collider를 끌 예정 -> 물줄기 판정 조정
+	Animation내에서 AnimNotify call back으로 특정 idx가 지났을 때 호출될 함수 
+	*/
+	void DisableBodyCollider();
 
 protected:
 
 	void OnColliderPointEnter(ColliderHolder* owner);
 	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner);
+
+/***************************************************************************************************
+*                                          Member variables                                        *
+****************************************************************************************************/
 
 protected:
 
@@ -38,14 +66,15 @@ protected:
 
 	ColliderRect* body{};
 	
-	Animation* curAction{};
+protected:
 
-	// End point animation은 살짝 다름
-	// 4방면의 End Point가 아닌 면의 animation
-	Animation* mainAnim{};
-	Animation* endAnim{};
+	// 물줄기 끝 block의 animation은 살짝 다름
+	bool		isEnd{};		// isEnd이면 endAnim을 사용
+	Animation*	curAction{};	// 현재 선택된 animation
+	Animation*	mainAnim{};		// 자신의 위치가 물줄기의 끝부분이 아닐 때 사용할 animation
+	Animation*	endAnim{};		// 자신이 물줄기의 끝부분일 때 사용할 animation
 	
-	bool isEnd{}; // isEnd이면 endAnim을 사용
+protected:
 
 	VertexShader*	vertexShader{};
 	PixelShader*	pixelShader{};
@@ -53,13 +82,13 @@ protected:
 	MatrixBuffer*	worldBuffer{};
 	ColorBuffer*	colorBuffer{};
 
-	//const vector<UINT> ANIM_INDICES{ 3, 0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10 };
-	const vector<UINT> ANIM_INDICES{ 3, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 4, 5, 6, 7, 8, 9, 10 };
-	const UINT ANIM_CLIP_IDX{ 14 };
-	
-	const float ANIM_SPEED{ 0.04f };
-	//const float ANIM_SPEED{ 1.f };
+protected:
 
+	/* sprite 재생 index 순서 */
+	const vector<UINT>	ANIM_INDICES{ 3, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 4, 5, 6, 7, 8, 9, 10 };
 
+	/* 물줄기 block animation이 모두 끝나기 전에 body collider를 끌 예정 -> 물줄기 판정 조정 */
+	const UINT			BODY_COLLISION_DISABLE_IDX{ 14 };
 	
+	const float			ANIM_SPEED = 0.04f;
 };

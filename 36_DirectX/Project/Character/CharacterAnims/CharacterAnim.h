@@ -70,6 +70,10 @@ private:
 	/* Owner Character의 velocity에 따라 curFaceDir set */
 	void SetCurFaceDir(const Vector2& velocity);
 
+/***************************************************************************************************
+*                                          Member variables                                        *
+****************************************************************************************************/
+
 private:
 	/* 직접 따라갈 부모의 몸체 */
 	ColliderRect* parentBody{};

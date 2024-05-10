@@ -28,10 +28,10 @@ GameScene::GameScene()
 	
 	uiManager = GM->GetGameUIManager();
 
-	uiManager->SetLogoFinEvent(bind(&GameScene::StartGameFromSpawn, this)); // 이게 게임 start 트리거
+	uiManager->SetStartLogoFinEvent(bind(&GameScene::StartGameFromSpawn, this)); // 이게 게임 start 트리거
 
-	float volume =  GM->GetCurMapType() == VILLAGE ? 1.f :
-					GM->GetCurMapType() == FOREST ? 0.7f : 0.7f;
+	float volume =  GM->GetCurMapType() == VILLAGE ? 1.f  :
+					GM->GetCurMapType() == FOREST  ? 0.7f : 0.7f;
 
 	SOUND->Play(GM->mapBGM[GM->GetCurMapType()], volume);
 

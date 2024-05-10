@@ -1,26 +1,26 @@
 #pragma once
+/* CONCRETE CLASS */
 class IntroScene : public Scene
 {
 public:
 	IntroScene();
 	~IntroScene();
 
-	// Scene을(를) 통해 상속됨
 	virtual void Update() override;
 	virtual void Render() override;
 
 private:
 
-	bool pressed = false;
-
-	Object* background{};
-	Object* desc{};
-
-	vector<Object*> characters{};
-	vector<Vector2> destPos{};
+	Object*	background{};
+	Object*	desc{};
 
 private:
-	bool clicked{};
-	float timer = 0.f;
+
+	vector<Object*> characters{};	// 화면에 출력할 캐릭터 sprite objects
+	vector<Vector2> destPos{};		// 클릭 시, 캐릭터 sprite objects가 향할 destination position
+
+private:
+	bool		clicked{};
+	float		timer{};
 	const float SPAWN_TICK = 0.4f;
 };

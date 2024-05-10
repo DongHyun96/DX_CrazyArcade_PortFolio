@@ -7,6 +7,10 @@ enum SceneName
 	GAME_SCENE
 };
 
+/*
+CONCRETE CLASS | SINGLETON
+전체 scene 및 scene 전환 담당 manager
+*/
 class SceneManager : public Singleton<SceneManager>
 {
 
@@ -21,9 +25,10 @@ public:
 	void Update();
 	void Render();
 
-	void SetCurScene(const SceneName& sceneName);
+private:
 
-	SceneName GetCurSceneName() const { return curScene; }
+	void		SetCurScene(const SceneName& sceneName);
+	SceneName	GetCurSceneName() const { return curScene; }
 
 private:
 
@@ -33,25 +38,24 @@ private:
 
 private:
 	
-	map<SceneName, Scene*> scenes{};
-
-	SceneName curScene{ INTRO_SCENE };
+	map<SceneName, Scene*>	scenes{};					// 모든 scene
+	SceneName				curScene{ INTRO_SCENE };	// 현재 scene
 	
-	MapEditor* mapEditor{};
-
 private:
 
-	Object* mouse{};
-	Object* mouseClicked{};
+	MapEditor* mapEditor{};
 
-	Object* curMouse{}; // mouse or mouseClicked
+private: /* 마우스 포인터 texture 관련 */
+
+	Object* idleMouseTexture{};		
+	Object* mouseClickedTexture{};
+
+	Object* curMouseTexture{}; 
+	bool	isCustomCursor = true;
+
+private: /* 게임 종료버튼 패널 관련 */
 
 	Object* gameExitPanel{};
 	Button* gameExitButton{};
-
-
-private:
-	bool isCustomCursor = true;
-	
 
 };

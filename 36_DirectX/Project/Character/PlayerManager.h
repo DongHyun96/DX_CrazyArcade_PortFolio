@@ -39,6 +39,10 @@ private:
 	/* 플레이어 상호간 충돌처리 */
 	void HandlePlayerCollisions();
 
+/***************************************************************************************************
+*                                          Member variables                                        *
+****************************************************************************************************/
+
 public: /* 플레이어Type에 따른 input mapping KeyCodes */
 
 	map<PlayerType, map<Direction, byte>> P_DIR_KEYCODE{};		// 방향키 키코드 mapping
