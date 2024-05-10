@@ -25,7 +25,7 @@ public:
 	void Update();
 	void Render();
 
-private:
+public:
 
 	void		SetCurScene(const SceneName& sceneName);
 	SceneName	GetCurSceneName() const { return curScene; }

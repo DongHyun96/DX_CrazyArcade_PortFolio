@@ -89,12 +89,9 @@ StreamBlock* StreamBlock::Spawn(const Util::Coord& spawnCoord, const bool& isEnd
 void StreamBlock::SetActive(const bool& isActive)
 {
 	this->isActive = isActive;
-
-	// 위험반경도 지워야 함 (For AStar)
-	if (!isActive)
-	{
-		Stream::EraseStreamDangerZone(spawnCoord);
-	}
+	
+	if (!isActive) 
+		Stream::EraseStreamDangerZone(spawnCoord); // Stream 클래스의 StreamDangerZone에서 자기자신의 위치 빼기
 }
 
 void StreamBlock::DisableBodyCollider()

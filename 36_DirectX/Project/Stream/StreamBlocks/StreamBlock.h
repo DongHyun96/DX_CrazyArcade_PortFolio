@@ -1,7 +1,7 @@
 #pragma once
 /* 
 CONCRETE CLASS 
-게임 맵에 실질적으로 spawn되는 물줄기 block
+게임 맵에 실질적으로 map cell 한 칸에 spawn되는 물줄기 block
 */
 class StreamBlock
 {
@@ -49,7 +49,7 @@ protected:
 	*/
 	void DisableBodyCollider();
 
-protected:
+protected: /* Collider call back functions */
 
 	void OnColliderPointEnter(ColliderHolder* owner);
 	void OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner);
@@ -87,7 +87,10 @@ protected:
 	/* sprite 재생 index 순서 */
 	const vector<UINT>	ANIM_INDICES{ 3, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 4, 5, 6, 7, 8, 9, 10 };
 
-	/* 물줄기 block animation이 모두 끝나기 전에 body collider를 끌 예정 -> 물줄기 판정 조정 */
+	/* 
+	물줄기 block animation이 모두 끝나기 전에 BODY_COLLISION_DISABLE_IDX 까지 재생하였다면 body collider를 끌 예정 ->
+	물줄기 판정 조정
+	*/
 	const UINT			BODY_COLLISION_DISABLE_IDX{ 14 };
 	
 	const float			ANIM_SPEED = 0.04f;
