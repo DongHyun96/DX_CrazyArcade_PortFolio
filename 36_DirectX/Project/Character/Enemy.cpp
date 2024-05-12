@@ -131,12 +131,10 @@ void Enemy::UpdatePath(const Util::Coord& dest)
 	visited				= path_visited.second;
 }
 
+/* targetState에 따른 FSM 상황조치 */
 void Enemy::UpdateState()
 {
 	// path가 empty이면 도착했다는 얘기
-
-	//TargetState prevState = targetState;
-	//if (path.empty()) targetState = NONE;
 
 	switch (targetState)
 	{

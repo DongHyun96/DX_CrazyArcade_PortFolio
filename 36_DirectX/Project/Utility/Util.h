@@ -44,14 +44,13 @@ namespace Util
 		UINT y{};
 	};
 
+	/* 유클리드 거리 */
 	static UINT GetDist(const Util::Coord& src, const Util::Coord& dst)
 	{
 		int sx = src.x;
 		int sy = src.y;
 		int dx = dst.x;
 		int dy = dst.y;
-
-		//return sqrtf(powf(x, 2) + powf(y, 2));
 
 		return sqrt(pow(sx - dx, 2) + pow(dx - dy, 2));
 	}

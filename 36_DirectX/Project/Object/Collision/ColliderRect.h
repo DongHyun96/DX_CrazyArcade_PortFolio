@@ -80,7 +80,7 @@ private:
 
 private:
 
-	set<ColliderHolder*>	enteredPointOwners{};	// 현재 이 ColliderRect에 들어와 있는 모든 pointer들의 Owner set
+	set<ColliderHolder*>	enteredPointOwners{};	// 현재 이 ColliderRect에 들어와 있는 모든 point들의 Owner set
 	set<ColliderRect*>		enteredBodies{};		// 현재 이 ColliderRect에 들어와 있는 모든 Other collider rects
 
 private: /* Call back events */

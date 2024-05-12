@@ -42,13 +42,11 @@ private:
 public:
 
 
-	/// <returns> path, 검사한 visited coords </returns>
-
 	/// <summary>
 	/// A* 알고리즘을 통한 start부터 dest까지의 경로 찾기
 	/// </summary>
-	/// <param name="start"> : 출발점 </param>
-	/// <param name="dest"> : 도착점 </param>
+	/// <param name="start">     : 출발점                                                                </param>
+	/// <param name="dest">      : 도착점                                                                </param>
 	/// <param name="isC_SPACE"> : 움직이려는 객체의 상태가 C_SPACE인지(우주선일 경우 최단경로 계산이 달라짐) </param>
 	/// <returns> path, 검사한 visited coords | 만약 경로가 존재하지 않다면 empty path return </returns>
 	static pair<stack<Util::Coord>, set<Util::Coord>> GetPath(const Util::Coord& start, const Util::Coord& dest, const bool& isC_SPACE);
