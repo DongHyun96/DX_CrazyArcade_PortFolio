@@ -2,6 +2,7 @@
 
 class Font : public Singleton<Font>
 {
+	friend class Singleton;
 private:
 	struct FontDesc
 	{
@@ -15,9 +16,11 @@ private:
 		}
 	};
 
-public:
+private:
 	Font();
 	~Font();
+
+public:
 
 	void Add(string key, wstring font, Vector3 color = Vector3(1, 1, 1), float size = 20.0f, 
 		DWRITE_PARAGRAPH_ALIGNMENT pAlignment = DWRITE_PARAGRAPH_ALIGNMENT_NEAR,
