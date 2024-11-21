@@ -2,6 +2,3 @@
 
 ![image](https://github.com/DongHyun96/DX_CrazyArcade_PortFolio/assets/50581769/4c79baa6-dd22-4a95-b98d-6ea76684553c)
 
----
-### 주요 클래스다이어그램 구조
-https://drive.google.com/file/d/1xpMYXz5LC2c1WHqpRj5oBa_2GLheLF33/view?usp=sharing
