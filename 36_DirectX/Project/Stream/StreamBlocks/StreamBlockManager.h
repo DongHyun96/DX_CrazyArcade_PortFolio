@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /*
 CONCRETE CLASS
 StreamBlock Object pooling manager
@@ -16,17 +16,17 @@ public:
 
 public:
 	/// <summary>
-	/// Cell ÇÑ Ä­ StreamBlock ½ºÆù ½ÃÅ°±â
+	/// Cell í•œ ì¹¸ StreamBlock ìŠ¤í° ì‹œí‚¤ê¸°
 	/// </summary>
-	/// <param name="dir"> : ¹°ÁÙ±â 4¹æÇâ Áß ¾î´À ¹æÇâ ¹°ÁÙ±âÀÎÁö </param>
-	/// <param name="spawnCoord"> : ½ºÆù À§Ä¡ </param>
-	/// <param name="isEnd"> : ¹°ÁÙ±âÀÇ ¸Ç ³¡ blockÀÎÁö(³¡ blockÀÇ animationÀº ÀÏ¹İ°ú ´Ù¸§)</param>
-	/// <returns> : SpawnµÈ StreamBlock °´Ã¼ </returns>
+	/// <param name="dir"> : ë¬¼ì¤„ê¸° 4ë°©í–¥ ì¤‘ ì–´ëŠ ë°©í–¥ ë¬¼ì¤„ê¸°ì¸ì§€ </param>
+	/// <param name="spawnCoord"> : ìŠ¤í° ìœ„ì¹˜ </param>
+	/// <param name="isEnd"> : ë¬¼ì¤„ê¸°ì˜ ë§¨ ë blockì¸ì§€(ë blockì˜ animationì€ ì¼ë°˜ê³¼ ë‹¤ë¦„)</param>
+	/// <returns> : Spawnëœ StreamBlock ê°ì²´ </returns>
 	StreamBlock* Spawn(const Direction& dir, const Util::Coord& spawnCoord, const bool& isEnd = false);
 		
 private:
 	
-	/* ¸Ê ºí·Ï, ¾ÆÀÌÅÛ, Ä³¸¯ÅÍ¿ÍÀÇ Ãæµ¹°Ë»ç ¹× Ã³¸® */
+	/* ë§µ ë¸”ë¡, ì•„ì´í…œ, ìºë¦­í„°ì™€ì˜ ì¶©ëŒê²€ì‚¬ ë° ì²˜ë¦¬ */
 	void HandleCollision();
 
 	void HandleBlockCollision(StreamBlock* streamBlock); // StreamBlock vs Block
@@ -34,11 +34,11 @@ private:
 
 private:
 
-	const UINT CENTER_POOL_CNT	= 60;						// °¡¿îµ¥ StreamBlock pool count
-	const UINT DIR_POOL_CNT		= 48;						// °¢ direction¿¡ ´ëÇÑ each streamBlock pool count
+	const UINT CENTER_POOL_CNT	= 60;						// ê°€ìš´ë° StreamBlock pool count
+	const UINT DIR_POOL_CNT		= 48;						// ê° directionì— ëŒ€í•œ each streamBlock pool count
 
-	vector<StreamBlock*>					centerBlocks{}; // °¡¿îµ¥ StreamBlock Object pool
-	map<Direction, vector<StreamBlock*>>	dirStreamMap{};	// °¢ direction¿¡ ´ëÇÑ StreamBlock Object pool
+	vector<StreamBlock*>					centerBlocks{}; // ê°€ìš´ë° StreamBlock Object pool
+	map<Direction, vector<StreamBlock*>>	dirStreamMap{};	// ê° directionì— ëŒ€í•œ StreamBlock Object pool
 
 	
 };

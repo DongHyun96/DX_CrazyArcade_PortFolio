@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 /* CONCRETE CLASS */
 class BalloonManager
@@ -16,7 +16,7 @@ public:
 
  public:
 
-	const vector<Balloon*>& GetNormalBalloons() { return normalBalloons; } // Collision ¶§¹®¿¡ ¶Õ¾îµÒ
+	const vector<Balloon*>& GetNormalBalloons() { return normalBalloons; } // Collision ë•Œë¬¸ì— ëš«ì–´ë‘ 
 	const vector<TimerBalloon*>& GetTimerBalloons() { return timerBalloons; }
 
 private:
@@ -24,8 +24,8 @@ private:
 	const UINT POOL_CNT = 60;
 	const UINT TIMERB_POOL_CNT = 18;
 
-	vector<Balloon*> normalBalloons{}; // ÀÏ¹İ ¹ú·é
+	vector<Balloon*> normalBalloons{}; // ì¼ë°˜ ë²Œë£¬
 
-	vector<TimerBalloon*> timerBalloons{}; // Å¸ÀÌ¸Ó ¹ú·é
+	vector<TimerBalloon*> timerBalloons{}; // íƒ€ì´ë¨¸ ë²Œë£¬
 
 };

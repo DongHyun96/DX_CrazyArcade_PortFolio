@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "IndexBuffer.h"
 
 
@@ -8,13 +8,13 @@ IndexBuffer::IndexBuffer(vector<UINT>& indices)
 
     bufferDesc.ByteWidth            = sizeof(UINT) * indices.size();
     bufferDesc.Usage                = D3D11_USAGE_DEFAULT;
-    bufferDesc.BindFlags            = D3D11_BIND_INDEX_BUFFER; //  bufferµµ Á¾·ù°¡ ¸¹À½ / bufferÀÇ ¿ëµµ¸¦ ¼³Á¤
+    bufferDesc.BindFlags            = D3D11_BIND_INDEX_BUFFER; //  bufferë„ ì¢…ë¥˜ê°€ ë§ŽìŒ / bufferì˜ ìš©ë„ë¥¼ ì„¤ì •
     bufferDesc.CPUAccessFlags       = 0;
     bufferDesc.MiscFlags            = 0;
     bufferDesc.StructureByteStride  = 0;
 
     D3D11_SUBRESOURCE_DATA initData{};
-    initData.pSysMem = indices.data(); // data() / vectorÀÇ ÁÖ¼Ò°ªÀ» ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+    initData.pSysMem = indices.data(); // data() / vectorì˜ ì£¼ì†Œê°’ì„ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 
     DEVICE->CreateBuffer(&bufferDesc, &initData, &indexBuffer);
 }

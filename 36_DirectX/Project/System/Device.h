@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Device : public Singleton<Device>
 {
 	friend class Singleton; 
@@ -26,15 +26,15 @@ private:
 
 private:
 
-	// interface (¶óÀÌºê·¯¸®¸í) (º¯¼ö¸í) - º¯¼ö¸íÀ» ±¸ºĞÁş±â À§ÇØ ´ëºÎºĞ Å¸ÀÔ ¾Õ¿¡ ¶óÀÌºê·¯¸®¸íÀ» ºÙÀÓ
-	ID3D11Device*			device;         // ¹«¾ğ°¡¸¦ ¸¸µå´Â ¿ªÇÒ, CPU¸¦ ´Ù·ç´Â °´Ã¼
-	ID3D11DeviceContext*	deviceContext;  // ¹«¾ğ°¡¸¦ ±×¸®´Â ¿ªÇÒ, GPU¸¦ ´Ù·ç´Â °´Ã¼
+	// interface (ë¼ì´ë¸ŒëŸ¬ë¦¬ëª…) (ë³€ìˆ˜ëª…) - ë³€ìˆ˜ëª…ì„ êµ¬ë¶„ì§“ê¸° ìœ„í•´ ëŒ€ë¶€ë¶„ íƒ€ì… ì•ì— ë¼ì´ë¸ŒëŸ¬ë¦¬ëª…ì„ ë¶™ì„
+	ID3D11Device*			device;         // ë¬´ì–¸ê°€ë¥¼ ë§Œë“œëŠ” ì—­í• , CPUë¥¼ ë‹¤ë£¨ëŠ” ê°ì²´
+	ID3D11DeviceContext*	deviceContext;  // ë¬´ì–¸ê°€ë¥¼ ê·¸ë¦¬ëŠ” ì—­í• , GPUë¥¼ ë‹¤ë£¨ëŠ” ê°ì²´
 
 	IDXGISwapChain*			swapChain;
 	ID3D11RenderTargetView* renderTargetView;
 
 	
-	//Depth Stencil °ü·Ã
+	//Depth Stencil ê´€ë ¨
 	ID3D11Texture2D*		g_pDepthStencil{};
 	ID3D11DepthStencilView* stencilView{};
 	ID3D11DepthStencilState* depthStencilState{};

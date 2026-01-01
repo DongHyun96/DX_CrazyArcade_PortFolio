@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 /* 
 CONCRETE CLASS
-ÀÚÃ¼ decision-making process¿¡ ÀÇÇØ controlµÉ enemy Ä³¸¯ÅÍ
+ìžì²´ decision-making processì— ì˜í•´ controlë  enemy ìºë¦­í„°
 */
 class Enemy : public Character
 {
@@ -13,10 +13,10 @@ public:
 public:
 	
 	/// <summary>
-	/// ±¸Á¶ÇÒ °æ·Î¿Í ±¸Á¶´ë»óÀ» ¼¼ÆÃ
+	/// êµ¬ì¡°í•  ê²½ë¡œì™€ êµ¬ì¡°ëŒ€ìƒì„ ì„¸íŒ…
 	/// </summary>
-	/// <param name="rescue_path_visited_pair"> : ±¸Á¶°æ·Î¿Í AStar ¾Ë°í¸®Áò visited pair</param>
-	/// <param name="rescueTarget"> : ±¸Á¶ÇÒ µ¿·á</param>
+	/// <param name="rescue_path_visited_pair"> : êµ¬ì¡°ê²½ë¡œì™€ AStar ì•Œê³ ë¦¬ì¦˜ visited pair</param>
+	/// <param name="rescueTarget"> : êµ¬ì¡°í•  ë™ë£Œ</param>
 	void SetPathToRescueMission(const pair<stack<Util::Coord>, set<Util::Coord>>& rescue_path_visited_pair, Character* rescueTarget);
 
 private:
@@ -28,51 +28,51 @@ private:
 	void Init()						override;
 
 private:
-	/* targetState¿¡ µû¸¥ FSM »óÈ²Á¶Ä¡ */
+	/* targetStateì— ë”°ë¥¸ FSM ìƒí™©ì¡°ì¹˜ */
 	void UpdateState();
 
 private:
-	/* »õ·Î¿î ¸ñÇ¥ÁöÁ¡À¸·Î path °»½Å */
+	/* ìƒˆë¡œìš´ ëª©í‘œì§€ì ìœ¼ë¡œ path ê°±ì‹  */
 	void UpdatePath(const Util::Coord& dest);
 
 private:
-	/* ´Ù¸¥ µ¿·á¿¡°Ô ±¸Á¶¿äÃ» ½Ãµµ */
+	/* ë‹¤ë¥¸ ë™ë£Œì—ê²Œ êµ¬ì¡°ìš”ì²­ ì‹œë„ */
 	void RequestRescue(); 
 
-private: /* ¹°Ç³¼± ³õ±â °ü·Ã */
+private: /* ë¬¼í’ì„  ë†“ê¸° ê´€ë ¨ */
 	
-	/* ¹°Ç³¼± ³õ±â */
+	/* ë¬¼í’ì„  ë†“ê¸° */
 	void DeployBalloonManually();
 	
 	/// <summary>
-	/// AStar·Î ¹æ¹®ÇÑ ÁÂÇ¥ Áß ¹°Ç³¼±À» ³õ¾Æµµ ¾ÈÀüÁö´ë°¡ È®º¸µÇ´Â ÁÂÇ¥µé Ã£±â
+	/// AStarë¡œ ë°©ë¬¸í•œ ì¢Œí‘œ ì¤‘ ë¬¼í’ì„ ì„ ë†“ì•„ë„ ì•ˆì „ì§€ëŒ€ê°€ í™•ë³´ë˜ëŠ” ì¢Œí‘œë“¤ ì°¾ê¸°
 	/// </summary>
-	/// <param name="visited"> : AStar·Î ¹æ¹®ÇÑ ÁÂÇ¥</param>
-	/// <returns>¾ÈÀüÁö´ë°¡ È®º¸µÇ´Â ÁÂÇ¥µé</returns>
+	/// <param name="visited"> : AStarë¡œ ë°©ë¬¸í•œ ì¢Œí‘œ</param>
+	/// <returns>ì•ˆì „ì§€ëŒ€ê°€ í™•ë³´ë˜ëŠ” ì¢Œí‘œë“¤</returns>
 	vector<Util::Coord> GetDeployableCoords(const set<Util::Coord>& visited);
 
 	/// <summary>
-	/// ÇØ´ç ÁÂÇ¥¿¡ ¹°Ç³¼±À» ³õ¾Æµµ ¾ÈÀüÁö´ë°¡ È®º¸°¡ µÇ´ÂÁö °Ë»ç
+	/// í•´ë‹¹ ì¢Œí‘œì— ë¬¼í’ì„ ì„ ë†“ì•„ë„ ì•ˆì „ì§€ëŒ€ê°€ í™•ë³´ê°€ ë˜ëŠ”ì§€ ê²€ì‚¬
 	/// </summary>
-	/// <param name="coord"> : °Ë»çÇÒ ÁÂÇ¥</param>
-	/// <param name="visited"> : AStar·Î ¹æ¹®Ã³¸®µÈ ÁÂÇ¥µé</param>
+	/// <param name="coord"> : ê²€ì‚¬í•  ì¢Œí‘œ</param>
+	/// <param name="visited"> : AStarë¡œ ë°©ë¬¸ì²˜ë¦¬ëœ ì¢Œí‘œë“¤</param>
 	/// <returns></returns>
 	bool IsDeployable(const Util::Coord& coord, const set<Util::Coord>& visited);
 
 	/// <summary>
-	/// ¹°Ç³¼±À» ³õÀ» ¼ö ÀÖ´Â ÁÂÇ¥µé Áß Á» ´õ ÀÌ»óÀûÀÎ ÁÂÇ¥(ex - ºÎ¼­Áö´Â ºí·Ï ¿·)¸¦ ±¸ÇÏ´Â ÇÔ¼ö
+	/// ë¬¼í’ì„ ì„ ë†“ì„ ìˆ˜ ìžˆëŠ” ì¢Œí‘œë“¤ ì¤‘ ì¢€ ë” ì´ìƒì ì¸ ì¢Œí‘œ(ex - ë¶€ì„œì§€ëŠ” ë¸”ë¡ ì˜†)ë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
 	/// </summary>
-	/// <param name="deployables"> : ¹°Ç³¼±À» ³õÀ» ¼ö ÀÖ´Â ÁÂÇ¥µé</param>
-	/// <returns>¹°Ç³¼±À» ³õÀ» ÀÌ»óÀûÀÎ ÁÂÇ¥</returns>
+	/// <param name="deployables"> : ë¬¼í’ì„ ì„ ë†“ì„ ìˆ˜ ìžˆëŠ” ì¢Œí‘œë“¤</param>
+	/// <returns>ë¬¼í’ì„ ì„ ë†“ì„ ì´ìƒì ì¸ ì¢Œí‘œ</returns>
 	Util::Coord GetIdealDeployCoord(const vector<Util::Coord>& deployables); 
 	
 private:
 	/// <summary>
-	/// ¾ÈÀüÇÒ ÀÌµ¿ ÁÂÇ¥ ±¸ÇÏ±â
+	/// ì•ˆì „í•  ì´ë™ ì¢Œí‘œ êµ¬í•˜ê¸°
 	/// </summary>
-	/// <param name="visited"> : AStar·Î ¹æ¹®Ã³¸®µÈ ÁÂÇ¥µé</param>
-	/// <param name="safeCoordExist"> : ¾ÈÀüÇÒ ÀÌµ¿ÁÂÇ¥°¡ ÀÖ´ÂÁö¿¡ ´ëÇÑ OUT reference °á°ú</param>
-	/// <returns>¾ÈÀüÇÒ ÀÌµ¿ÁÂÇ¥</returns>
+	/// <param name="visited"> : AStarë¡œ ë°©ë¬¸ì²˜ë¦¬ëœ ì¢Œí‘œë“¤</param>
+	/// <param name="safeCoordExist"> : ì•ˆì „í•  ì´ë™ì¢Œí‘œê°€ ìžˆëŠ”ì§€ì— ëŒ€í•œ OUT reference ê²°ê³¼</param>
+	/// <returns>ì•ˆì „í•  ì´ë™ì¢Œí‘œ</returns>
 	Util::Coord GetSafeCoord(const set<Util::Coord>& visited, OUT bool& safeCoordExist);
 
 private:
@@ -85,55 +85,55 @@ private:
 ****************************************************************************************************/
 private:
 
-	/* Enemy target state - ÇöÀç ÀÌµ¿ÇÒ ¸ñÇ¥ target Á¾·ù */
+	/* Enemy target state - í˜„ìž¬ ì´ë™í•  ëª©í‘œ target ì¢…ë¥˜ */
 	enum TargetState
 	{
 		PLAYER,
-		BALLOON_D_POS,		// ¹°Ç³¼±À» ³õÀ» ÀÚ¸®·Î ÀÌµ¿
-		SAFE_ZONE,			// ¹°ÁÙ±â¿¡ ´êÁö ¾ÊÀ» ÀÚ¸®·Î ÀÌµ¿
-		RESCUE_PEER,		// ±¸Á¶¿äÃ»À» ´Ù¸¥ µ¿·á¿¡°Ô¼­ ¹ÞÀ¸¸é, ¹°Ç³¼±¿¡ °¤Èù µ¿·á À§Ä¡·Î ÀÌµ¿
-		NONE				// ¸ñÇ¥ targetÀÌ ÀâÈ÷Áö ¾ÊÀº »óÅÂ
+		BALLOON_D_POS,		// ë¬¼í’ì„ ì„ ë†“ì„ ìžë¦¬ë¡œ ì´ë™
+		SAFE_ZONE,			// ë¬¼ì¤„ê¸°ì— ë‹¿ì§€ ì•Šì„ ìžë¦¬ë¡œ ì´ë™
+		RESCUE_PEER,		// êµ¬ì¡°ìš”ì²­ì„ ë‹¤ë¥¸ ë™ë£Œì—ê²Œì„œ ë°›ìœ¼ë©´, ë¬¼í’ì„ ì— ê°‡ížŒ ë™ë£Œ ìœ„ì¹˜ë¡œ ì´ë™
+		NONE				// ëª©í‘œ targetì´ ìž¡ížˆì§€ ì•Šì€ ìƒíƒœ
 	} targetState = NONE;
 
 private:
-	/* °ÔÀÓ¸Ê¿¡¼­ÀÇ ÇöÀç ÁÂÇ¥ */
+	/* ê²Œìž„ë§µì—ì„œì˜ í˜„ìž¬ ì¢Œí‘œ */
 	Util::Coord myCoord{};
 
-private: /* ÀÌµ¿ °æ·Î °ü·Ã */
+private: /* ì´ë™ ê²½ë¡œ ê´€ë ¨ */
 
-	stack<Util::Coord>	path{};		// AStarPathFinder¸¦ ÅëÇÑ ¸ñÇ¥ÁöÁ¡±îÁöÀÇ °æ·Î
-	set<Util::Coord>	visited{};	// AStarPathFinder¸¦ ÅëÇØ AStar ¾Ë°í¸®Áò »ó ¹æ¹®Çß´ø ÁÂÇ¥µé
+	stack<Util::Coord>	path{};		// AStarPathFinderë¥¼ í†µí•œ ëª©í‘œì§€ì ê¹Œì§€ì˜ ê²½ë¡œ
+	set<Util::Coord>	visited{};	// AStarPathFinderë¥¼ í†µí•´ AStar ì•Œê³ ë¦¬ì¦˜ ìƒ ë°©ë¬¸í–ˆë˜ ì¢Œí‘œë“¤
 
-private: /* Safe zone¿¡ µµÂø ½Ã ±â´Ù¸± time */
+private: /* Safe zoneì— ë„ì°© ì‹œ ê¸°ë‹¤ë¦´ time */
 
-	const float SAFE_ZONE_WAIT_TIME = 3.f;	// Safe Zone µµÂø ½Ã, À§ÇùÀÌ ¾ø´Ù¸é ÇØ´ç ÀÚ¸®¿¡¼­ ´ë±âÇÒ ½Ã°£
+	const float SAFE_ZONE_WAIT_TIME = 3.f;	// Safe Zone ë„ì°© ì‹œ, ìœ„í˜‘ì´ ì—†ë‹¤ë©´ í•´ë‹¹ ìžë¦¬ì—ì„œ ëŒ€ê¸°í•  ì‹œê°„
 	float		safeZoneWaitTime{};
 
-private: /* °æ·Î ÀÌµ¿ Áß °æ·Î°¡ ¸·ÇûÀ» ¶§ °ü·Ã */
-	// °æ·Î ÀÌµ¿ Áß Æ¯Á¤ ½Ã°£ ÀÌ»ó °°Àº ÀÚ¸®¿¡ ¸Ó¹«¸¥´Ù¸é, °æ·Î°¡ ¹æÇØ¹Þ¾Ò´Ù°í ÆÇ´ÜÇÏ¿© targetState¸¦ NONEÀ¸·Î µÎ¾î °æ·Î ÀçÅ½»ö
+private: /* ê²½ë¡œ ì´ë™ ì¤‘ ê²½ë¡œê°€ ë§‰í˜”ì„ ë•Œ ê´€ë ¨ */
+	// ê²½ë¡œ ì´ë™ ì¤‘ íŠ¹ì • ì‹œê°„ ì´ìƒ ê°™ì€ ìžë¦¬ì— ë¨¸ë¬´ë¥¸ë‹¤ë©´, ê²½ë¡œê°€ ë°©í•´ë°›ì•˜ë‹¤ê³  íŒë‹¨í•˜ì—¬ targetStateë¥¼ NONEìœ¼ë¡œ ë‘ì–´ ê²½ë¡œ ìž¬íƒìƒ‰
 
 	const float BLOCKED_TIME_LIMIT = 0.5f;
 	float		blockedTime{};
 
-private: /* ÀÌµ¿ ¸ñÇ¥ÁöÁ¡ÀÌ player À§Ä¡ÀÏ ¶§, ¸ñÇ¥ÁöÁ¡ Á¶Á¤ °ü·Ã */
-	// ÇÃ·¹ÀÌ¾î¿¡°Ô ÀÌµ¿ ¸ñÇ¥·Î ¼³Á¤ ½Ã, ¿ÏÀüÈ÷ Á¢±ÙÇÏ´Â °ÍÀÌ ¾Æ´Ñ ·£´ýÇÏ°Ô °Å¸®Â÷¸¦ Á¶Á¤ÇÒ °ÍÀÓ
+private: /* ì´ë™ ëª©í‘œì§€ì ì´ player ìœ„ì¹˜ì¼ ë•Œ, ëª©í‘œì§€ì  ì¡°ì • ê´€ë ¨ */
+	// í”Œë ˆì´ì–´ì—ê²Œ ì´ë™ ëª©í‘œë¡œ ì„¤ì • ì‹œ, ì™„ì „ížˆ ì ‘ê·¼í•˜ëŠ” ê²ƒì´ ì•„ë‹Œ ëžœë¤í•˜ê²Œ ê±°ë¦¬ì°¨ë¥¼ ì¡°ì •í•  ê²ƒìž„
 
-	const UINT	PLAYER_APPROACH_MIN = 0;	// ÃÖ¼Ò Á¢±Ù °Å¸®Â÷
-	const UINT	PLAYER_APPROACH_MAX = 3;	// ÃÖ´ë Á¢±Ù °Å¸®Â÷
-	UINT		player_approach_lv{};		// ·£´ýÇÏ°Ô settingÇÑ player ¸ñÇ¥ ÁöÁ¡±îÁöÀÇ °Å¸®Â÷
+	const UINT	PLAYER_APPROACH_MIN = 0;	// ìµœì†Œ ì ‘ê·¼ ê±°ë¦¬ì°¨
+	const UINT	PLAYER_APPROACH_MAX = 3;	// ìµœëŒ€ ì ‘ê·¼ ê±°ë¦¬ì°¨
+	UINT		player_approach_lv{};		// ëžœë¤í•˜ê²Œ settingí•œ player ëª©í‘œ ì§€ì ê¹Œì§€ì˜ ê±°ë¦¬ì°¨
 
-private: /* RESCUE °ü·Ã(³»°¡ ±¸Á¶ÇÒ ¶§) */
+private: /* RESCUE ê´€ë ¨(ë‚´ê°€ êµ¬ì¡°í•  ë•Œ) */
 
-	Character* rescueTarget{}; // ±¸Á¶ÇØ¾ß ÇÒ µ¿·á
+	Character* rescueTarget{}; // êµ¬ì¡°í•´ì•¼ í•  ë™ë£Œ
 
-private: /* RESCUE °ü·Ã(³»°¡ ¹°Ç³¼±¿¡ °¤Çô¼­ ´Ù¸¥ µ¿·áÀÇ µµ¿òÀ» ¹Þ¾Æ¾ß ÇÒ ¶§) */
+private: /* RESCUE ê´€ë ¨(ë‚´ê°€ ë¬¼í’ì„ ì— ê°‡í˜€ì„œ ë‹¤ë¥¸ ë™ë£Œì˜ ë„ì›€ì„ ë°›ì•„ì•¼ í•  ë•Œ) */
 
-	bool		requestResqueOnce{};			// Ã¹ ±¸Á¶½ÅÈ£¸¦ º¸³Â´ÂÁö Ã¼Å©
-	bool		requestResqueTwice{};			// µÎ¹ø Â° ±¸Á¶½ÅÈ£¸¦ º¸³Â´ÂÁö Ã¼Å©
+	bool		requestResqueOnce{};			// ì²« êµ¬ì¡°ì‹ í˜¸ë¥¼ ë³´ëƒˆëŠ”ì§€ ì²´í¬
+	bool		requestResqueTwice{};			// ë‘ë²ˆ ì§¸ êµ¬ì¡°ì‹ í˜¸ë¥¼ ë³´ëƒˆëŠ”ì§€ ì²´í¬
 
-	const float RESCUE_CALL_TIME_ONCE  = 0.5f;	// ÇØ´ç ½Ã°£ÀÌ Èå¸¥ ÈÄ, Ã¹ ±¸Á¶¿äÃ» ÁøÇà
-	const float RESCUE_CALL_TIME_TWICE = 2.f;	// ÇØ´ç ½Ã°£ÀÌ Èå¸¥ ÈÄ, µÎ ¹øÂ° ±¸Á¶¿äÃ» ÁøÇà
-	float		capturedTime		   = 0.f;	// ¹°Ç³¼±¿¡ °¤Èù ÃÑ ½Ã°£
+	const float RESCUE_CALL_TIME_ONCE  = 0.5f;	// í•´ë‹¹ ì‹œê°„ì´ íë¥¸ í›„, ì²« êµ¬ì¡°ìš”ì²­ ì§„í–‰
+	const float RESCUE_CALL_TIME_TWICE = 2.f;	// í•´ë‹¹ ì‹œê°„ì´ íë¥¸ í›„, ë‘ ë²ˆì§¸ êµ¬ì¡°ìš”ì²­ ì§„í–‰
+	float		capturedTime		   = 0.f;	// ë¬¼í’ì„ ì— ê°‡ížŒ ì´ ì‹œê°„
 
 
 };

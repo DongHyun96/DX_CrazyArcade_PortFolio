@@ -1,13 +1,13 @@
-#pragma once
+ï»¿#pragma once
 
-#define BLOCK_Y_OFFSET 10.f // ºí·ÏÀ» ±ò ¶§, CELLÀÇ Á¤Áß¾Ó À§Ä¡¿¡ ±î´Â °ÍÀÌ ¾Æ´Ñ À§ÂÊÀ¸·Î Offset¸¸Å­ ¿Ã¸± °ÍÀÓ
+#define BLOCK_Y_OFFSET 10.f // ë¸”ë¡ì„ ê¹” ë•Œ, CELLì˜ ì •ì¤‘ì•™ ìœ„ì¹˜ì— ê¹ŒëŠ” ê²ƒì´ ì•„ë‹Œ ìœ„ìª½ìœ¼ë¡œ Offsetë§Œí¼ ì˜¬ë¦´ ê²ƒì„
 
 class Character;
 class Player;
 class Item;
 
 
-/* ºí·ÏÀÇ Æ¯¼º ±¸Á¶Ã¼ */
+/* ë¸”ë¡ì˜ íŠ¹ì„± êµ¬ì¡°ì²´ */
 struct BlockProperty
 {
 	bool breakable{};
@@ -15,17 +15,17 @@ struct BlockProperty
 	bool hidable{};
 };
 
-/* Block¿¡ ´ëÇØ save & loadÇÒ Á¤º¸µé */
+/* Blockì— ëŒ€í•´ save & loadí•  ì •ë³´ë“¤ */
 struct BlockInfo
 {
 	BlockInfo() {}
 
 	/// <param name="file"> : Texture file path </param>
-	/// <param name="boardXY"> : °ÔÀÓ º¸µå ³»ÀÇ ÁÂÇ¥ </param>
-	/// <param name="frameXY"> : Texture ÆÄÀÏÀÇ Row, col ÇÁ·¹ÀÓ ÃÑ °³¼ö </param>
-	/// <param name="targetXY"> : Texture ÆÄÀÏ ³»¿¡¼­ »ç¿ëÇÒ ÇÁ·¹ÀÓ À§Ä¡ </param>
-	/// <param name="bProp"> : ºí·ÏÀÇ Æ¯¼º </param>
-	/// <param name="texWorldSize"> : World¿¡ ¹èÄ¡µÉ size ÁöÁ¤ </param>
+	/// <param name="boardXY"> : ê²Œì„ ë³´ë“œ ë‚´ì˜ ì¢Œí‘œ </param>
+	/// <param name="frameXY"> : Texture íŒŒì¼ì˜ Row, col í”„ë ˆì„ ì´ ê°œìˆ˜ </param>
+	/// <param name="targetXY"> : Texture íŒŒì¼ ë‚´ì—ì„œ ì‚¬ìš©í•  í”„ë ˆì„ ìœ„ì¹˜ </param>
+	/// <param name="bProp"> : ë¸”ë¡ì˜ íŠ¹ì„± </param>
+	/// <param name="texWorldSize"> : Worldì— ë°°ì¹˜ë  size ì§€ì • </param>
 	BlockInfo
 	(
 		wstring file, 
@@ -38,7 +38,7 @@ struct BlockInfo
 	{ initialized = true; }
 
 	/// <summary>
-	/// BlockInfo bin ÆÄÀÏ ³»¿ëÀ¸·Î ÀúÀå
+	/// BlockInfo bin íŒŒì¼ ë‚´ìš©ìœ¼ë¡œ ì €ì¥
 	/// </summary>
 	/// <param name="binWriter"> : BinaryWriter reference </param>
 	void SaveData(BinaryWriter& binWriter)
@@ -55,7 +55,7 @@ struct BlockInfo
 	}
 
 	/// <summary>
-	/// BinÆÄÀÏ ÀúÀå ³»¿ë ºÒ·¯¿À±â
+	/// BiníŒŒì¼ ì €ì¥ ë‚´ìš© ë¶ˆëŸ¬ì˜¤ê¸°
 	/// </summary>
 	/// <param name="binReader"> : BinaryReader reference </param>
 	void ReadAndCopy(BinaryReader& binReader)
@@ -73,14 +73,14 @@ struct BlockInfo
 		texWorldSize		= binReader.ReadVector2();
 	}
 
-	bool initialized{}; // ÃÊ±âÈ­ ¿©ºÎ È®ÀÎ¿ë
+	bool initialized{}; // ì´ˆê¸°í™” ì—¬ë¶€ í™•ì¸ìš©
 
 	wstring			file{};								// Texture file path
-	Util::Coord		boardXY{};							// °ÔÀÓ º¸µå ÁÂÇ¥ (Cell ÁÂÇ¥)
-	Util::Coord		frameXY{};							// Texture ÆÄÀÏÀÇ Row, col ÇÁ·¹ÀÓ ÃÑ °³¼ö
-	Util::Coord		targetXY{};							// Texture ÆÄÀÏ ³»¿¡¼­ »ç¿ëÇÒ ÇÁ·¹ÀÓ À§Ä¡
-	BlockProperty	bProp{};							// ºí·ÏÀÇ Æ¯¼º
-	Vector2			texWorldSize{ CELL_WORLD_SIZE };	// World¿¡ ¹èÄ¡µÉ size ÁöÁ¤
+	Util::Coord		boardXY{};							// ê²Œì„ ë³´ë“œ ì¢Œí‘œ (Cell ì¢Œí‘œ)
+	Util::Coord		frameXY{};							// Texture íŒŒì¼ì˜ Row, col í”„ë ˆì„ ì´ ê°œìˆ˜
+	Util::Coord		targetXY{};							// Texture íŒŒì¼ ë‚´ì—ì„œ ì‚¬ìš©í•  í”„ë ˆì„ ìœ„ì¹˜
+	BlockProperty	bProp{};							// ë¸”ë¡ì˜ íŠ¹ì„±
+	Vector2			texWorldSize{ CELL_WORLD_SIZE };	// Worldì— ë°°ì¹˜ë  size ì§€ì •
 };
 
 /*
@@ -92,7 +92,7 @@ public:
 
 	Block(const BlockInfo& info);
 
-	// texWorldSize¿¡ µğÆúÆ®·Î y offsetÀ» Á¶±İ µÎ¾î ¸Ó¸®ºÎºĞÀÌ µÚ·Î Á¶±İ ³Ñ¾î°¡°Ô²û ¹Ì¼¼ÇÏ°Ô Á¶Á¤ÇÒ °ÍÀÓ
+	// texWorldSizeì— ë””í´íŠ¸ë¡œ y offsetì„ ì¡°ê¸ˆ ë‘ì–´ ë¨¸ë¦¬ë¶€ë¶„ì´ ë’¤ë¡œ ì¡°ê¸ˆ ë„˜ì–´ê°€ê²Œë” ë¯¸ì„¸í•˜ê²Œ ì¡°ì •í•  ê²ƒì„
 	Block
 	(
 		Util::Coord boardXY, wstring texFile, 
@@ -110,28 +110,28 @@ public:
 private:
 
 	/// <summary>
-	/// block ÀÌµ¿ ½Ãµµ
+	/// block ì´ë™ ì‹œë„
 	/// </summary>
-	/// <param name="destBoardCoordX"> : ÀÌµ¿ÇÒ destination board coord X ÁÂÇ¥ </param>
-	/// <param name="destBoardCoordY"> : ÀÌµ¿ÇÒ destination board coord Y ÁÂÇ¥ </param>
-	/// <returns> ÀÌµ¿ ¼º°ø ¿©ºÎ </returns>
+	/// <param name="destBoardCoordX"> : ì´ë™í•  destination board coord X ì¢Œí‘œ </param>
+	/// <param name="destBoardCoordY"> : ì´ë™í•  destination board coord Y ì¢Œí‘œ </param>
+	/// <returns> ì´ë™ ì„±ê³µ ì—¬ë¶€ </returns>
 	bool Move(const UINT& destBoardCoordX, const UINT& destBoardCoordY);
 
 	/// <summary>
-	/// block ÀÌµ¿ ½Ãµµ
+	/// block ì´ë™ ì‹œë„
 	/// </summary>
-	/// <param name="destCoord"> : ÀÌµ¿ÇÒ destination board coord </param>
-	/// <returns> ÀÌµ¿ ¼º°ø ¿©ºÎ </returns>
+	/// <param name="destCoord"> : ì´ë™í•  destination board coord </param>
+	/// <returns> ì´ë™ ì„±ê³µ ì—¬ë¶€ </returns>
 	bool Move(const Util::Coord& destCoord);
 
 	/// <summary>
-	/// block ÀÌµ¿ ½Ãµµ
+	/// block ì´ë™ ì‹œë„
 	/// </summary>
-	/// <param name="destination"> : ÀÌµ¿ÇÒ ½ÇÁ¦ Vector2 ÁÂÇ¥ </param>
-	/// <returns> ÀÌµ¿ ¼º°ø ¿©ºÎ </returns>
+	/// <param name="destination"> : ì´ë™í•  ì‹¤ì œ Vector2 ì¢Œí‘œ </param>
+	/// <returns> ì´ë™ ì„±ê³µ ì—¬ë¶€ </returns>
 	bool Move(Vector2 destination);
 
-	/* block ÀÌµ¿ ½Ã ÀÌµ¿Ã³¸® ´ã´ç (Called in Update) */
+	/* block ì´ë™ ì‹œ ì´ë™ì²˜ë¦¬ ë‹´ë‹¹ (Called in Update) */
 	void HandleMove();
 
 public:
@@ -157,10 +157,10 @@ public: /* Getters, setters */
 	void			SetLabel(const string& label)			{ this->label = label; }
 
 private:
-	/* ¼öÇ® interaction ½Ç½Ã */
+	/* ìˆ˜í’€ interaction ì‹¤ì‹œ */
 	void PlayBushInteraction();
 
-	/* currentlyBushingÀ» Ã¼Å©ÇÏ¿© ¼öÇ® interaction handling */
+	/* currentlyBushingì„ ì²´í¬í•˜ì—¬ ìˆ˜í’€ interaction handling */
 	void HandleBushInteraction();
 	
 private: /* Collider call back functions */
@@ -175,13 +175,13 @@ private: /* Collider call back functions */
 
 private:
 
-	/// <param name="cDirection"> : ÇöÀç Ä³¸¯ÅÍ°¡ ÇâÇÏ´Â ¹æÇâ </param>
-	/// <param name="collidedFace"> : ÇöÀç Ä³¸¯ÅÍ¿Í Ãæµ¹ÁßÀÎ blockÀÇ ¸é ¹æÇâ </param>
+	/// <param name="cDirection"> : í˜„ì¬ ìºë¦­í„°ê°€ í–¥í•˜ëŠ” ë°©í–¥ </param>
+	/// <param name="collidedFace"> : í˜„ì¬ ìºë¦­í„°ì™€ ì¶©ëŒì¤‘ì¸ blockì˜ ë©´ ë°©í–¥ </param>
 	/// <returns></returns>
 	bool IsPushing(const Direction& cDirection, const Direction& collidedFace);
 
 private:
-	/* ·£´ıÇÑ È®·ü·Î ¾ÆÀÌÅÛ »ı¼º ½Ãµµ */
+	/* ëœë¤í•œ í™•ë¥ ë¡œ ì•„ì´í…œ ìƒì„± ì‹œë„ */
 	void HandleAddItem();
 
 public: /* Debugging */
@@ -212,27 +212,27 @@ private: /* Block properties */
 
 private:
 
-	UINT		hp{1};				// ºí·ÏÀÇ Ã¼·Â
-	Animation*	destroyedAnim{};	// ºí·ÏÀÌ ºÎ¼­Áú ¶§ Àç»ıÇÒ animation
+	UINT		hp{1};				// ë¸”ë¡ì˜ ì²´ë ¥
+	Animation*	destroyedAnim{};	// ë¸”ë¡ì´ ë¶€ì„œì§ˆ ë•Œ ì¬ìƒí•  animation
 
-private: /* Movable block °ü·Ã */
+private: /* Movable block ê´€ë ¨ */
 
-	Util::Coord boardPos{};							// º¸µå Cell ÁÂÇ¥
-	Vector2		destination{};						// ÀÌµ¿ÇÒ À§Ä¡
-	bool		currentlyMoving{};					// ÇöÀç ¿òÁ÷ÀÌ´Â ÁßÀÎÁö
-	float		pushForceAppliedTime{};				// ¹Ğ¸² ´çÇÑ ½Ã°£ Ã¼Å© timer
-	const float PUSH_APPLIED_TIME_LIMIT{ 0.2f };	// ¹Ğ¸± ½Ã°£ threshold
+	Util::Coord boardPos{};							// ë³´ë“œ Cell ì¢Œí‘œ
+	Vector2		destination{};						// ì´ë™í•  ìœ„ì¹˜
+	bool		currentlyMoving{};					// í˜„ì¬ ì›€ì§ì´ëŠ” ì¤‘ì¸ì§€
+	float		pushForceAppliedTime{};				// ë°€ë¦¼ ë‹¹í•œ ì‹œê°„ ì²´í¬ timer
+	const float PUSH_APPLIED_TIME_LIMIT{ 0.2f };	// ë°€ë¦´ ì‹œê°„ threshold
 
-private: /* ¼öÇ® block Interaction °ü·Ã */
+private: /* ìˆ˜í’€ block Interaction ê´€ë ¨ */
 
-	bool	currentlyBushing{};		// ¼öÇ® interactionÀÌ ÁøÇàÁßÀÎÁö (ex - bush animation, bush sound play)
-	float	bushInteractedTime{};	// ¼öÇ® interactionÀÌ ÁøÇàÇÑ ÃÑ ½Ã°£
+	bool	currentlyBushing{};		// ìˆ˜í’€ interactionì´ ì§„í–‰ì¤‘ì¸ì§€ (ex - bush animation, bush sound play)
+	float	bushInteractedTime{};	// ìˆ˜í’€ interactionì´ ì§„í–‰í•œ ì´ ì‹œê°„
 
-private: /* ¾ÆÀÌÅÛ °ü·Ã(°¡Áö°í ÀÖÀ» ¼öµµ ¾øÀ» ¼öµµ ÀÖÀ½) */
+private: /* ì•„ì´í…œ ê´€ë ¨(ê°€ì§€ê³  ìˆì„ ìˆ˜ë„ ì—†ì„ ìˆ˜ë„ ìˆìŒ) */
 	
 	/* 
-	Block¿¡¼­ ·£´ıÇÏ°Ô »ı¼º -> »ı¼ºµÇ¾ú´Ù¸é ÇØ´ç ¾ÆÀÌÅÛÀ» ItemManager¿¡ ³Ñ°Ü¼­ ItemManager¿¡¼­ ÀÏ°ıÀûÀ¸·Î managing
-	¾ÆÀÌÅÛ ¸Å´ÏÀú¿¡¼­ ÀÏ°ı »èÁ¦, Update, RenderÇÒ ¿¹Á¤
+	Blockì—ì„œ ëœë¤í•˜ê²Œ ìƒì„± -> ìƒì„±ë˜ì—ˆë‹¤ë©´ í•´ë‹¹ ì•„ì´í…œì„ ItemManagerì— ë„˜ê²¨ì„œ ItemManagerì—ì„œ ì¼ê´„ì ìœ¼ë¡œ managing
+	ì•„ì´í…œ ë§¤ë‹ˆì €ì—ì„œ ì¼ê´„ ì‚­ì œ, Update, Renderí•  ì˜ˆì •
 	*/
 	Item* item{};
 

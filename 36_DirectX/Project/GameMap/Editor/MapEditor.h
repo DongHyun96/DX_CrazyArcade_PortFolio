@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 class GameUIManager;
 
 /*
 CONCRETE CLASS
-TileMapEditor¿Í BlockMapEditor¸¦ ¼ÒÀ¯
+TileMapEditorì™€ BlockMapEditorë¥¼ ì†Œìœ 
 */
 class MapEditor
 {
@@ -45,17 +45,17 @@ private:
 	TileEditor*		tileEditor{};
 	BlockEditor*	blockEditor{};
 
-private: // ImGui¸¦ ÅëÇÑ ±â´Éµé
+private: // ImGuië¥¼ í†µí•œ ê¸°ëŠ¥ë“¤
 	
 	const string label = "MapEditor";	// Debug label
 	EditMode	 mode  = BLOCK_MODE;	// Current editing mode
 	
 private:
-	/* CellColliders ·»´õ¸µÇÒÁö ¿©ºÎ */
+	/* CellColliders ë Œë”ë§í• ì§€ ì—¬ë¶€ */
 	bool renderColliderFlag = true;
 
 private:
-	/* GameScene ¿· ÆĞ³Î ·»´õ¸µ ¿ëµµ */
+	/* GameScene ì˜† íŒ¨ë„ ë Œë”ë§ ìš©ë„ */
 	GameUIManager* uiManager{};
 
 };

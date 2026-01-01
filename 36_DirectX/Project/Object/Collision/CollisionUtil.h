@@ -1,23 +1,23 @@
-#pragma once
+ï»¿#pragma once
 
 namespace CollisionUtil
 {
 	/// <summary>
-	/// MyBody¿¡ µé¾î¿Â enteredBody°¡ myBodyÀÇ ¾î´À ¹æÇâÀ¸·Î Ãæµ¹ÇÏ¿© µé¾î¿Ô´ÂÁö
+	/// MyBodyì— ë“¤ì–´ì˜¨ enteredBodyê°€ myBodyì˜ ì–´ëŠ ë°©í–¥ìœ¼ë¡œ ì¶©ëŒí•˜ì—¬ ë“¤ì–´ì™”ëŠ”ì§€
 	/// </summary>
 	/// <param name="myBody"> : My body collider </param>
-	/// <param name="enteredBody"> : myBody¿¡ µé¾î¿Â collider </param>
+	/// <param name="enteredBody"> : myBodyì— ë“¤ì–´ì˜¨ collider </param>
 	/// <returns></returns>
 	Direction GetCollidedDirection(ColliderRect* myBody, ColliderRect* enteredBody);
 	
 	/// <summary>
-	/// <para> BlockÀÌ³ª Balloon°ú Character¿¡ ´ëÇÑ Collision handling								</para>
-	/// <para> ±âº» º®Ãæµ¹Ã³¸®¿Í ´õºÒ¾î, ±ÍÅüÀÌ ºÎºĞ¿¡ À§Ä¡ÇÏ°í Ä³¸¯ÅÍ°¡ ÀÌµ¿ÇÏ´Â ¹æÇâÀÌ ÀûÀıÈ÷ ¸Â¹°¸± ¶§, </para>
-	/// <para> Lerp¸¦ ÅëÇÑ Ä³¸¯ÅÍ À§Ä¡Á¶Á¤À» Ã³¸®ÇÔ													</para>
+	/// <para> Blockì´ë‚˜ Balloonê³¼ Characterì— ëŒ€í•œ Collision handling								</para>
+	/// <para> ê¸°ë³¸ ë²½ì¶©ëŒì²˜ë¦¬ì™€ ë”ë¶ˆì–´, ê·€í‰ì´ ë¶€ë¶„ì— ìœ„ì¹˜í•˜ê³  ìºë¦­í„°ê°€ ì´ë™í•˜ëŠ” ë°©í–¥ì´ ì ì ˆíˆ ë§ë¬¼ë¦´ ë•Œ, </para>
+	/// <para> Lerpë¥¼ í†µí•œ ìºë¦­í„° ìœ„ì¹˜ì¡°ì •ì„ ì²˜ë¦¬í•¨													</para>
 	/// </summary>
-	/// <param name="block"> : Block ¶Ç´Â Balloon ¶Ç´Â º®Ãæµ¹Ã³¸®¸¦ ÇÒ ¹°Ã¼ÀÇ ColliderRect body </param>
+	/// <param name="block"> : Block ë˜ëŠ” Balloon ë˜ëŠ” ë²½ì¶©ëŒì²˜ë¦¬ë¥¼ í•  ë¬¼ì²´ì˜ ColliderRect body </param>
 	/// <param name="character"> : Character body collider </param>
-	/// <param name="characterSpeed"> : Ä³¸¯ÅÍÀÇ speed - Lerp¸¦ ÅëÇÑ Ä³¸¯ÅÍ À§Ä¡Á¶Á¤À» Ã³¸®ÇÒ ¶§ ¾²ÀÓ </param>
+	/// <param name="characterSpeed"> : ìºë¦­í„°ì˜ speed - Lerpë¥¼ í†µí•œ ìºë¦­í„° ìœ„ì¹˜ì¡°ì •ì„ ì²˜ë¦¬í•  ë•Œ ì“°ì„ </param>
 	void HandleCharacterCommonCollision(ColliderRect* block, ColliderRect* character, const float& characterSpeed);
 	
 }

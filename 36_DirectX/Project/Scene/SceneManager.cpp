@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "SceneManager.h"
 
 
@@ -108,13 +108,13 @@ void SceneManager::SetCurScene(const SceneName& sceneName)
 
 		if (curScene == GAME_SCENE)
 		{
-			// °ÔÀÓ¾À¿¡¼­ ·Îºñ·Î µ¹¾Æ¿Ã ¶§
+			// ê²Œì„ì”¬ì—ì„œ ë¡œë¹„ë¡œ ëŒì•„ì˜¬ ë•Œ
 			delete scenes[GAME_SCENE];
 			scenes[GAME_SCENE] = nullptr;
 
 			LobbyScene* ls = dynamic_cast<LobbyScene*>(scenes[LOBBY_SCENE]);
 
-			if (ls) ls->InitPlayerCharacters(); // ·£´ı ¼±ÅÃµÇ¾î ÀÖ¾ú´Ù¸é ÇÃ·¹ÀÌ¾î¸¦ ´Ù½Ã ·£´ıÀ¸·Î ¹Ù²Ş
+			if (ls) ls->InitPlayerCharacters(); // ëœë¤ ì„ íƒë˜ì–´ ìˆì—ˆë‹¤ë©´ í”Œë ˆì´ì–´ë¥¼ ë‹¤ì‹œ ëœë¤ìœ¼ë¡œ ë°”ê¿ˆ
 
 		}
 	}
@@ -137,9 +137,9 @@ void SceneManager::SetCurScene(const SceneName& sceneName)
 			scenes[GAME_SCENE] = nullptr;
 		}
 
-		scenes[GAME_SCENE] = new GameScene; // Load gameData (ºí·Ï°ú Å¸ÀÏÁ¤º¸ ·Îµå
+		scenes[GAME_SCENE] = new GameScene; // Load gameData (ë¸”ë¡ê³¼ íƒ€ì¼ì •ë³´ ë¡œë“œ
 
-		// ÇÑ¹ø Å¸ÀÓÀ» elapsed¸¦ ÃÊ±âÈ­ ½ÃÄÑÁà¾ß ÇÔ
+		// í•œë²ˆ íƒ€ì„ì„ elapsedë¥¼ ì´ˆê¸°í™” ì‹œì¼œì¤˜ì•¼ í•¨
 		Time::GetInstance()->RefreshTimer();
 
 		SOUND->Stop("LobbyBGM");

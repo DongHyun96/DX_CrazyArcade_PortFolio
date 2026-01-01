@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 /* Character Anim Direction Key */
 enum CharacterAnimDir
@@ -9,7 +9,7 @@ enum CharacterAnimDir
 	A_DOWN
 };
 
-/* ¹°Ç³¼±¿¡ °¤ÇûÀ» ¶§ÀÇ animation »óÅÂ */
+/* ë¬¼í’ì„ ì— ê°‡í˜”ì„ ë•Œì˜ animation ìƒíƒœ */
 enum BubbleAnimState
 {
 	A_BUBBLE_CAPTURED,

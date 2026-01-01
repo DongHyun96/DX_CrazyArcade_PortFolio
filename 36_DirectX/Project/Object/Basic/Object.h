@@ -1,16 +1,16 @@
-#pragma once
+ï»¿#pragma once
 class Object : public Transform
 {
 public:
 	Object(Vector2 size);
 
-	// Texture ÀÔÈù Objectµé
-	Object(wstring file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1)); // Texture size¸¦ ±×´ë·Î »ç¿ë
+	// Texture ì…íŒ Objectë“¤
+	Object(wstring file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1)); // Texture sizeë¥¼ ê·¸ëŒ€ë¡œ ì‚¬ìš©
 
-	// Client°¡ Á¤ÇÑ size »ç¿ë
+	// Clientê°€ ì •í•œ size ì‚¬ìš©
 	Object(Vector2 size, wstring file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1)); 
 
-	// Å¸ÀÏ¸ÊÃ³·³ ¿©·¯Àå ÀÖÀ» ¶§ ºĞ¸®ÇÏ±â À§ÇÑ ¿ëµµ
+	// íƒ€ì¼ë§µì²˜ëŸ¼ ì—¬ëŸ¬ì¥ ìˆì„ ë•Œ ë¶„ë¦¬í•˜ê¸° ìœ„í•œ ìš©ë„
 	Object(Vector2 size, wstring file, UINT frameX, UINT frameY, UINT targetX, UINT targetY);
 
 	Object(const Vector4& UDLR, const wstring& file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1));

@@ -1,8 +1,8 @@
-#pragma once
+О╩©#pragma once
 
 /* 
 CONCRETE CLASS
-х╧╣Фго╢б аО╫ц ╧ъ╣©╣г╢б ╬фюлеш
+М █К⌠²М∙≤К┼■ Л╕┴Л▀° К╟°К▐≥К░≤К┼■ Л∙└Л²╢М┘°
 */
 class ImmediateItem : public Item
 {

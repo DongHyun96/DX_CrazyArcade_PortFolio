@@ -1,11 +1,11 @@
-#include "Framework.h"
+﻿#include "Framework.h"
 #include "StreamBlock_Left.h"
 
 
 StreamBlock_Left::StreamBlock_Left()
 {
 	// _Texture\InGame\Stream
-	// mainAnim / endAnim �ʱ�ȭ
+	// mainAnim / endAnim 초기화
 	// L"InGame/Characters/Bazzi/playerBubble.png"
 
 	mainAnim = new Animation(CELL_WORLD_SIZE, L"InGame/Stream/leftNormal.png", 11, 1, 11, ANIM_SPEED);

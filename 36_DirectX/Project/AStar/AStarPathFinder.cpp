@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "AStarPathFinder.h"
 
 ASNode* AStarPathFinder::fieldNodes[MAP_ROW][MAP_COL];
@@ -60,7 +60,7 @@ pair<stack<Util::Coord>, set<Util::Coord>> AStarPathFinder::GetPath(const Util::
 
         visited.insert(curNode->coord);
 
-        if (curNode->coord == dest) // ÃÖ´Ü°æ·Î Å½»ö ¿Ï·á
+        if (curNode->coord == dest) // ìµœë‹¨ê²½ë¡œ íƒìƒ‰ ì™„ë£Œ
         {
             path.push(curNode->coord);
             curNode = curNode->parent;
@@ -79,14 +79,14 @@ pair<stack<Util::Coord>, set<Util::Coord>> AStarPathFinder::GetPath(const Util::
             int nx = curNode->coord.x + dx[i];
             int ny = curNode->coord.y + dy[i];
             
-            // ¹üÀ§ ÆÇÁ¤ ¸ÕÀú
+            // ë²”ìœ„ íŒì • ë¨¼ì €
             if (nx < 0 || nx >= MAP_COL || ny < 0 || ny >= MAP_ROW) continue;
             
             Util::Coord nextCoord{ (UINT)nx, (UINT)ny};
 
             if (!IsAvailableCell(nextCoord, isC_SPACE)) continue;
             
-            // f, g, h°ª ±¸ÇÏ±â
+            // f, g, hê°’ êµ¬í•˜ê¸°
             UINT g = curNode->g + 1;
             UINT h = Util::GetDist(nextCoord, dest);
             int f = g + h;
@@ -108,9 +108,9 @@ pair<stack<Util::Coord>, set<Util::Coord>> AStarPathFinder::GetPath(const Util::
 bool AStarPathFinder::IsAvailableCell(const Util::Coord& coord, const bool& isC_SPACE)
 {
 
-    // ¾ÈµÇ´Â Á¶°Ç ¸ğµÎ °Ë»ç
+    // ì•ˆë˜ëŠ” ì¡°ê±´ ëª¨ë‘ ê²€ì‚¬
 
-    // ºí·° ¸ÕÀú Ã¼Å©
+    // ë¸”ëŸ­ ë¨¼ì € ì²´í¬
     Block* block = BlockManager::GetCoordBlock(coord);
 
     if (block)
@@ -125,10 +125,10 @@ bool AStarPathFinder::IsAvailableCell(const Util::Coord& coord, const bool& isC_
         }
     }
 
-    // ¹ú·é Á¶»ç
+    // ë²Œë£¬ ì¡°ì‚¬
     if (Balloon::IsActiveBalloonOnCoord(coord)) return false;
 
-    // ½ºÆ®¸² °Ë»ç
+    // ìŠ¤íŠ¸ë¦¼ ê²€ì‚¬
     if (Stream::IsStreamDangerZone(coord)) return false;
 
     return true;

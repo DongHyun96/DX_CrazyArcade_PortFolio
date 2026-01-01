@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Dart.h"
 
 
@@ -110,7 +110,7 @@ void Dart::HandleBoundary()
 
 void Dart::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner)
 {
-	// Block°úÀÇ Ãæµ¹Àº blockManager¿¡¼­ ´ã´ç
+	// Blockê³¼ì˜ ì¶©ëŒì€ blockManagerì—ì„œ ë‹´ë‹¹
 
 	Balloon* balloon = dynamic_cast<Balloon*>(owner);
 

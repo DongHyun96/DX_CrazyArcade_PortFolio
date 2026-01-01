@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "BinaryWriter.h"
 
 
@@ -42,7 +42,7 @@ void BinaryWriter::WriteData(string data)
 {
 	UINT dataSize = data.size();
 
-	WriteData(dataSize); // ¹®ÀÚ¿­ Å©±â¸¦ ¸ÕÀú ±â·ÏÇÏ°í ±× Å©±â¸¸Å­ ¹®ÀÚ¿­À» ±â·Ï
+	WriteData(dataSize); // ë¬¸ìì—´ í¬ê¸°ë¥¼ ë¨¼ì € ê¸°ë¡í•˜ê³  ê·¸ í¬ê¸°ë§Œí¼ ë¬¸ìì—´ì„ ê¸°ë¡
 
 	WriteFile(file, data.data(), sizeof(char) * dataSize, &size, nullptr);
 }

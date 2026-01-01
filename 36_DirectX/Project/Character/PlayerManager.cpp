@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "PlayerManager.h"
 
 
@@ -76,7 +76,7 @@ void PlayerManager::Init()
 	P_ITEM_KEYCODE[P1] = VK_LCONTROL;
 
 
-	if (gameMode == PVP) // TODO p1°ú p2 °ÔÀÓÄ³¸¯ÅÍ Å¸ÀÔ °¡Á®¿À±â
+	if (gameMode == PVP) // TODO p1ê³¼ p2 ê²Œì„ìºë¦­í„° íƒ€ì… ê°€ì ¸ì˜¤ê¸°
 	{
 		p1 = p1CharacterData[GM->P_SelectedCharacterMap()[P1]];
 		p1->SetLabel("P1");
@@ -166,12 +166,12 @@ void PlayerManager::HandlePlayersGameOver()
 
 void PlayerManager::HandlePlayerCollisions()
 {
-	for (Character* player : wholePlayers) // ÁÖÃ¼
+	for (Character* player : wholePlayers) // ì£¼ì²´
 	{
 		switch (player->GetCharacterState()) 
 			case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: continue;
 
-		for (Character* target : wholePlayers) // ¾ê°¡ È¿°ú ¹Ş´Â ¾Ö
+		for (Character* target : wholePlayers) // ì–˜ê°€ íš¨ê³¼ ë°›ëŠ” ì• 
 		{
 			if (player == target)
 				continue;
@@ -196,7 +196,7 @@ Util::Coord PlayerManager::GetApproximatedPlayerCoord(Character* character)
 {
 	Util::Coord exactCoord = GM->GetCollidedMapCellCoord(character->GetBody()->GlobalPosition());
 
-	// »óÇÏÁÂ¿ì ´ë°¢ 2Ä­ ¹İ°æ(25Ä­) & ÇØ´ç coord¿¡ ¹°Ã¼°¡ ¾øµµ·Ï
+	// ìƒí•˜ì¢Œìš° ëŒ€ê° 2ì¹¸ ë°˜ê²½(25ì¹¸) & í•´ë‹¹ coordì— ë¬¼ì²´ê°€ ì—†ë„ë¡
 	vector<Util::Coord> candidates{};
 
 	for (int i = -2; i <= 2; i++)
@@ -250,7 +250,7 @@ void PlayerManager::CheckAndHandleGameOver()
 		{
 			deathTimer += Time::Delta();
 			
-			if (deathTimer >= DRAW_CHECK_TIME) // ÇÑ ÇÃ·¹ÀÌ¾î°¡ Á×Àº ÈÄ DEATH_CEHCK_TIMEÀ» ³Ñ¾î°¡¸é ½ÂÆĞ¸¦ °áÁ¤ÁöÀ» ½Ã°£
+			if (deathTimer >= DRAW_CHECK_TIME) // í•œ í”Œë ˆì´ì–´ê°€ ì£½ì€ í›„ DEATH_CEHCK_TIMEì„ ë„˜ì–´ê°€ë©´ ìŠ¹íŒ¨ë¥¼ ê²°ì •ì§€ì„ ì‹œê°„
 			{
 				deathTimerTriggered = false;
 				deathTimer = 0.f;
@@ -266,7 +266,7 @@ void PlayerManager::CheckAndHandleGameOver()
 			}
 		}
 		break;
-	case PVE: // ÇÃ·¹ÀÌ¾î°¡ Á×Àº »óÈ², ÄÄÇ»ÅÍ°¡ ¸ğµÎ Á×Àº »óÈ²
+	case PVE: // í”Œë ˆì´ì–´ê°€ ì£½ì€ ìƒí™©, ì»´í“¨í„°ê°€ ëª¨ë‘ ì£½ì€ ìƒí™©
 	{
 
 		bool comAllDead = true;

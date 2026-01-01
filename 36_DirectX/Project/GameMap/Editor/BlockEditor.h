@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class MapEditor;
 
@@ -6,7 +6,7 @@ class MapEditor;
 /*
 CONCRETE CLASS
 Owned by MapEditor
-GameManager¿¡¼­ editMode°¡ È°¼ºÈ­ µÇ¾î ÀÖ°í, MapEditorÀÇ mode°¡ BlockEditorModeÀÏ ¶§ »ç¿ë
+GameManagerì—ì„œ editModeê°€ í™œì„±í™” ë˜ì–´ ìˆê³ , MapEditorì˜ modeê°€ BlockEditorModeì¼ ë•Œ ì‚¬ìš©
 */
 class BlockEditor
 {
@@ -23,35 +23,35 @@ private:
 	void UpdateObjects();
 
 private:
-	/* ºí·Ï ¸Ş´º¹öÆ° initialization */
+	/* ë¸”ë¡ ë©”ë‰´ë²„íŠ¼ initialization */
 	void InitBlockButtons();
 
 private:
-	/* ºí·Ï ¸Ş´º¹öÆ°À» ÅëÇØ ÇöÀç ºí·Ï ¼±ÅÃÇÏ±â */
+	/* ë¸”ë¡ ë©”ë‰´ë²„íŠ¼ì„ í†µí•´ í˜„ì¬ ë¸”ë¡ ì„ íƒí•˜ê¸° */
 	void SelectBlockMap();
 
-	/* ÇöÀç ºí·Ï world¿¡ ¹èÄ¡ */
+	/* í˜„ì¬ ë¸”ë¡ worldì— ë°°ì¹˜ */
 	void SetBlockToWorld();
 
 private:
 	/// <summary>
-	/// Editor¿¡¼­ ÇöÀç ¼±ÅÃµÈ ºí·ÏÀ» world¿¡ ¹èÄ¡ÇÒ ¶§ »ç¿ë
+	/// Editorì—ì„œ í˜„ì¬ ì„ íƒëœ ë¸”ë¡ì„ worldì— ë°°ì¹˜í•  ë•Œ ì‚¬ìš©
 	/// </summary>
-	/// <param name="boardXY"> : ¹èÄ¡µÉ cell pos ÁÂÇ¥ </param>
+	/// <param name="boardXY"> : ë°°ì¹˜ë  cell pos ì¢Œí‘œ </param>
 	void CreateBlock(Util::Coord boardXY);
 
 	/// <summary>
-	/// EditMode ½ÃÀÛ ½Ã, GameManagerÀÇ curMapType¿¡ µû¸¥ ¹Ì¸® ÀúÀåµÈ BlockµéÀ» Load
+	/// EditMode ì‹œì‘ ì‹œ, GameManagerì˜ curMapTypeì— ë”°ë¥¸ ë¯¸ë¦¬ ì €ì¥ëœ Blockë“¤ì„ Load
 	/// </summary>
-	/// <param name="info"> : ¸¸µé ºí·ÏÀÇ Á¤º¸</param>
-	/// <param name="boardXY"> : ¹èÄ¡µÉ cell pos ÁÂÇ¥ </param>
+	/// <param name="info"> : ë§Œë“¤ ë¸”ë¡ì˜ ì •ë³´</param>
+	/// <param name="boardXY"> : ë°°ì¹˜ë  cell pos ì¢Œí‘œ </param>
 	void CreateBlock(const BlockInfo& info, Util::Coord boardXY); 
 
 
 	/// <summary>
-	/// World¿¡ ¹èÄ¡µÈ block Áö¿ì±â
+	/// Worldì— ë°°ì¹˜ëœ block ì§€ìš°ê¸°
 	/// </summary>
-	/// <param name="boardXY"> Áö¿ï blockÀÇ cell pos ÁÂÇ¥ </param>
+	/// <param name="boardXY"> ì§€ìš¸ blockì˜ cell pos ì¢Œí‘œ </param>
 	void EraseBlock(const Util::Coord& boardXY);
 																  
 private:
@@ -71,14 +71,14 @@ private:
 	/* Owner of this class */
 	MapEditor* mapEditor{};
 
-private: /* World¿¡ ¹èÄ¡µÈ ºí·Ï °ü·Ã */
-	Block*		cellBlocks[MAP_ROW][MAP_COL]{};	// World¿¡ ¹èÄ¡µÈ ºí·Ï °´Ã¼µé
-	BlockInfo	infos[MAP_ROW][MAP_COL]{};		// ÇöÀç worldÀÇ °¢ cell¿¡ ¹èÄ¡µÈ ºí·ÏµéÀÇ infos
+private: /* Worldì— ë°°ì¹˜ëœ ë¸”ë¡ ê´€ë ¨ */
+	Block*		cellBlocks[MAP_ROW][MAP_COL]{};	// Worldì— ë°°ì¹˜ëœ ë¸”ë¡ ê°ì²´ë“¤
+	BlockInfo	infos[MAP_ROW][MAP_COL]{};		// í˜„ì¬ worldì˜ ê° cellì— ë°°ì¹˜ëœ ë¸”ë¡ë“¤ì˜ infos
 
-private: /* ºí·Ï¸Ê ¹öÆ° °ü·Ã */
-	vector<pair<Block*, BlockInfo>> blockMaps{};			// vector< <ºí·Ï¸Ê¹öÆ° renderingÇÒ °´Ã¼, ÇØ´çÇÏ´Â BlockInfo> >
-	vector<Collider*>				blockMapColliders{};	// ºí·Ï¸Ê¹öÆ° Collider (¸¶¿ì½º¿Í Collision Ã³¸®)
-	UINT							selectedIdx{};			// ÇöÀç ¼±ÅÃµÈ ºí·Ï¸Ê¹öÆ° index
+private: /* ë¸”ë¡ë§µ ë²„íŠ¼ ê´€ë ¨ */
+	vector<pair<Block*, BlockInfo>> blockMaps{};			// vector< <ë¸”ë¡ë§µë²„íŠ¼ renderingí•  ê°ì²´, í•´ë‹¹í•˜ëŠ” BlockInfo> >
+	vector<Collider*>				blockMapColliders{};	// ë¸”ë¡ë§µë²„íŠ¼ Collider (ë§ˆìš°ìŠ¤ì™€ Collision ì²˜ë¦¬)
+	UINT							selectedIdx{};			// í˜„ì¬ ì„ íƒëœ ë¸”ë¡ë§µë²„íŠ¼ index
 
 
 };

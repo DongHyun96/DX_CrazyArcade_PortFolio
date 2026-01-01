@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Planet.h"
 
 
@@ -19,7 +19,7 @@ void Planet::UpdateWorld()
 
 	world = S * R * T;
 
-	if (parent) // ºÎ¸ğÀÇ À§Ä¡Á¤º¸¸¸ ¹ŞÀ» °ÍÀÓ
+	if (parent) // ë¶€ëª¨ì˜ ìœ„ì¹˜ì •ë³´ë§Œ ë°›ì„ ê²ƒì„
 	{
 		Matrix revMatrix = XMMatrixRotationZ(revAngle);
 

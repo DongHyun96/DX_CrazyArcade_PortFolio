@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 
 /*
 CONCRETE CLASS
 Item field init helper class
-¾ÆÀÌÅÛÀÇ texObj¿Í item strategy¸¦ ¿©±â¼­ initialize½ÃÅ³ °ÍÀÓ (immediateµç ConsumableÀÌµç ¸ğµÎ ÀÌ °úÁ¤À» °ÅÃÄ¾ß ÇÏ´Â °ÍÀº µ¿ÀÏ)
+ì•„ì´í…œì˜ texObjì™€ item strategyë¥¼ ì—¬ê¸°ì„œ initializeì‹œí‚¬ ê²ƒì„ (immediateë“  Consumableì´ë“  ëª¨ë‘ ì´ ê³¼ì •ì„ ê±°ì³ì•¼ í•˜ëŠ” ê²ƒì€ ë™ì¼)
 */
 class ItemInitializer
 {
@@ -14,11 +14,11 @@ public:
 	~ItemInitializer();
 	
 	/// <summary>
-	/// Item classÀÇ texture object¿Í itemStrategy¸¦ ÀÌ ÇÔ¼ö¸¦ ÅëÇØ ÃÊ±âÈ­ / itemName¿¡ µû¶ó °¢±â´Ù¸¥ ÃÊ±âÈ­ ÁøÇà
+	/// Item classì˜ texture objectì™€ itemStrategyë¥¼ ì´ í•¨ìˆ˜ë¥¼ í†µí•´ ì´ˆê¸°í™” / itemNameì— ë”°ë¼ ê°ê¸°ë‹¤ë¥¸ ì´ˆê¸°í™” ì§„í–‰
 	/// </summary>
-	/// <param name="itemName"> : ÃÊ±âÈ­ ¾ÆÀÌÅÛ ÀÌ¸§ </param>
-	/// <param name="texObj"> : ¾ÆÀÌÅÛ ÀÌ¸§¿¡ µû¸¥ textureObj ÃÊ±âÈ­ (Double pointerÇü)</param>
-	/// <param name="itemStrategy"> : ¾ÆÀÌÅÛ ÀÌ¸§¿¡ µû¸¥ itemStrategy ÃÊ±âÈ­ (Double pointerÇü)</param>
+	/// <param name="itemName"> : ì´ˆê¸°í™” ì•„ì´í…œ ì´ë¦„ </param>
+	/// <param name="texObj"> : ì•„ì´í…œ ì´ë¦„ì— ë”°ë¥¸ textureObj ì´ˆê¸°í™” (Double pointerí˜•)</param>
+	/// <param name="itemStrategy"> : ì•„ì´í…œ ì´ë¦„ì— ë”°ë¥¸ itemStrategy ì´ˆê¸°í™” (Double pointerí˜•)</param>
 	static void CreateCommonFields(const ItemName& itemName, Object** texObj, ItemStrategy** itemStrategy);
 
 private:

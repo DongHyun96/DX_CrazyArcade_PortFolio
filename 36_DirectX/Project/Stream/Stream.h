@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 /* 
 CONCRETE CLASS
-½ºÆù À§Ä¡(°¡¿îµ¥ StreamBlockÀÇ À§Ä¡)¿Í ¹°ÁÙ±â levelÀ» ¹Ş¾Æ,
-½Ã°£Â÷¸¦ µÎ¾î °¡¿îµ¥ StreamBlockºÎÅÍ ÀÏÁ¤ÇÑ ½Ã°£°£°İÀ¸·Î 4¹æÇâ StreamBlock ½ºÆù Ã³¸® ´ã´ç
+ìŠ¤í° ìœ„ì¹˜(ê°€ìš´ë° StreamBlockì˜ ìœ„ì¹˜)ì™€ ë¬¼ì¤„ê¸° levelì„ ë°›ì•„,
+ì‹œê°„ì°¨ë¥¼ ë‘ì–´ ê°€ìš´ë° StreamBlockë¶€í„° ì¼ì •í•œ ì‹œê°„ê°„ê²©ìœ¼ë¡œ 4ë°©í–¥ StreamBlock ìŠ¤í° ì²˜ë¦¬ ë‹´ë‹¹
 */
 class Stream
 {
@@ -17,23 +17,23 @@ public:
 public:
 
 	/// <summary>
-	/// <para> spawnCoord(°¡¿îµ¥ streamBlockÀ§Ä¡)ºÎÅÍ ½ÃÀÛÇØ¼­ streamLv¿¡ µû¶ó(±×¸®°í ÁöÇüÁö¹°¿¡ µû¶ó) </para>
-	/// <para> StreamBlockÀ» ½Ã°£Â÷¸¦ µÎ°í ½ºÆù </para>
+	/// <para> spawnCoord(ê°€ìš´ë° streamBlockìœ„ì¹˜)ë¶€í„° ì‹œì‘í•´ì„œ streamLvì— ë”°ë¼(ê·¸ë¦¬ê³  ì§€í˜•ì§€ë¬¼ì— ë”°ë¼) </para>
+	/// <para> StreamBlockì„ ì‹œê°„ì°¨ë¥¼ ë‘ê³  ìŠ¤í° </para>
 	/// </summary>
-	/// <param name="spawnCoord"> : ¹°ÁÙ±â ½ºÆù Á¤°¡¿îµ¥ À§Ä¡ </param>
-	/// <param name="streamLv"> : ¹°ÁÙ±â level </param>
+	/// <param name="spawnCoord"> : ë¬¼ì¤„ê¸° ìŠ¤í° ì •ê°€ìš´ë° ìœ„ì¹˜ </param>
+	/// <param name="streamLv"> : ë¬¼ì¤„ê¸° level </param>
 	void Spawn(const Util::Coord& spawnCoord, const UINT& streamLv);
 
 public:
 
 	bool IsActive() const { return isActive; }
 
-public: /* StreamDanagerZone °ü·Ã (Enemy¿Í PathFinding¿¡¼­ ÇÊ¿ä) */
+public: /* StreamDanagerZone ê´€ë ¨ (Enemyì™€ PathFindingì—ì„œ í•„ìš”) */
 
 	/// <summary>
-	/// BalloonÀÌ ÅÍÁú ¶§, ÅÍÁø balloonÀÇ ÁÂÇ¥¿Í streamLv¸¦ ¹Ş¾Æ ¹°ÁÙ±â À§Çè Áö¿ª Ãß°¡
+	/// Balloonì´ í„°ì§ˆ ë•Œ, í„°ì§„ balloonì˜ ì¢Œí‘œì™€ streamLvë¥¼ ë°›ì•„ ë¬¼ì¤„ê¸° ìœ„í—˜ ì§€ì—­ ì¶”ê°€
 	/// </summary>
-	/// <param name="balloonCoord"> : ÅÍÁø balloonÀÇ ÁÂÇ¥ </param>
+	/// <param name="balloonCoord"> : í„°ì§„ balloonì˜ ì¢Œí‘œ </param>
 	/// <param name="streamLv"> : Stream level </param>
 	static void AddStreamDanagerZone(const Util::Coord& balloonCoord, const UINT& streamLv);
 	
@@ -43,19 +43,19 @@ public: /* StreamDanagerZone °ü·Ã (Enemy¿Í PathFinding¿¡¼­ ÇÊ¿ä) */
 
 private:
 	/// <summary>
-	/// Ã¹ spawn½Ã ¾î´ÀÁöÁ¡±îÁö µµ´ŞÇÏ´ÂÁö reachedCoordMap ÃÊ±âÈ­
+	/// ì²« spawnì‹œ ì–´ëŠì§€ì ê¹Œì§€ ë„ë‹¬í•˜ëŠ”ì§€ reachedCoordMap ì´ˆê¸°í™”
 	/// </summary>
-	/// <param name="spawnCoord"> : Spawn À§Ä¡(°¡¿îµ¥ StreamBlockÀ§Ä¡) </param>
+	/// <param name="spawnCoord"> : Spawn ìœ„ì¹˜(ê°€ìš´ë° StreamBlockìœ„ì¹˜) </param>
 	/// <param name="streamLv"> : Stream level </param>
 	void InitReachedMap(const Util::Coord& spawnCoord, const UINT& streamLv);
 
-	/* ¹°ÁÙ±â µµ´Ş ÁöÁ¡ ¹üÀ§ ³»¿¡ balloonÀÌ ÀÖ´ÂÁö Á¶»çÇØ¼­ ÀÖ´Ù¸é ÇØ´ç balloonµé ¸ğµÎ ¿¬¼â Æø¹ß ½ÃÅ´ */
+	/* ë¬¼ì¤„ê¸° ë„ë‹¬ ì§€ì  ë²”ìœ„ ë‚´ì— balloonì´ ìˆëŠ”ì§€ ì¡°ì‚¬í•´ì„œ ìˆë‹¤ë©´ í•´ë‹¹ balloonë“¤ ëª¨ë‘ ì—°ì‡„ í­ë°œ ì‹œí‚´ */
 	void HandleChainExplosion();
 
-	/* ½Ã°£Â÷¸¦ µÎ°í °¢ ¹æÇâÀÇ StreamBlockµéÀ» spawn½ÃÅ´ */
+	/* ì‹œê°„ì°¨ë¥¼ ë‘ê³  ê° ë°©í–¥ì˜ StreamBlockë“¤ì„ spawnì‹œí‚´ */
 	void HandleSpawning();
 
-	/* this°¡ ½ºÆù½ÃÅ² StreamBlockÀÌ ¸ğµÎ ´Ù ²¨Áö¸é ÀÚ½ÅÀÇ activeµµ ²û */
+	/* thisê°€ ìŠ¤í°ì‹œí‚¨ StreamBlockì´ ëª¨ë‘ ë‹¤ êº¼ì§€ë©´ ìì‹ ì˜ activeë„ ë” */
 	void HandleSelfActive();
 
 /***************************************************************************************************
@@ -67,21 +67,21 @@ private:
 	bool isActive{};
 
 private:
-	/* °¢ Direction º°·Î µµ´ŞÇÑ ¸ğµç ÁÂÇ¥µé */
+	/* ê° Direction ë³„ë¡œ ë„ë‹¬í•œ ëª¨ë“  ì¢Œí‘œë“¤ */
 	map<Direction, deque<Util::Coord>> reachedCoordMap{};
 
 private:
-	/* °¡Àå ÃÖ±Ù spawnµÈ ¹°ÁÙ±â block°ú ±× ´ÙÀ½ spawnµÉ ¹°ÁÙ±â blockÀÇ spawn ½Ã°£Â÷ */
+	/* ê°€ì¥ ìµœê·¼ spawnëœ ë¬¼ì¤„ê¸° blockê³¼ ê·¸ ë‹¤ìŒ spawnë  ë¬¼ì¤„ê¸° blockì˜ spawn ì‹œê°„ì°¨ */
 	const float BLOCK_SPAWN_DELTA{ 0.05f };
 
 	float		blockSpawnTime = 0.f;
 	bool		stopSpawning = true;
 
 private:
-	/* ÀÌ Stream(this) °´Ã¼°¡ ½ºÆù½ÃÅ² activated streamBlocks */
+	/* ì´ Stream(this) ê°ì²´ê°€ ìŠ¤í°ì‹œí‚¨ activated streamBlocks */
 	vector<StreamBlock*> activatedBlocks{};
 	
-	//½ÇÁ¦ stream À§Ä¡¸¦ ÀúÀå -> AStar¿¡¼­ cell ÆÇ´Ü ½Ã »ç¿ë
+	//ì‹¤ì œ stream ìœ„ì¹˜ë¥¼ ì €ì¥ -> AStarì—ì„œ cell íŒë‹¨ ì‹œ ì‚¬ìš©
 	static set<Util::Coord> streamDangerZone;
 
 };

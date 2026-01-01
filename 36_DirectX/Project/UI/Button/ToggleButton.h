@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #define C_SELECT_FUNC_P function<void(const CharacterType& cType, const PlayerType& pType)>
 

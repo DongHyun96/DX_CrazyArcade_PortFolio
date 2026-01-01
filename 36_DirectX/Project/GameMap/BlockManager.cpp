@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "BlockManager.h"
 
 Block* BlockManager::blocks[MAP_ROW][MAP_COL]{};
@@ -149,7 +149,7 @@ void BlockManager::HandleDartCollision(Block* block)
 	{
 		if (!dart->GetIsActive()) continue;
 
-		if (block->IsHidable()) continue; // HidableÀ» Á¦¿ÜÇÑ ºí·Ïµé¿¡ dart°¡ ¸ÂÀ¸¸é dart ²û
+		if (block->IsHidable()) continue; // Hidableì„ ì œì™¸í•œ ë¸”ë¡ë“¤ì— dartê°€ ë§žìœ¼ë©´ dart ë”
 
 		if (block->GetBody()->AABBCollision(dart->GetBody()))
 			dart->SetActive(false);
@@ -189,7 +189,7 @@ void BlockManager::HandleHidableCollisions()
 		}
 
 		// vs Balloons
-		for (Balloon* balloon : GM->GetBalloonManager()->GetNormalBalloons()) // ÀÏ¹Ý ¹ú·éµé
+		for (Balloon* balloon : GM->GetBalloonManager()->GetNormalBalloons()) // ì¼ë°˜ ë²Œë£¬ë“¤
 		{
 			if (!balloon->Active())
 				continue;

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "BalloonManager.h"
 
 
@@ -67,7 +67,7 @@ void BalloonManager::Render()
 
 bool BalloonManager::Spawn(const Util::Coord& spawnCoord, Character* owner, const bool& isNormalBalloon)
 {
-	// ¿ìÁÖ¼± ¶§¹®¿¡ ÇØ´ç À§Ä¡¿¡ ºí·Ï(Hidable Á¦¿Ü)ÀÌ ÀÖ´Ù¸é spawn½ÃÅ³ ¼ö ¾øÀ½
+	// ìš°ì£¼ì„  ë•Œë¬¸ì— í•´ë‹¹ ìœ„ì¹˜ì— ë¸”ë¡(Hidable ì œì™¸)ì´ ìžˆë‹¤ë©´ spawnì‹œí‚¬ ìˆ˜ ì—†ìŒ
 	Block* block = GM->GetBlockManager()->GetCoordBlock(spawnCoord);
 
 	if (block)

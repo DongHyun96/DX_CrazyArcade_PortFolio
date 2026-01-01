@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 
 /*
@@ -16,32 +16,32 @@ public:
 
 public:
 
-	/* GameOverResult¿¡ µû¸¥ GameScene³»¿¡¼­ÀÇ GameOverÃ³¸® */
+	/* GameOverResultì— ë”°ë¥¸ GameSceneë‚´ì—ì„œì˜ GameOverì²˜ë¦¬ */
 	void SetGameEnd(const GameOverResult& result);
 
 private:
 
-	/* Game start logo animationÀÌ ³¡³­ µÚ, ÇÃ·¹ÀÌ¾î SPAWN»óÅÂ ³¡³»°í ½ÇÁúÀûÀ¸·Î play°¡´ÉÇÏ°Ô game start*/
+	/* Game start logo animationì´ ëë‚œ ë’¤, í”Œë ˆì´ì–´ SPAWNìƒíƒœ ëë‚´ê³  ì‹¤ì§ˆì ìœ¼ë¡œ playê°€ëŠ¥í•˜ê²Œ game start*/
 	void StartGameFromSpawn();
 
 private:
-	/* °ÔÀÓ Å¸ÀÌ¸Ó ¾÷µ¥ÀÌÆ® */
+	/* ê²Œì„ íƒ€ì´ë¨¸ ì—…ë°ì´íŠ¸ */
 	void UpdateTimer();
 
 private:
 
-	/* ·Îºñ·Î º¹±ÍÇÏ´Â ½Ã°£ Ã¼Å© */
+	/* ë¡œë¹„ë¡œ ë³µê·€í•˜ëŠ” ì‹œê°„ ì²´í¬ */
 	void CheckTimerAfterGameOver();
 
 	void ExitToLobby();
 
 
-private: /* GameSceneÀ¸·Î ÀüÈ¯(GameScene »ı¼º) ½Ã ÇöÀç °ÔÀÓ¸Ê¿¡ ÇØ´çÇÏ´Â »õ·Î¿î tileManager¿Í blockManager »ı¼º */
+private: /* GameSceneìœ¼ë¡œ ì „í™˜(GameScene ìƒì„±) ì‹œ í˜„ì¬ ê²Œì„ë§µì— í•´ë‹¹í•˜ëŠ” ìƒˆë¡œìš´ tileManagerì™€ blockManager ìƒì„± */
 
 	TileManager*	tileManager{};
 	BlockManager*	blockManager{};
 
-private: /* GameManager¿¡ ¹Ì¸® ÀúÀåÇØµĞ managerµé */
+private: /* GameManagerì— ë¯¸ë¦¬ ì €ì¥í•´ë‘” managerë“¤ */
 
 	GameUIManager*	uiManager{};
 
@@ -55,17 +55,17 @@ private: /* GameManager¿¡ ¹Ì¸® ÀúÀåÇØµĞ managerµé */
 	DartManager*	dartManager{};
 
 private:
-	/* ·Îºñ·Î ³ª°¡´Â ¹öÆ° */
+	/* ë¡œë¹„ë¡œ ë‚˜ê°€ëŠ” ë²„íŠ¼ */
 	Button*	exitToLobbyButton{};
 
 private:
 
-	const float GAME_TIME_TOTAL = 180.f;			// °ÔÀÓÇÃ·¹ÀÌ ½Ã°£Á¦ÇÑ
-	float		gamePlayTimer	= GAME_TIME_TOTAL;	// °ÔÀÓÇÃ·¹ÀÌ Å¸ÀÌ¸Ó
+	const float GAME_TIME_TOTAL = 180.f;			// ê²Œì„í”Œë ˆì´ ì‹œê°„ì œí•œ
+	float		gamePlayTimer	= GAME_TIME_TOTAL;	// ê²Œì„í”Œë ˆì´ íƒ€ì´ë¨¸
 
-private: /* °ÔÀÓ ¿À¹ö ÈÄ ÀûÁ¤ ½Ã°£ÀÌ Áö³ª¸é ·Îºñ·Î µ¹¾Æ°¨ */
+private: /* ê²Œì„ ì˜¤ë²„ í›„ ì ì • ì‹œê°„ì´ ì§€ë‚˜ë©´ ë¡œë¹„ë¡œ ëŒì•„ê° */
 
-	const float AFTER_GAMEOVER_TIME = 4.f; // °ÔÀÓ¿À¹ö°¡ µÈ ÈÄ 4ÃÊ µÚ ·Îºñ·Î º¹±Í
+	const float AFTER_GAMEOVER_TIME = 4.f; // ê²Œì„ì˜¤ë²„ê°€ ëœ í›„ 4ì´ˆ ë’¤ ë¡œë¹„ë¡œ ë³µê·€
 	float		afterGameOverTime = 0.f;
 };
 

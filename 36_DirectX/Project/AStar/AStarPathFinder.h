@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-#define INF 10000	// °Å¸® ¹«ÇÑ´ë defined
+#define INF 10000	// ê±°ë¦¬ ë¬´í•œëŒ€ defined
 
 struct ASNode
 {
@@ -9,16 +9,16 @@ struct ASNode
 		:coord(coord) {}
 
 
-	Util::Coord coord{};	// ÀÌ nodeÀÇ À§Ä¡
+	Util::Coord coord{};	// ì´ nodeì˜ ìœ„ì¹˜
 	ASNode*		parent{};
 
-	UINT g{};				// Çö ¹ßÀÚ±¹ Á¡¼ö
-	UINT h{};				// ÈŞ¸®½ºÆ½ °ª
+	UINT g{};				// í˜„ ë°œìêµ­ ì ìˆ˜
+	UINT h{};				// íœ´ë¦¬ìŠ¤í‹± ê°’
 
-	int f = INF;			// ÇÕ»ê °Å¸® Á¡¼ö
+	int f = INF;			// í•©ì‚° ê±°ë¦¬ ì ìˆ˜
 };
 
-/* A* ¾Ë°í¸®Áò ³»¿¡¼­ prioriy_queueÀÇ Priority Á¶°Ç */
+/* A* ì•Œê³ ë¦¬ì¦˜ ë‚´ì—ì„œ prioriy_queueì˜ Priority ì¡°ê±´ */
 struct CompareNode
 {
 	bool operator()(const ASNode* node1, const ASNode* node2) const
@@ -29,7 +29,7 @@ struct CompareNode
 
 
 /* CONCRETE CLASS | SINGLETON */
-class AStarPathFinder : public Singleton<AStarPathFinder> // AStar ÃÊ±âÈ­ ¶§¹®¿¡ »ı¼ºÀÚ ÇÑ ¹ø È£ÃâÇÏ°í ¿ÜºÎ¿¡¼­´Â static ¸Ş¼­µå ¹Ù·Î È£ÃâÇÒ ¿¹Á¤
+class AStarPathFinder : public Singleton<AStarPathFinder> // AStar ì´ˆê¸°í™” ë•Œë¬¸ì— ìƒì„±ì í•œ ë²ˆ í˜¸ì¶œí•˜ê³  ì™¸ë¶€ì—ì„œëŠ” static ë©”ì„œë“œ ë°”ë¡œ í˜¸ì¶œí•  ì˜ˆì •
 {
 
 	friend class Singleton;
@@ -43,25 +43,25 @@ public:
 
 
 	/// <summary>
-	/// A* ¾Ë°í¸®ÁòÀ» ÅëÇÑ startºÎÅÍ dest±îÁöÀÇ °æ·Î Ã£±â
+	/// A* ì•Œê³ ë¦¬ì¦˜ì„ í†µí•œ startë¶€í„° destê¹Œì§€ì˜ ê²½ë¡œ ì°¾ê¸°
 	/// </summary>
-	/// <param name="start">     : Ãâ¹ßÁ¡                                                                </param>
-	/// <param name="dest">      : µµÂøÁ¡                                                                </param>
-	/// <param name="isC_SPACE"> : ¿òÁ÷ÀÌ·Á´Â °´Ã¼ÀÇ »óÅÂ°¡ C_SPACEÀÎÁö(¿ìÁÖ¼±ÀÏ °æ¿ì ÃÖ´Ü°æ·Î °è»êÀÌ ´Ş¶óÁü) </param>
-	/// <returns> path, °Ë»çÇÑ visited coords | ¸¸¾à °æ·Î°¡ Á¸ÀçÇÏÁö ¾Ê´Ù¸é empty path return </returns>
+	/// <param name="start">     : ì¶œë°œì                                                                 </param>
+	/// <param name="dest">      : ë„ì°©ì                                                                 </param>
+	/// <param name="isC_SPACE"> : ì›€ì§ì´ë ¤ëŠ” ê°ì²´ì˜ ìƒíƒœê°€ C_SPACEì¸ì§€(ìš°ì£¼ì„ ì¼ ê²½ìš° ìµœë‹¨ê²½ë¡œ ê³„ì‚°ì´ ë‹¬ë¼ì§) </param>
+	/// <returns> path, ê²€ì‚¬í•œ visited coords | ë§Œì•½ ê²½ë¡œê°€ ì¡´ì¬í•˜ì§€ ì•Šë‹¤ë©´ empty path return </returns>
 	static pair<stack<Util::Coord>, set<Util::Coord>> GetPath(const Util::Coord& start, const Util::Coord& dest, const bool& isC_SPACE);
 
 private:
 	
-	/* ÀÌµ¿ °¡´ÉÇÑ cell ÁÂÇ¥ÀÎÁö °Ë»ç */
+	/* ì´ë™ ê°€ëŠ¥í•œ cell ì¢Œí‘œì¸ì§€ ê²€ì‚¬ */
 	static bool IsAvailableCell(const Util::Coord& coord, const bool& isC_SPACE);
 
-	/* fieldNodeµéÀÇ º¯¼ö°ª ÃÊ±âÈ­ */
+	/* fieldNodeë“¤ì˜ ë³€ìˆ˜ê°’ ì´ˆê¸°í™” */
 	static void InitFields();
 
 private:
 
-	/* Game field °¢ cell À§Ä¡¿¡ ÇØ´çÇÏ´Â ASNodeµé */
+	/* Game field ê° cell ìœ„ì¹˜ì— í•´ë‹¹í•˜ëŠ” ASNodeë“¤ */
 	static ASNode* fieldNodes[MAP_ROW][MAP_COL];
 
 };

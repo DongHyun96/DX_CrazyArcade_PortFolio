@@ -1,8 +1,8 @@
-#pragma once
+ï»¿#pragma once
 
 /*
 CONCRETE CLASS
-User input¿¡ ÀÇÇØ controlµÉ Ä³¸¯ÅÍ
+User inputì— ì˜í•´ controlë  ìºë¦­í„°
 */
 class Player : public Character
 {

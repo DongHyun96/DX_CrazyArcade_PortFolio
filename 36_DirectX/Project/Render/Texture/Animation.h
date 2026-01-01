@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 class Animation
 {
 public:
-	Animation(Vector2 texWorldSize, wstring file, UINT frameX, UINT frameY, UINT nFrames = 0, float updateTime = 0.1f); // ÀÌ¹ÌÁö Å©±â¸¦ texWorldSize¿¡ ¸ÂÃã
+	Animation(Vector2 texWorldSize, wstring file, UINT frameX, UINT frameY, UINT nFrames = 0, float updateTime = 0.1f); // ì´ë¯¸ì§€ í¬ê¸°ë¥¼ texWorldSizeì— ë§ì¶¤
 
-	Animation(wstring file, UINT frameX, UINT frameY, UINT nFrames = 0, float updateTime = 0.1f); // ÀÌ¹ÌÁö º»¿¬ÀÇ Å©±â ±×´ë·Î »ç¿ë
+	Animation(wstring file, UINT frameX, UINT frameY, UINT nFrames = 0, float updateTime = 0.1f); // ì´ë¯¸ì§€ ë³¸ì—°ì˜ í¬ê¸° ê·¸ëŒ€ë¡œ ì‚¬ìš©
 
-	Animation(vector<Frame*> frames, float updateTime = 0.1f); // ÀÌ¹ÌÁö ÆÄÀÏ ÇÏ³ª¾¿ ¾µ °æ¿ì
+	Animation(vector<Frame*> frames, float updateTime = 0.1f); // ì´ë¯¸ì§€ íŒŒì¼ í•˜ë‚˜ì”© ì“¸ ê²½ìš°
 
 	~Animation();
 
@@ -46,7 +46,7 @@ private:
 
 	function<void()> EndEvent = nullptr;
 	
-	function<void()> ClipEvent = nullptr; // ¾Ö´Ï¸ŞÀÌ¼Ç ÇÃ·¹ÀÌ µµÁß ½ÇÇàµÇ´Â Å¬¸³ ÀÌº¥Æ®
+	function<void()> ClipEvent = nullptr; // ì• ë‹ˆë©”ì´ì…˜ í”Œë ˆì´ ë„ì¤‘ ì‹¤í–‰ë˜ëŠ” í´ë¦½ ì´ë²¤íŠ¸
 	UINT clipIdx{};
 
 

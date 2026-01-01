@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /* CONCRETE CLASS */
 class LobbyScene : public Scene
 {
@@ -10,13 +10,13 @@ public:
 	virtual void Render() override;
 
 	/*
-	Game Scene¿¡¼­ Lobby SceneÀ¸·Î µ¹¾Æ¿Ã ¶§, ÀÌÀü¿¡ Ä³¸¯ÅÍ ¼±ÅÃÃ¢ pickÀÌ RandomÀÌ¾ú´Ù¸é
-	´Ù½Ã Ä³¸¯ÅÍ select»óÅÂ¸¦ randomÀ¸·Î µ¹·Á³õÀ½
+	Game Sceneì—ì„œ Lobby Sceneìœ¼ë¡œ ëŒì•„ì˜¬ ë•Œ, ì´ì „ì— ìºë¦­í„° ì„ íƒì°½ pickì´ Randomì´ì—ˆë‹¤ë©´
+	ë‹¤ì‹œ ìºë¦­í„° selectìƒíƒœë¥¼ randomìœ¼ë¡œ ëŒë ¤ë†“ìŒ
 	*/
 	void InitPlayerCharacters();
 
 private:
-	/* Ä³¸¯ÅÍ ´É·ÂÄ¡ UI ¶ç¿ì±â */
+	/* ìºë¦­í„° ëŠ¥ë ¥ì¹˜ UI ë„ìš°ê¸° */
 	void HandleInfoHover();
 
 private: /* Button click call back functions */
@@ -36,7 +36,7 @@ private:
 	Object* mainBackground{};
 	Object* instruction{};
 
-private: /* Button °ü·Ã */
+private: /* Button ê´€ë ¨ */
 
 	Button* gameStartButton{};
 

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 /* CONCRETE CLASS */
 class CharacterAnimFactory
@@ -8,7 +8,7 @@ public:
 	~CharacterAnimFactory();
 	
 	/// <summary>
-	/// CharacterType¿¡ µû¸¥ °¢ CharacterAnim »ı¼º
+	/// CharacterTypeì— ë”°ë¥¸ ê° CharacterAnim ìƒì„±
 	/// </summary>
 	/// <param name="cType"> : Character Type</param>
 	/// <param name="parent"> : parentBody </param>

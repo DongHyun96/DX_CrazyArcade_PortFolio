@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "IntroScene.h"
 
 
@@ -6,7 +6,7 @@ IntroScene::IntroScene()
 {
 	//rgb(199, 0, 57)
 	//rgb(12, 53, 106)
-	FONT->Add("InstructionFont", L"¹èÂîÃ¼", Util::ConvertRGB_UINT_To_Float(199, 0, 57),
+	FONT->Add("InstructionFont", L"ë°°ì°Œì²´", Util::ConvertRGB_UINT_To_Float(199, 0, 57),
 		50.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
 
 	background = new Object(WIN_SIZE, L"InGame/UI/IntroScene/Back_Loding.bmp");
@@ -73,7 +73,7 @@ void IntroScene::Update()
 			}
 		}
 
-		if (Vector2::Distance(characters.back()->translation, destPos.back()) < 0.1f) // Scene ÀüÈ¯
+		if (Vector2::Distance(characters.back()->translation, destPos.back()) < 0.1f) // Scene ì „í™˜
 		{
 			SOUND->Stop("IntroBGM");
 			SM->SetCurScene(LOBBY_SCENE);
@@ -98,6 +98,6 @@ void IntroScene::Render()
 	desc->Render();
 	
 
-	FONT->RenderText(L"¾Æ¹« °÷ÀÌ³ª Å¬¸¯ÇÏ¿© ½ÃÀÛ!", "InstructionFont", Util::ConvertDxPosToAPIPos({ WIN_CENTER.x, 327.f}));
+	FONT->RenderText(L"ì•„ë¬´ ê³³ì´ë‚˜ í´ë¦­í•˜ì—¬ ì‹œì‘!", "InstructionFont", Util::ConvertDxPosToAPIPos({ WIN_CENTER.x, 327.f}));
 	//\nCLICK ANYWHERE TO START!
 }

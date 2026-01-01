@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Button.h"
 
 
@@ -37,7 +37,7 @@ Button::Button(const wstring& file, const UINT& frameX, const UINT& frameY, UINT
 		texMap[DOWN] = texMap[UP];
 		break;
 	case 1:
-		// TODO - ½Ã°£µÇ¸é Implement
+		// TODO - ì‹œê°„ë˜ë©´ Implement
 		return;
 	default:
 		break;
@@ -83,7 +83,7 @@ Button::Button(const Vector2& size, const wstring& file, const UINT& frameX, con
 		texMap[DOWN] = texMap[UP];
 		break;
 	case 1:
-		// TODO - ½Ã°£µÇ¸é Implement
+		// TODO - ì‹œê°„ë˜ë©´ Implement
 		return;
 	default:
 		break;

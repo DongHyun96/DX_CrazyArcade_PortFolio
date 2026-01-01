@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class VertexBuffer
 {
 public:
@@ -26,13 +26,13 @@ inline VertexBuffer::VertexBuffer(vector<T>& vertices)
 
     bufferDesc.ByteWidth            = sizeof(T) * vertices.size();
     bufferDesc.Usage                = D3D11_USAGE_DEFAULT;
-    bufferDesc.BindFlags            = D3D11_BIND_VERTEX_BUFFER; //  bufferµµ Á¾·ù°¡ ¸¹À½ / bufferÀÇ ¿ëµµ¸¦ ¼³Á¤
+    bufferDesc.BindFlags            = D3D11_BIND_VERTEX_BUFFER; //  bufferë„ ì¢…ë¥˜ê°€ ë§ŽìŒ / bufferì˜ ìš©ë„ë¥¼ ì„¤ì •
     bufferDesc.CPUAccessFlags       = 0;
     bufferDesc.MiscFlags            = 0;
     bufferDesc.StructureByteStride  = 0;
 
     D3D11_SUBRESOURCE_DATA initData{};
-    initData.pSysMem = vertices.data(); // data() / vectorÀÇ ÁÖ¼Ò°ªÀ» ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+    initData.pSysMem = vertices.data(); // data() / vectorì˜ ì£¼ì†Œê°’ì„ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 
     DEVICE->CreateBuffer(&bufferDesc, &initData, &vertexBuffer);
 }

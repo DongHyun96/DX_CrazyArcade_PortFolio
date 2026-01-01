@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 /* CONCRETE CLASS */
 class BazziAnim : public CharacterAnim
 {

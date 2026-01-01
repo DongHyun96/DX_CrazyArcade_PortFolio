@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 /* INTERFACE */
 class ItemStrategy
@@ -10,8 +10,8 @@ public:
 	/// <summary>
 	/// Strategy pattern's pure-virtual method
 	/// </summary>
-	/// <param name="itemUser"> : ¾ÆÀÌÅÛÀ» »ç¿ëÇÑ character </param>
-	/// <returns> : ¾ÆÀÌÅÛ »ç¿ëÀÌ Á¤»óÀûÀ¸·Î ÀÌ·ç¾îÁ³´Ù¸é return true </returns>
+	/// <param name="itemUser"> : ì•„ì´í…œì„ ì‚¬ìš©í•œ character </param>
+	/// <returns> : ì•„ì´í…œ ì‚¬ìš©ì´ ì •ìƒì ìœ¼ë¡œ ì´ë£¨ì–´ì¡Œë‹¤ë©´ return true </returns>
 	virtual bool UseStrategy(class Character* itemUser) = 0;
 	
 };

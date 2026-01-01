@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 
 /// <summary>
-/// Á¡ °³³äÀ¸·Îµµ »ç¿ë
+/// ì  ê°œë…ìœ¼ë¡œë„ ì‚¬ìš©
 /// </summary>
 struct Vector2 : public XMFLOAT2
 {
@@ -12,11 +12,11 @@ struct Vector2 : public XMFLOAT2
 
 	Vector2 GetNormal() const;
 
-	void Normalize(); // ¿øº» ÀÚÃ¼¸¦ Á¤±ÔÈ­
+	void Normalize(); // ì›ë³¸ ìì²´ë¥¼ ì •ê·œí™”
 
 	static float Dot(const Vector2& v1, const Vector2& v2);
 
-	// ¿ÜÀûÀÇ ¹İÈ¯Àº Vector but 2Â÷¿ø¿¡¼­ ¾²±â ¶§¹®¿¡ z°ªÀÇ ºÎÈ£¸¸ ÀÇ¹Ì ÀÖ±â ¶§¹®¿¡ ±×³É float À¸·Î return
+	// ì™¸ì ì˜ ë°˜í™˜ì€ Vector but 2ì°¨ì›ì—ì„œ ì“°ê¸° ë•Œë¬¸ì— zê°’ì˜ ë¶€í˜¸ë§Œ ì˜ë¯¸ ìˆê¸° ë•Œë¬¸ì— ê·¸ëƒ¥ float ìœ¼ë¡œ return
 	static float Cross(const Vector2& v1, const Vector2& v2);
 
 	static float Distance(const Vector2& p1, const Vector2& p2);
@@ -42,7 +42,7 @@ struct Vector2 : public XMFLOAT2
 	void	operator*=(const Matrix& value);
 	
 
-	/// <summary> factor°¡ v1°ú v2 »çÀÌ¿¡ ÀÖ³ª </summary>
+	/// <summary> factorê°€ v1ê³¼ v2 ì‚¬ì´ì— ìˆë‚˜ </summary>
 	static bool IsBetween(const Vector2& factor, const Vector2& v1, const Vector2& v2);
 
 };

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Character.h"
 
 
@@ -47,10 +47,10 @@ Character::Character(const CharacterType& cType, const PlayerType& playerType)
 		arrow->SetParent(body);
 	}
 
-	// ½ºÅÈ ¼³Á¤
+	// ìŠ¤íƒ¯ ì„¤ì •
 	InitStat(cType);
 	
-
+	
 }
 
 Character::~Character()
@@ -135,7 +135,7 @@ void Character::Render()
 
 	spawnColorBuffer->PSSetBuffer(0);
 
-	actionHandler->Render(); // ¿©±â¿¡¼­ shader ¼¼ÆÃ
+	actionHandler->Render(); // ì—¬ê¸°ì—ì„œ shader ì„¸íŒ…
 
 	shadow->Render();
 
@@ -189,7 +189,7 @@ void Character::SetCharacterState(const CharacterState& state)
 		//if (NotifyCapturedEvent) NotifyCapturedEvent();
 
 		break;
-	case C_RETURN_IDLE: // ÀÌ ¶§ ¼Óµµ°¡ 0
+	case C_RETURN_IDLE: // ì´ ë•Œ ì†ë„ê°€ 0
 		if (mainState == C_CAPTURED)
 			SOUND->Play("Saved", 1.f);
 		speedLv = 0;
@@ -243,14 +243,14 @@ void Character::HandleGameOver()
 
 bool Character::UseConsumableItem()
 {
-	if (!consumableItem) return false; // °¡Áö°í ÀÖ´Â ¾ÆÀÌÅÛÀÌ ¾øÀ½
+	if (!consumableItem) return false; // ê°€ì§€ê³  ìžˆëŠ” ì•„ì´í…œì´ ì—†ìŒ
 	
 	return consumableItem->UseItem(this);
 }
 
 bool Character::IncreaseSpeed(bool increaseToMax)
 {
-	// curIdleSpeed°¡ ÇöÀç ÀúÀåÇØ³õÀº IdleSpeed
+	// curIdleSpeedê°€ í˜„ìž¬ ì €ìž¥í•´ë†“ì€ IdleSpeed
 
 	if (curIdleSpeedLv >= speedLvMax) return false;
 
@@ -370,7 +370,7 @@ void Character::UpdateBasedOnMainCharacterState(OUT bool& continueCharacterUpdat
 			is_captured_collidable_with_others = true;
 
 		break;
-	case C_SPACECRAFT: // y Depth °íÁ¤½ÃÅ´
+	case C_SPACECRAFT: // y Depth ê³ ì •ì‹œí‚´
 
 		body->zDepth = -1.f;
 		break;

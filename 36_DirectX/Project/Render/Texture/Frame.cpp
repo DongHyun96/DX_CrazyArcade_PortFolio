@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Frame.h"
 
 
@@ -8,7 +8,7 @@ Frame::Frame(wstring file, Vector2 uvStart, Vector2 uvEnd)
 
 	Vector2 pos = Vector2();
 
-	// texture->GetSize() = ½ºÇÁ¶óÀÌÆ® ÀüÃ¼ÀÇ Å©±â
+	// texture->GetSize() = ìŠ¤í”„ë¼ì´íŠ¸ ì „ì²´ì˜ í¬ê¸°
 
 	size =
 	{

@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-#define MAX_CHANNEL 10 // ¼Ò¸® Ã¤³Î °³¼ö
+#define MAX_CHANNEL 10 // ì†Œë¦¬ ì±„ë„ ê°œìˆ˜
 
 struct SoundInfo
 {

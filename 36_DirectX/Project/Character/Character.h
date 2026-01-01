@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
 class CharacterAnim;
 
-#define SPEED_BASE 70.f // Ä³¸¯ÅÍ speed lv¿¡ °öÇÒ ±âº» base ¹è¼ö
+#define SPEED_BASE 70.f // ìºë¦­í„° speed lvì— ê³±í•  ê¸°ë³¸ base ë°°ìˆ˜
 
-/* Ä³¸¯ÅÍ Á¾·ù */
+/* ìºë¦­í„° ì¢…ë¥˜ */
 enum CharacterType
 {
 	BAZZI,
@@ -15,27 +15,27 @@ enum CharacterType
 	CHARACTER_MAX
 };
 
-/* Ä³¸¯ÅÍÀÇ MainState */
+/* ìºë¦­í„°ì˜ MainState */
 enum CharacterState
 {
-	C_SPAWN,		// ½ºÆù »óÅÂ
+	C_SPAWN,		// ìŠ¤í° ìƒíƒœ
 
-	C_IDLE,			// ±âº» Idle »óÅÂ
+	C_IDLE,			// ê¸°ë³¸ Idle ìƒíƒœ
 
-	C_SPACECRAFT,	// ¿ìÁÖ¼± »óÅÂ
-	C_OWL,			// ºÎ¾ûÀÌ »óÅÂ
-	C_TURTLE,		// °ÅºÏÀÌ »óÅÂ
+	C_SPACECRAFT,	// ìš°ì£¼ì„  ìƒíƒœ
+	C_OWL,			// ë¶€ì—‰ì´ ìƒíƒœ
+	C_TURTLE,		// ê±°ë¶ì´ ìƒíƒœ
 
-	C_CAPTURED,		// ¹°Ç³¼±¿¡ °¤Èù »óÅÂ
+	C_CAPTURED,		// ë¬¼í’ì„ ì— ê°‡íŒ ìƒíƒœ
 
-	C_RETURN_IDLE,	// ¹°Ç³¼± »óÅÂ ¶Ç´Â Å» °Í¿¡¼­ ³»·Á¼­ Idle·Î µ¹¾Æ°¡°í ÀÖ´Â »óÅÂ
+	C_RETURN_IDLE,	// ë¬¼í’ì„  ìƒíƒœ ë˜ëŠ” íƒˆ ê²ƒì—ì„œ ë‚´ë ¤ì„œ Idleë¡œ ëŒì•„ê°€ê³  ìˆëŠ” ìƒíƒœ
 
 	C_DEAD,
 
 	C_WIN
 };
 
-/* Ä³¸¯ÅÍÀÇ PlayerType - P1, P2, ComputerÀÎÁö ±¸ºĞÇÏ±â À§ÇÔ */
+/* ìºë¦­í„°ì˜ PlayerType - P1, P2, Computerì¸ì§€ êµ¬ë¶„í•˜ê¸° ìœ„í•¨ */
 enum PlayerType
 {
 	P1,
@@ -45,7 +45,7 @@ enum PlayerType
 };
 
 
-/* Å» °Í°ú captured µÇ¾úÀ» ¶§(¸ğµç Ä³¸¯ÅÍÀÇ ¼Óµµ°¡ µ¿ÀÏ)ÀÇ Common Speed level */
+/* íƒˆ ê²ƒê³¼ captured ë˜ì—ˆì„ ë•Œ(ëª¨ë“  ìºë¦­í„°ì˜ ì†ë„ê°€ ë™ì¼)ì˜ Common Speed level */
 static struct CommonSpeedLv
 {
 	static const UINT CAPTURED_SPEED_LV		= 1;
@@ -69,7 +69,7 @@ public:
 private: 
 	/*
 	Basic move pure-virtual method
-	ÀÚ½Ä ´Ü°è¿¡¼­ Player´Â input¿¡ µû¶ó, Enemy´Â EnemyAI¿¡ µû¶ó ±¸Çö
+	ìì‹ ë‹¨ê³„ì—ì„œ PlayerëŠ” inputì— ë”°ë¼, EnemyëŠ” EnemyAIì— ë”°ë¼ êµ¬í˜„
 	*/
 	virtual void Move() = 0;
 
@@ -92,7 +92,7 @@ public: /* Getters, Setters, Adders */
 
 	UINT			GetStreamLv() const { return streamLv; }
 
-	bool			AddLeftBalloonCnt(const UINT& addAmount = 1); // Balloon È¸¼ö & ¹°Ç³¼± ¾ÆÀÌÅÛ È¹µæ ½Ã »ç¿ë
+	bool			AddLeftBalloonCnt(const UINT& addAmount = 1); // Balloon íšŒìˆ˜ & ë¬¼í’ì„  ì•„ì´í…œ íšë“ ì‹œ ì‚¬ìš©
 
 	Direction		GetCurFaceDir() const;
 
@@ -102,33 +102,33 @@ public: /* Getters, Setters, Adders */
 	Item*			GetConsumableItem() const { return consumableItem; }
 
 
-public: /* ½ºÅÈ °­È­ methods */
+public: /* ìŠ¤íƒ¯ ê°•í™” methods */
 
 	bool IncreaseSpeed(bool increaseToMax = false);
 	bool IncreaseStreamLv(bool increaseToMax = false);
 
 public: 
-	/* ÀÚ½ÅÀÌ ÇÊµå¿¡ spawnÇÑ timerballoon ÀúÀå */
+	/* ìì‹ ì´ í•„ë“œì— spawní•œ timerballoon ì €ì¥ */
 	void AddTimerBalloon(TimerBalloon* timerBalloon) { this->timerBalloons.push_back(timerBalloon); }
 
 public: 
 	/* GameOver handling */
 	void HandleGameOver();
 
-protected: /* ¼Ò¸ğ ¾ÆÀÌÅÛ »ç¿ë °ü·Ã */
+protected: /* ì†Œëª¨ ì•„ì´í…œ ì‚¬ìš© ê´€ë ¨ */
 
 	virtual void	HandleUseConsumableItem() = 0;
 	bool			UseConsumableItem();
 
 private:
-	/* Map boundary Ãæµ¹Ã³¸® */
+	/* Map boundary ì¶©ëŒì²˜ë¦¬ */
 	void HandleBoundary();
 
 private:
-	/* ¹°Ç³¼± ³õ±â method */
+	/* ë¬¼í’ì„  ë†“ê¸° method */
 	virtual void DeployBalloon() = 0;
 
-public: /* Debugging °ü·Ã */
+public: /* Debugging ê´€ë ¨ */
 	virtual void	Debug();
 	void			SetLabel(const string& label) { this->debugLabel = label; }
 
@@ -163,9 +163,9 @@ protected: /* PlayerType, MainState */
 
 protected: /* Colliders */
 	ColliderRect*	body{};			// Main body collider
-	ColliderRect*	pushCollider{}; // ¹Ğ¾î³¾ ¼ö ÀÖ´Â ºí·Ï¿ëµµ·Î ¾µ °ÍÀÓ
+	ColliderRect*	pushCollider{}; // ë°€ì–´ë‚¼ ìˆ˜ ìˆëŠ” ë¸”ë¡ìš©ë„ë¡œ ì“¸ ê²ƒì„
 
-protected: /* Ä³¸¯ÅÍ ±×¸²ÀÚ ¹× È­»ìÇ¥ */
+protected: /* ìºë¦­í„° ê·¸ë¦¼ì ë° í™”ì‚´í‘œ */
 	Object*				shadow{};
 	Object*				arrow{};
 	map<bool, float>	arrowYDestMap{};
@@ -176,27 +176,27 @@ protected:
 	Vector2 velocity{};
 
 protected: 
-	/* ½ÇÁúÀûÀÎ Ä³¸¯ÅÍ ¾Ö´Ï¸ŞÀÌ¼Ç ½ºÇÁ¶óÀÌÆ® Ãâ·Â ´ã´ç */
+	/* ì‹¤ì§ˆì ì¸ ìºë¦­í„° ì• ë‹ˆë©”ì´ì…˜ ìŠ¤í”„ë¼ì´íŠ¸ ì¶œë ¥ ë‹´ë‹¹ */
 	CharacterAnim* actionHandler{};
 
 protected:	
-	/* ¼Ò¸ğÇ° ¾ÆÀÌÅÛ(¹Ù´Ã, ´ÙÆ® µî) */
+	/* ì†Œëª¨í’ˆ ì•„ì´í…œ(ë°”ëŠ˜, ë‹¤íŠ¸ ë“±) */
 	Item* consumableItem{};
 
 protected:
 	/* 
-	* °ÔÀÓ ÇÊµå¿¡ ½ºÆùµÈ timerballoonµéÀÇ pointer ÀúÀå
-	* ¹°Ç³¼±À» ³õÀ» ¶§(DeployBalloon) ÀÚ½ÅÀÌ ³õÀº timerBallonÀÌ ÇÏ³ª¶óµµ Á¸ÀçÇÑ´Ù¸é timerBalloonÀ» ÅÍÄ¡´Â ¿ëµµ·Î »ç¿ë
+	* ê²Œì„ í•„ë“œì— ìŠ¤í°ëœ timerballoonë“¤ì˜ pointer ì €ì¥
+	* ë¬¼í’ì„ ì„ ë†“ì„ ë•Œ(DeployBalloon) ìì‹ ì´ ë†“ì€ timerBallonì´ í•˜ë‚˜ë¼ë„ ì¡´ì¬í•œë‹¤ë©´ timerBalloonì„ í„°ì¹˜ëŠ” ìš©ë„ë¡œ ì‚¬ìš©
 	*/
 	vector<TimerBalloon*> timerBalloons{};
 
-protected: /* ½ºÅÈ °ü·Ã (¼Óµµ, ¹°Ç³¼± °¹¼ö, ¹°ÁÙ±â ½ºÅÈ) */
+protected: /* ìŠ¤íƒ¯ ê´€ë ¨ (ì†ë„, ë¬¼í’ì„  ê°¯ìˆ˜, ë¬¼ì¤„ê¸° ìŠ¤íƒ¯) */
 	
 	UINT speedLvMin{};
 	UINT speedLvMax{};
 
-	UINT curIdleSpeedLv{};	// ¸¶Áö¸· Idle »óÅÂÀÏ ¶§ÀÇ speed lv¸¦ ÀúÀå
-	UINT speedLv{};			// ÇöÀç(Å» °Í Æ÷ÇÔ)ÀÇ speed lv
+	UINT curIdleSpeedLv{};	// ë§ˆì§€ë§‰ Idle ìƒíƒœì¼ ë•Œì˜ speed lvë¥¼ ì €ì¥
+	UINT speedLv{};			// í˜„ì¬(íƒˆ ê²ƒ í¬í•¨)ì˜ speed lv
 
 	UINT balloonCntMin{};
 	UINT balloonCntMax{};
@@ -206,17 +206,17 @@ protected: /* ½ºÅÈ °ü·Ã (¼Óµµ, ¹°Ç³¼± °¹¼ö, ¹°ÁÙ±â ½ºÅÈ) */
 	UINT streamLvMax{};
 	UINT streamLv{};		
 
-protected: /* ½ºÆù ÄÃ·¯ °ü·Ã */
+protected: /* ìŠ¤í° ì»¬ëŸ¬ ê´€ë ¨ */
 
-	ColorBuffer*	spawnColorBuffer{}; // ½ºÆù ½Ã »ç¿ëÇÒ colorBuffer
+	ColorBuffer*	spawnColorBuffer{}; // ìŠ¤í° ì‹œ ì‚¬ìš©í•  colorBuffer
 	float			flicker{};
 	bool			flicked{};
 	const Vector4	SPAWN_COLOR = { 0, 0, 0, 1 };
 
 protected:
 	/*
-	* Captured µÇ¾úÀ» ¶§ ÇÃ·¹ÀÌ¾î »óÈ£°£ Ãæµ¹Ã³¸®¸¦ ¹Ù·Î Ã³¸®ÇÏ¸é ¾î»öÇÔ
-	* Captured µÇ¾úÀ» ¶§ ÀÏÁ¤ termÀ» ÁØ µÚ Ãæµ¹Ã³¸® ÁøÇà
+	* Captured ë˜ì—ˆì„ ë•Œ í”Œë ˆì´ì–´ ìƒí˜¸ê°„ ì¶©ëŒì²˜ë¦¬ë¥¼ ë°”ë¡œ ì²˜ë¦¬í•˜ë©´ ì–´ìƒ‰í•¨
+	* Captured ë˜ì—ˆì„ ë•Œ ì¼ì • termì„ ì¤€ ë’¤ ì¶©ëŒì²˜ë¦¬ ì§„í–‰
     */
 
 	const float CAPTURED_P_COLLIDE_START_TIME = 0.5f;

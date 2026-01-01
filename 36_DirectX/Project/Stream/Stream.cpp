@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Stream.h"
 
 set<Util::Coord> Stream::streamDangerZone{};
@@ -44,7 +44,7 @@ void Stream::Spawn(const Util::Coord& spawnCoord, const UINT& streamLv)
 	stopSpawning = false;
 	activatedBlocks.clear();
 
-	// Center ¸ÕÀú ½ºÆù ½ÃÅ´
+	// Center ë¨¼ì € ìŠ¤í° ì‹œí‚´
 	StreamBlock* block = StreamManager::GetStreamBlockManager()->Spawn(DIR_NONE, spawnCoord);
 
 	activatedBlocks.push_back(block);
@@ -104,7 +104,7 @@ void Stream::InitReachedMap(const Util::Coord& spawnCoord, const UINT& streamLv)
 			curCoord.first += dx[i];
 			curCoord.second += dy[i];
 			
-			// ¹üÀ§ ÆÇÁ¤
+			// ë²”ìœ„ íŒì •
 			if ( curCoord.first < 0 || curCoord.first >= MAP_COL ||
 				curCoord.second < 0 || curCoord.second >= MAP_ROW )
 				break;
@@ -154,7 +154,7 @@ void Stream::HandleSpawning()
 	{
 		Direction dir = (Direction)i;
 
-		// ¹®Á¦Á¡ - ¾Æ¿¹ ¾øÀ» ¼öµµ ÀÖ±â ¶§¹®¿¡ continue °É¾î µÒ
+		// ë¬¸ì œì  - ì•„ì˜ˆ ì—†ì„ ìˆ˜ë„ ìˆê¸° ë•Œë¬¸ì— continue ê±¸ì–´ ë‘ 
 		if (reachedCoordMap[dir].empty())
 		{
 			dequeEmptyCnt++;
@@ -171,7 +171,7 @@ void Stream::HandleSpawning()
 		activatedBlocks.push_back(spawnedBlock);
 	}
 
-	if (dequeEmptyCnt >= 4) // ´õ ÀÌ»ó spawn½ÃÅ³ streamBlockÀÌ ¾øÀ½
+	if (dequeEmptyCnt >= 4) // ë” ì´ìƒ spawnì‹œí‚¬ streamBlockì´ ì—†ìŒ
 	{
 		stopSpawning = true;
 		return;

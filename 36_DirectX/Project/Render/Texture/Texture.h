@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 class Texture
 {
 private:
@@ -13,14 +13,14 @@ public:
 
 	static Texture* GetTexture(wstring file);
 
-	// MainGame ¼Ò¸êÀÚ¿¡¼­ È£Ãâ
+	// MainGame ì†Œë©¸ìì—ì„œ í˜¸ì¶œ
 	static void Delete();
 
 private:
 	
-	ScratchImage image;				// ¿ÂÀüÇÑ ÀÌ¹ÌÁö Á¤º¸¸¦ ¿©±â·Î ºÒ·¯¿È
+	ScratchImage image;				// ì˜¨ì „í•œ ì´ë¯¸ì§€ ì •ë³´ë¥¼ ì—¬ê¸°ë¡œ ë¶ˆëŸ¬ì˜´
 
-	ID3D11ShaderResourceView* srv{};	// srv¸¦ ÅëÇØ ÀÌ¹ÌÁö Á¤º¸¸¦ °¡°øÇÏ¿© gpu¿¡ ³Ñ±è
+	ID3D11ShaderResourceView* srv{};	// srvë¥¼ í†µí•´ ì´ë¯¸ì§€ ì •ë³´ë¥¼ ê°€ê³µí•˜ì—¬ gpuì— ë„˜ê¹€
 
 	static map<wstring, Texture*> textures;
 

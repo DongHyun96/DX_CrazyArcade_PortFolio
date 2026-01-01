@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-// ¾Ë¾Æ¾ß ÇÒ °Í : Ã¢¸ðµå¸¦ ¸ø ¾¸ (Á¤È®ÇÑ mousePos°¡ ÀâÈú ¼ö ¾øÀ½)
+// ì•Œì•„ì•¼ í•  ê²ƒ : ì°½ëª¨ë“œë¥¼ ëª» ì”€ (ì •í™•í•œ mousePosê°€ ìž¡íž ìˆ˜ ì—†ìŒ)
 class Button
 {
 protected:
@@ -14,7 +14,7 @@ protected:
 
 public:
 
-	// nFrame 2°³ -> (UP, DOWN) (HOVER)
+	// nFrame 2ê°œ -> (UP, DOWN) (HOVER)
 	Button(const wstring& file, const UINT& frameX, const UINT& frameY, UINT nFrames = 0);
 
 	Button(const Vector2& size, const wstring& file, const UINT& frameX, const UINT& frameY, UINT nFrames = 0);

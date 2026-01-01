@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "BlockEditor.h"
 
 
@@ -137,7 +137,7 @@ void BlockEditor::InitBlockButtons()
 			blockMapColliders.push_back(collider);
 		}
 
-		// ·¹°íºí·°µé
+		// ë ˆê³ ë¸”ëŸ­ë“¤
 		for (UINT i = 0; i < 2; i++)
 		{
 			//block = new Block({ 6, 6 }, L"InGame/Village/Objects/box.png", { 3, 1 }, { 3, 1 }, CELL_WORLD_SIZE, { true, true, false });
@@ -170,7 +170,7 @@ void BlockEditor::InitBlockButtons()
 		Collider* collider{};
 		BlockInfo info{};
 
-		// º®µ¹ 1, 2, 3
+		// ë²½ëŒ 1, 2, 3
 		for (UINT i = 0; i < 3; i++) // 16, 10 9 8
 		{
 			info = { L"InGame/Forest/Objects/object"+ to_wstring(i + 1) + L".png", {0, 0}, {1, 1}, {1, 1}, {false, false, false} };
@@ -194,7 +194,7 @@ void BlockEditor::InitBlockButtons()
 		blockMaps.push_back({ block, info });
 		blockMapColliders.push_back(collider);
 
-		// ¿¬¸ø
+		// ì—°ëª»
 		for (UINT i = 0; i < 6; i++)
 		{
 			UINT x = i % 3 + 1;
@@ -211,7 +211,7 @@ void BlockEditor::InitBlockButtons()
 			blockMapColliders.push_back(collider);
 		}
 
-		// ÀÏ¹Ý ºí·Ïµé
+		// ì¼ë°˜ ë¸”ë¡ë“¤
 		for (UINT i = 0; i < 2; i++) // 18, 10 9 
 		{
 			info = { L"InGame/Forest/Objects/block" + to_wstring(i + 2) + L".png", {0, 0}, {1, 1}, {1, 1}, {true, false, false} };
@@ -232,7 +232,7 @@ void BlockEditor::InitBlockButtons()
 		Collider* collider{};
 		BlockInfo info{};
 
-		// ½ÅÈ£µî
+		// ì‹ í˜¸ë“±
 		info = { L"InGame/Factory/Objects/TrafficLight.png", {0, 0}, {1, 1}, {1, 1}, {false, false, false}, Vector2(WIN_WIDTH / MAP_COL, WIN_HEIGHT / MAP_ROW * 2.2f) };
 		block = new Block({ 16, 10 }, info.file, info.frameXY, info.targetXY, info.texWorldSize, info.bProp);
 
@@ -270,7 +270,7 @@ void BlockEditor::InitBlockButtons()
 		}
 
 
-		// Basic ÆÄ¶õ»ö ºí·Ïµé
+		// Basic íŒŒëž€ìƒ‰ ë¸”ë¡ë“¤
 		for (UINT i = 0; i < 2; i++)
 		{
 			info = { L"InGame/Factory/Objects/Basic.bmp", {0, 0}, {2, 1}, {i + 1, 1}, {true, false, false} };
@@ -348,7 +348,7 @@ void BlockEditor::SetBlockToWorld()
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			if (mapEditor->cellColliders[i][j]->OBBCollision(mousePos)) // i, j À§Ä¡¿Í info°¡ ÇÊ¿ä
+			if (mapEditor->cellColliders[i][j]->OBBCollision(mousePos)) // i, j ìœ„ì¹˜ì™€ infoê°€ í•„ìš”
 			{
 				if (KEY_DOWN(VK_LBUTTON))
 				{

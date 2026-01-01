@@ -1,24 +1,24 @@
-#pragma once
+ï»¿#pragma once
 
 class MapEditor;
 
-/* Tile¿¡ ´ëÇØ save & loadÇÒ Á¤º¸µé */
+/* Tileì— ëŒ€í•´ save & loadí•  ì •ë³´ë“¤ */
 struct TileInfo
 {
 	TileInfo() {}
 
 	/// <param name="file"> : Texture file path </param>
-	/// <param name="frameX"> : Texture fileÀÇ Row ÇÁ·¹ÀÓ ÃÑ °³¼ö </param>
-	/// <param name="frameY"> : Texture fileÀÇ Col ÇÁ·¹ÀÓ ÃÑ °³¼ö </param>
-	/// <param name="targetX"> : »ç¿ëÇÒ ÇÁ·¹ÀÓ À§Ä¡ÀÇ Row °ª </param>
-	/// <param name="targetY"> : »ç¿ëÇÒ ÇÁ·¹ÀÓ À§Ä¡ÀÇ Col °ª </param>
+	/// <param name="frameX"> : Texture fileì˜ Row í”„ë ˆì„ ì´ ê°œìˆ˜ </param>
+	/// <param name="frameY"> : Texture fileì˜ Col í”„ë ˆì„ ì´ ê°œìˆ˜ </param>
+	/// <param name="targetX"> : ì‚¬ìš©í•  í”„ë ˆì„ ìœ„ì¹˜ì˜ Row ê°’ </param>
+	/// <param name="targetY"> : ì‚¬ìš©í•  í”„ë ˆì„ ìœ„ì¹˜ì˜ Col ê°’ </param>
 	TileInfo(wstring file, UINT frameX=1, UINT frameY=1, UINT targetX=1, UINT targetY=1)
 		:file(file), frameX(frameX), frameY(frameY), targetX(targetX), targetY(targetY)
 	{
 	}
 
 	/// <summary>
-	/// TileInfo bin ÆÄÀÏ ³»¿ëÀ¸·Î ÀúÀå
+	/// TileInfo bin íŒŒì¼ ë‚´ìš©ìœ¼ë¡œ ì €ì¥
 	/// </summary>
 	/// <param name="binWriter"> : BinaryWriter reference </param>
 	void SaveData(BinaryWriter& binWriter)
@@ -31,7 +31,7 @@ struct TileInfo
 	}
 
 	/// <summary>
-	/// BinÆÄÀÏ ÀúÀå ³»¿ë ºÒ·¯¿À±â
+	/// BiníŒŒì¼ ì €ì¥ ë‚´ìš© ë¶ˆëŸ¬ì˜¤ê¸°
 	/// </summary>
 	/// <param name="binReader"> : BinaryReader reference </param>
 	void ReadAndCopy(BinaryReader& binReader)
@@ -44,10 +44,10 @@ struct TileInfo
 	}
 
 	wstring		file{};		// Texture file path
-	UINT		frameX{};	// °ÔÀÓ º¸µå cell ÁÂÇ¥ X
-	UINT		frameY{};	// °ÔÀÓ º¸µå cell ÁÂÇ¥ Y
-	UINT		targetX{};	// Texture ÆÄÀÏ ³»¿¡¼­ »ç¿ëÇÒ ÇÁ·¹ÀÓ À§Ä¡ Row°ª
-	UINT		targetY{};	// Texture ÆÄÀÏ ³»¿¡¼­ »ç¿ëÇÒ ÇÁ·¹ÀÓ À§Ä¡ Col°ª
+	UINT		frameX{};	// ê²Œì„ ë³´ë“œ cell ì¢Œí‘œ X
+	UINT		frameY{};	// ê²Œì„ ë³´ë“œ cell ì¢Œí‘œ Y
+	UINT		targetX{};	// Texture íŒŒì¼ ë‚´ì—ì„œ ì‚¬ìš©í•  í”„ë ˆì„ ìœ„ì¹˜ Rowê°’
+	UINT		targetY{};	// Texture íŒŒì¼ ë‚´ì—ì„œ ì‚¬ìš©í•  í”„ë ˆì„ ìœ„ì¹˜ Colê°’
 
 };
 
@@ -55,12 +55,12 @@ struct TileInfo
 /* 
 CONCRETE CLASS
 Owned by MapEditor
-GameManager¿¡¼­ editMode°¡ È°¼ºÈ­ µÇ¾î ÀÖ°í, MapEditorÀÇ mode°¡ TileEditorModeÀÏ ¶§ »ç¿ë
+GameManagerì—ì„œ editModeê°€ í™œì„±í™” ë˜ì–´ ìˆê³ , MapEditorì˜ modeê°€ TileEditorModeì¼ ë•Œ ì‚¬ìš©
 */
 class TileEditor
 {
 public:
-	/// <param name="mapEditor"> : TileEditor¸¦ ¼ÒÀ¯ ÁßÀÎ mapEditor </param>
+	/// <param name="mapEditor"> : TileEditorë¥¼ ì†Œìœ  ì¤‘ì¸ mapEditor </param>
 	TileEditor(MapEditor* mapEditor);
 	~TileEditor();
 
@@ -72,32 +72,32 @@ private:
 	void UpdateObjects();
 
 private:
-	/* Å¸ÀÏ ¸Ş´º¹öÆ° initialization */
+	/* íƒ€ì¼ ë©”ë‰´ë²„íŠ¼ initialization */
 	void InitTileButtons();
 
 private:
-	/* Å¸ÀÏ ¸Ş´º¹öÆ°À» ÅëÇØ ÇöÀç Å¸ÀÏ ¼±ÅÃÇÏ±â */
+	/* íƒ€ì¼ ë©”ë‰´ë²„íŠ¼ì„ í†µí•´ í˜„ì¬ íƒ€ì¼ ì„ íƒí•˜ê¸° */
 	void SelectTileMap();
 
-	/* ÇöÀç Å¸ÀÏ world¿¡ ¹èÄ¡ */
+	/* í˜„ì¬ íƒ€ì¼ worldì— ë°°ì¹˜ */
 	void HandleSetTileToWorld();
 
 private:
 
 	/// <summary>
-	/// Editor¿¡¼­ ÇöÀç ¼±ÅÃµÈ Å¸ÀÏÀ» world¿¡ ¹èÄ¡ÇÒ ¶§ »ç¿ë
+	/// Editorì—ì„œ í˜„ì¬ ì„ íƒëœ íƒ€ì¼ì„ worldì— ë°°ì¹˜í•  ë•Œ ì‚¬ìš©
 	/// </summary>
-	/// <param name="boardX"> : ¹èÄ¡µÉ cell pos X°ª </param>
-	/// <param name="boardY"> : ¹èÄ¡µÉ cell pos Y°ª </param>
+	/// <param name="boardX"> : ë°°ì¹˜ë  cell pos Xê°’ </param>
+	/// <param name="boardY"> : ë°°ì¹˜ë  cell pos Yê°’ </param>
 	void CreateTile(UINT boardX, UINT boardY);
 
 	/// <summary>
-	/// EditMode ½ÃÀÛ ½Ã, GameManagerÀÇ curMapType¿¡ µû¸¥ ¹Ì¸® ÀúÀåµÈ TileµéÀ» LoadÇÒ ¶§ »ç¿ë
+	/// EditMode ì‹œì‘ ì‹œ, GameManagerì˜ curMapTypeì— ë”°ë¥¸ ë¯¸ë¦¬ ì €ì¥ëœ Tileë“¤ì„ Loadí•  ë•Œ ì‚¬ìš©
 	/// </summary>
-	/// <param name="info"> : ¸¸µé Å¸ÀÏÀÇ Á¤º¸ </param>
-	/// <param name="boardX"> : ¹èÄ¡µÉ cell pos X°ª </param>
-	/// <param name="boardY"> : ¹èÄ¡µÉ cell pos Y°ª </param>
-	void CreateTile(const TileInfo& info, UINT boardX, UINT boardY); // ½ÃÀÛ ½Ã LoadÇÒ ¶§ createÇÏ´Â ¿ëµµ
+	/// <param name="info"> : ë§Œë“¤ íƒ€ì¼ì˜ ì •ë³´ </param>
+	/// <param name="boardX"> : ë°°ì¹˜ë  cell pos Xê°’ </param>
+	/// <param name="boardY"> : ë°°ì¹˜ë  cell pos Yê°’ </param>
+	void CreateTile(const TileInfo& info, UINT boardX, UINT boardY); // ì‹œì‘ ì‹œ Loadí•  ë•Œ createí•˜ëŠ” ìš©ë„
 
 private:
 
@@ -115,14 +115,14 @@ private:
 	/* Owner of this class */
 	MapEditor* mapEditor{};
 
-private: /* ¿ùµå Å¸ÀÏ °ü·Ã */
+private: /* ì›”ë“œ íƒ€ì¼ ê´€ë ¨ */
 	
-	Object*		cellTiles[MAP_ROW][MAP_COL]{};	// World¿¡ ¹èÄ¡µÈ Å¸ÀÏ °´Ã¼µé
-	TileInfo	infos[MAP_ROW][MAP_COL]{};		// ÇöÀç worldÀÇ °¢ cell¿¡ ¹èÄ¡µÈ Å¸ÀÏµéÀÇ infos
+	Object*		cellTiles[MAP_ROW][MAP_COL]{};	// Worldì— ë°°ì¹˜ëœ íƒ€ì¼ ê°ì²´ë“¤
+	TileInfo	infos[MAP_ROW][MAP_COL]{};		// í˜„ì¬ worldì˜ ê° cellì— ë°°ì¹˜ëœ íƒ€ì¼ë“¤ì˜ infos
 	
-private: /* Å¸ÀÏ¸Ê¸Ş´º ¹öÆ° °ü·Ã */
-	vector<pair<Object*, TileInfo>> tileMaps;			// vector< <Å¸ÀÏ¸Ê¹öÆ° renderingÇÒ °´Ã¼, ÇØ´çÇÏ´Â TileInfo> >
-	vector<Collider*>				tileMapColliders{};	// Å¸ÀÏ¸Ê¹öÆ° Collider (¸¶¿ì½º¿Í Collision Ã³¸®)
-	UINT							selectedTIdx{};		// ÇöÀç ¼±ÅÃµÈ Å¸ÀÏ¸Ê¹öÆ° index
+private: /* íƒ€ì¼ë§µë©”ë‰´ ë²„íŠ¼ ê´€ë ¨ */
+	vector<pair<Object*, TileInfo>> tileMaps;			// vector< <íƒ€ì¼ë§µë²„íŠ¼ renderingí•  ê°ì²´, í•´ë‹¹í•˜ëŠ” TileInfo> >
+	vector<Collider*>				tileMapColliders{};	// íƒ€ì¼ë§µë²„íŠ¼ Collider (ë§ˆìš°ìŠ¤ì™€ Collision ì²˜ë¦¬)
+	UINT							selectedTIdx{};		// í˜„ì¬ ì„ íƒëœ íƒ€ì¼ë§µë²„íŠ¼ index
 
 };

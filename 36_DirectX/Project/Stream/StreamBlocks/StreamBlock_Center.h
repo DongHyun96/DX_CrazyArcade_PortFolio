@@ -1,7 +1,7 @@
-#pragma once
+Ôªø#pragma once
 /* 
 CONCRETE CLASS
-∞°øÓµ• π∞¡Ÿ±‚ block
+Í∞ÄÏö¥Îç∞ Î¨ºÏ§ÑÍ∏∞ block
 */
 class StreamBlock_Center : public StreamBlock
 {

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Collider.h"
 
 
@@ -11,7 +11,7 @@ Collider::Collider()
 	colorBuffer		= new ColorBuffer();
 	colorBuffer->SetData(Vector4(0, 1, 0, 1));
 
-	// VertexBuffer´Â ÀÚ½Ä¿¡¼­ ¸ğ¾çÀÌ Á¤ÇØÁö±â ¶§¹®¿¡ ÀÚ½Ä¿¡¼­ ¸¸µê
+	// VertexBufferëŠ” ìì‹ì—ì„œ ëª¨ì–‘ì´ ì •í•´ì§€ê¸° ë•Œë¬¸ì— ìì‹ì—ì„œ ë§Œë“¦
 }
 
 Collider::~Collider()

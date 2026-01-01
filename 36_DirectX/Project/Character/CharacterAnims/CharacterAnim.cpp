@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "CharacterAnim.h"
 
 
@@ -71,7 +71,7 @@ void CharacterAnim::Update()
 	Transform::Update();
 	curAction->Update();
 
-	// Á÷Á¢ÀûÀÎ y ÁÂÇ¥ handlingÀ» ¿©±â¼­ ÇÔ
+	// ì§ì ‘ì ì¸ y ì¢Œí‘œ handlingì„ ì—¬ê¸°ì„œ í•¨
 
 	if (curAction == bubbleActions[A_BUBBLE_CAPTURED])
 	{
@@ -86,7 +86,7 @@ void CharacterAnim::Update()
 
 	if (isRidableReturningToIdle)
 	{
-		// Ã³À½¿¡´Â Á¡ÇÁÇß´Ù°¡ µµ·Î Á¦ÀÚ¸®·Î ¿Í¾ß ÇÔ
+		// ì²˜ìŒì—ëŠ” ì í”„í–ˆë‹¤ê°€ ë„ë¡œ ì œìë¦¬ë¡œ ì™€ì•¼ í•¨
 		jump_UpdateTime += Time::Delta();
 		
 		if (jump_UpdateTime >= JUMP_TICK)
@@ -98,7 +98,7 @@ void CharacterAnim::Update()
 
 		translation.y += jump_ySpeed * Time::Delta();
 
-		if (translation.y < (curAction->Size().y - parentBody->LocalSize().y) / 2) // Á¡ÇÁ µ¿ÀÛ ³¡ (ÂøÁöÇÔ)
+		if (translation.y < (curAction->Size().y - parentBody->LocalSize().y) / 2) // ì í”„ ë™ì‘ ë (ì°©ì§€í•¨)
 		{
 			jump_UpdateTime = 0.f;
 			jump_ySpeed = 150.f;
@@ -112,7 +112,7 @@ void CharacterAnim::Update()
 	}
 	
 
-	// floorÀ» parent floor¿¡ ¸ÂÃß´Â ÀÛ¾÷
+	// floorì„ parent floorì— ë§ì¶”ëŠ” ì‘ì—…
 	translation.y = (curAction->Size().y - parentBody->LocalSize().y) / 2;
 }
 
@@ -159,7 +159,7 @@ void CharacterAnim::UpdateAction(const CharacterState& cState, const Vector2& ve
 		curAction->Play(false);
 
 		break;
-	case C_RETURN_IDLE: // TODO -> EndEvent·Î ownerÀÇ »óÅÂ¸¦ º¯È­½ÃÄÑ¾ß ÇÔ
+	case C_RETURN_IDLE: // TODO -> EndEventë¡œ ownerì˜ ìƒíƒœë¥¼ ë³€í™”ì‹œì¼œì•¼ í•¨
 
 		if (ownerPrevState == C_CAPTURED)
 		{
@@ -225,7 +225,7 @@ void CharacterAnim::SetReturnIdleEndEvent(function<void()> E)
 }
 
 
-/// <returns> ¼Óµµ°¡ 0ÀÌ¸é -1 return </returns>
+/// <returns> ì†ë„ê°€ 0ì´ë©´ -1 return </returns>
 int CharacterAnim::GetCurFaceDirByVelocity(const Vector2& velocity)
 {
 	if (velocity.Length() == 0.f)	return -1;

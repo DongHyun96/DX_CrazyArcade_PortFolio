@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ConsumableItem.h"
 
 
@@ -29,7 +29,7 @@ bool ConsumableItem::UseItem(Character* itemUser)
 	return false;
 }
 
-// ¾ÆÀÌÅÛÀ» ¸Ô¾úÀ» ¶§ÀÇ Ã³¸®
+// ì•„ì´í…œì„ ë¨¹ì—ˆì„ ë•Œì˜ ì²˜ë¦¬
 void ConsumableItem::OnColliderPointEnter(ColliderHolder* owner)
 {
 	if (!isActive) return;
@@ -47,14 +47,14 @@ void ConsumableItem::OnColliderPointEnter(ColliderHolder* owner)
 
 		SOUND->Play("ItemEarned", 0.5f);
 
-		// ¸¸¾à ÇØ´ç Ä³¸¯ÅÍ°¡ ´Ù¸¥ ConsumableItemÀ» µé°í ÀÖÀ» ¶§, ÀÌÀü ¾ÆÀÌÅÛÀÇ active¸¦ ²¨ÁÜ
+		// ë§Œì•½ í•´ë‹¹ ìºë¦­í„°ê°€ ë‹¤ë¥¸ ConsumableItemì„ ë“¤ê³  ìžˆì„ ë•Œ, ì´ì „ ì•„ì´í…œì˜ activeë¥¼ êº¼ì¤Œ
 		if (character->GetConsumableItem())
 			character->GetConsumableItem()->SetActive(false);
 
 		// set this item to character
 		character->SetConsumableItem(this);
 
-		// 1pÀÎÁö 2pÀÎÁö enemyÀÎÁö¿¡ µû¶ó¼­µµ ´Þ¶óÁü (ÀâÈ÷´Â À§Ä¡°¡)
+		// 1pì¸ì§€ 2pì¸ì§€ enemyì¸ì§€ì— ë”°ë¼ì„œë„ ë‹¬ë¼ì§ (ìž¡ížˆëŠ” ìœ„ì¹˜ê°€)
 		switch (character->GetPlayerType())
 		{
 		case P1:
@@ -68,7 +68,7 @@ void ConsumableItem::OnColliderPointEnter(ColliderHolder* owner)
 
 			leftCntTextPos = { 1815, 157 };
 			break;
-		case COMPUTER: // ¾Æ¿¹ È­¸é ¹Û¿¡ ¶ç¿ö¹ö¸²
+		case COMPUTER: // ì•„ì˜ˆ í™”ë©´ ë°–ì— ë„ì›Œë²„ë¦¼
 			body->translation = { -500, -500 };
 			leftCntTextPos = { -500, 500 };
 			break;
@@ -81,7 +81,7 @@ void ConsumableItem::OnColliderPointEnter(ColliderHolder* owner)
 
 void ConsumableItem::EarnedRenderHook()
 {
-	// body¿Í texture´Â ºÎ¸ð Å¬·¡½º¿¡¼­ ·»´õ¸µ µÇ°í(À§Ä¡°¡ ÀâÈùÃ¤·Î), ³²Àº ¾ÆÀÌÅÛ ¼ö ÆùÆ®¸¦ ¶ç¿ö¾ß ÇÔ
+	// bodyì™€ textureëŠ” ë¶€ëª¨ í´ëž˜ìŠ¤ì—ì„œ ë Œë”ë§ ë˜ê³ (ìœ„ì¹˜ê°€ ìž¡ížŒì±„ë¡œ), ë‚¨ì€ ì•„ì´í…œ ìˆ˜ í°íŠ¸ë¥¼ ë„ì›Œì•¼ í•¨
 	FONT->RenderText(L"x " + to_wstring(leftCnt), "BazziFontBold", Util::ConvertDxPosToAPIPos(leftCntTextPos));
 }
 

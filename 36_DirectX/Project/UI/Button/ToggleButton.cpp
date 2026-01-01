@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ToggleButton.h"
 
 map<string, vector<ToggleButton*>> ToggleButton::toggleGroups{};
@@ -14,7 +14,7 @@ ToggleButton::ToggleButton
 )
 	:Button(UDLR, downFile, upFile, hoverFile), myToggleKey(toggleGroupKey), customKey(customKey)
 {
-	if (toggleGroups.find(toggleGroupKey) == toggleGroups.end()) // ½Å±Ô »ı¼º (Ã¹ ¹öÆ°À» ´­¸° »óÅÂ·Î µÑ °ÍÀÓ)
+	if (toggleGroups.find(toggleGroupKey) == toggleGroups.end()) // ì‹ ê·œ ìƒì„± (ì²« ë²„íŠ¼ì„ ëˆŒë¦° ìƒíƒœë¡œ ë‘˜ ê²ƒì„)
 		this->state = DOWN;
 
 	toggleGroups[toggleGroupKey].push_back(this);
@@ -31,7 +31,7 @@ void ToggleButton::Update()
 	for (auto& p : texMap)
 		if (p.second) p.second->Update();
 	
-	// Down »óÅÂ¸¦ Ç® ¼ö ÀÖ´Â °ÍÀº ¿À·ÎÁö ´Ù¸¥ ¹öÆ°ÀÌ ´­·ÈÀ» ¶§
+	// Down ìƒíƒœë¥¼ í’€ ìˆ˜ ìˆëŠ” ê²ƒì€ ì˜¤ë¡œì§€ ë‹¤ë¥¸ ë²„íŠ¼ì´ ëˆŒë ¸ì„ ë•Œ
 
 
 	if (body->AABBCollision(mousePos))
@@ -65,7 +65,7 @@ void ToggleButton::Update()
 			}
 
 			if (Event) Event();
-			if (CharacterSelectEvent) CharacterSelectEvent(RANDOM, P1); // ¿©±âÀÇ paramÀº »ó°ü x
+			if (CharacterSelectEvent) CharacterSelectEvent(RANDOM, P1); // ì—¬ê¸°ì˜ paramì€ ìƒê´€ x
 		}
 	}
 	else if (state != DOWN)

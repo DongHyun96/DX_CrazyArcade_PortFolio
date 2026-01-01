@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 /* 
 CONCRETE CLASS
@@ -22,8 +22,8 @@ public:
 	/// <summary>
 	/// Spawn dart
 	/// </summary>
-	/// <param name="spawnPos"> : ½ºÆù ½ÃÀÛ À§Ä¡ </param>
-	/// <param name="fireDirection"> : ¹ß»ç ¹æÇâ </param>
+	/// <param name="spawnPos"> : ìŠ¤í° ì‹œì‘ ìœ„ì¹˜ </param>
+	/// <param name="fireDirection"> : ë°œì‚¬ ë°©í–¥ </param>
 	void Spawn(const Vector2& spawnPos, const Direction& fireDirection);
 
 public: /* Getters and setters */
@@ -34,7 +34,7 @@ public: /* Getters and setters */
 
 private:
 
-	/* Game map ¹üÀ§ ¹ÛÀ¸·Î ³ª°£ dart Ã³¸® */
+	/* Game map ë²”ìœ„ ë°–ìœ¼ë¡œ ë‚˜ê°„ dart ì²˜ë¦¬ */
 	void HandleBoundary();
 
 	/// <summary>
@@ -54,8 +54,8 @@ private:
 
 private:
 
-	map<Direction, Object*> dirTexMap{}; // Dart ¹æÇâ¿¡ µû¸¥ Texture map
-	Object*					curTexObj{}; // ¹æÇâÀÌ ÁöÁ¤µÈ ÇöÀç Texture object
+	map<Direction, Object*> dirTexMap{}; // Dart ë°©í–¥ì— ë”°ë¥¸ Texture map
+	Object*					curTexObj{}; // ë°©í–¥ì´ ì§€ì •ëœ í˜„ì¬ Texture object
 	
 private:
 

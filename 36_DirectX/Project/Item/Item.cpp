@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Item.h"
 
 bool Item::spawnSoundPlayed{};
@@ -12,7 +12,7 @@ Item::Item(const ItemName& itemName)
 	body->SetPointEnterEvent(bind(&Item::OnColliderPointEnter, this, placeholders::_1));
 	body->SetRectEnterEvent(bind(&Item::OnColliderRectEnter, this, placeholders::_1, placeholders::_2));
 
-	// TODO : °¢°¢ÀÇ texObj »ı¼º ¹× itemStrategy ÃÊ±âÈ­ ÇÏ±â
+	// TODO : ê°ê°ì˜ texObj ìƒì„± ë° itemStrategy ì´ˆê¸°í™” í•˜ê¸°
 	ItemInitializer::CreateCommonFields(itemName, &texObj, &itemStrategy);
 
 	texObj->SetParent(body);
@@ -74,7 +74,7 @@ void Item::Render()
 	switch (itemState)
 	{
 	case HIDDEN: case SPAWNED:	break;
-	case EARNED:				EarnedRenderHook(); // Hook Method  (ÀÚ½Ä¿¡¼­ °áÁ¤)
+	case EARNED:				EarnedRenderHook(); // Hook Method  (ìì‹ì—ì„œ ê²°ì •)
 		break;
 	default:
 		break;
@@ -133,7 +133,7 @@ void Item::SetItemState(const ItemState& itemState)
 		body->scale = {};
 		break;
 	case EARNED:
-		EarnedSetterHook(); // Hook Method (ÀÚ½Ä¿¡¼­ °áÁ¤)
+		EarnedSetterHook(); // Hook Method (ìì‹ì—ì„œ ê²°ì •)
 		break;
 	default:
 		break;
@@ -144,7 +144,7 @@ void Item::SetItemState(const ItemState& itemState)
 
 void Item::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner)
 {
-	// ¹°ÁÙ±â Ãæµ¹ °Ë»ç (¸¦ ¿©±â¼­ ÇÏ·Á ÇßÁö¸¸ StreamBlock¿¡¼­ ÇÏ±â·Î ÇÔ)
+	// ë¬¼ì¤„ê¸° ì¶©ëŒ ê²€ì‚¬ (ë¥¼ ì—¬ê¸°ì„œ í•˜ë ¤ í–ˆì§€ë§Œ StreamBlockì—ì„œ í•˜ê¸°ë¡œ í•¨)
 	/*StreamBlock* streamblock = dynamic_cast<StreamBlock*>(owner);
 
 	if (streamblock)

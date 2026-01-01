@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "LobbyScene.h"
 
 
@@ -280,13 +280,13 @@ void LobbyScene::Render()
 	switch (GM->GetCurMapType())
 	{
 	case VILLAGE:
-		FONT->RenderText(L"ºô¸®Áö 10", "BazziFontBold50", Util::ConvertDxPosToAPIPos({1694, 350}));
+		FONT->RenderText(L"ë¹Œë¦¬ì§€ 10", "BazziFontBold50", Util::ConvertDxPosToAPIPos({1694, 350}));
 		break;
 	case FOREST:
-		FONT->RenderText(L"Æ÷·¹½ºÆ® 07", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
+		FONT->RenderText(L"í¬ë ˆìŠ¤íŠ¸ 07", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
 		break;
 	case FACTORY:
-		FONT->RenderText(L"ÆÑÅä¸® 07", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
+		FONT->RenderText(L"íŒ©í† ë¦¬ 07", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));
 		break;
 	/*case TEST_FIELD:
 		FONT->RenderText(L"TestField", "BazziFontBold50", Util::ConvertDxPosToAPIPos({ 1694, 350 }));

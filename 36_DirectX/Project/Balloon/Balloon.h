@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 
 /* 
@@ -19,13 +19,13 @@ public:
 
 public:
 
-	/// <param name="spawnCoord"> : ½ºÆù½ÃÅ³ cell coordinate </param>
-	/// <param name="owner"> : ¹°Ç³¼±À» ½ºÆù½ÃÅ°·Á´Â ownerCharacter </param>
-	/// <returns> : Á¤»óÀûÀ¸·Î ½ºÆù µÇ¾ú´Ù¸é return true </returns>
+	/// <param name="spawnCoord"> : ìŠ¤í°ì‹œí‚¬ cell coordinate </param>
+	/// <param name="owner"> : ë¬¼í’ì„ ì„ ìŠ¤í°ì‹œí‚¤ë ¤ëŠ” ownerCharacter </param>
+	/// <returns> : ì •ìƒì ìœ¼ë¡œ ìŠ¤í° ë˜ì—ˆë‹¤ë©´ return true </returns>
 	virtual bool Spawn(const Util::Coord& spawnCoord, Character* owner);
 
 public:
-	/* Balloon ÅÍ¶ß¸®±â */
+	/* Balloon í„°ëœ¨ë¦¬ê¸° */
 	virtual void Explode();
 
 public:
@@ -55,37 +55,37 @@ public: /* Getters and setters */
 public:
 
 	/// <summary>
-	/// ¿¹ºñ DangerZone »èÁ¦
+	/// ì˜ˆë¹„ DangerZone ì‚­ì œ
 	/// </summary>
-	/// <param name="coord"> : »èÁ¦ÇÒ cell coordinate </param>
+	/// <param name="coord"> : ì‚­ì œí•  cell coordinate </param>
 	static void ErasePreDangerZone(const Util::Coord& coord) { preDangerZone.erase(coord); }
 
 	/// <summary>
-	/// ¾ÕÀ¸·Î »ı¼ºµÉ ¹°ÁÙ±â ¿µ¿ª(PreDangerZone) Áß ÇÑ °÷ÀÎÁö Ã¼Å©
+	/// ì•ìœ¼ë¡œ ìƒì„±ë  ë¬¼ì¤„ê¸° ì˜ì—­(PreDangerZone) ì¤‘ í•œ ê³³ì¸ì§€ ì²´í¬
 	/// </summary>
-	/// <param name="coord"> : °Ë»çÇÒ cell coordinate </param>
-	/// <returns> »ı¼ºµÉ ¹°ÁÙ±â ¿µ¿ª Áß ÇÑ °÷ÀÌ¸é return true </returns>
+	/// <param name="coord"> : ê²€ì‚¬í•  cell coordinate </param>
+	/// <returns> ìƒì„±ë  ë¬¼ì¤„ê¸° ì˜ì—­ ì¤‘ í•œ ê³³ì´ë©´ return true </returns>
 	static bool IsPreDangerZone(const Util::Coord& coord) { return (preDangerZone.find(coord) != preDangerZone.end()); }
 
 protected:
 
 	/// <summary>
-	/// ¿¹ºñ DangerZone Ãß°¡
+	/// ì˜ˆë¹„ DangerZone ì¶”ê°€
 	/// </summary>
-	/// <param name="spawnCoord"> : »õ·Î spawnµÉ ¹°Ç³¼±ÀÇ ÁÂÇ¥ </param>
-	/// <param name="streamLv"> : »õ·Î spawnµÉ ¹°Ç³¼±ÀÇ stream lv </param>
+	/// <param name="spawnCoord"> : ìƒˆë¡œ spawnë  ë¬¼í’ì„ ì˜ ì¢Œí‘œ </param>
+	/// <param name="streamLv"> : ìƒˆë¡œ spawnë  ë¬¼í’ì„ ì˜ stream lv </param>
 	static void AddPreDangerZone(const Util::Coord& spawnCoord, const UINT& streamLv);
 
 protected:
 
 	/// <summary>
-	/// ¹°Ç³¼± spawn½ÃÅ°±â
+	/// ë¬¼í’ì„  spawnì‹œí‚¤ê¸°
 	/// </summary>
-	/// <param name="spawnPos"> SpawnÇÒ position </param>
+	/// <param name="spawnPos"> Spawní•  position </param>
 	void Spawn(const Vector2& spawnPos);
 
 protected:
-	/* Æø¹ß ½Ã°£ Ã¼Å©ÇÏ¿© EXPLODE_TIME_LIMIT ÀÌ»ó ½Ã°£ÀÌ Áö³ª¸é ¹°Ç³¼±À» ÅÍÄ§ (Called in Update tick) */
+	/* í­ë°œ ì‹œê°„ ì²´í¬í•˜ì—¬ EXPLODE_TIME_LIMIT ì´ìƒ ì‹œê°„ì´ ì§€ë‚˜ë©´ ë¬¼í’ì„ ì„ í„°ì¹¨ (Called in Update tick) */
 	virtual void HandleExplode();
 
 /***************************************************************************************************
@@ -102,8 +102,8 @@ protected:
 
 protected:
 
-	static vector<Util::Coord>	activeBalloonCoords;		// ÇöÀç ActiveÇÑ ¸ğµç balloonµéÀÇ Cell ÁÂÇ¥µé
-	static vector<Vector2>		activeBalloonPositions;		// ÇöÀç ActiveÇÑ ¸ğµç balloonµéÀÇ positions
+	static vector<Util::Coord>	activeBalloonCoords;		// í˜„ì¬ Activeí•œ ëª¨ë“  balloonë“¤ì˜ Cell ì¢Œí‘œë“¤
+	static vector<Vector2>		activeBalloonPositions;		// í˜„ì¬ Activeí•œ ëª¨ë“  balloonë“¤ì˜ positions
 
 protected:
 
@@ -112,7 +112,7 @@ protected:
 
 protected:
 
-	UINT streamLv{}; // ÀÌ balloonÀÇ ¹°ÁÙ±â lv
+	UINT streamLv{}; // ì´ balloonì˜ ë¬¼ì¤„ê¸° lv
 
 protected:
 
@@ -124,29 +124,29 @@ protected:
 
 protected:
 	/* 
-	ÅÍÁ³À» ¶§ owner characterÀÇ ³õÀ» ¼ö ÀÖ´Â ¹°Ç³¼± °³¼ö È¸º¹ÇØÁà¾ß ÇÔ
-	Spawn½Ã¿¡ ÀÚ½ÅÀÇ owner¸¦ ¹Ş¾Æ¿Ã °ÍÀÓ
+	í„°ì¡Œì„ ë•Œ owner characterì˜ ë†“ì„ ìˆ˜ ìˆëŠ” ë¬¼í’ì„  ê°œìˆ˜ íšŒë³µí•´ì¤˜ì•¼ í•¨
+	Spawnì‹œì— ìì‹ ì˜ ownerë¥¼ ë°›ì•„ì˜¬ ê²ƒì„
 	*/
 	Character* owner{};
 
-protected: // º¼·ı Á¶Àı ¿ëµµ (1 tick¿¡ Ç³¼±ÀÌ ÅÍÁ³´ÂÁö ¾ÈÅÍÁ³´ÂÁö Ã¼Å©)
+protected: // ë³¼ë¥¨ ì¡°ì ˆ ìš©ë„ (1 tickì— í’ì„ ì´ í„°ì¡ŒëŠ”ì§€ ì•ˆí„°ì¡ŒëŠ”ì§€ ì²´í¬)
 
 	/*
-	Update ÇÑ tick¿¡ ¸ğµç balloonÀÌ ÅÍÁú ¶§, º¼·ıÀÌ ³Ê¹« Å­
-	¹°Ç³¼± ÅÍÁö´Â ¼Ò¸®´Â Update tick ³»¿¡¼­ ÇÑ ¹ø¸¸ Ã³¸®¸¦ ÇÒ ¿¹Á¤
+	Update í•œ tickì— ëª¨ë“  balloonì´ í„°ì§ˆ ë•Œ, ë³¼ë¥¨ì´ ë„ˆë¬´ í¼
+	ë¬¼í’ì„  í„°ì§€ëŠ” ì†Œë¦¬ëŠ” Update tick ë‚´ì—ì„œ í•œ ë²ˆë§Œ ì²˜ë¦¬ë¥¼ í•  ì˜ˆì •
 	*/
 	static bool explodeSoundPlayed;
 
 private:
 
 	float		explosionTimer{};			
-	const float EXPLODE_TIME_LIMIT{ 3.f };	// ¹°Ç³¼±ÀÌ ³õÀÎ µÚ ¿ÜºÎÀÇ È¿°ú ¾øÀÌ ÀÚÃ¼ÀûÀ¸·Î ÅÍÁú ½Ã°£
+	const float EXPLODE_TIME_LIMIT{ 3.f };	// ë¬¼í’ì„ ì´ ë†“ì¸ ë’¤ ì™¸ë¶€ì˜ íš¨ê³¼ ì—†ì´ ìì²´ì ìœ¼ë¡œ í„°ì§ˆ ì‹œê°„
 
 private:
 	
 	/*
-	¾ÕÀ¸·Î »ı¼ºµÉ ¹°ÁÙ±âµéÀÇ À§Ä¡ cell coordinates
-	¿¹ºñ stream À§Ä¡¸¦ ÀúÀå->EnemyÀÇ path targetÀ» Ã£À» ¶§ »ç¿ë
+	ì•ìœ¼ë¡œ ìƒì„±ë  ë¬¼ì¤„ê¸°ë“¤ì˜ ìœ„ì¹˜ cell coordinates
+	ì˜ˆë¹„ stream ìœ„ì¹˜ë¥¼ ì €ì¥->Enemyì˜ path targetì„ ì°¾ì„ ë•Œ ì‚¬ìš©
 	*/
 	static set<Util::Coord> preDangerZone;
 };

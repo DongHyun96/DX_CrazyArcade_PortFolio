@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Vector2.h"
 
 Vector2::Vector2()
@@ -109,7 +109,7 @@ Vector2 Vector2::operator*(const Matrix& value) const
 {
 	XMVECTOR point = XMLoadFloat2(this);
 
-	// XMVector2TransformNormal -> returnÇÏ´Â µ¿Â÷ÁÂÇ¥ÀÇ w°ªÀÌ point, vector³Ä¿¡ µû¶ó ´Ş¶óÁü
+	// XMVector2TransformNormal -> returní•˜ëŠ” ë™ì°¨ì¢Œí‘œì˜ wê°’ì´ point, vectorëƒì— ë”°ë¼ ë‹¬ë¼ì§
 	point = XMVector2TransformCoord(point, value);
 
 	Vector2 position;
@@ -123,7 +123,7 @@ void Vector2::operator*=(const Matrix& value)
 {
 	XMVECTOR point = XMLoadFloat2(this);
 
-	// XMVector2TransformNormal -> returnÇÏ´Â µ¿Â÷ÁÂÇ¥ÀÇ w°ªÀÌ point, vector³Ä¿¡ µû¶ó ´Ş¶óÁü
+	// XMVector2TransformNormal -> returní•˜ëŠ” ë™ì°¨ì¢Œí‘œì˜ wê°’ì´ point, vectorëƒì— ë”°ë¼ ë‹¬ë¼ì§
 	point = XMVector2TransformCoord(point, value);
 
 	Vector2 position;
@@ -135,6 +135,6 @@ void Vector2::operator*=(const Matrix& value)
 
 bool Vector2::IsBetween(const Vector2& factor, const Vector2& v1, const Vector2& v2)
 {
-	// Factor°¡ µé¾î°¡´Â ¼ø¼­µµ ÀÏÁ¤ÇØ¾ß ÇÔ
+	// Factorê°€ ë“¤ì–´ê°€ëŠ” ìˆœì„œë„ ì¼ì •í•´ì•¼ í•¨
 	return Cross(factor, v1) * Cross(factor, v2) < 0;
 }

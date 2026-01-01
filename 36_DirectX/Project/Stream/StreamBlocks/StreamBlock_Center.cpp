@@ -1,11 +1,11 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "StreamBlock_Center.h"
 
 
 StreamBlock_Center::StreamBlock_Center()
 {
 	mainAnim = new Animation(CELL_WORLD_SIZE, L"InGame/Stream/center.png", 3, 1, 3, ANIM_SPEED);
-	// 20¹ø
+	// 20ë²ˆ
 	
 	vector<UINT> indices{};
 

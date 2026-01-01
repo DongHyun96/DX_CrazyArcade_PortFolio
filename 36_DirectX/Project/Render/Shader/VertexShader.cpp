@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "VertexShader.h"
 
 
@@ -39,7 +39,7 @@ VertexShader::VertexShader(wstring file)
 
 VertexShader::~VertexShader()
 {
-    blob->Release(); // ´Ü¼øÈ÷ shader Á¤º¸¸¦ ºÒ·¯¿Í¼­ vertexShader¸¦ ¸¸µå´Â µ¥ ÇÊ¿äÇÔ
+    blob->Release(); // ë‹¨ìˆœížˆ shader ì •ë³´ë¥¼ ë¶ˆëŸ¬ì™€ì„œ vertexShaderë¥¼ ë§Œë“œëŠ” ë° í•„ìš”í•¨
     vertexShader->Release();
     inputLayout->Release();
     reflection->Release();
@@ -55,7 +55,7 @@ void VertexShader::SetShader()
 void VertexShader::CreateInputLayout()
 {
     //D3D11_INPUT_ELEMENT_DESC layoutDesc[2] = {};
-    //layoutDesc[0].SemanticName = "POSITION";                        // SemanticÀº ÀÌ º¯¼öÀÇ ÀÇ¹Ì ¶Ç´Â ¿ëµµ¸¦ ¾²¸é µÊ
+    //layoutDesc[0].SemanticName = "POSITION";                        // Semanticì€ ì´ ë³€ìˆ˜ì˜ ì˜ë¯¸ ë˜ëŠ” ìš©ë„ë¥¼ ì“°ë©´ ë¨
     //layoutDesc[0].SemanticIndex = 0;
     //layoutDesc[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
     //layoutDesc[0].InputSlot = 0;
@@ -64,22 +64,22 @@ void VertexShader::CreateInputLayout()
     //layoutDesc[0].InstanceDataStepRate = 0;
 
     ////layoutDesc[1].SemanticName = "COLOR";
-    ////layoutDesc[1].SemanticIndex = 0;                                // colorÀÇ Á¤º¸°¡ ¿©·¯°³ ÀÖÀ» ¼ö ÀÖÀ½ (color0 color1 color2)
+    ////layoutDesc[1].SemanticIndex = 0;                                // colorì˜ ì •ë³´ê°€ ì—¬ëŸ¬ê°œ ìžˆì„ ìˆ˜ ìžˆìŒ (color0 color1 color2)
     ////layoutDesc[1].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
     ////layoutDesc[1].InputSlot = 0;
-    ////layoutDesc[1].AlignedByteOffset = 12;                           // ¾Õ¿¡ (Position)12¹ÙÀÌÆ®°¡ Ã¤¿öÁ® ÀÖ¾î¼­ offsetÀ¸·Î °Ç³Ê ¶Ù¾î¾ß ÇÔ
+    ////layoutDesc[1].AlignedByteOffset = 12;                           // ì•žì— (Position)12ë°”ì´íŠ¸ê°€ ì±„ì›Œì ¸ ìžˆì–´ì„œ offsetìœ¼ë¡œ ê±´ë„ˆ ë›°ì–´ì•¼ í•¨
     ////layoutDesc[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
     ////layoutDesc[1].InstanceDataStepRate = 0;
 
     //layoutDesc[1].SemanticName = "UV";
-    //layoutDesc[1].SemanticIndex = 0;                                // colorÀÇ Á¤º¸°¡ ¿©·¯°³ ÀÖÀ» ¼ö ÀÖÀ½ (color0 color1 color2)
+    //layoutDesc[1].SemanticIndex = 0;                                // colorì˜ ì •ë³´ê°€ ì—¬ëŸ¬ê°œ ìžˆì„ ìˆ˜ ìžˆìŒ (color0 color1 color2)
     //layoutDesc[1].Format = DXGI_FORMAT_R32G32_FLOAT;
     //layoutDesc[1].InputSlot = 0;
-    //layoutDesc[1].AlignedByteOffset = 12;                           // ¾Õ¿¡ (Position)12¹ÙÀÌÆ®°¡ Ã¤¿öÁ® ÀÖ¾î¼­ offsetÀ¸·Î °Ç³Ê ¶Ù¾î¾ß ÇÔ
+    //layoutDesc[1].AlignedByteOffset = 12;                           // ì•žì— (Position)12ë°”ì´íŠ¸ê°€ ì±„ì›Œì ¸ ìžˆì–´ì„œ offsetìœ¼ë¡œ ê±´ë„ˆ ë›°ì–´ì•¼ í•¨
     //layoutDesc[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
     //layoutDesc[1].InstanceDataStepRate = 0;
 
-    //UINT layoutSize = ARRAYSIZE(layoutDesc);                        // ¹è¿­ÀÇ ±æÀÌ¸¦ ±¸ÇÏ´Â ¸ÞÅ©·Î ÇÔ¼ö
+    //UINT layoutSize = ARRAYSIZE(layoutDesc);                        // ë°°ì—´ì˜ ê¸¸ì´ë¥¼ êµ¬í•˜ëŠ” ë©”í¬ë¡œ í•¨ìˆ˜
 
     //DEVICE->CreateInputLayout
     //(

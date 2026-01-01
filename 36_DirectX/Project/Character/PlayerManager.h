@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /* CONCRETE CLASS */
 class PlayerManager
 {
@@ -13,7 +13,7 @@ public:
 
 public:
 
-	/* °ÔÀÓ ¸ğµå¿¡ µû¸¥ p1 Å°ÄÚµå º¯°æ */
+	/* ê²Œì„ ëª¨ë“œì— ë”°ë¥¸ p1 í‚¤ì½”ë“œ ë³€ê²½ */
 	void SetKeyCode(const GameMode& gameMode);
 
 public: /* Getters */
@@ -24,41 +24,41 @@ public: /* Getters */
 	Character*			GetP2() const { return p2; }
 	vector<Character*>& GetComEnemies() { return comEnemies; }
 
-	Util::Coord			GetApproximatedPlayerCoord(Character* character); // Á¤È®È÷ ¶³¾îÁö´Â ÇÃ·¹ÀÌ¾î ÁÂÇ¥°¡ ¾Æ´Ñ ÁÖº¯ ±Ù»çÄ¡¸¦ ±¸ÇØÁÖ´Â ÇÔ¼ö
+	Util::Coord			GetApproximatedPlayerCoord(Character* character); // ì •í™•íˆ ë–¨ì–´ì§€ëŠ” í”Œë ˆì´ì–´ ì¢Œí‘œê°€ ì•„ë‹Œ ì£¼ë³€ ê·¼ì‚¬ì¹˜ë¥¼ êµ¬í•´ì£¼ëŠ” í•¨ìˆ˜
 public:
 
-	/* GameOver½Ã PlayerµéÀÇ GameOverÃ³¸® */
+	/* GameOverì‹œ Playerë“¤ì˜ GameOverì²˜ë¦¬ */
 	void HandlePlayersGameOver();
 
 private:
-	/* GameOver Ã¼Å© & GameOver°¡ µÇ¾ú´Ù¸é GameOver handlingÀÇ Ã¹ ½ÃÀÛ */
+	/* GameOver ì²´í¬ & GameOverê°€ ë˜ì—ˆë‹¤ë©´ GameOver handlingì˜ ì²« ì‹œì‘ */
 	void CheckAndHandleGameOver();
 
 private:
 
-	/* ÇÃ·¹ÀÌ¾î »óÈ£°£ Ãæµ¹Ã³¸® */
+	/* í”Œë ˆì´ì–´ ìƒí˜¸ê°„ ì¶©ëŒì²˜ë¦¬ */
 	void HandlePlayerCollisions();
 
 /***************************************************************************************************
 *                                          Member variables                                        *
 ****************************************************************************************************/
 
-public: /* ÇÃ·¹ÀÌ¾îType¿¡ µû¸¥ input mapping KeyCodes */
+public: /* í”Œë ˆì´ì–´Typeì— ë”°ë¥¸ input mapping KeyCodes */
 
-	map<PlayerType, map<Direction, byte>> P_DIR_KEYCODE{};		// ¹æÇâÅ° Å°ÄÚµå mapping
-	map<PlayerType, byte>				  P_BALLOON_KEYCODE{};	// ¹°Ç³¼± ³õ±â Å°ÄÚµå mapping
-	map<PlayerType, byte>				  P_ITEM_KEYCODE{};		// ¾ÆÀÌÅÛ »ç¿ë Å°ÄÚµå mapping
+	map<PlayerType, map<Direction, byte>> P_DIR_KEYCODE{};		// ë°©í–¥í‚¤ í‚¤ì½”ë“œ mapping
+	map<PlayerType, byte>				  P_BALLOON_KEYCODE{};	// ë¬¼í’ì„  ë†“ê¸° í‚¤ì½”ë“œ mapping
+	map<PlayerType, byte>				  P_ITEM_KEYCODE{};		// ì•„ì´í…œ ì‚¬ìš© í‚¤ì½”ë“œ mapping
 
 public:
-	/* °¢ ¸ÊÀÇ Ä³¸¯ÅÍ ½ºÆù °¡´É À§Ä¡ map */
+	/* ê° ë§µì˜ ìºë¦­í„° ìŠ¤í° ê°€ëŠ¥ ìœ„ì¹˜ map */
 	map<GameMap, vector<Util::Coord>> spawnPosMap{};
 
 
-private: /* °ÔÀÓ ÇÃ·¹ÀÌ¿¡ »ç¿ëÇÒ Player¿Í Enemy */
+private: /* ê²Œì„ í”Œë ˆì´ì— ì‚¬ìš©í•  Playerì™€ Enemy */
 
-	// Ä³¸¯ÅÍ°¡ ´©±¸ÀÎÁö´Â Character°¡ µé°íÀÖ´Â PlayerTypeÀ¸·Î ±¸ºĞ°¡´ÉÇÔ
+	// ìºë¦­í„°ê°€ ëˆ„êµ¬ì¸ì§€ëŠ” Characterê°€ ë“¤ê³ ìˆëŠ” PlayerTypeìœ¼ë¡œ êµ¬ë¶„ê°€ëŠ¥í•¨
 
-	/* ÀüÁ¦ ÇÃ·¹ÀÌ¾î ÁıÇÕ±º (PVPÀÏ ¶§ P1, P2 | PVEÀÏ ¶§ P1, comEnemies·Î ±¸¼º) */
+	/* ì „ì œ í”Œë ˆì´ì–´ ì§‘í•©êµ° (PVPì¼ ë•Œ P1, P2 | PVEì¼ ë•Œ P1, comEnemiesë¡œ êµ¬ì„±) */
 	vector<Character*>	wholePlayers{};
 
 	Character*			p1{};
@@ -67,16 +67,16 @@ private: /* °ÔÀÓ ÇÃ·¹ÀÌ¿¡ »ç¿ëÇÒ Player¿Í Enemy */
 
 	const UINT			ENEMY_CNT{ 5 };
 
-private: /* ¹Ì¸® ÃÊ±âÈ­ÇØ µĞ ÇÃ·¹ÀÌ¾î Ä³¸¯ÅÍµé data */
+private: /* ë¯¸ë¦¬ ì´ˆê¸°í™”í•´ ë‘” í”Œë ˆì´ì–´ ìºë¦­í„°ë“¤ data */
 	
 	map<CharacterType, Character*> p1CharacterData{};
 	map<CharacterType, Character*> p2CharacterData{};
 
-private: /* °ÔÀÓ ¿À¹ö Ã³¸®°ü·Ã */
+private: /* ê²Œì„ ì˜¤ë²„ ì²˜ë¦¬ê´€ë ¨ */
 	
-	bool		deathTimerTriggered{};			// ¾î´À ÇÑ ¸íÀÌ Á×¾úÀ» ¶§, deathTimer ½Ã°£ ÃøÁ¤À» À§ÇÑ flag
-	float		deathTimer{};					// ÇÑ ÇÃ·¹ÀÌ¾î°¡ Á×Àº µÚ ½Ã°£ ÃøÁ¤ÇØ¼­ DEATH_CHECK_TIME ÀÌ³»·Î »ó´ëÆÀ¿øµµ Àü¸êÇÏ¸é draw·Î Ã³¸®
+	bool		deathTimerTriggered{};			// ì–´ëŠ í•œ ëª…ì´ ì£½ì—ˆì„ ë•Œ, deathTimer ì‹œê°„ ì¸¡ì •ì„ ìœ„í•œ flag
+	float		deathTimer{};					// í•œ í”Œë ˆì´ì–´ê°€ ì£½ì€ ë’¤ ì‹œê°„ ì¸¡ì •í•´ì„œ DEATH_CHECK_TIME ì´ë‚´ë¡œ ìƒëŒ€íŒ€ì›ë„ ì „ë©¸í•˜ë©´ drawë¡œ ì²˜ë¦¬
 	bool		gameOverChecked{};
-	const float DRAW_CHECK_TIME = 0.3f;			// ¾î´À ÇÑ ÇÃ·¹ÀÌ¾î°¡ Á×Àº µÚ, ÇØ´ç ½Ã°£ ÀÌ³»·Î ÇöÀç °ÔÀÓ ³»¿¡ ÇÃ·¹ÀÌ¾î°¡ ¸ğµÎ »ç¸ÁÇÏ¿´´Ù¸é drawÃ³¸®
+	const float DRAW_CHECK_TIME = 0.3f;			// ì–´ëŠ í•œ í”Œë ˆì´ì–´ê°€ ì£½ì€ ë’¤, í•´ë‹¹ ì‹œê°„ ì´ë‚´ë¡œ í˜„ì¬ ê²Œì„ ë‚´ì— í”Œë ˆì´ì–´ê°€ ëª¨ë‘ ì‚¬ë§í•˜ì˜€ë‹¤ë©´ drawì²˜ë¦¬
 
 };

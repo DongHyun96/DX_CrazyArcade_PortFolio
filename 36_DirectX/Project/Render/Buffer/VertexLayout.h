@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 
 struct Vertex
 {
@@ -17,7 +17,7 @@ struct VertexColor
 	VertexColor(XMFLOAT3 pos, XMFLOAT4 color)
 		:pos(pos), color(color) {}
 
-	XMFLOAT3 pos{}; // float¿Ã 3∞≥
+	XMFLOAT3 pos{}; // floatÏù¥ 3Í∞ú
 	XMFLOAT4 color{};
 };
 
@@ -38,7 +38,7 @@ struct VertexTexture
 	VertexTexture(Vector3 pos, Vector2 uv)
 		:pos(pos), uv(uv) {}
 
-	Vector3 pos{}; // float¿Ã 3∞≥
+	Vector3 pos{}; // floatÏù¥ 3Í∞ú
 	Vector2 uv{};
 };
 

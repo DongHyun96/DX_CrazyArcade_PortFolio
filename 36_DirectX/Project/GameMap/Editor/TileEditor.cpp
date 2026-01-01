@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "TileEditor.h"
 
 
@@ -168,7 +168,7 @@ void TileEditor::HandleSetTileToWorld()
 	{
 		for (UINT j = 0; j < MAP_COL; j++)
 		{
-			if (mapEditor->cellColliders[i][j]->OBBCollision(mousePos)) // i, j À§Ä¡¿Í info°¡ ÇÊ¿ä
+			if (mapEditor->cellColliders[i][j]->OBBCollision(mousePos)) // i, j ìœ„ì¹˜ì™€ infoê°€ í•„ìš”
 			{
 				if (KEY_DOWN(VK_LBUTTON))
 				{

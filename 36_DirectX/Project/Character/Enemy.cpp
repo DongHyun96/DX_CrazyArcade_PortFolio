@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Enemy.h"
 
 
@@ -27,7 +27,7 @@ void Enemy::Move()
 {
 	if (mainState == C_CAPTURED)
 	{
-		// 0.5ÃÊ¿¡ ÇÑ ¹ø 2ÃÊ µÚ ÇÑ¹ø ´õ È£ÃâÇØÁÖ¾î ÇÑ¹ø ´õ µµ¿ò ¿äÃ»ÇÔ
+		// 0.5ì´ˆì— í•œ ë²ˆ 2ì´ˆ ë’¤ í•œë²ˆ ë” í˜¸ì¶œí•´ì£¼ì–´ í•œë²ˆ ë” ë„ì›€ ìš”ì²­í•¨
 		if (requestResqueTwice) return;
 
 		capturedTime += Time::Delta();
@@ -70,7 +70,7 @@ void Enemy::Move()
 	else dir.y = 0.f;
 
 
-	if (dir.Length() < 1.f)// destination reached·Î ÆÇ´Ü -> ¿©±â¼­ °æ·Î Àç¼³Á¤ Æ®¸®°Å°¡ µ¿ÀÛÇØ¾ßÇÔ & path°¡ ºñ¾úÀ» ¶§µµ ÇÑ¹ø µ¿ÀÛÇØ¾ß ÇÔ
+	if (dir.Length() < 1.f)// destination reachedë¡œ íŒë‹¨ -> ì—¬ê¸°ì„œ ê²½ë¡œ ì¬ì„¤ì • íŠ¸ë¦¬ê±°ê°€ ë™ì‘í•´ì•¼í•¨ & pathê°€ ë¹„ì—ˆì„ ë•Œë„ í•œë²ˆ ë™ì‘í•´ì•¼ í•¨
 	{
 		body->translation = destination;
 		path.pop();
@@ -83,7 +83,7 @@ void Enemy::Move()
 
 		blockedTime += Time::Delta();
 
-		if (blockedTime >= BLOCKED_TIME_LIMIT) // Path°¡ ¾ÆÁ÷ ³²¾ÆÀÖ°í ÇÑÀÚ¸®¿¡ °è¼Ó ¸Ó¹° ¶§ ¾îµğ¿¡ ¸·ÇûÀ»°ÍÀÌ¶ó ÆÇ´Ü -> ´Ù½Ã NoneÀ¸·Î µ¹¾Æ°¡¼­ ÀçÆÇ´Ü
+		if (blockedTime >= BLOCKED_TIME_LIMIT) // Pathê°€ ì•„ì§ ë‚¨ì•„ìˆê³  í•œìë¦¬ì— ê³„ì† ë¨¸ë¬¼ ë•Œ ì–´ë””ì— ë§‰í˜”ì„ê²ƒì´ë¼ íŒë‹¨ -> ë‹¤ì‹œ Noneìœ¼ë¡œ ëŒì•„ê°€ì„œ ì¬íŒë‹¨
 		{
 			path = {};
 			visited.clear();
@@ -131,37 +131,37 @@ void Enemy::UpdatePath(const Util::Coord& dest)
 	visited				= path_visited.second;
 }
 
-/* targetState¿¡ µû¸¥ FSM »óÈ²Á¶Ä¡ */
+/* targetStateì— ë”°ë¥¸ FSM ìƒí™©ì¡°ì¹˜ */
 void Enemy::UpdateState()
 {
-	// path°¡ emptyÀÌ¸é µµÂøÇß´Ù´Â ¾ê±â
+	// pathê°€ emptyì´ë©´ ë„ì°©í–ˆë‹¤ëŠ” ì–˜ê¸°
 
 	switch (targetState)
 	{
 	case Enemy::PLAYER:
-		if (path.size() <= player_approach_lv) // ·£´ıÇÏ°Ô ÁöÁ¤ÇÑ approach_lv¿¡ µµ´ŞÇß´Ù¸é °æ·Î¿¡ µµ´ŞÇß´Ù°í ÆÇ´Ü
+		if (path.size() <= player_approach_lv) // ëœë¤í•˜ê²Œ ì§€ì •í•œ approach_lvì— ë„ë‹¬í–ˆë‹¤ë©´ ê²½ë¡œì— ë„ë‹¬í–ˆë‹¤ê³  íŒë‹¨
 		{
 			DeployBalloonManually();
 			targetState = NONE;
 		}
 		break;
-	case Enemy::BALLOON_D_POS: // ¹°Ç³¼±À» ³õÀº µÚ °¡Àå °¡±î¿î safe_zoneÀ¸·Î °¡¾ßÇÔ
+	case Enemy::BALLOON_D_POS: // ë¬¼í’ì„ ì„ ë†“ì€ ë’¤ ê°€ì¥ ê°€ê¹Œìš´ safe_zoneìœ¼ë¡œ ê°€ì•¼í•¨
 		if (path.empty())
 		{
 			DeployBalloonManually();
 			targetState = SAFE_ZONE;
 
-			// ÇÃ·¹ÀÌ¾î À§Ä¡·Î path Update ½Ãµµ
+			// í”Œë ˆì´ì–´ ìœ„ì¹˜ë¡œ path Update ì‹œë„
 			Util::Coord pCurCoord = GM->GetCollidedMapCellCoord(PM->GetP1()->GetBody()->GlobalPosition());
 			UpdatePath(pCurCoord);
 			
 			if (!path.empty())
 			{
-				// È®·ü»óÀ¸·Î ÇÃ·¹ÀÌ¾î¿¡°Ô Á¢±ÙÇÒÁö ¸»Áö °è»ê X ÀÌ°Å ÇÏÁö ¸»°í »õ·Î¿î À§Çè¹İ°æ Á¶»çÇØ¼­ »õ·Î¿î safezoneÀ¸·Î ÀÌµ¿ÇÏ´Â°Ô ³ªÀ»¼öµµ ÀÖÀ½
+				// í™•ë¥ ìƒìœ¼ë¡œ í”Œë ˆì´ì–´ì—ê²Œ ì ‘ê·¼í• ì§€ ë§ì§€ ê³„ì‚° X ì´ê±° í•˜ì§€ ë§ê³  ìƒˆë¡œìš´ ìœ„í—˜ë°˜ê²½ ì¡°ì‚¬í•´ì„œ ìƒˆë¡œìš´ safezoneìœ¼ë¡œ ì´ë™í•˜ëŠ”ê²Œ ë‚˜ì„ìˆ˜ë„ ìˆìŒ
 			}
 			else
 			{
-				// ¾ÆÁ÷ ¼¶ -> ¹Ù·Î °¡Àå °¡±î¿î safezoneÀ¸·Î ÀÌµ¿
+				// ì•„ì§ ì„¬ -> ë°”ë¡œ ê°€ì¥ ê°€ê¹Œìš´ safezoneìœ¼ë¡œ ì´ë™
 				bool safeCoordExist{};
 				Util::Coord safeCoord = GetSafeCoord(visited, safeCoordExist);
 
@@ -181,13 +181,13 @@ void Enemy::UpdateState()
 		{
 			safeZoneWaitTime += Time::Delta();
 			
-			if (Balloon::IsPreDangerZone(myCoord)) // ÇöÀç ÀÚ½ÅÀÇ À§Ä¡°¡ °ğ ÀÖÀ¸¸é À§ÇèÇÑ ÀÚ¸®¸é ´Ù¸¥ ÀÚ¸®·Î ÀÌµ¿
+			if (Balloon::IsPreDangerZone(myCoord)) // í˜„ì¬ ìì‹ ì˜ ìœ„ì¹˜ê°€ ê³§ ìˆìœ¼ë©´ ìœ„í—˜í•œ ìë¦¬ë©´ ë‹¤ë¥¸ ìë¦¬ë¡œ ì´ë™
 			{
 				safeZoneWaitTime = 0.f;
 				targetState = NONE;
 			}
 
-			if (safeZoneWaitTime < SAFE_ZONE_WAIT_TIME) return; // safe_zone¿¡¼­ 3ÃÊ°£ ´ë±âÇÑ µÚ ´Ù½Ã±İ ±æÃ£±â
+			if (safeZoneWaitTime < SAFE_ZONE_WAIT_TIME) return; // safe_zoneì—ì„œ 3ì´ˆê°„ ëŒ€ê¸°í•œ ë’¤ ë‹¤ì‹œê¸ˆ ê¸¸ì°¾ê¸°
 
 			safeZoneWaitTime = 0.f;
 			targetState = NONE;
@@ -195,40 +195,40 @@ void Enemy::UpdateState()
 		break;
 	case Enemy::RESCUE_PEER:
 		
-		if (rescueTarget->GetCharacterState() != C_CAPTURED || path.empty()) // ÀÌ¹Ì ±¸ÇØÁ³°Å³ª ÀÌ¹Ì Á×Àº »óÅÂ
+		if (rescueTarget->GetCharacterState() != C_CAPTURED || path.empty()) // ì´ë¯¸ êµ¬í•´ì¡Œê±°ë‚˜ ì´ë¯¸ ì£½ì€ ìƒíƒœ
 		{
 			path = {};
 			visited.clear();
 			targetState = NONE;
 		}
 		break;
-	case Enemy::NONE: // NoneÀÏ ¶§¿¡´Â ¹Ù·Î »óÅÂ º¯È¯ ½Ãµµ
+	case Enemy::NONE: // Noneì¼ ë•Œì—ëŠ” ë°”ë¡œ ìƒíƒœ ë³€í™˜ ì‹œë„
 	{
-		// ÇÃ·¹ÀÌ¾îÀÇ approximate À§Ä¡·Î path Update ½Ãµµ
+		// í”Œë ˆì´ì–´ì˜ approximate ìœ„ì¹˜ë¡œ path Update ì‹œë„
 		Util::Coord approximate_player_coord = PM->GetApproximatedPlayerCoord(PM->GetP1());
 		UpdatePath(approximate_player_coord);
 
-		if (path.empty()) // ÇÃ·¹ÀÌ¾î±îÁöÀÇ µµ´Ş°æ·Î°¡ ¾øÀ» ¶§
+		if (path.empty()) // í”Œë ˆì´ì–´ê¹Œì§€ì˜ ë„ë‹¬ê²½ë¡œê°€ ì—†ì„ ë•Œ
 		{
-			// ¹°Ç³¼±À» ³õÀ» À§Ä¡ ÆÇ´Ü
+			// ë¬¼í’ì„ ì„ ë†“ì„ ìœ„ì¹˜ íŒë‹¨
 			vector<Util::Coord> deployable = GetDeployableCoords(visited);
 
-			// ¹°Ç³¼±À» ³õÀ» ÀÚ¸®°¡ ¾ø´Ù¸é Ã³À½À¸·Î µ¹¾Æ°¨
+			// ë¬¼í’ì„ ì„ ë†“ì„ ìë¦¬ê°€ ì—†ë‹¤ë©´ ì²˜ìŒìœ¼ë¡œ ëŒì•„ê°
 			if (deployable.empty()) break; 
 
-			// ¹°Ç³¼±À» ³õÀ» ÀÚ¸® Áß ÀÌ»óÀûÀÎ ÀÚ¸®·Î ¼³Á¤
+			// ë¬¼í’ì„ ì„ ë†“ì„ ìë¦¬ ì¤‘ ì´ìƒì ì¸ ìë¦¬ë¡œ ì„¤ì •
 			Util::Coord targetCoord = GetIdealDeployCoord(deployable);
 			
-			// ¹°Ç³¼±À» ³õÀ»ÀÚ¸®·Î °æ·Î ¼³Á¤
+			// ë¬¼í’ì„ ì„ ë†“ì„ìë¦¬ë¡œ ê²½ë¡œ ì„¤ì •
 			UpdatePath(targetCoord);
 			
 			targetState = BALLOON_D_POS;
 		}
-		else if (path.size() > 10) // ÇÃ·¹ÀÌ¾î±îÁöÀÇ µµ´Ş°æ·Î°¡ Á¸Àç´Â ÇÏÁö¸¸ ³Ê¹« ¸Ö ¶§
+		else if (path.size() > 10) // í”Œë ˆì´ì–´ê¹Œì§€ì˜ ë„ë‹¬ê²½ë¡œê°€ ì¡´ì¬ëŠ” í•˜ì§€ë§Œ ë„ˆë¬´ ë©€ ë•Œ
 		{
 			targetState = PLAYER;
 		}
-		else // ÇÃ·¹ÀÌ¾î À§Ä¡±îÁö °¡±â
+		else // í”Œë ˆì´ì–´ ìœ„ì¹˜ê¹Œì§€ ê°€ê¸°
 		{
 			player_approach_lv = Util::GetRandom(PLAYER_APPROACH_MIN, PLAYER_APPROACH_MAX);
 			targetState = PLAYER;
@@ -247,10 +247,10 @@ void Enemy::DeployBalloonManually()
 	case C_SPAWN: case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: case C_WIN: return;
 	}
 
-	if (!timerBalloons.empty()) // Å¸ÀÌ¸Ó ¹ú·éÀÌ ¼¼ÆÃµÇ¾îÀÖÀ» ¶§
+	if (!timerBalloons.empty()) // íƒ€ì´ë¨¸ ë²Œë£¬ì´ ì„¸íŒ…ë˜ì–´ìˆì„ ë•Œ
 	{
 
-		// Å¸ÀÌ¸Ó ¹ú·éÀ» ÇÑ¹ø¿¡ ÅÍÄ§
+		// íƒ€ì´ë¨¸ ë²Œë£¬ì„ í•œë²ˆì— í„°ì¹¨
 		for (TimerBalloon* t_balloon : timerBalloons)
 		{
 			if (!t_balloon) continue;
@@ -272,9 +272,9 @@ void Enemy::DeployBalloonManually()
 	}
 }
 
-void Enemy::RequestRescue() // Ã³À½ ÇÑ¹ø È£ÃâÇÏ°í ¸îÃÊ µÚ ÇÑ¹ø ´õ È£ÃâÇØº½ (ÃÑ µÎ¹ø)
+void Enemy::RequestRescue() // ì²˜ìŒ í•œë²ˆ í˜¸ì¶œí•˜ê³  ëª‡ì´ˆ ë’¤ í•œë²ˆ ë” í˜¸ì¶œí•´ë´„ (ì´ ë‘ë²ˆ)
 {
-	/* µ¿·áµéÀ» °Å¸®¼øÀ¸·Î Á¤·Ä */
+	/* ë™ë£Œë“¤ì„ ê±°ë¦¬ìˆœìœ¼ë¡œ ì •ë ¬ */
 	set<pair<UINT, Character*>> sortedByDist{};
 
 	for (Character* target : GM->GetPlayerManager()->GetComEnemies())
@@ -285,27 +285,27 @@ void Enemy::RequestRescue() // Ã³À½ ÇÑ¹ø È£ÃâÇÏ°í ¸îÃÊ µÚ ÇÑ¹ø ´õ È£ÃâÇØº½ (ÃÑ µ
 		sortedByDist.insert(make_pair(dist, target));
 	}
 
-	for (const auto& p : sortedByDist) // °¡Àå °¡±î¿î °Å¸®¿¡ Á¸ÀçÇÏ´Â µ¿·á ¼ø
+	for (const auto& p : sortedByDist) // ê°€ì¥ ê°€ê¹Œìš´ ê±°ë¦¬ì— ì¡´ì¬í•˜ëŠ” ë™ë£Œ ìˆœ
 	{
 		Character* target = p.second;
 
-		// ÇöÀç µ¿·á°¡ µµ¿ÍÁÙ ¼ö ¾ø´Â »óÈ²ÀÌ¸é ³Ñ¾î°¨
+		// í˜„ì¬ ë™ë£Œê°€ ë„ì™€ì¤„ ìˆ˜ ì—†ëŠ” ìƒí™©ì´ë©´ ë„˜ì–´ê°
 		if (target->GetCharacterState() == C_CAPTURED || target->GetCharacterState() == C_DEAD)
 			continue;
 
-		// ÇöÀç µ¿·á±îÁöÀÇ °æ·Î°¡ Á¸ÀçÇÏ´ÂÁö Ã¼Å©, targetCoord -> ÇöÀç µ¿·áÀÇ À§Ä¡
+		// í˜„ì¬ ë™ë£Œê¹Œì§€ì˜ ê²½ë¡œê°€ ì¡´ì¬í•˜ëŠ”ì§€ ì²´í¬, targetCoord -> í˜„ì¬ ë™ë£Œì˜ ìœ„ì¹˜
 		Util::Coord targetCoord = GM->GetCollidedMapCellCoord(target->GetBody()->GlobalPosition());
 
-		// Captured´çÇÑ ³ª ÀÚ½ÅÀ¸·ÎºÎÅÍ µ¿·á±îÁöÀÇ °æ·Î°¡ Á¸ÀçÇÏ´ÂÁö Ã¼Å©ÇÔ (³» path¸¦ UpdateÇØº½)
+		// Capturedë‹¹í•œ ë‚˜ ìì‹ ìœ¼ë¡œë¶€í„° ë™ë£Œê¹Œì§€ì˜ ê²½ë¡œê°€ ì¡´ì¬í•˜ëŠ”ì§€ ì²´í¬í•¨ (ë‚´ pathë¥¼ Updateí•´ë´„)
 		UpdatePath(targetCoord);
 
-		// ÇØ´çÇÏ´Â °æ·Î°¡ ¾ø´Ù¸é ´ÙÀ½ µ¿·á·Î ´Ù½Ã ½Ãµµ
+		// í•´ë‹¹í•˜ëŠ” ê²½ë¡œê°€ ì—†ë‹¤ë©´ ë‹¤ìŒ ë™ë£Œë¡œ ë‹¤ì‹œ ì‹œë„
 		if (path.empty()) continue;
 
-		// for loopÀÇ ÇöÀç µ¿·á°¡ °æ·Î°¡ Á¸ÀçÇÏ´Â °¡Àå °¡±î¿î µ¿·á -> ³»°¡ Ã£Àº °æ·Î¸¦ ¹éÆ®·¡Å·ÇÏ¿© ±¸Á¶¸¦ ¿äÃ»ÇÒ µ¿·áÀÇ path¿¡ ³Ö¾îÁÜ
-		stack<Util::Coord> rescuerPath{}; // ±¸Á¶ÀÚ °æ·Î
+		// for loopì˜ í˜„ì¬ ë™ë£Œê°€ ê²½ë¡œê°€ ì¡´ì¬í•˜ëŠ” ê°€ì¥ ê°€ê¹Œìš´ ë™ë£Œ -> ë‚´ê°€ ì°¾ì€ ê²½ë¡œë¥¼ ë°±íŠ¸ë˜í‚¹í•˜ì—¬ êµ¬ì¡°ë¥¼ ìš”ì²­í•  ë™ë£Œì˜ pathì— ë„£ì–´ì¤Œ
+		stack<Util::Coord> rescuerPath{}; // êµ¬ì¡°ì ê²½ë¡œ
 		
-		// ³»°¡ Ã£Àº °æ·Î¸¦ ¿ªÀ¸·Î ³Ö¾îÁÖµÇ, ±¸Á¶ÀÚ °æ·ÎÀÇ ³¡¿¡´Â ³ªÀÇ ÁÂÇ¥¸¦ ³Ö¾îÁÖ°í, °æ·ÎÀÇ ½ÃÀÛ(rescuerÀÚ±âÀÚ½ÅÀÇ ÇöÀ§Ä¡) ºÎºĞÀº ÇÏ³ª »©Áà¾ß ÇÔ
+		// ë‚´ê°€ ì°¾ì€ ê²½ë¡œë¥¼ ì—­ìœ¼ë¡œ ë„£ì–´ì£¼ë˜, êµ¬ì¡°ì ê²½ë¡œì˜ ëì—ëŠ” ë‚˜ì˜ ì¢Œí‘œë¥¼ ë„£ì–´ì£¼ê³ , ê²½ë¡œì˜ ì‹œì‘(rescuerìê¸°ìì‹ ì˜ í˜„ìœ„ì¹˜) ë¶€ë¶„ì€ í•˜ë‚˜ ë¹¼ì¤˜ì•¼ í•¨
 
 		rescuerPath.push(myCoord);
 
@@ -317,11 +317,11 @@ void Enemy::RequestRescue() // Ã³À½ ÇÑ¹ø È£ÃâÇÏ°í ¸îÃÊ µÚ ÇÑ¹ø ´õ È£ÃâÇØº½ (ÃÑ µ
 
 		rescuerPath.pop();
 
-		// µ¿·áÀÇ targetState¸¦ RESCUE_PEER·Î ¹Ù²Ù°í pathµµ ³ª ÀÚ½ÅÀ» ±¸ÇÏ·¯ ¿À´Â path·Î ¼öÁ¤
+		// ë™ë£Œì˜ targetStateë¥¼ RESCUE_PEERë¡œ ë°”ê¾¸ê³  pathë„ ë‚˜ ìì‹ ì„ êµ¬í•˜ëŸ¬ ì˜¤ëŠ” pathë¡œ ìˆ˜ì •
 		Enemy* peer = dynamic_cast<Enemy*>(target);
 		peer->SetPathToRescueMission(make_pair(rescuerPath, visited), this);
 
-		// ±¸Á¶¿äÃ» ÈÄ ³ª ÀÚ½ÅÀÇ path, visited, targetState ÃÊ±âÈ­
+		// êµ¬ì¡°ìš”ì²­ í›„ ë‚˜ ìì‹ ì˜ path, visited, targetState ì´ˆê¸°í™”
 		visited.clear();
 		path = {};
 		targetState = NONE;
@@ -349,7 +349,7 @@ bool Enemy::IsDeployable(const Util::Coord& coord, const set<Util::Coord>& visit
 	static vector<int> dx = { 0, 0, -1, 1 };
 	static vector<int> dy = { 1, -1, 0, 0 };
 
-	// ¾ÈÀüÇÏÁö ¸øÇÑ ÁÂÇ¥µéÀ» Á¶»çÇÒ °ÍÀÓ
+	// ì•ˆì „í•˜ì§€ ëª»í•œ ì¢Œí‘œë“¤ì„ ì¡°ì‚¬í•  ê²ƒì„
 	set<Util::Coord> unsafeCoords{};
 	unsafeCoords.insert(coord);
 	

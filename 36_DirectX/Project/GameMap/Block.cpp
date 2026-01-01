@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Block.h"
 
 Block::Block(const BlockInfo& info)
@@ -9,14 +9,14 @@ Block::Block(const BlockInfo& info)
 Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Coord targetXY, Vector2 texWorldSize, BlockProperty bProp)
 	:breakable(bProp.breakable), movable(bProp.movable), hidable(bProp.hidable)
 {
-	texWorldSize.y += BLOCK_Y_OFFSET; // offset Á¶Á¤
+	texWorldSize.y += BLOCK_Y_OFFSET; // offset ì¡°ì •
 
 	rectBody	= new ColliderRect(CELL_WORLD_SIZE);
 	texObj		= new Object(texWorldSize, texFile, frameXY.x, frameXY.y, targetXY.x, targetXY.y);
 
-	texObj->translation.y += (texWorldSize.y - CELL_WORLD_SIZE.y) * 0.5f; // local translationÀ¸·Î texÀÇ À§Ä¡ Á¶Á¤
+	texObj->translation.y += (texWorldSize.y - CELL_WORLD_SIZE.y) * 0.5f; // local translationìœ¼ë¡œ texì˜ ìœ„ì¹˜ ì¡°ì •
 
-	texObj->SetParent(rectBody); // ½ÇÁ¦ body¸¦ texture°¡ µû¶ó°¡°Ô²û Ã³¸®ÇÒ °ÍÀÓ
+	texObj->SetParent(rectBody); // ì‹¤ì œ bodyë¥¼ textureê°€ ë”°ë¼ê°€ê²Œë” ì²˜ë¦¬í•  ê²ƒì„
 
 	Util::SetTransformToGameBoard(rectBody, boardXY);
 
@@ -25,8 +25,8 @@ Block::Block(Util::Coord boardXY, wstring texFile, Util::Coord frameXY, Util::Co
 	label = to_string(boardXY.x) + to_string(boardXY.y);
 
 	// Setting Collider call back functions
-	// ¹°ÁÙ±â À§Ä¡ ÆÄ¾Ç -> ÇØ´ç À§Ä¡¿¡ ÀÖ´Â ºí·ÏÀ» Á¦°Å
-	// player ¿òÁ÷ÀÓÀº ¸íÈ®ÇÏ°Ô ¶³¾îÁöÁö ¾ÊÀ½(ÁÂÇ¥°¡ µüµü ¶³¾îÁö´Â °ÍÀÌ ¾Æ´Ô) -> player movement Ãæµ¹Àº ½ÇÁ¦ Ãæµ¹Ã³¸®·Î Ã³¸®
+	// ë¬¼ì¤„ê¸° ìœ„ì¹˜ íŒŒì•… -> í•´ë‹¹ ìœ„ì¹˜ì— ìˆëŠ” ë¸”ë¡ì„ ì œê±°
+	// player ì›€ì§ì„ì€ ëª…í™•í•˜ê²Œ ë–¨ì–´ì§€ì§€ ì•ŠìŒ(ì¢Œí‘œê°€ ë”±ë”± ë–¨ì–´ì§€ëŠ” ê²ƒì´ ì•„ë‹˜) -> player movement ì¶©ëŒì€ ì‹¤ì œ ì¶©ëŒì²˜ë¦¬ë¡œ ì²˜ë¦¬
 	if (hidable)
 	{
 		rectBody->SetPointEnterEvent(bind(&Block::OnColliderPointEnter, this, placeholders::_1));
@@ -157,7 +157,7 @@ void Block::ApplyDamage()
 		destroyed = true;
 		destroyedAnim->Play(false);
 		
-		if (hidable) // ¼û°ÜÁ® ÀÖ´Â ¹°Ã¼µé visible¸ğµÎ ÄÑÁÖ°í ºí·ÏÀº ºÎ¼û
+		if (hidable) // ìˆ¨ê²¨ì ¸ ìˆëŠ” ë¬¼ì²´ë“¤ visibleëª¨ë‘ ì¼œì£¼ê³  ë¸”ë¡ì€ ë¶€ìˆ¨
 		{
 			for (ColliderHolder* owner : rectBody->EnteredPointOwners())
 			{
@@ -199,7 +199,7 @@ void Block::HandleMove()
 
 	float leftDist = direction.Length();
 
-	if (leftDist < 1.f) // µµÂø
+	if (leftDist < 1.f) // ë„ì°©
 	{
 		rectBody->translation = destination;
 		currentlyMoving = false;
@@ -216,7 +216,7 @@ void Block::HandleBushInteraction()
 
 	bushInteractedTime += Time::Delta();
 
-	// 1ÃÊ¸¦ 0.25·Î ÂÉ°³¾î interactionÀ» ÁÙ ¿¹Á¤, texObj¸¸ local translation x°ªÀ» Á¶Á¤ÇÏ¿© ¾ç¿·À¸·Î ¿Ô´Ù°¬´Ù¸¸ ÇÒ ¿¹Á¤
+	// 1ì´ˆë¥¼ 0.25ë¡œ ìª¼ê°œì–´ interactionì„ ì¤„ ì˜ˆì •, texObjë§Œ local translation xê°’ì„ ì¡°ì •í•˜ì—¬ ì–‘ì˜†ìœ¼ë¡œ ì™”ë‹¤ê°”ë‹¤ë§Œ í•  ì˜ˆì •
 	if		(bushInteractedTime < 0.1f)	texObj->translation.x =  5.f;
 	else if (bushInteractedTime < 0.2f)	texObj->translation.x = -5.f;
 	else if (bushInteractedTime < 0.3f)	texObj->translation.x =  5.f;
@@ -270,7 +270,7 @@ void Block::OnColliderPointStay(ColliderHolder* owner)
 				return;
 			}
 
-			// balloonÀÌ activeÇÏÁö ¾ÊÀº °æ¿ì, entererdSet¿¡¼­ »©Áà¾ß ÇÔ
+			// balloonì´ activeí•˜ì§€ ì•Šì€ ê²½ìš°, entererdSetì—ì„œ ë¹¼ì¤˜ì•¼ í•¨
 			rectBody->EnteredPointOwners().erase(owner);
 			return;
 		}
@@ -302,7 +302,7 @@ void Block::OnColliderPointExit(ColliderHolder* owner)
 
 		Balloon* balloon = dynamic_cast<Balloon*>(owner);
 
-		if (balloon) // ³ªÁß¿¡ balloon ¹ßÂ÷±â °°Àº ¾ÆÀÌÅÛ ¶§¹®¿¡ ³öµÎ´Â°Ô ³ªÀ»Áöµµ?
+		if (balloon) // ë‚˜ì¤‘ì— balloon ë°œì°¨ê¸° ê°™ì€ ì•„ì´í…œ ë•Œë¬¸ì— ë†”ë‘ëŠ”ê²Œ ë‚˜ì„ì§€ë„?
 		{
 			balloon->SetVisible(true);
 			return;
@@ -313,14 +313,14 @@ void Block::OnColliderPointExit(ColliderHolder* owner)
 
 void Block::OnColliderRectEnter(ColliderRect* targetCollider, ColliderHolder* owner)
 {
-	// Hidable ¹èÁ¦ (µî·Ïµµ ÇÏÁö ¾Ê´Â´Ù)
+	// Hidable ë°°ì œ (ë“±ë¡ë„ í•˜ì§€ ì•ŠëŠ”ë‹¤)
 	if (targetCollider->GetColliderTag() != CHARACTER_PUSH)
 	{
 		Character* c = dynamic_cast<Character*>(owner);
 
 		if (c)
 		{
-			if (!breakable) // ¾È ºÎ¼­Áö´Â ºí·ÏÀÇ °æ¿ì Ä³¸¯ÅÍ°¡ ¾î´À »óÅÂÀÌµç CommonCollisionÀ» Ã³¸®
+			if (!breakable) // ì•ˆ ë¶€ì„œì§€ëŠ” ë¸”ë¡ì˜ ê²½ìš° ìºë¦­í„°ê°€ ì–´ëŠ ìƒíƒœì´ë“  CommonCollisionì„ ì²˜ë¦¬
 			{
 				CollisionUtil::HandleCharacterCommonCollision(rectBody, targetCollider, c->GetSpeed());
 				return;
@@ -379,9 +379,9 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* own
 		}
 
 		
-		// Ãæµ¹ÇÏ°í ÀÖ´Â ¸éÀÇ ¹æÇâ°ú Ä³¸¯ÅÍÀÇ Çö velocity°¡ ¸Â¹°·Á¾ß pushForceAppliedTime ½Ã°£À» ´õÇÔ
-		// ¹Ì´Â ½Ã°£À» ÃæÁ·ÇÏ¸é (pushForceAppliedTime >= PUSH_APPLIED_TIME_LIMIT) ½ÇÁ¦·Î ºí·ÏÀ» ¹Ò
-		// ¿òÁ÷ÀÌ°íÀÚ ÇÏ´Â ¹æ¸é¿¡ ¹°Ã¼°¡ ¾ø¾î¾ß ÇÔ + ¸Ê ¹üÀ§ ÆÇÁ¤
+		// ì¶©ëŒí•˜ê³  ìˆëŠ” ë©´ì˜ ë°©í–¥ê³¼ ìºë¦­í„°ì˜ í˜„ velocityê°€ ë§ë¬¼ë ¤ì•¼ pushForceAppliedTime ì‹œê°„ì„ ë”í•¨
+		// ë¯¸ëŠ” ì‹œê°„ì„ ì¶©ì¡±í•˜ë©´ (pushForceAppliedTime >= PUSH_APPLIED_TIME_LIMIT) ì‹¤ì œë¡œ ë¸”ë¡ì„ ë°ˆ
+		// ì›€ì§ì´ê³ ì í•˜ëŠ” ë°©ë©´ì— ë¬¼ì²´ê°€ ì—†ì–´ì•¼ í•¨ + ë§µ ë²”ìœ„ íŒì •
 
 		if (!IsPushing(cDir, collidedFace))
 		{
@@ -412,7 +412,7 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* own
 
 		pushForceAppliedTime += Time::Delta();
 		
-		// ¹Ğ±â ¸¸Á·
+		// ë°€ê¸° ë§Œì¡±
 		if (pushForceAppliedTime >= PUSH_APPLIED_TIME_LIMIT)
 		{
 			Move(destCoord);
@@ -423,7 +423,7 @@ void Block::OnColliderRectStay(ColliderRect* targetCollider, ColliderHolder* own
 
 void Block::OnColliderRectExit(ColliderRect* targetCollider, ColliderHolder* owner)
 {
-	// Hidable ¹èÁ¦ (µî·Ïµµ ÇÏÁö ¾Ê´Â´Ù)
+	// Hidable ë°°ì œ (ë“±ë¡ë„ í•˜ì§€ ì•ŠëŠ”ë‹¤)
 
 }
 
@@ -450,10 +450,10 @@ void Block::HandleAddItem()
 	
 	if (randGenerator() % 2 != 0) return;
 
-	// BUBBLE, ROLLER°¡ ¸¹ÀÌ ½ºÆùµÇ¾î¾ß ÇÔ
-	if (Util::GetRandom(0, 9) < 8) // 80% È®·ü·Î Immediate Item ½ºÆù
+	// BUBBLE, ROLLERê°€ ë§ì´ ìŠ¤í°ë˜ì–´ì•¼ í•¨
+	if (Util::GetRandom(0, 9) < 8) // 80% í™•ë¥ ë¡œ Immediate Item ìŠ¤í°
 	{
-		// ºÓÀº ¾Ç¸¶ ¸ÕÀú ½ºÆù ½Ãµµ
+		// ë¶‰ì€ ì•…ë§ˆ ë¨¼ì € ìŠ¤í° ì‹œë„
 		if (Util::GetRandom(0, 150) == 0)
 		{
 			item = new ImmediateItem(RED_DEVIL);
@@ -461,31 +461,31 @@ void Block::HandleAddItem()
 			return;
 		}
 		
-		// 90%ÀÇ È®·ü·Î Power-up ½ºÆù
+		// 90%ì˜ í™•ë¥ ë¡œ Power-up ìŠ¤í°
 		if (Util::GetRandom(0, 9) != 9)
 		{
-			// 60%ÀÇ È®·ü·Î ROLLER³ª BUBBLE ½ºÆù
+			// 60%ì˜ í™•ë¥ ë¡œ ROLLERë‚˜ BUBBLE ìŠ¤í°
 			if (Util::GetRandom(0, 9) < 6)
 			{
 				item = new ImmediateItem((ItemName)(randGenerator() % 2));
 				ItemManager::AddItem(item);
 				return;
 			}
-			else // 40%ÀÇ È®·ü·Î ³ª¸ÓÁö ½ºÆù
+			else // 40%ì˜ í™•ë¥ ë¡œ ë‚˜ë¨¸ì§€ ìŠ¤í°
 			{
 				item = new ImmediateItem((ItemName)(Util::GetRandom(2, 4)));
 				ItemManager::AddItem(item);
 				return;
 			}
 		}
-		else // 10%ÀÇ È®·ü·Î Å» °Í ½ºÆù
+		else // 10%ì˜ í™•ë¥ ë¡œ íƒˆ ê²ƒ ìŠ¤í°
 		{
 			item = new ImmediateItem((ItemName(Util::GetRandom(5, 7))));
 			ItemManager::AddItem(item);
 			return;
 		}
 	} 
-	else  // 20%ÀÇ È®·ü·Î Consumable ¾ÆÀÌÅÛ ½ºÆù
+	else  // 20%ì˜ í™•ë¥ ë¡œ Consumable ì•„ì´í…œ ìŠ¤í°
 	{
 		item = new ConsumableItem((ItemName)(Util::GetRandom(8, 10))); 
 		ItemManager::AddItem(item);

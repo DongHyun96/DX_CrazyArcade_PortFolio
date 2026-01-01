@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Player.h"
 
 Player::Player(const CharacterType& cType, const PlayerType& playerType)
@@ -32,25 +32,25 @@ void Player::Move()
 		velocity = { 0.f, -SPEED_BASE * speedLv };
 	}
 
-	// 4 way movements ¶ó noramlizeÇÒ ÇÊ¿ä°¡ ¾øÀ½
+	// 4 way movements ë¼ noramlizeí•  í•„ìš”ê°€ ì—†ìŒ
 	body->translation += velocity * Time::Delta();
 }
 
 void Player::DeployBalloon()
 {
 	switch (mainState)
-	{ // ¹°Ç³¼±À» ³õÁö ¸øÇÒ »óÈ²ÀÏ ¶§
+	{ // ë¬¼í’ì„ ì„ ë†“ì§€ ëª»í•  ìƒí™©ì¼ ë•Œ
 	case C_SPAWN: case C_CAPTURED: case C_RETURN_IDLE: case C_DEAD: case C_WIN: return;
 	}
 
-	// ¹°Ç³¼± Å° ÀÔ·ÂÀÌ µé¾î¿ÀÁö ¾Ê¾ÒÀ» ¶§
+	// ë¬¼í’ì„  í‚¤ ìž…ë ¥ì´ ë“¤ì–´ì˜¤ì§€ ì•Šì•˜ì„ ë•Œ
 	if (!KEY_DOWN(PM->P_BALLOON_KEYCODE[playerType])) return; 
 
-	// Å¸ÀÌ¸Ó ¹ú·éÀÌ ¼¼ÆÃµÇ¾îÀÖÀ» ¶§
+	// íƒ€ì´ë¨¸ ë²Œë£¬ì´ ì„¸íŒ…ë˜ì–´ìžˆì„ ë•Œ
 	if (!timerBalloons.empty())
 	{
 
-		// Å¸ÀÌ¸Ó ¹ú·éµéÀ» ÇÑ¹ø¿¡ ÅÍÄ§
+		// íƒ€ì´ë¨¸ ë²Œë£¬ë“¤ì„ í•œë²ˆì— í„°ì¹¨
 		for (TimerBalloon* t_balloon : timerBalloons)
 		{
 			if (!t_balloon) continue;
@@ -63,7 +63,7 @@ void Player::DeployBalloon()
 		return;
 	}
 
-	// ³õÀ» ¼ö ÀÖ´Â ¹°Ç³¼±ÀÇ °³¼ö°¡ ¾øÀ» ¶§
+	// ë†“ì„ ìˆ˜ ìžˆëŠ” ë¬¼í’ì„ ì˜ ê°œìˆ˜ê°€ ì—†ì„ ë•Œ
 	if (leftBalloonCnt <= 0) return;
 	
 	Util::Coord deployCoord = GM->GetCollidedMapCellCoord(body->GlobalPosition());

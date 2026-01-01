@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "GameUIManager.h"
 
 
@@ -126,7 +126,7 @@ void GameUIManager::RenderGameOver()
 	if (!gameOver)
 		return;
 
-	// TODO -> GameOverResult gameOverResult{};¿¡ ¸ÂÃß¾î result Ãâ·Â
+	// TODO -> GameOverResult gameOverResult{};ì— ë§žì¶”ì–´ result ì¶œë ¥
 
 
 	gameOverPanel[gameOverResult]->Render();
@@ -151,7 +151,7 @@ void GameUIManager::UpdateGameOver()
 		flickedCnt++;
 	}
 
-	// TODO -> GameOverResult gameOverResult{};¿¡ ¸ÂÃß¾î result Ãâ·Â
+	// TODO -> GameOverResult gameOverResult{};ì— ë§žì¶”ì–´ result ì¶œë ¥
 	gameOverPanel[gameOverResult]->Update();
 }
 

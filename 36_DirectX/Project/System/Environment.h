@@ -1,5 +1,5 @@
-#pragma once
-// Scene°ú ¹«°üÇÏ°Ô ¼¼ÆÃÇÏ´Â È¯°æ°ª
+ï»¿#pragma once
+// Sceneê³¼ ë¬´ê´€í•˜ê²Œ ì„¸íŒ…í•˜ëŠ” í™˜ê²½ê°’
 class Environment : public Singleton<Environment>
 {
 	friend class Singleton<Environment>;

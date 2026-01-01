@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 /*
 CONCRETE CLASS
-¹°ÁÙ±â ÃÖ»óÀ§ ÃÑ°ı ¸Å´ÏÀú ¿ªÇÒ
-Stream Object pooling°ú StreamBlockManager¸¦ °®°í ÀÖÀ½
-¹°ÁÙ±â spawn ÀÇ·Ú¸¦ ¿©±â¼­ Ã¹ ½ÃÀÛÀ¸·Î ¹ŞÀ½ (SpawnStreamÇÔ¼ö¸¦ ÅëÇØ)
+ë¬¼ì¤„ê¸° ìµœìƒìœ„ ì´ê´„ ë§¤ë‹ˆì € ì—­í• 
+Stream Object poolingê³¼ StreamBlockManagerë¥¼ ê°–ê³  ìˆìŒ
+ë¬¼ì¤„ê¸° spawn ì˜ë¢°ë¥¼ ì—¬ê¸°ì„œ ì²« ì‹œì‘ìœ¼ë¡œ ë°›ìŒ (SpawnStreamí•¨ìˆ˜ë¥¼ í†µí•´)
 */
 class StreamManager
 {
@@ -19,10 +19,10 @@ public:
 public:
 
 	/// <summary>
-	/// ¹°ÁÙ±â spawnÀÇ·ÚÀÇ Ã¹ ½ÃÀÛ
+	/// ë¬¼ì¤„ê¸° spawnì˜ë¢°ì˜ ì²« ì‹œì‘
 	/// </summary>
-	/// <param name="spawnCoord"> : Spawn cell ÁÂÇ¥(¹°ÁÙ±âÀÇ Á¤ °¡¿îµ¥) </param>
-	/// <param name="streamLv"> : SpawnÇÒ streamÀÇ stream level </param>
+	/// <param name="spawnCoord"> : Spawn cell ì¢Œí‘œ(ë¬¼ì¤„ê¸°ì˜ ì • ê°€ìš´ë°) </param>
+	/// <param name="streamLv"> : Spawní•  streamì˜ stream level </param>
 	void SpawnStream(const Util::Coord& spawnCoord, const UINT& streamLv);
 
 	static StreamBlockManager* GetStreamBlockManager() { return streamBlockManager; }
@@ -34,8 +34,8 @@ private:
 
 private:
 	/* 
-	StreamManager¸¦ staticÀ¸·Î ¼ÒÀ¯ÇÏ°í Stream ½ºÆù ½Ã StreamBlockÀ» Â÷·Ê·Î ½ºÆùÇÒ ¶§,
-	ÀÌ streamBlockManager¸¦ ÅëÇØ StreamBlock ½ºÆù½ÃÅ´
+	StreamManagerë¥¼ staticìœ¼ë¡œ ì†Œìœ í•˜ê³  Stream ìŠ¤í° ì‹œ StreamBlockì„ ì°¨ë¡€ë¡œ ìŠ¤í°í•  ë•Œ,
+	ì´ streamBlockManagerë¥¼ í†µí•´ StreamBlock ìŠ¤í°ì‹œí‚´
 	*/
 	static StreamBlockManager*	streamBlockManager;
 

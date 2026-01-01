@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "CollisionUtil.h"
 
 
@@ -39,7 +39,7 @@ void CollisionUtil::HandleCharacterCommonCollision(ColliderRect* block, Collider
 		//D = 0.0016
 		// 0.15f
 		// characterSpeed * Time::Delta();
-		// y°ª Á¶Á¤
+		// yê°’ ì¡°ì •
 		if (character->Bottom() < block->Bottom())
 		{
 			if (character->Top() < block->Bottom() + block->LocalSize().y * 0.4f)
@@ -60,7 +60,7 @@ void CollisionUtil::HandleCharacterCommonCollision(ColliderRect* block, Collider
 		character->translation.y = (collidedFace == DIR_UP) ? block->Top() + character->LocalSize().y * 0.5001f
 															  : block->Bottom() - character->LocalSize().y * 0.5001f;
 
-		// x°ª Á¶Á¤
+		// xê°’ ì¡°ì •
 		if (character->Left() < block->Left())
 		{
 			if (character->Right() < block->Left() + block->LocalSize().x * 0.4f)

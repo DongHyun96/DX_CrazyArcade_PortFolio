@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 /* CONCRETE CLASS */
 class BlockManager
@@ -12,29 +12,29 @@ public:
 
 public:
 	/// <summary>
-	/// ºí·Ï³¢¸®ÀÇ À§Ä¡ ¼­·Î ¹Ù²Ù±â
+	/// ë¸”ë¡ë¼ë¦¬ì˜ ìœ„ì¹˜ ì„œë¡œ ë°”ê¾¸ê¸°
 	/// </summary>
 	/// <param name="c1"> : First block cell pos  </param>
 	/// <param name="c2"> : Second block cell pos </param>
 	static void SwapBlocks(const Util::Coord& c1, const Util::Coord& c2);
 
 public:
-	/* dest À§Ä¡¿¡ ºí·ÏÀ» ÀÌµ¿½ÃÄÑµµ °¡´ÉÇÑ ÀÚ¸®ÀÎÁö Ã¼Å© */
+	/* dest ìœ„ì¹˜ì— ë¸”ë¡ì„ ì´ë™ì‹œì¼œë„ ê°€ëŠ¥í•œ ìë¦¬ì¸ì§€ ì²´í¬ */
 	static bool IsValidDestCoord(const Util::Coord& dest);
 
 public:
-	/* ÇØ´ç À§Ä¡ÀÇ Block Getter */
+	/* í•´ë‹¹ ìœ„ì¹˜ì˜ Block Getter */
 	static Block* GetCoordBlock(const Util::Coord& coord) { return blocks[coord.y][coord.x]; }
 
-private: /* BlockManager³»ÀÇ Block »ı¼º °ü·Ã */
+private: /* BlockManagerë‚´ì˜ Block ìƒì„± ê´€ë ¨ */
 
-	/// <param name="coord"> : ºí·ÏÀ» ¸¸µé cell coord </param>
-	/// <param name="file"> : ºí·Ï Texure file </param>
-	/// <param name="frameXY"> : Texture fileÀÇ Row, col ÇÁ·¹ÀÓ ÃÑ °³¼ö </param>
-	/// <param name="targetXY"> : Texture file ³»¿¡¼­ »ç¿ëÇÒ ÇÁ·¹ÀÓ À§Ä¡ </param>
-	/// <param name="texWorldSize"> : World¿¡ ¹èÄ¡µÉ size ÁöÁ¤ </param>
-	/// <param name="bProp"> : ºí·ÏÀÇ Æ¯¼º </param>
-	/// <returns> »ı¼ºÇÑ ºí·Ï °´Ã¼ </returns>
+	/// <param name="coord"> : ë¸”ë¡ì„ ë§Œë“¤ cell coord </param>
+	/// <param name="file"> : ë¸”ë¡ Texure file </param>
+	/// <param name="frameXY"> : Texture fileì˜ Row, col í”„ë ˆì„ ì´ ê°œìˆ˜ </param>
+	/// <param name="targetXY"> : Texture file ë‚´ì—ì„œ ì‚¬ìš©í•  í”„ë ˆì„ ìœ„ì¹˜ </param>
+	/// <param name="texWorldSize"> : Worldì— ë°°ì¹˜ë  size ì§€ì • </param>
+	/// <param name="bProp"> : ë¸”ë¡ì˜ íŠ¹ì„± </param>
+	/// <returns> ìƒì„±í•œ ë¸”ë¡ ê°ì²´ </returns>
 	Block* CreateBlock(Util::Coord coord, wstring file,
 					   Util::Coord frameXY = { 1, 1 },
 					   Util::Coord targetXY = {1, 1},
@@ -42,25 +42,25 @@ private: /* BlockManager³»ÀÇ Block »ı¼º °ü·Ã */
 					   BlockProperty bProp = {});
 
 	/// <summary>
-	/// »õ·Î¿î BlockManager »ı¼º ½Ã, ¸Ê¿¡ ¸Â´Â BlockÀ» LoadÇÏ¸é¼­ BlockÀ» »ı¼ºÇÒ ¶§ »ç¿ë
+	/// ìƒˆë¡œìš´ BlockManager ìƒì„± ì‹œ, ë§µì— ë§ëŠ” Blockì„ Loadí•˜ë©´ì„œ Blockì„ ìƒì„±í•  ë•Œ ì‚¬ìš©
 	/// </summary>
-	/// <param name="info"> : LoadµÈ BlockInfo</param>
-	/// <param name="boardXY"> : °ÔÀÓ º¸µåÀÇ cell pos </param>
-	/// <returns> »ı¼ºÇÑ ºí·Ï °´Ã¼</returns>
-	Block* CreateBlock(const BlockInfo& info, Util::Coord boardXY); // ½ÃÀÛ ½Ã LoadÇÒ ¶§ createÇÏ´Â ¿ëµµ
+	/// <param name="info"> : Loadëœ BlockInfo</param>
+	/// <param name="boardXY"> : ê²Œì„ ë³´ë“œì˜ cell pos </param>
+	/// <returns> ìƒì„±í•œ ë¸”ë¡ ê°ì²´</returns>
+	Block* CreateBlock(const BlockInfo& info, Util::Coord boardXY); // ì‹œì‘ ì‹œ Loadí•  ë•Œ createí•˜ëŠ” ìš©ë„
 
 private:
 	 /* 
-	 GameManager¿¡¼­ curMapType(ÇöÀç ¼±ÅÃµÈ °ÔÀÓ¸Ê)¿¡ µû¸¥ ºí·Ïµé Á¤º¸ ·Îµù
-	 ÇöÀç GameMapÀÇ °¢ cell¿¡ ´ëÇÑ block info¸¦ ºÒ·¯¿À°í ÇØ´ç cellÀÇ ºí·Ï Á¤º¸·Î blockµé ÃÊ±âÈ­ ´ã´ç
+	 GameManagerì—ì„œ curMapType(í˜„ì¬ ì„ íƒëœ ê²Œì„ë§µ)ì— ë”°ë¥¸ ë¸”ë¡ë“¤ ì •ë³´ ë¡œë”©
+	 í˜„ì¬ GameMapì˜ ê° cellì— ëŒ€í•œ block infoë¥¼ ë¶ˆëŸ¬ì˜¤ê³  í•´ë‹¹ cellì˜ ë¸”ë¡ ì •ë³´ë¡œ blockë“¤ ì´ˆê¸°í™” ë‹´ë‹¹
 	 */
 	void Load();
 
-private: /* Collision Handling °ü·Ã */
+private: /* Collision Handling ê´€ë ¨ */
 	
-	void HandleCommonCollisions();						// ±âº»ÀûÀÎ CommonCollision handling
-	void HandleCharacterCommonCollision(Block* block);  // HandleCommonCollisions¿¡¼­ call
-	void HandleDartCollision(Block* block);				// HandleCommonCollisions¿¡¼­ call
+	void HandleCommonCollisions();						// ê¸°ë³¸ì ì¸ CommonCollision handling
+	void HandleCharacterCommonCollision(Block* block);  // HandleCommonCollisionsì—ì„œ call
+	void HandleDartCollision(Block* block);				// HandleCommonCollisionsì—ì„œ call
 
 	void HandleMovableCollisions();						// Movable vs Character  collision handling
 	void HandleHidableCollisions();						// Hidable vs (Movable, Balloon) collision handling

@@ -1,16 +1,16 @@
-#pragma once
+ï»¿#pragma once
 
 
 // ImmediateItem  (power-ups, Ridable)
-// ConsumableItem (´Ïµé, Á¡ÇÁÆÑ, Å¸ÀÌ¸Ó ÆøÅº, ´ÙÆ® µî)
+// ConsumableItem (ë‹ˆë“¤, ì í”„íŒ©, íƒ€ì´ë¨¸ í­íƒ„, ë‹¤íŠ¸ ë“±)
 
-/* ¾ÆÀÌÅÛÀÇ »óÅÂ */
+/* ì•„ì´í…œì˜ ìƒíƒœ */
 enum ItemState
 {
-	HIDDEN,		// ¾ÆÁ÷ block µÚ¿¡ ÀÖÀ» ¶§
-	SPAWNED,	// °ÔÀÓ ÇÊµå À§¿¡ spawnµÈ »óÅÂ
-	EARNED,		// ÇÃ·¹ÀÌ¾î°¡ ¸Ô¾úÀ» ‹š »óÅÂ
-	// Ä³¸¯ÅÍ°¡ Á×¾úÀ» ¶§ ¸ÔÀº ¾ÆÀÌÅÛÀÌ °ÔÀÓ¸Ê¿¡ ¹İÈ¯µÉ ¶§ »ç¿ë (¿ø·¡´Â RESPAWNÀÌ ÀÖ¾úÀ½)
+	HIDDEN,		// ì•„ì§ block ë’¤ì— ìˆì„ ë•Œ
+	SPAWNED,	// ê²Œì„ í•„ë“œ ìœ„ì— spawnëœ ìƒíƒœ
+	EARNED,		// í”Œë ˆì´ì–´ê°€ ë¨¹ì—ˆì„ ë–„ ìƒíƒœ
+	// ìºë¦­í„°ê°€ ì£½ì—ˆì„ ë•Œ ë¨¹ì€ ì•„ì´í…œì´ ê²Œì„ë§µì— ë°˜í™˜ë  ë•Œ ì‚¬ìš© (ì›ë˜ëŠ” RESPAWNì´ ìˆì—ˆìŒ)
 };
 
 /* All item types(or names) */
@@ -43,10 +43,10 @@ public:
 	void Render(); 
 
 	/// <summary>
-	/// ¾ÆÀÌÅÛ È¿°ú »ç¿ëÇÏ±â
+	/// ì•„ì´í…œ íš¨ê³¼ ì‚¬ìš©í•˜ê¸°
 	/// </summary>
-	/// <param name="itemUser"> : ¾ÆÀÌÅÛÀ» »ç¿ëÇÏ´Â Ä³¸¯ÅÍ </param>
-	/// <returns> : ¾ÆÀÌÅÛ È¿°ú°¡ ¹ßµ¿µÇ¾ú´Ù¸é return true </returns>
+	/// <param name="itemUser"> : ì•„ì´í…œì„ ì‚¬ìš©í•˜ëŠ” ìºë¦­í„° </param>
+	/// <returns> : ì•„ì´í…œ íš¨ê³¼ê°€ ë°œë™ë˜ì—ˆë‹¤ë©´ return true </returns>
 	virtual bool UseItem(Character* itemUser);
 
 public: /* Getters and setters */
@@ -63,22 +63,22 @@ public: /* Getters and setters */
 public:
 	
 	/// <summary>
-	/// ½ºÆù ½ÃÅ°±â
+	/// ìŠ¤í° ì‹œí‚¤ê¸°
 	/// </summary>
 	/// <param name="spawnPos"> : Spawn position </param>
 	void Spawn(const Vector2& spawnPos);
 
 	/// <summary>
-	/// Æ¯Á¤ Ä³¸¯ÅÍ°¡ Á×¾úÀ» ¶§, ÇØ´ç Ä³¸¯ÅÍ°¡ È¹µæÇß´ø ¾ÆÀÌÅÛ ¸®½ºÆù ½ÃÅ°±â | Not implemented
+	/// íŠ¹ì • ìºë¦­í„°ê°€ ì£½ì—ˆì„ ë•Œ, í•´ë‹¹ ìºë¦­í„°ê°€ íšë“í–ˆë˜ ì•„ì´í…œ ë¦¬ìŠ¤í° ì‹œí‚¤ê¸° | Not implemented
 	/// </summary>
-	/// <param name="src"> : ¸®½ºÆù ½ÃÀÛÁ¡(Ä³¸¯ÅÍ°¡ Á×Àº À§Ä¡)</param>
-	/// <param name="dst"> : ¸®½ºÆù ³¡Á¡ </param>
+	/// <param name="src"> : ë¦¬ìŠ¤í° ì‹œì‘ì (ìºë¦­í„°ê°€ ì£½ì€ ìœ„ì¹˜)</param>
+	/// <param name="dst"> : ë¦¬ìŠ¤í° ëì  </param>
 	void Respawn(const Vector2& src, const Vector2& dst);
 
 protected:
 
 	/// <summary>
-	/// State ¹Ù²ğ¶§ÀÇ ½ÃÀÛÁ¡À¸·Î µ¿ÀÛ | EARNED·Î settingµÇ´Â °æ¿ì ÀÚ½ÄÅ¬·¡½º¿¡¼­ ¼­·Î ´Ù¸£°Ô Ã³¸®ÇÏ´Â Hook Method¸¦ °É¾îµÒ
+	/// State ë°”ë€”ë•Œì˜ ì‹œì‘ì ìœ¼ë¡œ ë™ì‘ | EARNEDë¡œ settingë˜ëŠ” ê²½ìš° ìì‹í´ë˜ìŠ¤ì—ì„œ ì„œë¡œ ë‹¤ë¥´ê²Œ ì²˜ë¦¬í•˜ëŠ” Hook Methodë¥¼ ê±¸ì–´ë‘ 
 	/// </summary>
 	/// <param name="itemState"> : Next itemState </param>
 	void SetItemState(const ItemState& itemState); 
@@ -86,7 +86,7 @@ protected:
 protected:
 
 	/// <summary>
-	/// Ä³¸¯ÅÍ¿Í Ãæµ¹ÇßÀ» ¶§ ÀÌ¿ë
+	/// ìºë¦­í„°ì™€ ì¶©ëŒí–ˆì„ ë•Œ ì´ìš©
 	/// </summary>
 	/// <param name="owner"> : Point(position) owner </param>
 	virtual void OnColliderPointEnter(ColliderHolder* owner) = 0;
@@ -94,21 +94,21 @@ protected:
 protected:
 
 	/* 
-	Render()ÇÔ¼ö ³»ÀÇ itemState°¡ EARNED »óÅÂÀÏ ¶§ÀÇ Template hook method
-	itemState°¡ EARNED »óÅÂÀÏ ¶§ Immediate item°ú Consumable itemÀÇ RenderHook ºÎºĞÀÇ ±¸ÇöºÎ°¡ ´Ù¸§
+	Render()í•¨ìˆ˜ ë‚´ì˜ itemStateê°€ EARNED ìƒíƒœì¼ ë•Œì˜ Template hook method
+	itemStateê°€ EARNED ìƒíƒœì¼ ë•Œ Immediate itemê³¼ Consumable itemì˜ RenderHook ë¶€ë¶„ì˜ êµ¬í˜„ë¶€ê°€ ë‹¤ë¦„
 	*/
 	virtual void EarnedRenderHook() = 0;
 
 	/*
-	SetItemState ÇÔ¼ö ³»ÀÇ Template hook method
-	Setter·Î setting½Ã EARNED state·Î settingÇÒ ¶§ Ã³¸®ºÎºĞÀÌ ÀÚ½Ä¿¡ µû¶ó ´Ù¸§
+	SetItemState í•¨ìˆ˜ ë‚´ì˜ Template hook method
+	Setterë¡œ settingì‹œ EARNED stateë¡œ settingí•  ë•Œ ì²˜ë¦¬ë¶€ë¶„ì´ ìì‹ì— ë”°ë¼ ë‹¤ë¦„
 	*/
 	virtual void EarnedSetterHook() = 0;
 
 private:
 
 	/// <summary>
-	/// Collision call back function, ¹°ÁÙ±â µî°ú Ãæµ¹ÇßÀ» ¶§ ÀÌµ¿
+	/// Collision call back function, ë¬¼ì¤„ê¸° ë“±ê³¼ ì¶©ëŒí–ˆì„ ë•Œ ì´ë™
 	/// </summary>
 	/// <param name="targetCollider"> : Entered collider </param>
 	/// <param name="owner"> : Entered collider owner </param>
@@ -125,7 +125,7 @@ protected:
 protected:
 
 	ColliderRect*	body{};			// Body collider
-	Object*			texObj{};		// BodyÀÇ transformÀ» µû¶ó°¨
+	Object*			texObj{};		// Bodyì˜ transformì„ ë”°ë¼ê°
 
 	bool			isActive{};
 
@@ -137,7 +137,7 @@ private:
 
 	ItemState itemState = HIDDEN;
 
-private: /* ½ºÆùµÈ ¾ÆÀÌÅÛ floating effect °ü·Ã */
+private: /* ìŠ¤í°ëœ ì•„ì´í…œ floating effect ê´€ë ¨ */
 
 	float		floatingTime{};
 	float		floatingYSpeed			= 25.f;
@@ -145,8 +145,8 @@ private: /* ½ºÆùµÈ ¾ÆÀÌÅÛ floating effect °ü·Ã */
 
 private:
 	/*
-	Update ÇÑ tick¿¡ µ¿½Ã¿¡ ¾ÆÀÌÅÛÀ» ¸Ô¾úÀ» ¶§, ¾ÆÀÌÅÛ È¹µæ »ç¿îµå ÀÌÆåÆ®ÀÇ º¼·ıÀÌ ³Ê¹« Å­
-	¾ÆÀÌÅÛ È¹µæ sfx´Â Update tick ³»¿¡¼­ ÇÑ ¹ø¸¸ Ã³¸®¸¦ ÇÒ ¿¹Á¤
+	Update í•œ tickì— ë™ì‹œì— ì•„ì´í…œì„ ë¨¹ì—ˆì„ ë•Œ, ì•„ì´í…œ íšë“ ì‚¬ìš´ë“œ ì´í™íŠ¸ì˜ ë³¼ë¥¨ì´ ë„ˆë¬´ í¼
+	ì•„ì´í…œ íšë“ sfxëŠ” Update tick ë‚´ì—ì„œ í•œ ë²ˆë§Œ ì²˜ë¦¬ë¥¼ í•  ì˜ˆì •
 	*/
 	static bool spawnSoundPlayed;
 };

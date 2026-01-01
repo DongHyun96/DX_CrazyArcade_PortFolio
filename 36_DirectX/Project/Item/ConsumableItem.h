@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 
 
 /* 
 CONCRETE CLASS
-ÇÃ·¹ÀÌ Áß ÇÏ³ª ¾¿ ¼Ò¸ğÇÏ¿© »ç¿ëÇÒ ¼ö ÀÖ´Â ¾ÆÀÌÅÛ(ex - Dart, TimerBalloon, ¹Ù´Ã µî)
+í”Œë ˆì´ ì¤‘ í•˜ë‚˜ ì”© ì†Œëª¨í•˜ì—¬ ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ì•„ì´í…œ(ex - Dart, TimerBalloon, ë°”ëŠ˜ ë“±)
 */
 class ConsumableItem : public Item
 {
@@ -23,11 +23,11 @@ private:
 	virtual void EarnedSetterHook() override;
 
 private:
-	/* ¼Ò¸ğ ¾ÆÀÌÅÛÀÇ ³²Àº °¹¼ö */
+	/* ì†Œëª¨ ì•„ì´í…œì˜ ë‚¨ì€ ê°¯ìˆ˜ */
 	UINT leftCnt{};
 
 private:
-	/* ³²Àº °¹¼ö Text UI À§Ä¡ */
+	/* ë‚¨ì€ ê°¯ìˆ˜ Text UI ìœ„ì¹˜ */
 	Vector2 leftCntTextPos{};
 
 };

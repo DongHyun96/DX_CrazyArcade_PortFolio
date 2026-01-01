@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "TimerBalloon.h"
 
 
@@ -26,7 +26,7 @@ void TimerBalloon::Explode()
 {
 	isActive = false;
 
-	// owner->AddLeftBalloonCnt(); -> ÀÏ¹İ balloon°ú ´Ş¸® OwnerÀÇ leftBalloonCnt °³¼ö¸¦ ´Ã¸± ÇÊ¿ä x
+	// owner->AddLeftBalloonCnt(); -> ì¼ë°˜ balloonê³¼ ë‹¬ë¦¬ Ownerì˜ leftBalloonCnt ê°œìˆ˜ë¥¼ ëŠ˜ë¦´ í•„ìš” x
 
 	Stream::AddStreamDanagerZone(spawnCoord, streamLv);
 
@@ -64,5 +64,5 @@ void TimerBalloon::Explode()
 
 void TimerBalloon::HandleExplode()
 {
-	// ºÎ¸ğÅ¬·¡½º¿¡¼­´Â ExplodeTimer°¡ ÀÖ´Âµ¥ ¿©±â¼­´Â TimerÀÇ ¿µÇâÀ» ¹ŞÁö ¾Êµµ·Ï ±×³É ³öµÑ°ÍÀÓ
+	// ë¶€ëª¨í´ë˜ìŠ¤ì—ì„œëŠ” ExplodeTimerê°€ ìˆëŠ”ë° ì—¬ê¸°ì„œëŠ” Timerì˜ ì˜í–¥ì„ ë°›ì§€ ì•Šë„ë¡ ê·¸ëƒ¥ ë†”ë‘˜ê²ƒì„
 }

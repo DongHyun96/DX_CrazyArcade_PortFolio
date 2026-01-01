@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 class Camera : public Singleton<Camera>
 {
 	friend class Singleton<Camera>;

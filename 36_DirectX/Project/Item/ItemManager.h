@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 
-// °¢ ºí·ÏµéÀÌ ·£´ıÇÏ°Ô »ı¼ºÇÑ ¾ÆÀÌÅÛµéÀ» ¸ğµÎ µé°í ÀÖÀ» °ÍÀÓ
+// ê° ë¸”ë¡ë“¤ì´ ëœë¤í•˜ê²Œ ìƒì„±í•œ ì•„ì´í…œë“¤ì„ ëª¨ë‘ ë“¤ê³  ìˆì„ ê²ƒì„
 /*
 CONCRETE CLASS
-BlockµéÀ» »ı¼ºÇÒ ¶§, Block¿¡¼­ ·£´ıÇÑ ItemÀ» ·£´ıÇÑ È®·ü·Î »ı¼ºÇÒ °ÍÀÓ
-Block¿¡¼­ »ı¼ºµÈ ¾ÆÀÌÅÛÀº ItemManager¿¡ ³Ñ°Ü¼­ °ü¸® ¹ŞÀ½
+Blockë“¤ì„ ìƒì„±í•  ë•Œ, Blockì—ì„œ ëœë¤í•œ Itemì„ ëœë¤í•œ í™•ë¥ ë¡œ ìƒì„±í•  ê²ƒì„
+Blockì—ì„œ ìƒì„±ëœ ì•„ì´í…œì€ ItemManagerì— ë„˜ê²¨ì„œ ê´€ë¦¬ ë°›ìŒ
 */
 class ItemManager
 {
@@ -21,7 +21,7 @@ public:
 
 	static vector<Item*>& GetItems() { return items; }
 	
-	static void AddItem(Item* item); // °¢ ºí·Ï¿¡¼­ ¾ÆÀÌÅÛÀ» »ı¼ºÇß´Ù¸é ItemManager¿¡ ³Ö¾îµÒ
+	static void AddItem(Item* item); // ê° ë¸”ë¡ì—ì„œ ì•„ì´í…œì„ ìƒì„±í–ˆë‹¤ë©´ ItemManagerì— ë„£ì–´ë‘ 
 
 private:
 	void HandleCollisions();

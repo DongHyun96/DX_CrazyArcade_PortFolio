@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Transform.h"
 
 
@@ -40,7 +40,7 @@ void Transform::UpdateWorld()
 
 	XMVECTOR outS, outR, outT;
 
-	XMMatrixDecompose(&outS, &outR, &outT, world); // Decompose S, R, T·Î ºÐÇØÇØÁÖ´Â ÇÔ¼ö
+	XMMatrixDecompose(&outS, &outR, &outT, world); // Decompose S, R, Të¡œ ë¶„í•´í•´ì£¼ëŠ” í•¨ìˆ˜
 
 	XMStoreFloat2(&globalScale, outS);
 	XMStoreFloat2(&globalPosition, outT);

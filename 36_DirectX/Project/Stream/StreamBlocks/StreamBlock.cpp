@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "StreamBlock.h"
 
 StreamBlock::StreamBlock()
@@ -91,7 +91,7 @@ void StreamBlock::SetActive(const bool& isActive)
 	this->isActive = isActive;
 	
 	if (!isActive) 
-		Stream::EraseStreamDangerZone(spawnCoord); // Stream Å¬·¡½ºÀÇ StreamDangerZone¿¡¼­ ÀÚ±âÀÚ½ÅÀÇ À§Ä¡ »©±â
+		Stream::EraseStreamDangerZone(spawnCoord); // Stream í´ë˜ìŠ¤ì˜ StreamDangerZoneì—ì„œ ìê¸°ìì‹ ì˜ ìœ„ì¹˜ ë¹¼ê¸°
 }
 
 void StreamBlock::DisableBodyCollider()

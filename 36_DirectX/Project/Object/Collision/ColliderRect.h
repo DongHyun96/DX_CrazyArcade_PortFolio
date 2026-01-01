@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-/* Collider ±¸ºĞ¿ë Tags */
+/* Collider êµ¬ë¶„ìš© Tags */
 enum ColliderTag
 {
 	DEFAULT,
@@ -20,23 +20,23 @@ public:
 
 	void SetVertex() override;
 	
-public: /* Collision detection °ü·Ã */
+public: /* Collision detection ê´€ë ¨ */
 
 	bool OBBCollision(const Vector2& point, ColliderHolder* owner = nullptr)	override;
 	bool OBBCollision(ColliderRect* rect, ColliderHolder* owner = nullptr)		override;
 	bool OBBCollision(ColliderCircle* other) override;
 
-	/* ÁÖÀÇ : Always use Global Position for Collision detection */
+	/* ì£¼ì˜ : Always use Global Position for Collision detection */
 	bool AABBCollision(const Vector2& point, ColliderHolder* owner = nullptr);
 
-	/* ÁÖÀÇ : Always use Global Position for Collision detection */
+	/* ì£¼ì˜ : Always use Global Position for Collision detection */
 	bool AABBCollision(ColliderRect* rect, ColliderHolder* owner = nullptr);
 
 public:
 
 	Vector2 GlobalSize() const { return Vector2(size.x * globalScale.x, size.y * globalScale.y); }
 
-	// ÁÖÀÇ : È¸ÀüÀÌ µé¾î°¡Áö ¾ÊÀº »ç°¢Çü(AABB Rect)¿¡¼­¸¸ »ç¿ë, Local ±âÁØÀ¸·Î ¹İÈ¯ÇÒ °Í
+	// ì£¼ì˜ : íšŒì „ì´ ë“¤ì–´ê°€ì§€ ì•Šì€ ì‚¬ê°í˜•(AABB Rect)ì—ì„œë§Œ ì‚¬ìš©, Local ê¸°ì¤€ìœ¼ë¡œ ë°˜í™˜í•  ê²ƒ
 	float	Left()		const { return translation.x - size.x * 0.5f; }
 	float	Right()		const { return translation.x + size.x * 0.5f; }
 	float	Top()		const { return translation.y + size.y * 0.5f; }
@@ -65,7 +65,7 @@ public:
 public:
 	
 	/// <summary>
-	/// Up, down, left, right°ªÀ¸·Î setting
+	/// Up, down, left, rightê°’ìœ¼ë¡œ setting
 	/// </summary>
 	/// <param name="UDLR"> : Each up, down, left, right values </param>
 	void SetColliderRect(const Vector4& UDLR);
@@ -80,19 +80,19 @@ private:
 
 private:
 
-	set<ColliderHolder*>	enteredPointOwners{};	// ÇöÀç ÀÌ ColliderRect¿¡ µé¾î¿Í ÀÖ´Â ¸ğµç pointµéÀÇ Owner set
-	set<ColliderRect*>		enteredBodies{};		// ÇöÀç ÀÌ ColliderRect¿¡ µé¾î¿Í ÀÖ´Â ¸ğµç Other collider rects
+	set<ColliderHolder*>	enteredPointOwners{};	// í˜„ì¬ ì´ ColliderRectì— ë“¤ì–´ì™€ ìˆëŠ” ëª¨ë“  pointë“¤ì˜ Owner set
+	set<ColliderRect*>		enteredBodies{};		// í˜„ì¬ ì´ ColliderRectì— ë“¤ì–´ì™€ ìˆëŠ” ëª¨ë“  Other collider rects
 
 private: /* Call back events */
 	
-	function<void(ColliderHolder*)> PointEnterEvent{};	// Á¡(Æ¯Á¤ GameObjectÀÇ position)ÀÌ µé¾î¿ÔÀ» ¶§ÀÇ call back function pointer (Event)
-	function<void(ColliderHolder*)> PointStayEvent{};	// Á¡ÀÌ stayÇÏ°í ÀÖÀ» ¶§ÀÇ call back function pointer
-	function<void(ColliderHolder*)> PointExitEvent{};	// Á¡ÀÌ ³ª°¬À» ¶§ÀÇ call back function pointer
+	function<void(ColliderHolder*)> PointEnterEvent{};	// ì (íŠ¹ì • GameObjectì˜ position)ì´ ë“¤ì–´ì™”ì„ ë•Œì˜ call back function pointer (Event)
+	function<void(ColliderHolder*)> PointStayEvent{};	// ì ì´ stayí•˜ê³  ìˆì„ ë•Œì˜ call back function pointer
+	function<void(ColliderHolder*)> PointExitEvent{};	// ì ì´ ë‚˜ê°”ì„ ë•Œì˜ call back function pointer
 
-	function<void(ColliderRect*, ColliderHolder*)> RectEnterEvent{};	// ´Ù¸¥ ColliderRect°¡ µé¾î¿ÔÀ» ¶§ÀÇ call back function pointer
-	function<void(ColliderRect*, ColliderHolder*)> RectStayEvent{};		// ´Ù¸¥ ColliderRect°¡ stayÇÏ°í ÀÖÀ» ¶§ÀÇ call back function pointer
-	function<void(ColliderRect*, ColliderHolder*)> RectExitEvent{};		// ´Ù¸¥ ColliderRect°¡ ³ª°¬À» ¶§ÀÇ call back function pointer
+	function<void(ColliderRect*, ColliderHolder*)> RectEnterEvent{};	// ë‹¤ë¥¸ ColliderRectê°€ ë“¤ì–´ì™”ì„ ë•Œì˜ call back function pointer
+	function<void(ColliderRect*, ColliderHolder*)> RectStayEvent{};		// ë‹¤ë¥¸ ColliderRectê°€ stayí•˜ê³  ìˆì„ ë•Œì˜ call back function pointer
+	function<void(ColliderRect*, ColliderHolder*)> RectExitEvent{};		// ë‹¤ë¥¸ ColliderRectê°€ ë‚˜ê°”ì„ ë•Œì˜ call back function pointer
 
 private:
-	ColliderTag tag{DEFAULT};	// Collider ±¸ºĞÀ» À§ÇÑ collider tag
+	ColliderTag tag{DEFAULT};	// Collider êµ¬ë¶„ì„ ìœ„í•œ collider tag
 };

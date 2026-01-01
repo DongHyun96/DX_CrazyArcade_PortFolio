@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Device.h"
 
 
@@ -22,24 +22,24 @@ Device::~Device()
 void Device::Initialize()
 {
 
-    // Swap ChainÀÇ ¼³Á¤°ªÀ» ¸ğ¾Æ µĞ ±¸Á¶Ã¼
-    DXGI_SWAP_CHAIN_DESC swapChainDesc = {}; // ¸Å°³º¯¼ö¸¦ ¸ğÀº ±¸Á¶Ã¼ (Descriptor)
+    // Swap Chainì˜ ì„¤ì •ê°’ì„ ëª¨ì•„ ë‘” êµ¬ì¡°ì²´
+    DXGI_SWAP_CHAIN_DESC swapChainDesc = {}; // ë§¤ê°œë³€ìˆ˜ë¥¼ ëª¨ì€ êµ¬ì¡°ì²´ (Descriptor)
 
     swapChainDesc.BufferDesc.Width                      = WIN_WIDTH;
     swapChainDesc.BufferDesc.Height                     = WIN_HEIGHT;
 
-    // »ö»óÀ» ¾ğ¸®¾óÃ³·³ 0ºÎÅÍ 1±îÁöÀÇ °ªÀ» ¾¸ (unsigned normalized) / signed normalized -> -1 ~ 1
+    // ìƒ‰ìƒì„ ì–¸ë¦¬ì–¼ì²˜ëŸ¼ 0ë¶€í„° 1ê¹Œì§€ì˜ ê°’ì„ ì”€ (unsigned normalized) / signed normalized -> -1 ~ 1
     swapChainDesc.BufferDesc.Format                     = DXGI_FORMAT_R8G8B8A8_UNORM;
-    swapChainDesc.BufferDesc.RefreshRate.Numerator      = 240; // RefreshRate Àç»ıºóµµ (ÁÖ»çÀ²)
+    swapChainDesc.BufferDesc.RefreshRate.Numerator      = 240; // RefreshRate ì¬ìƒë¹ˆë„ (ì£¼ì‚¬ìœ¨)
     swapChainDesc.BufferDesc.RefreshRate.Denominator    = 1;
 
-    swapChainDesc.SampleDesc.Count                      = 1; // sampleDesc -> »ùÇÃ¸µ°ú °ü·ÃÇÑ descriptor
-    swapChainDesc.SampleDesc.Quality                    = 0; // 1, 0 -> ÇØ´ç ÇÈ¼¿°ªÀ» ±×´ë·Î ¾µ °ÍÀÓ (sampling »ç¿ë x )
+    swapChainDesc.SampleDesc.Count                      = 1; // sampleDesc -> ìƒ˜í”Œë§ê³¼ ê´€ë ¨í•œ descriptor
+    swapChainDesc.SampleDesc.Quality                    = 0; // 1, 0 -> í•´ë‹¹ í”½ì…€ê°’ì„ ê·¸ëŒ€ë¡œ ì“¸ ê²ƒì„ (sampling ì‚¬ìš© x )
 
-    swapChainDesc.BufferUsage                           = DXGI_USAGE_RENDER_TARGET_OUTPUT; // ¹öÆÛÀÇ ¿ëµµ
-    swapChainDesc.BufferCount                           = 1; //BackBufferÀÇ °³¼ö
+    swapChainDesc.BufferUsage                           = DXGI_USAGE_RENDER_TARGET_OUTPUT; // ë²„í¼ì˜ ìš©ë„
+    swapChainDesc.BufferCount                           = 1; //BackBufferì˜ ê°œìˆ˜
     swapChainDesc.OutputWindow                          = hWnd;
-    swapChainDesc.Windowed                              = false; // Ã¢¸ğµå¸¦ ¾µ °ÍÀÎÁö
+    swapChainDesc.Windowed                              = false; // ì°½ëª¨ë“œë¥¼ ì“¸ ê²ƒì¸ì§€
 
     D3D11CreateDeviceAndSwapChain
     (
@@ -51,23 +51,23 @@ void Device::Initialize()
         0,
         D3D11_SDK_VERSION,
         &swapChainDesc,
-        &swapChain, // o ¼Â ´Ù ÇÒ´çµÊ
+        &swapChain, // o ì…‹ ë‹¤ í• ë‹¹ë¨
         &device,    // o
         nullptr,
         &deviceContext // o
     );
 
-    // Texture2D -> ¹ü¿ëÀûÀ¸·Î »ç¿ë
+    // Texture2D -> ë²”ìš©ì ìœ¼ë¡œ ì‚¬ìš©
     ID3D11Texture2D* backBuffer{};
 
-    // ÀÌÁßÆ÷ÀÎÅÍ ÆÄ¶ó¹ÌÅÍ -> backBuffer¸¦ ¸Ş¼­µå ¾È¿¡¼­ ÇÒ´çÇØÁÖ´Â°Í¸¸ ¾Ë¸é µÊ
-    // __uuidof (Å¬·¡½º´Â °íÀ¯ÀÇ uuid¸¦ °¡Áö°í ÀÖ°í uuidof´Â ÇØ´ç Å¬·¡½ºÀÇ °íÀ¯ ½Äº° id¸¦ ²¨³»¿È)
+    // ì´ì¤‘í¬ì¸í„° íŒŒë¼ë¯¸í„° -> backBufferë¥¼ ë©”ì„œë“œ ì•ˆì—ì„œ í• ë‹¹í•´ì£¼ëŠ”ê²ƒë§Œ ì•Œë©´ ë¨
+    // __uuidof (í´ë˜ìŠ¤ëŠ” ê³ ìœ ì˜ uuidë¥¼ ê°€ì§€ê³  ìˆê³  uuidofëŠ” í•´ë‹¹ í´ë˜ìŠ¤ì˜ ê³ ìœ  ì‹ë³„ idë¥¼ êº¼ë‚´ì˜´)
     swapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
 
-    // view°¡ µé¾î°£ Ä£±¸µé -> GPU ÂÊ ¸®¼Ò½º¸¦ ´Ù·ë (RAM¿¡ ÇÒ´çµÇ´Â °ÍÀÌ ¾Æ´Ñ VRAM¿¡ ÇÒ´çÀÌ µÊ)
+    // viewê°€ ë“¤ì–´ê°„ ì¹œêµ¬ë“¤ -> GPU ìª½ ë¦¬ì†ŒìŠ¤ë¥¼ ë‹¤ë£¸ (RAMì— í• ë‹¹ë˜ëŠ” ê²ƒì´ ì•„ë‹Œ VRAMì— í• ë‹¹ì´ ë¨)
     device->CreateRenderTargetView(backBuffer, nullptr, &renderTargetView);
 
-    // backBuffer´Â renderTargetView¸¦ ¸¸µé¸é ³¡³²
+    // backBufferëŠ” renderTargetViewë¥¼ ë§Œë“¤ë©´ ëë‚¨
     backBuffer->Release();
 
     CreateDepthStencil();
@@ -91,16 +91,16 @@ void Device::Initialize()
 void Device::ClearRTV()
 {
     float clearColor[4] = { 0.33f, 0.33f, 0.33f, 1.0f };
-    deviceContext->ClearRenderTargetView(renderTargetView, clearColor); // È­¸éÀ» ¹éÁö·Î ÃÊ±âÈ­ÇÏ´Â °Í (PltBlt°ú °°Àº °úÁ¤)
+    deviceContext->ClearRenderTargetView(renderTargetView, clearColor); // í™”ë©´ì„ ë°±ì§€ë¡œ ì´ˆê¸°í™”í•˜ëŠ” ê²ƒ (PltBltê³¼ ê°™ì€ ê³¼ì •)
 
     deviceContext->ClearDepthStencilView(stencilView, D3D11_CLEAR_DEPTH, 1.f, 0);
 }
 
 void Device::Present()
 {
-    // WINAPI ¿¡¼­´Â BackDC¿¡ ÀÖ´Â °ÍÀ» BitBltÀ» ÅëÇØ º¸¿©Áö´Â DC¿¡ Á¤º¸¸¦ º¸³¿
-    // SwapChain¿¡¼­´Â present¸¦ ÅëÇØ ¹æ±İ ±×¸° ¹öÆÛ¸¦ "ÇÁ¸®Á¨Æ®"½ÃÅ´
-    swapChain->Present(0, 0); // ÇÁ¸®Á¨Æ® - Ç¥½ÃÇÏ´Ù, ½ÇÁ¦ swapÀ» ¿©±â¼­ ÇÔ
+    // WINAPI ì—ì„œëŠ” BackDCì— ìˆëŠ” ê²ƒì„ BitBltì„ í†µí•´ ë³´ì—¬ì§€ëŠ” DCì— ì •ë³´ë¥¼ ë³´ëƒ„
+    // SwapChainì—ì„œëŠ” presentë¥¼ í†µí•´ ë°©ê¸ˆ ê·¸ë¦° ë²„í¼ë¥¼ "í”„ë¦¬ì  íŠ¸"ì‹œí‚´
+    swapChain->Present(0, 0); // í”„ë¦¬ì  íŠ¸ - í‘œì‹œí•˜ë‹¤, ì‹¤ì œ swapì„ ì—¬ê¸°ì„œ í•¨
 }
 
 void Device::CreateDepthStencil()

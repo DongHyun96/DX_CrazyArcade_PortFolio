@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 class Transform;
 
@@ -31,7 +31,7 @@ enum GameMap
 	MAP_MAX
 };
 
-/* ÇöÀç SceneÀÌ GameSceneÀÏ ¶§ÀÇ Game status */
+/* í˜„ì¬ Sceneì´ GameSceneì¼ ë•Œì˜ Game status */
 enum GameStatus
 {
 	START,
@@ -64,10 +64,10 @@ public:
 
 public:
 
-	/* MainGame »ı¼ºÀÚ¿¡¼­ call (GM »ı¼ºÀÚ¿¡¼­ ºÎ¸£¸é Singleton »ı¼º½Ã±â ¶§¹®¿¡ ¿À·ù³²) */
+	/* MainGame ìƒì„±ìì—ì„œ call (GM ìƒì„±ìì—ì„œ ë¶€ë¥´ë©´ Singleton ìƒì„±ì‹œê¸° ë•Œë¬¸ì— ì˜¤ë¥˜ë‚¨) */
 	void CreateGameObjects();
 
-	/* GameScene ³¡³­ ½ÃÁ¡(GameOverÀÌÈÄ)ÀÌ³ª GameScene ½ÃÀÛ Àü ÇÑ ¹ø Ã³¸® */ 
+	/* GameScene ëë‚œ ì‹œì (GameOverì´í›„)ì´ë‚˜ GameScene ì‹œì‘ ì „ í•œ ë²ˆ ì²˜ë¦¬ */ 
 	void InitGame();
 
 
@@ -124,26 +124,26 @@ public:
 *                                          Member variables                                        *
 ****************************************************************************************************/
 
-public: /* °¢ GameMap¿¡ µû¸¥ binary dataµé & BGMµé Á¤º¸ */
+public: /* ê° GameMapì— ë”°ë¥¸ binary dataë“¤ & BGMë“¤ ì •ë³´ */
 
 	map<GameMap, wstring>	tileBinFile{};
 	map<GameMap, wstring>	blockBinFile{};
 	map<GameMap, string>	mapBGM{};
 
-private: /* ÇöÀç °í¸¥ GameMode, Edit mode, Game Map, Character, GameStatus °ü·Ã */
+private: /* í˜„ì¬ ê³ ë¥¸ GameMode, Edit mode, Game Map, Character, GameStatus ê´€ë ¨ */
 
 	GameMode						gameMode{};					// CurGameMode
 	GameMap							curMap{};					// Cur selected gameMap
-	map<PlayerType, CharacterType>	pSelectedCharacterMap{};	// P1, P2°¡ ÇöÀç °í¸¥ CharacterType
+	map<PlayerType, CharacterType>	pSelectedCharacterMap{};	// P1, P2ê°€ í˜„ì¬ ê³ ë¥¸ CharacterType
 	bool							editMode{};					// If it is edit mode
-	GameStatus						gameStatus{};				// CurSceneÀÌ GameSceneÀÏ °æ¿ì »ç¿ëÇÒ ÇöÀç °ÔÀÓ ÁøÇà »óÈ²
+	GameStatus						gameStatus{};				// CurSceneì´ GameSceneì¼ ê²½ìš° ì‚¬ìš©í•  í˜„ì¬ ê²Œì„ ì§„í–‰ ìƒí™©
 
-private: /* Board ¹× GameField °ü·Ã */
+private: /* Board ë° GameField ê´€ë ¨ */
 
 	/* 
-	½ÇÁúÀûÀÎ Game Map Field´Â ÀüÃ¼ Window size·Î ÀâÈ÷Áö ¾Ê°í Game UI Panel ¾È¿¡ ´õ ÀÛÀº Å©±â·Î ÀâÈû
-	Game¿¡¼­ »ç¿ëÇÒ Game Objectµé ÀÚÃ¼ÀÇ TransformÀº Window size¿¡ ¸Â°Ô²û ÀüÃ¼ Å©±â·Î ¹èÄ¡ÇÑ µÚ, ÃÖ»óÀ§ Parent TransformÀ»
-	ÇØ´ç º¯¼ö·Î ÀâÀ» °ÍÀÓ -> Game field¿¡ GameObject ¹èÄ¡ÇÏ±â°¡ ´õ ¿ëÀÌ
+	ì‹¤ì§ˆì ì¸ Game Map FieldëŠ” ì „ì²´ Window sizeë¡œ ì¡íˆì§€ ì•Šê³  Game UI Panel ì•ˆì— ë” ì‘ì€ í¬ê¸°ë¡œ ì¡í˜
+	Gameì—ì„œ ì‚¬ìš©í•  Game Objectë“¤ ìì²´ì˜ Transformì€ Window sizeì— ë§ê²Œë” ì „ì²´ í¬ê¸°ë¡œ ë°°ì¹˜í•œ ë’¤, ìµœìƒìœ„ Parent Transformì„
+	í•´ë‹¹ ë³€ìˆ˜ë¡œ ì¡ì„ ê²ƒì„ -> Game fieldì— GameObject ë°°ì¹˜í•˜ê¸°ê°€ ë” ìš©ì´
 	*/
 	Transform*		gameFieldTransform{};
 
@@ -153,24 +153,24 @@ private: /* Board ¹× GameField °ü·Ã */
 	float			mapB{};	// Map Bottom boundary limit
 
 	/*
-	Game Map¿¡ ¹èÄ¡µÈ °¢ cellµéÀÇ colliders
-	Game ObjectµéÀÇ cell coordinate¸¦ ÆÄ¾ÇÇÏ±â À§ÇÑ ¿ëµµ·Î »ç¿ë
+	Game Mapì— ë°°ì¹˜ëœ ê° cellë“¤ì˜ colliders
+	Game Objectë“¤ì˜ cell coordinateë¥¼ íŒŒì•…í•˜ê¸° ìœ„í•œ ìš©ë„ë¡œ ì‚¬ìš©
 	*/
 	ColliderRect*	mapCellColliders[MAP_ROW][MAP_COL]{};
 
 private:
-	/* ÇöÀç ÇÃ·¹ÀÌ ÁßÀÎ GameScene -> GameSceneÀ¸·Î scene ÀüÈ¯ÀÌ ÀÌ·ç¾îÁú ¶§ ÇÒ´çÇÒ ¿¹Á¤ */
+	/* í˜„ì¬ í”Œë ˆì´ ì¤‘ì¸ GameScene -> GameSceneìœ¼ë¡œ scene ì „í™˜ì´ ì´ë£¨ì–´ì§ˆ ë•Œ í• ë‹¹í•  ì˜ˆì • */
 	GameScene* gameScene{};
 
-private: /* InGame ¿ÀºêÁ§Æ® °ü·Ã, ½ÇÁúÀûÀÎ Update, Render´Â GameScene¿¡¼­ ´ã´ç */
+private: /* InGame ì˜¤ë¸Œì íŠ¸ ê´€ë ¨, ì‹¤ì§ˆì ì¸ Update, RenderëŠ” GameSceneì—ì„œ ë‹´ë‹¹ */
 
 	GameUIManager*		gameUIManager{};	// GameSceneUIManager
 
 	PlayerManager*		playerManager{};
 
 	/*
-	TileManager¿Í BlockManager´Â ´Ã»ó ¹Ù²ñ (GameScene¿¡¼­ »ı¼º ÇØÁ¦ ´ã´ç)
-	BlockManager¸¸ GameManager·Î setÇØ¼­ Àü¿ªÀûÀ¸·Î »Ñ¸± °ÍÀÓ
+	TileManagerì™€ BlockManagerëŠ” ëŠ˜ìƒ ë°”ë€œ (GameSceneì—ì„œ ìƒì„± í•´ì œ ë‹´ë‹¹)
+	BlockManagerë§Œ GameManagerë¡œ setí•´ì„œ ì „ì—­ì ìœ¼ë¡œ ë¿Œë¦´ ê²ƒì„
 	*/
 	BlockManager*		blockManager{}; 
 

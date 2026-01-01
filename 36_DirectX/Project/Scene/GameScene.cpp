@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "GameScene.h"
 
 GameScene::GameScene()
@@ -28,7 +28,7 @@ GameScene::GameScene()
 	
 	uiManager = GM->GetGameUIManager();
 
-	uiManager->SetStartLogoFinEvent(bind(&GameScene::StartGameFromSpawn, this)); // ÀÌ°Ô °ÔÀÓ start Æ®¸®°Å
+	uiManager->SetStartLogoFinEvent(bind(&GameScene::StartGameFromSpawn, this)); // ì´ê²Œ ê²Œìž„ start íŠ¸ë¦¬ê±°
 
 	float volume =  GM->GetCurMapType() == VILLAGE ? 1.f  :
 					GM->GetCurMapType() == FOREST  ? 0.7f : 0.7f;

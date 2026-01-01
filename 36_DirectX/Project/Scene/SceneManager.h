@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 enum SceneName
 {
@@ -9,7 +9,7 @@ enum SceneName
 
 /*
 CONCRETE CLASS | SINGLETON
-ÀüÃ¼ scene ¹× scene ÀüÈ¯ ´ã´ç manager
+ì „ì²´ scene ë° scene ì „í™˜ ë‹´ë‹¹ manager
 */
 class SceneManager : public Singleton<SceneManager>
 {
@@ -38,14 +38,14 @@ private:
 
 private:
 	
-	map<SceneName, Scene*>	scenes{};					// ¸ğµç scene
-	SceneName				curScene{ INTRO_SCENE };	// ÇöÀç scene
+	map<SceneName, Scene*>	scenes{};					// ëª¨ë“  scene
+	SceneName				curScene{ INTRO_SCENE };	// í˜„ì¬ scene
 	
 private:
 
 	MapEditor* mapEditor{};
 
-private: /* ¸¶¿ì½º Æ÷ÀÎÅÍ texture °ü·Ã */
+private: /* ë§ˆìš°ìŠ¤ í¬ì¸í„° texture ê´€ë ¨ */
 
 	Object* idleMouseTexture{};		
 	Object* mouseClickedTexture{};
@@ -53,7 +53,7 @@ private: /* ¸¶¿ì½º Æ÷ÀÎÅÍ texture °ü·Ã */
 	Object* curMouseTexture{}; 
 	bool	isCustomCursor = true;
 
-private: /* °ÔÀÓ Á¾·á¹öÆ° ÆĞ³Î °ü·Ã */
+private: /* ê²Œì„ ì¢…ë£Œë²„íŠ¼ íŒ¨ë„ ê´€ë ¨ */
 
 	Object* gameExitPanel{};
 	Button* gameExitButton{};

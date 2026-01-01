@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /* CONCRETE CLASS */
 class TileManager
 {
@@ -12,16 +12,16 @@ public:
 private:
 
 	/// <summary>
-	/// »õ·Î¿î TileManager »ı¼º ½Ã, GameManagerÀÇ curMapType¿¡ µû¸¥ ¹Ì¸® ÀúÀåµÈ TileµéÀ» LoadÇÏ¸é¼­ TileÀ» »ı¼ºÇÒ ¶§ »ç¿ë
+	/// ìƒˆë¡œìš´ TileManager ìƒì„± ì‹œ, GameManagerì˜ curMapTypeì— ë”°ë¥¸ ë¯¸ë¦¬ ì €ì¥ëœ Tileë“¤ì„ Loadí•˜ë©´ì„œ Tileì„ ìƒì„±í•  ë•Œ ì‚¬ìš©
 	/// </summary>
-	/// <param name="info"> : ÇØ´ç ÀÚ¸® Tile info </param>
-	/// <param name="boardX"> : »ı¼ºÇÒ ÀÚ¸®ÀÇ cell pos X </param>
-	/// <param name="boardY"> : »ı¼ºÇÒ ÀÚ¸®ÀÇ cell pos Y </param>
+	/// <param name="info"> : í•´ë‹¹ ìë¦¬ Tile info </param>
+	/// <param name="boardX"> : ìƒì„±í•  ìë¦¬ì˜ cell pos X </param>
+	/// <param name="boardY"> : ìƒì„±í•  ìë¦¬ì˜ cell pos Y </param>
 	void CreateTile(const TileInfo& info, UINT boardX, UINT boardY);
 
 	/*
-	GameManager¿¡¼­ curMapType(ÇöÀç ¼±ÅÃµÈ °ÔÀÓ¸Ê)¿¡ µû¸¥ Å¸ÀÏµé Á¤º¸ ·Îµù
-	ÇöÀç GameMapÀÇ °¢ cell¿¡ ´ëÇÑ Tile info¸¦ ºÒ·¯¿À°í ÇØ´ç cellÀÇ Å¸ÀÏ Á¤º¸·Î Å¸ÀÏµé ÃÊ±âÈ­ ´ã´ç
+	GameManagerì—ì„œ curMapType(í˜„ì¬ ì„ íƒëœ ê²Œì„ë§µ)ì— ë”°ë¥¸ íƒ€ì¼ë“¤ ì •ë³´ ë¡œë”©
+	í˜„ì¬ GameMapì˜ ê° cellì— ëŒ€í•œ Tile infoë¥¼ ë¶ˆëŸ¬ì˜¤ê³  í•´ë‹¹ cellì˜ íƒ€ì¼ ì •ë³´ë¡œ íƒ€ì¼ë“¤ ì´ˆê¸°í™” ë‹´ë‹¹
 	*/
 	void Load();
 

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /* CONCRETE CLASS */
 class DartManager
 {
@@ -14,10 +14,10 @@ public:
 public:
 
 	/// <summary>
-	/// Dart pool¿¡¼­ dart ½ºÆù ½Ãµµ
+	/// Dart poolì—ì„œ dart ìŠ¤í° ì‹œë„
 	/// </summary>
-	/// <param name="spawnPos"> : ½ºÆù ½ÃÀÛ À§Ä¡ </param>
-	/// <param name="fireDirection"> : ¹ß»ç ¹æÇâ </param>
+	/// <param name="spawnPos"> : ìŠ¤í° ì‹œì‘ ìœ„ì¹˜ </param>
+	/// <param name="fireDirection"> : ë°œì‚¬ ë°©í–¥ </param>
 	void Spawn(const Vector2& spawnPos, const Direction& fireDirection);
 
 	void HandleCollision();

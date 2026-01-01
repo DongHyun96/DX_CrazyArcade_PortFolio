@@ -1,15 +1,15 @@
-#pragma once
+ï»¿#pragma once
 
 /*
 CONCRETE CLASS
 Owned by Character class
-CharacterÀÇ ½ÇÁúÀûÀÎ Animation Ãâ·Â¹° ´ã´ç
+Characterì˜ ì‹¤ì§ˆì ì¸ Animation ì¶œë ¥ë¬¼ ë‹´ë‹¹
 */
 class CharacterAnim : public Transform
 {
 protected:
-	/// <param name="parentBody"> <para> : TransformÀÇ parent·Î ÃëÇÏ¿© ºÎ¸ğÀÇ À§Ä¡¸¦ µû¶ó°¥ ¿¹Á¤ </para>
-	///                           <para> ColliderRectÇü(TransformÀÇ ÀÚ½Ä Å¬·¡½º)À¸·Î ¹ŞÀº ÀÌÀ¯ - ÃßÈÄ Parent bodyÀÇ LocalSize ÇÊ¿ä </para>
+	/// <param name="parentBody"> <para> : Transformì˜ parentë¡œ ì·¨í•˜ì—¬ ë¶€ëª¨ì˜ ìœ„ì¹˜ë¥¼ ë”°ë¼ê°ˆ ì˜ˆì • </para>
+	///                           <para> ColliderRectí˜•(Transformì˜ ìì‹ í´ë˜ìŠ¤)ìœ¼ë¡œ ë°›ì€ ì´ìœ  - ì¶”í›„ Parent bodyì˜ LocalSize í•„ìš” </para>
 	/// </param>
 	CharacterAnim(ColliderRect* parentBody);
 
@@ -25,7 +25,7 @@ public:
 public:
 	
 	/// <summary>
-	/// ÁÖÀÎ Ä³¸¯ÅÍÀÇ mainState¿Í velocity¸¦ ¹Ş¾Æ, ½ÇÁúÀûÀÎ FSM transition ÁøÇà
+	/// ì£¼ì¸ ìºë¦­í„°ì˜ mainStateì™€ velocityë¥¼ ë°›ì•„, ì‹¤ì§ˆì ì¸ FSM transition ì§„í–‰
 	/// </summary>
 	/// <param name="cState">   : OwnerCharacter current mainState </param>
 	/// <param name="velocity"> : OwnerCharacter current velocity </param>
@@ -34,11 +34,11 @@ public:
 private:
 
 	/// <summary>
-	/// UpdateAction ±¸ÇöºÎ ³»ÀÇ DirectionÀ» Å°·Î °¡Áö´Â animation update Ã³¸®¿¡ ´ëÇÑ boiler plate code Á¤¸®
+	/// UpdateAction êµ¬í˜„ë¶€ ë‚´ì˜ Directionì„ í‚¤ë¡œ ê°€ì§€ëŠ” animation update ì²˜ë¦¬ì— ëŒ€í•œ boiler plate code ì •ë¦¬
 	/// </summary>
 	/// <param name="cState"> : OwnerCharacter current mainState </param>
 	/// <param name="velocity"> : OwnerCharacter current velocity</param>
-	/// <param name="dirActions"> : directionÀÌ Á¸ÀçÇÏ°í cState¿¡ ÇØ´çÇÏ´Â animation map </param>
+	/// <param name="dirActions"> : directionì´ ì¡´ì¬í•˜ê³  cStateì— í•´ë‹¹í•˜ëŠ” animation map </param>
 	void UpdateDirectionActions(const CharacterState& cState, const Vector2& velocity, map<CharacterAnimDir, Animation*>& dirActions);
 	
 public: /* Anim Notify setters */
@@ -52,7 +52,7 @@ public:
 
 	Direction GetCurFaceDir() const { return curFaceDir; }			// Get Current facing direction
 
-	Vector2 GetCurActionSize() const { return curAction->Size(); }	// ÇöÀç Àç»ıÁßÀÎ Animation rectÀÇ Å©±â
+	Vector2 GetCurActionSize() const { return curAction->Size(); }	// í˜„ì¬ ì¬ìƒì¤‘ì¸ Animation rectì˜ í¬ê¸°
 
 public:
 
@@ -61,13 +61,13 @@ public:
 private:
 
 	/// <summary>
-	/// OwnerCharacterÀÇ velocioty¿¡ µû¸¥ ¹æÇâ getter
+	/// OwnerCharacterì˜ velociotyì— ë”°ë¥¸ ë°©í–¥ getter
 	/// </summary>
 	/// <param name="velocity"> : OwnerCharacter velocity</param>
-	/// <returns> -1: ÇâÇÏ°í ÀÖ´Â ¹æÇâÀÌ ¾øÀ» ¶§(¼ÓµµÅ©±â°¡ 0ÀÏ ¶§) | 0~3 : CharacterAnimDir enum integer°ª </returns>
+	/// <returns> -1: í–¥í•˜ê³  ìˆëŠ” ë°©í–¥ì´ ì—†ì„ ë•Œ(ì†ë„í¬ê¸°ê°€ 0ì¼ ë•Œ) | 0~3 : CharacterAnimDir enum integerê°’ </returns>
 	int GetCurFaceDirByVelocity(const Vector2& velocity);
 
-	/* Owner CharacterÀÇ velocity¿¡ µû¶ó curFaceDir set */
+	/* Owner Characterì˜ velocityì— ë”°ë¼ curFaceDir set */
 	void SetCurFaceDir(const Vector2& velocity);
 
 /***************************************************************************************************
@@ -75,30 +75,30 @@ private:
 ****************************************************************************************************/
 
 private:
-	/* Á÷Á¢ µû¶ó°¥ ºÎ¸ğÀÇ ¸öÃ¼ */
+	/* ì§ì ‘ ë”°ë¼ê°ˆ ë¶€ëª¨ì˜ ëª¸ì²´ */
 	ColliderRect* parentBody{};
 
 private:
-	/* ºÎ¸ğÀÇ 4 way movement velocity¿¡ µû¸¥ ÇöÀç ¹Ù¶óº¸°í ÀÖ´Â ¹æ¸é */
+	/* ë¶€ëª¨ì˜ 4 way movement velocityì— ë”°ë¥¸ í˜„ì¬ ë°”ë¼ë³´ê³  ìˆëŠ” ë°©ë©´ */
 	Direction curFaceDir{};
 
-protected: /* State¿¡ µû¸¥ Animation maps */
+protected: /* Stateì— ë”°ë¥¸ Animation maps */
 
-	Animation*							winAction{};		// ½Â¸® Animation
+	Animation*							winAction{};		// ìŠ¹ë¦¬ Animation
 
-	map<CharacterAnimDir, Animation*>	idleActions{};		// ¹æÇâ¿¡ µû¸¥ ±âº» ÀÌµ¿±â Animations map
-	map<CharacterAnimDir, Animation*>	spaceActions{};		// ¹æÇâ¿¡ µû¸¥ ¿ìÁÖ¼± ÀÌµ¿±â Animations map
-	map<CharacterAnimDir, Animation*>	owlActions{};		// ¹æÇâ¿¡ µû¸¥ ºÎ¾ûÀÌ ÀÌµ¿±â Animations map
-	map<CharacterAnimDir, Animation*>	turtleActions{};	// ¹æÇâ¿¡ µû¸¥ °ÅºÏÀÌ ÀÌµ¿±â Animations map
-	map<BubbleAnimState, Animation*>	bubbleActions{};	// Bubble¿¡ °¤Èù »óÅÂ¿¡¼­, BubbleAnimState¿¡ µû¸¥ Animations map 
+	map<CharacterAnimDir, Animation*>	idleActions{};		// ë°©í–¥ì— ë”°ë¥¸ ê¸°ë³¸ ì´ë™ê¸° Animations map
+	map<CharacterAnimDir, Animation*>	spaceActions{};		// ë°©í–¥ì— ë”°ë¥¸ ìš°ì£¼ì„  ì´ë™ê¸° Animations map
+	map<CharacterAnimDir, Animation*>	owlActions{};		// ë°©í–¥ì— ë”°ë¥¸ ë¶€ì—‰ì´ ì´ë™ê¸° Animations map
+	map<CharacterAnimDir, Animation*>	turtleActions{};	// ë°©í–¥ì— ë”°ë¥¸ ê±°ë¶ì´ ì´ë™ê¸° Animations map
+	map<BubbleAnimState, Animation*>	bubbleActions{};	// Bubbleì— ê°‡íŒ ìƒíƒœì—ì„œ, BubbleAnimStateì— ë”°ë¥¸ Animations map 
 	
 		
-	Animation*							curAction{};		// ÇöÀç Àç»ıÇÏ°í ÀÖ´Â animation
+	Animation*							curAction{};		// í˜„ì¬ ì¬ìƒí•˜ê³  ìˆëŠ” animation
 	
-private: /* Animation FSM¿¡¼­(UpdateAction) transition Á¶°Ç¿¡ ÇÊ¿äÇÑ º¯¼öµé */
+private: /* Animation FSMì—ì„œ(UpdateAction) transition ì¡°ê±´ì— í•„ìš”í•œ ë³€ìˆ˜ë“¤ */
 	
-	CharacterState	ownerPrevState{};		// ÁÖÀÎ Ä³¸¯ÅÍÀÇ ÀÌÀü Update tickÀÇ mainState
-	Vector2			ownerPrevVelocity{};	// ÁÖÀÎ Ä³¸¯ÅÍÀÇ ÀÌÀü Update tickÀÇ velocity
+	CharacterState	ownerPrevState{};		// ì£¼ì¸ ìºë¦­í„°ì˜ ì´ì „ Update tickì˜ mainState
+	Vector2			ownerPrevVelocity{};	// ì£¼ì¸ ìºë¦­í„°ì˜ ì´ì „ Update tickì˜ velocity
 
 private:
 
@@ -107,17 +107,17 @@ private:
 	MatrixBuffer*	worldBuffer{};
 
 private:
-	/* Å» °Í¿¡¼­ ³»¸®°í ÀÖÀ» ¶§, ´Ù ³»·È´Ù¸é È£Ãâ½ÃÅ³ ÇÔ¼ö Æ÷ÀÎÅÍ (ºÎ¸ğÀÇ mainState¸¦ C_IDLE·Î ¹Ù²Ü ¿¹Á¤) */
+	/* íƒˆ ê²ƒì—ì„œ ë‚´ë¦¬ê³  ìˆì„ ë•Œ, ë‹¤ ë‚´ë ¸ë‹¤ë©´ í˜¸ì¶œì‹œí‚¬ í•¨ìˆ˜ í¬ì¸í„° (ë¶€ëª¨ì˜ mainStateë¥¼ C_IDLEë¡œ ë°”ê¿€ ì˜ˆì •) */
 	function<void()> ReturnIdleEndEvent{};
 
-private: /* Captured»óÅÂÀÇ translation y Update °ü·Ã */
+private: /* Capturedìƒíƒœì˜ translation y Update ê´€ë ¨ */
 
 	float		captured_yUpdateTime{};
 	float		captured_ySpeed			= 10.f;
 
 	const float CAPTURED_Y_UPDATE_TICK	= 1.f;
 
-private: /* ReturnToIdle »óÅÂ¿¡¼­ Ridable °ü·Ã */
+private: /* ReturnToIdle ìƒíƒœì—ì„œ Ridable ê´€ë ¨ */
 
 	bool		isRidableReturningToIdle{};
 	

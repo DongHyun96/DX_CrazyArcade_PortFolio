@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 class Frame
 {
 public:
 	
-	Frame(wstring file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1)); // AnimationÅ¬·¡½º¿¡¼­ uv ÁÂÇ¥ °è»êÇÏ¿© ÀÌ¿ëÇÏ´Â »ı¼ºÀÚ
+	Frame(wstring file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1)); // Animationí´ë˜ìŠ¤ì—ì„œ uv ì¢Œí‘œ ê³„ì‚°í•˜ì—¬ ì´ìš©í•˜ëŠ” ìƒì„±ì
 	
-	Frame(Vector2 texWorldSize, wstring file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1)); // texWorldSize¿¡ frameÅ©±â¸¦ ¸ÂÃã
+	Frame(Vector2 texWorldSize, wstring file, Vector2 uvStart = Vector2(0, 0), Vector2 uvEnd = Vector2(1, 1)); // texWorldSizeì— frameí¬ê¸°ë¥¼ ë§ì¶¤
 
 	Frame(wstring file, UINT startX, UINT startY, UINT imgWidth, UINT imgHeight);
 

@@ -1,9 +1,9 @@
-#pragma once
+ï»¿#pragma once
 
 /*
 INTERFACE
-Collider¸¦ ¸â¹öº¯¼ö·Î °¡Áö°í ÀÖ´Â Å¬·¡½ºµéÀÇ ÃÖ»óÀ§ Å¬·¡½º
-Collision event call ¸Þ¼­µå ³»¿¡¼­ Çüº¯È¯À» ÅëÇÑ Æ¯Á¤ Å¬·¡½º Å¸ÀÔ È®ÀÎ¿ë
+Colliderë¥¼ ë©¤ë²„ë³€ìˆ˜ë¡œ ê°€ì§€ê³  ìžˆëŠ” í´ëž˜ìŠ¤ë“¤ì˜ ìµœìƒìœ„ í´ëž˜ìŠ¤
+Collision event call ë©”ì„œë“œ ë‚´ì—ì„œ í˜•ë³€í™˜ì„ í†µí•œ íŠ¹ì • í´ëž˜ìŠ¤ íƒ€ìž… í™•ì¸ìš©
 */
 class ColliderHolder
 {

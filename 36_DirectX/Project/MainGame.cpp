@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "MainGame.h"
 
 
@@ -6,8 +6,8 @@ MainGame::MainGame()
 {
 	//srand(time(NULL));
 
-	mt19937 engine((unsigned int)time(NULL));                    // MT19937 ³­¼ö ¿£Áø
-	uniform_int_distribution<int> distribution(0, 20000);        // »ý¼º ¹üÀ§
+	mt19937 engine((unsigned int)time(NULL));                    // MT19937 ë‚œìˆ˜ ì—”ì§„
+	uniform_int_distribution<int> distribution(0, 20000);        // ìƒì„± ë²”ìœ„
 	randGenerator = bind(distribution, engine);
 
 	SetUpImGui();
@@ -19,14 +19,14 @@ MainGame::MainGame()
 
 	FONT->Add("D2Coding", L"D2Coding", {1.f, 1.f, 1.f}, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_TRAILING, DWRITE_FONT_WEIGHT_BOLD);
 
-	FONT->Add("BazziFont", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER);
-	FONT->Add("BazziFontBold", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
-	FONT->Add("BazziFontBold50", L"¹èÂîÃ¼", { 1.f, 1.f, 1.f }, 50.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
+	FONT->Add("BazziFont", L"ë°°ì°Œì²´", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER);
+	FONT->Add("BazziFontBold", L"ë°°ì°Œì²´", { 1.f, 1.f, 1.f }, 30.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
+	FONT->Add("BazziFontBold50", L"ë°°ì°Œì²´", { 1.f, 1.f, 1.f }, 50.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
 
 
 		//rgb(35, 45, 63)
 
-	FONT->Add("NumberFont", L"µÕ±Ù¸ð²Ã", { 0.9764f, 0.5803f, 0.0901f }, 50.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
+	FONT->Add("NumberFont", L"ë‘¥ê·¼ëª¨ê¼´", { 0.9764f, 0.5803f, 0.0901f }, 50.f, DWRITE_PARAGRAPH_ALIGNMENT_NEAR, DWRITE_TEXT_ALIGNMENT_CENTER, DWRITE_FONT_WEIGHT_BOLD);
 
 	// Late Init GM GameObjects
 	GM->CreateGameObjects();
@@ -85,7 +85,7 @@ void MainGame::Render()
 {
 	ImGuiNewFrame();
 
-	FONT->GetDC()->BeginDraw(); // Begin End »çÀÌ¿¡¼­ renderÇØ¾ßÇÔ
+	FONT->GetDC()->BeginDraw(); // Begin End ì‚¬ì´ì—ì„œ renderí•´ì•¼í•¨
 
 	Environment::GetInstance()->Set();
 	Camera::GetInstance()->Set();

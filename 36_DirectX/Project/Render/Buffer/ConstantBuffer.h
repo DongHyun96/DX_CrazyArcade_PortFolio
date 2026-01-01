@@ -1,12 +1,12 @@
-#pragma once
-/* ½Ç½Ã°£À¸·Î µ¥ÀÌÅÍ¸¦ º¯È­½ÃÅ³ buffer */
+ï»¿#pragma once
+/* ì‹¤ì‹œê°„ìœ¼ë¡œ ë°ì´í„°ë¥¼ ë³€í™”ì‹œí‚¬ buffer */
 class ConstantBuffer
 {
 public:
 	ConstantBuffer(void* data, UINT dataSize);
 	virtual ~ConstantBuffer();
 
-	// µ¥ÀÌÅÍ¸¦ ¼ÎÀÌ´õ¿¡ ³Ñ°ÜÁÖ´Â ÇÔ¼ö
+	// ë°ì´í„°ë¥¼ ì…°ì´ë”ì— ë„˜ê²¨ì£¼ëŠ” í•¨ìˆ˜
 	void VSSetBuffer(UINT slot);
 	void PSSetBuffer(UINT slot);
 

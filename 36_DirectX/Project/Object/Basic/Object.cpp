@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Object.h"
 
 
@@ -15,7 +15,7 @@ Object::Object(Vector2 size)
 //    {XMFLOAT3(-0.5f, -0.5f, 0.f), XMFLOAT4(0.f, 1.f, 1.f, 1.f)}, //LB
 //    {XMFLOAT3(+0.5f, +0.5f, 0.f), XMFLOAT4(1.f, 0.f, 1.f, 1.f)}, //RT
 //    {XMFLOAT3(+0.5f, -0.5f, 0.f), XMFLOAT4(1.f, 1.f, 0.f, 1.f)}  //RB
-//    //BackFace Culling °í·Á
+//    //BackFace Culling ê³ ë ¤
 
 //    // Polygons
 //};
@@ -189,7 +189,7 @@ Object::~Object()
 
 }
 
-void Object::Render() // ¸ğµç data ¼¼ÆÃÀº "draw callÀü¿¡ ÇØ¾ßÇÔ
+void Object::Render() // ëª¨ë“  data ì„¸íŒ…ì€ "draw callì „ì— í•´ì•¼í•¨
 {
     SetData();
     

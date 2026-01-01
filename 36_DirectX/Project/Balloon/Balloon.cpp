@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "Balloon.h"
 
 vector<Vector2> Balloon::activeBalloonPositions{};
@@ -114,7 +114,7 @@ void Balloon::Explode()
 
 	owner->AddLeftBalloonCnt();
 
-	// À§Çè ¹İ°æÀ» Stream¿¡ ÀúÀåÇÔ (For AStar algorithm), ÀÌ°ÍÀº ½ÇÁúÀûÀÎ À§Çè ¹İ°æ / BalloonÀÇ preDangerZoneµµ ¿©±â¼­ »èÁ¦µÊ
+	// ìœ„í—˜ ë°˜ê²½ì„ Streamì— ì €ì¥í•¨ (For AStar algorithm), ì´ê²ƒì€ ì‹¤ì§ˆì ì¸ ìœ„í—˜ ë°˜ê²½ / Balloonì˜ preDangerZoneë„ ì—¬ê¸°ì„œ ì‚­ì œë¨
 	Stream::AddStreamDanagerZone(spawnCoord, streamLv);
 
 
@@ -162,7 +162,7 @@ bool Balloon::IsActiveBalloonOnCoord(const Util::Coord& coord)
 void Balloon::Spawn(const Vector2& spawnPos) // private
 {
 	
-	// ÀÌ¹Ì ÇØ´çÀ§Ä¡¿¡ ¹ú·éÀÌ Á¸Àç (double checking)
+	// ì´ë¯¸ í•´ë‹¹ìœ„ì¹˜ì— ë²Œë£¬ì´ ì¡´ì¬ (double checking)
 	if (find(activeBalloonPositions.begin(), activeBalloonPositions.end(), spawnPos) != activeBalloonPositions.end())
 		return;
 

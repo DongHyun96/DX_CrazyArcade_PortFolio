@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 /* CONCRETE CLASS */
 class IntroScene : public Scene
 {
@@ -16,8 +16,8 @@ private:
 
 private:
 
-	vector<Object*> characters{};	// È­¸é¿¡ Ãâ·ÂÇÒ Ä³¸¯ÅÍ sprite objects
-	vector<Vector2> destPos{};		// Å¬¸¯ ½Ã, Ä³¸¯ÅÍ sprite objects°¡ ÇâÇÒ destination position
+	vector<Object*> characters{};	// í™”ë©´ì— ì¶œë ¥í•  ìºë¦­í„° sprite objects
+	vector<Vector2> destPos{};		// í´ë¦­ ì‹œ, ìºë¦­í„° sprite objectsê°€ í–¥í•  destination position
 
 private:
 	bool		clicked{};

@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 extern function<int()> randGenerator;
 
@@ -44,7 +44,7 @@ namespace Util
 		UINT y{};
 	};
 
-	/* À¯Å¬¸®µå °Å¸® */
+	/* ìœ í´ë¦¬ë“œ ê±°ë¦¬ */
 	static UINT GetDist(const Util::Coord& src, const Util::Coord& dst)
 	{
 		int sx = src.x;
@@ -70,7 +70,7 @@ namespace Util
 		return ConvertBoardIdxToWorldPos(xy.x, xy.y);
 	}
 
-	// Á¤È®È÷ ¶³¾îÁö´Â ÁßÁ¡¸¸ »ç¿ë°¡´ÉÇÔ (°ÅÀÇ »ç¿ëÀ» ¸øÇÔ) -> AABB Ãæµ¹Ã³¸®·Î ÇÏ¸é ³¡³²
+	// ì •í™•íˆ ë–¨ì–´ì§€ëŠ” ì¤‘ì ë§Œ ì‚¬ìš©ê°€ëŠ¥í•¨ (ê±°ì˜ ì‚¬ìš©ì„ ëª»í•¨) -> AABB ì¶©ëŒì²˜ë¦¬ë¡œ í•˜ë©´ ëë‚¨
 	//static Coord ConvertWorldPosToBoardIdx(const Vector2& pos)
 	//{
 	//	return Coord

@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "DartManager.h"
 
 
@@ -41,7 +41,7 @@ void DartManager::Spawn(const Vector2& spawnPos, const Direction& fireDirection)
 
 void DartManager::HandleCollision()
 {
-	// Block°úÀÇ Ãæµ¹Àº blockManager¿¡¼­ ´ã´ç
+	// Blockê³¼ì˜ ì¶©ëŒì€ blockManagerì—ì„œ ë‹´ë‹¹
 
 	for (Dart* dart : darts)
 	{

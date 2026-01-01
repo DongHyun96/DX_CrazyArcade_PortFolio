@@ -1,6 +1,6 @@
-#pragma once
+ï»¿#pragma once
 
-/* GameOver °á°ú */
+/* GameOver ê²°ê³¼ */
 enum GameOverResult
 {
 	P1_WIN,
@@ -11,7 +11,7 @@ enum GameOverResult
 
 /*
 CONCRETE CLASS
-GameScene UI ´ã´ç
+GameScene UI ë‹´ë‹¹
 */
 class GameUIManager : public UIManager
 {
@@ -28,22 +28,22 @@ public:
 public:
 
 	/// <summary>
-	/// <para> Start Logo°¡ À§·Î ¸ğµÎ ¿Ã¶ó°¡¸é triggerµÉ function pointer setter </para>
-	/// <para> ½ÇÁúÀûÀÎ ÀÎ°ÔÀÓ ½ÃÀÛÁ¡ ÇÔ¼ö¸¦ settingÇÑ´Ù°í º¼ ¼ö ÀÖÀ½ </para>
+	/// <para> Start Logoê°€ ìœ„ë¡œ ëª¨ë‘ ì˜¬ë¼ê°€ë©´ triggerë  function pointer setter </para>
+	/// <para> ì‹¤ì§ˆì ì¸ ì¸ê²Œì„ ì‹œì‘ì  í•¨ìˆ˜ë¥¼ settingí•œë‹¤ê³  ë³¼ ìˆ˜ ìˆìŒ </para>
 	/// </summary>
 	/// <param name="LogoEndEvent"> : Call-back funcion pointer </param>
 	void SetStartLogoFinEvent(function<void()> LogoEndEvent); // Whole GameStart Trigger
 
 	/// <summary>
-	/// °ÔÀÓ Å¸ÀÌ¸Ó(¿ìÃø »ó´Ü) Ãâ·Â
+	/// ê²Œì„ íƒ€ì´ë¨¸(ìš°ì¸¡ ìƒë‹¨) ì¶œë ¥
 	/// </summary>
 	/// <param name="gameTimer"> : Game play timer time </param>
 	void RenderTimer(const float& gameTimer);
 	
 	/// <summary>
-	/// GameOverResult¿¡ µû¶ó GameOver UI Ã³¸®
+	/// GameOverResultì— ë”°ë¼ GameOver UI ì²˜ë¦¬
 	/// </summary>
-	/// <param name="result"> GameOver °á°ú </param>
+	/// <param name="result"> GameOver ê²°ê³¼ </param>
 	void StartRenderGameOver(const GameOverResult& result);
 
 private: 
@@ -60,10 +60,10 @@ private:
 
 private:
 
-	Object* mainUI{}; // ±âº» ÀüÃ¼ main panel texture object
-	Object* itemUI{}; // ¾ÆÀÌÅÛ Ã¢ texture object
+	Object* mainUI{}; // ê¸°ë³¸ ì „ì²´ main panel texture object
+	Object* itemUI{}; // ì•„ì´í…œ ì°½ texture object
 
-private: /* Game start °ü·Ã */
+private: /* Game start ê´€ë ¨ */
 
 	bool			hasGameStarted{};
 	vector<Object*> startLogo{};					// Start logo alphbet textures
@@ -72,9 +72,9 @@ private: /* Game start °ü·Ã */
 	const float		START_LOGO_SPEED	 = 2000.f;
 	float			startLogoTime{};
 
-	function<void()> StartLogoFinEvent{};			// Start logo ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³¡³­ ÈÄ È£ÃâµÉ ÇÔ¼ö Æ÷ÀÎÅÍ
+	function<void()> StartLogoFinEvent{};			// Start logo ì• ë‹ˆë©”ì´ì…˜ì´ ëë‚œ í›„ í˜¸ì¶œë  í•¨ìˆ˜ í¬ì¸í„°
 
-private: /* GameOver °ü·Ã */
+private: /* GameOver ê´€ë ¨ */
 
 	bool							gameOver{};
 
@@ -82,7 +82,7 @@ private: /* GameOver °ü·Ã */
 	
 	GameOverResult					gameOverResult{};
 
-	/* GameOver ·Î°í flicker °ü·Ã */
+	/* GameOver ë¡œê³  flicker ê´€ë ¨ */
 
 	const Vector4					FLICKER_COLOR{ 0, 0, 0, 1 };
 	float							flicker{};

@@ -1,7 +1,7 @@
-#pragma once
+ï»¿#pragma once
 /* 
 CONCRETE CLASS 
-°ÔÀÓ ¸Ê¿¡ ½ÇÁúÀûÀ¸·Î map cell ÇÑ Ä­¿¡ spawnµÇ´Â ¹°ÁÙ±â block
+ê²Œì„ ë§µì— ì‹¤ì§ˆì ìœ¼ë¡œ map cell í•œ ì¹¸ì— spawnë˜ëŠ” ë¬¼ì¤„ê¸° block
 */
 class StreamBlock
 {
@@ -17,11 +17,11 @@ public:
 public:
 	
 	/// <summary>
-	/// ¹°ÁÙ±â block ½ºÆù½ÃÅ°±â
+	/// ë¬¼ì¤„ê¸° block ìŠ¤í°ì‹œí‚¤ê¸°
 	/// </summary>
-	/// <param name="spawnCoord"> : ½ºÆù À§Ä¡ </param>
-	/// <param name="isEnd"> : ¸Ç ³¡ ¹°ÁÙ±âÀÎÁö </param>
-	/// <returns> : ½ºÆùµÈ ÀÚ±âÀÚ½Å return </returns>
+	/// <param name="spawnCoord"> : ìŠ¤í° ìœ„ì¹˜ </param>
+	/// <param name="isEnd"> : ë§¨ ë ë¬¼ì¤„ê¸°ì¸ì§€ </param>
+	/// <returns> : ìŠ¤í°ëœ ìê¸°ìì‹  return </returns>
 	StreamBlock* Spawn(const Util::Coord& spawnCoord, const bool& isEnd = false);
 
 public: /* Getters */
@@ -36,16 +36,16 @@ public: /* Getters */
 protected:
 
 	/*
-	¹°ÁÙ±âÀÇ °æ¿ì ÀÚ½ÅÀÇ ¹°ÁÙ±â animationÀÌ ³¡³­ µÚ ÀÚ½ÅÀÇ active¸¦ ²û
-	¹°ÁÙ±â animation End event·Î (param false) °É¾îµÑ ÇÔ¼ö
+	ë¬¼ì¤„ê¸°ì˜ ê²½ìš° ìì‹ ì˜ ë¬¼ì¤„ê¸° animationì´ ëë‚œ ë’¤ ìì‹ ì˜ activeë¥¼ ë”
+	ë¬¼ì¤„ê¸° animation End eventë¡œ (param false) ê±¸ì–´ë‘˜ í•¨ìˆ˜
 	*/
 	void SetActive(const bool& isActive);
 
 protected:
 
 	/* 
-	¹°ÁÙ±â block animationÀÌ ¸ğµÎ ³¡³ª±â Àü¿¡ body collider¸¦ ²ø ¿¹Á¤ -> ¹°ÁÙ±â ÆÇÁ¤ Á¶Á¤
-	Animation³»¿¡¼­ AnimNotify call backÀ¸·Î Æ¯Á¤ idx°¡ Áö³µÀ» ¶§ È£ÃâµÉ ÇÔ¼ö 
+	ë¬¼ì¤„ê¸° block animationì´ ëª¨ë‘ ëë‚˜ê¸° ì „ì— body colliderë¥¼ ëŒ ì˜ˆì • -> ë¬¼ì¤„ê¸° íŒì • ì¡°ì •
+	Animationë‚´ì—ì„œ AnimNotify call backìœ¼ë¡œ íŠ¹ì • idxê°€ ì§€ë‚¬ì„ ë•Œ í˜¸ì¶œë  í•¨ìˆ˜ 
 	*/
 	void DisableBodyCollider();
 
@@ -68,11 +68,11 @@ protected:
 	
 protected:
 
-	// ¹°ÁÙ±â ³¡ blockÀÇ animationÀº »ìÂ¦ ´Ù¸§
-	bool		isEnd{};		// isEndÀÌ¸é endAnimÀ» »ç¿ë
-	Animation*	curAction{};	// ÇöÀç ¼±ÅÃµÈ animation
-	Animation*	mainAnim{};		// ÀÚ½ÅÀÇ À§Ä¡°¡ ¹°ÁÙ±âÀÇ ³¡ºÎºĞÀÌ ¾Æ´Ò ¶§ »ç¿ëÇÒ animation
-	Animation*	endAnim{};		// ÀÚ½ÅÀÌ ¹°ÁÙ±âÀÇ ³¡ºÎºĞÀÏ ¶§ »ç¿ëÇÒ animation
+	// ë¬¼ì¤„ê¸° ë blockì˜ animationì€ ì‚´ì§ ë‹¤ë¦„
+	bool		isEnd{};		// isEndì´ë©´ endAnimì„ ì‚¬ìš©
+	Animation*	curAction{};	// í˜„ì¬ ì„ íƒëœ animation
+	Animation*	mainAnim{};		// ìì‹ ì˜ ìœ„ì¹˜ê°€ ë¬¼ì¤„ê¸°ì˜ ëë¶€ë¶„ì´ ì•„ë‹ ë•Œ ì‚¬ìš©í•  animation
+	Animation*	endAnim{};		// ìì‹ ì´ ë¬¼ì¤„ê¸°ì˜ ëë¶€ë¶„ì¼ ë•Œ ì‚¬ìš©í•  animation
 	
 protected:
 
@@ -84,12 +84,12 @@ protected:
 
 protected:
 
-	/* sprite Àç»ı index ¼ø¼­ */
+	/* sprite ì¬ìƒ index ìˆœì„œ */
 	const vector<UINT>	ANIM_INDICES{ 3, 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 4, 5, 6, 7, 8, 9, 10 };
 
 	/* 
-	¹°ÁÙ±â block animationÀÌ ¸ğµÎ ³¡³ª±â Àü¿¡ BODY_COLLISION_DISABLE_IDX ±îÁö Àç»ıÇÏ¿´´Ù¸é body collider¸¦ ²ø ¿¹Á¤ ->
-	¹°ÁÙ±â ÆÇÁ¤ Á¶Á¤
+	ë¬¼ì¤„ê¸° block animationì´ ëª¨ë‘ ëë‚˜ê¸° ì „ì— BODY_COLLISION_DISABLE_IDX ê¹Œì§€ ì¬ìƒí•˜ì˜€ë‹¤ë©´ body colliderë¥¼ ëŒ ì˜ˆì • ->
+	ë¬¼ì¤„ê¸° íŒì • ì¡°ì •
 	*/
 	const UINT			BODY_COLLISION_DISABLE_IDX{ 14 };
 	

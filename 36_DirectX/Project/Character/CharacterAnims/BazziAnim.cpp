@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "BazziAnim.h"
 
 BazziAnim::BazziAnim(ColliderRect* parent)
@@ -116,7 +116,7 @@ BazziAnim::BazziAnim(ColliderRect* parent)
 
 	curAction = idleActions[A_DOWN];
 
-	// ¾Ö´Ï¸ŞÀÌ¼Ç ¹Ù´Ú¸é parentÀÇ body¿¡ ¸ÂÃß±â
+	// ì• ë‹ˆë©”ì´ì…˜ ë°”ë‹¥ë©´ parentì˜ bodyì— ë§ì¶”ê¸°
 
 
 }

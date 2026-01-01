@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 /* CONCRETE CLASS */
 class DaoAnim : public CharacterAnim

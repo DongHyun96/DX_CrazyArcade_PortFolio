@@ -1,4 +1,4 @@
-#include "Framework.h"
+ï»¿#include "Framework.h"
 #include "ConstantBuffer.h"
 
 ConstantBuffer::ConstantBuffer(void* data, UINT dataSize)
@@ -8,7 +8,7 @@ ConstantBuffer::ConstantBuffer(void* data, UINT dataSize)
 
     bufferDesc.ByteWidth            = dataSize;
     bufferDesc.Usage                = D3D11_USAGE_DEFAULT;
-    bufferDesc.BindFlags            = D3D11_BIND_CONSTANT_BUFFER; //  bufferµµ Á¾·ù°¡ ¸¹À½ / bufferÀÇ ¿ëµµ¸¦ ¼³Á¤
+    bufferDesc.BindFlags            = D3D11_BIND_CONSTANT_BUFFER; //  bufferë„ ì¢…ë¥˜ê°€ ë§ŽìŒ / bufferì˜ ìš©ë„ë¥¼ ì„¤ì •
     bufferDesc.CPUAccessFlags       = 0;
     bufferDesc.MiscFlags            = 0;
     bufferDesc.StructureByteStride  = 0;
@@ -23,7 +23,7 @@ ConstantBuffer::~ConstantBuffer()
 
 void ConstantBuffer::VSSetBuffer(UINT slot)
 {
-    // Subresource -> ¹öÆÛ¸¦ ÀÇ¹Ì
+    // Subresource -> ë²„í¼ë¥¼ ì˜ë¯¸
     DC->UpdateSubresource(constantBuffer, 0, nullptr, data, 0, 0);
     DC->VSSetConstantBuffers(slot, 1, &constantBuffer);
 }
