@@ -10,10 +10,10 @@ struct VertexOutput
     float2 uv   : UV;
 };
 
-Texture2D       map     : register(t0); // SRV Á¤º¸°¡ ¿©±â·Î ¿È
+Texture2D       map     : register(t0); // SRV ì •ë³´ê°€ ì—¬ê¸°ë¡œ ì˜´
 SamplerState    samp    : register(s0); // Mapping descriptor
 
-// ¿©±â¼­ºÎÅÍ´Â position Á¤º¸°¡ ÇÊ¿ä¾øÀ½
+// ì—¬ê¸°ì„œë¶€í„°ëŠ” position ì •ë³´ê°€ í•„ìš”ì—†ìŒ
 
 float4 main(VertexOutput input) : SV_TARGET
 {

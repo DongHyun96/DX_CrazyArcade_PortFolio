@@ -1,4 +1,4 @@
-// ÀÌ°ÍµéÀº Çü½Ä¿¡ ºÒ°ú
+// ì´ê²ƒë“¤ì€ í˜•ì‹ì— ë¶ˆê³¼
 cbuffer World : register(b0)
 {
     matrix world;
@@ -15,19 +15,19 @@ cbuffer Proj : register(b2)
 }
 
 
-struct VertexInput // Sementic¸¸ ¸ÂÃß¸é µÊ
+struct VertexInput // Semanticë§Œ ë§ì¶”ë©´ ë¨
 {
     float4 pos   : POSITION;
     float4 color : COLOR;
 };
 
-struct VertexOutput // Sementic¸¸ ¸ÂÃß¸é µÊ
+struct VertexOutput // Semanticë§Œ ë§ì¶”ë©´ ë¨
 {
     float4 pos   : SV_POSITION;
     float4 color : COLOR;
 };
 
-// SV_Position - ¸®ÅÏ°ªÀÇ sementic (sv´Â System Value) -> System¿¡´Â IA RS OMÀÌ ÀÖ°í ¿©±â´Â RS¿¡ ³Ñ±â´Â °ÍÀÓ
+// SV_Position - ë¦¬í„´ê°’ì˜ semantic (svëŠ” system value) -> Systemì—ëŠ” IA RS OMì´ ìˆê³  ì—¬ê¸°ëŠ” RSì— ë„˜ê¸°ëŠ” ê²ƒì„
 VertexOutput main( VertexInput input )
 {
     VertexOutput output;

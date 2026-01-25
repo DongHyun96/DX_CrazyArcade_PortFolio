@@ -1,10 +1,10 @@
-struct VertexOutput // Sementic¸¸ ¸ÂÃß¸é µÊ
+struct VertexOutput // Sementicë§Œ ë§ì¶”ë©´ ë¨
 {
     float4 pos   : SV_POSITION;
     float4 color : COLOR;
 };
 
-// ¿©±â¼­ºÎÅÍ´Â position Á¤º¸°¡ ÇÊ¿ä¾øÀ½
+// ì—¬ê¸°ì„œë¶€í„°ëŠ” position ì •ë³´ê°€ í•„ìš”ì—†ìŒ
 
 float4 main(VertexOutput input) : SV_TARGET
 {

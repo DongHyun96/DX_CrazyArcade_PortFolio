@@ -1,4 +1,4 @@
-// ÀÌ°ÍµéÀº Çü½Ä¿¡ ºÒ°ú
+// ì´ê²ƒë“¤ì€ í˜•ì‹ì— ë¶ˆê³¼
 cbuffer World : register(b0)
 {
     matrix world;
